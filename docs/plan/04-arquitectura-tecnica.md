@@ -1,6 +1,6 @@
 # 04 · Arquitectura técnica
 
-**Responsable:** desarrollo (arquitectura de software) · **Insumos:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza).
+**Responsable:** desarrollo (arquitectura de software) · **Proyecto:** Lumen Travels (nombre de trabajo; propuesta comercial «Farol», ver `00`) · **Insumos:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza).
 **Principio rector:** construir rápido con piezas administradas que Lumen Studio ya domina (Supabase y Vercel), con privacidad y seguridad desde el diseño, y sin atarnos a servicios caros antes de validar el producto.
 
 > **Nota sobre precios:** ninguna cifra de este documento es un precio garantizado. Cada costo remite a la página oficial de precios del proveedor y debe verificarse al contratar; los rangos son **estimaciones** con supuestos explícitos.
@@ -300,7 +300,7 @@ El destino no suma: es filtro. Las razones se muestran al usuario («Coinciden 5
 
 **Cifrado.** TLS 1.2+ en tránsito; cifrado en reposo del proveedor (Supabase/AWS); columnas especialmente sensibles (teléfono, referencias de verificación) cifradas con `pgsodium`/Vault; tokens locales en Keychain/Keystore (`expo-secure-store`). El chat no es E2E en el MVP para permitir moderación ante reportes; se informa con claridad en la política de privacidad.
 
-**Verificación de identidad.** Imágenes de documento y selfie quedan en el proveedor (Truora/Veriff) con su retención; nosotros guardamos solo estado, fecha, tipo y referencia. Edad mínima **18 años**: fecha de nacimiento declarada en el registro y confirmada con el documento al verificar; las cuentas no verificadas tienen funciones limitadas (no pueden publicar viajes ni unirse a grupos, según doc 05).
+**Verificación de identidad.** Imágenes de documento y selfie quedan en el proveedor (Truora/Veriff) con su retención; nosotros guardamos solo estado, fecha, tipo y referencia. Edad mínima **18 años**: fecha de nacimiento declarada en el registro y confirmada con el documento al verificar; las cuentas sin nivel 2 tienen funciones limitadas (no pueden escribir a otras personas, publicar viajes ni unirse a grupos; niveles 0–3 según doc 05).
 
 **Moderación automática.** Todo texto público (bio, viajes, reseñas) y los mensajes pasan por un clasificador antes o justo después de publicarse; las imágenes se analizan al subir (Edge Function sobre Storage) y quedan en cuarentena si superan el umbral. Detección de patrones de riesgo: solicitudes de dinero, enlaces externos, datos de contacto en los primeros mensajes. Lo dudoso va a la cola humana del panel interno. Metadatos EXIF (incluida la ubicación GPS) se eliminan de toda foto subida.
 
@@ -324,7 +324,7 @@ El destino no suma: es filtro. Las razones se muestran al usuario («Coinciden 5
 
 ## 6. Funcionamiento sin conexión y rendimiento
 
-**Offline primero para el itinerario.** El viajero suele perder señal justo cuando más necesita el plan.
+**Offline primero para el itinerario (después del MVP: `02` lo deja fuera del alcance inicial y lo programa para crecimiento; el MVP solo guarda en caché lo último visto).** El viajero suele perder señal justo cuando más necesita el plan.
 - Al marcar un viaje como «disponible sin conexión», la app descarga a **SQLite local** (`expo-sqlite` con una capa de sincronización como PowerSync o una cola propia) el itinerario, días, paradas, lugares, gastos y los últimos mensajes; y descarga la **región del mapa** con el gestor offline de Mapbox (zona acotada y niveles de zoom limitados para cuidar espacio).
 - Ediciones sin conexión se guardan como operaciones en cola y se sincronizan al volver la señal. Resolución de conflictos: *last-write-wins* por campo con `version` y `updated_at`; reordenamiento sin choques gracias a la posición fraccional; gastos y mensajes solo se agregan, así que no chocan.
 - Indicador visible de estado: «Sincronizado», «Pendiente», «Sin conexión».
@@ -346,9 +346,9 @@ El destino no suma: es filtro. Las razones se muestran al usuario («Coinciden 5
 | 0 | Cimientos | Repos, monorepo (app + web), Supabase (entornos dev/staging/prod), CI, EAS, Sentry, PostHog, sistema de diseño base en código |
 | 1 | Cuenta y perfil | Registro (Apple/Google/correo), verificación de teléfono, perfil con intereses/estilo/idiomas, consentimientos, borrado y exportación de cuenta |
 | 2 | Planea I | Crear itinerario por días, buscar lugares (Places + caché), mapa con paradas, reordenar |
-| 3 | Planea II + offline | Presupuesto por parada, plantillas públicas, modo sin conexión, página pública compartible en Vercel |
+| 3 | Planea II | Presupuesto aproximado, página pública compartible en Vercel; base de datos y paradas listas para sincronización futura (modo sin conexión y plantillas públicas quedan fuera del MVP, según `02`) |
 | 4 | Coincide | Publicar viaje, filtros + puntaje de matching con razones, solicitudes de unión, notificaciones push |
-| 5 | Viajen juntos | Grupo automático al aceptar, chat en tiempo real, votaciones, división de gastos y saldos |
+| 5 | Viajen juntos | Grupo automático al aceptar, chat en tiempo real, división de gastos y saldos (las votaciones son «Could» en `02`, para Lanzamiento) |
 | 6 | Confianza | Verificación de identidad (Truora/Veriff), niveles de confianza, reportar/bloquear, moderación automática, panel interno, botón de seguridad, reseñas doble ciego |
 | 7 | Endurecimiento y lanzamiento | Pruebas E2E, auditoría RLS y de seguridad, rendimiento, beta cerrada (TestFlight / prueba interna), envío a tiendas |
 

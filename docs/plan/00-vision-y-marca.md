@@ -25,10 +25,12 @@
 | Frente a… | Qué hacen bien | Qué nos diferencia |
 | --- | --- | --- |
 | **Apps de itinerarios** (Wanderlog, TripIt) | Organizar reservas y planes de quien ya sabe con quién viaja | El itinerario es también la puerta para coincidir: puedes abrirlo para que otros se unan o unirte al de alguien |
-| **Redes de viajeros** (hangouts de Couchsurfing, Viatik y otras de *social travel*) | Conectar personas en un destino | Unimos la conexión con la planificación real por días y con la coordinación del grupo (chat, votos, gastos); confianza como funcionalidad, no como aviso legal |
+| **Redes de viajeros** (hangouts de Couchsurfing, Hostelworld Social y otras de *social travel*) | Conectar personas en un destino | Unimos la conexión con la planificación real por días y con la coordinación del grupo (chat, votos, gastos); confianza como funcionalidad, no como aviso legal |
 | **Grupos de Facebook/WhatsApp** | Alcance y costo cero | Filtros por destino, fechas, estilo y presupuesto; perfiles verificados y reseñas mutuas; el plan no se pierde entre mensajes |
 
 *Cualquier comparación de tamaño, usuarios o precios de estos competidores debe venir con fuente en `01`.*
+
+**Nota sobre Viatik.** La investigación (`01`) encontró que Viatik es carpooling entre ciudades (Uruguay y Argentina), no una app de *social travel*. Tomamos la referencia del dueño por el espíritu de compartir viajes. Compartir trayectos entre ciudades queda como posible función futura, a validar con el dueño; no es parte del MVP.
 
 ## 4. Nombre comercial
 
@@ -64,7 +66,7 @@
 **Palabras sí:** ruta, camino, juntos, compañía, encender, plan, coincidir, confianza, tranquilo.
 **Palabras no:** *match* o lenguaje de citas, «desconocidos», «garantizado», «100 % seguro», jerga técnica (servidor, sincronizar, token), urgencia artificial («¡solo hoy!»).
 
-**Relación con Lumen:** hereda la calidez (fondos oscuros cálidos, acento dorado) y la cercanía del tono, pero con paleta, logo y tipografía propios definidos por el diseñador en `03`. La mascota Champi no aparece en la app. Firma en pantalla «Acerca de», tiendas y web: **«Diseñado por Lumen Studio»**.
+**Relación con Lumen:** hereda la calidez (fondos oscuros cálidos, acento dorado) y la cercanía del tono, pero con paleta, logo y tipografía propios definidos por el diseñador en `03`. La mascota Champi no forma parte de la marca principal ni de los flujos de la app: solo puede aparecer como guiño discreto en los estados vacíos y en la pantalla «Diseñado por Lumen Studio», y nunca en flujos de seguridad (SOS, reportes, verificación) ni en el logo, el ícono o las tiendas. Firma en pantalla «Acerca de», tiendas y web: **«Diseñado por Lumen Studio»**.
 
 ## 6. Principios de producto
 
@@ -78,7 +80,7 @@
 
 1. **¿Existe la necesidad de compañía?** Entrevistas con viajeros solos (con atención a mujeres) en Colombia: cómo buscan compañía hoy y qué los frena. Es la hipótesis que sostiene todo.
 2. **¿Confían lo suficiente para encontrarse?** Qué nivel de verificación y qué señales necesitan para aceptar unirse al viaje de alguien (trabajo con `confianza`).
-3. **¿Hay densidad suficiente?** Coincidir solo sirve si hay viajeros en el mismo lugar y fechas: elegir una o dos rutas piloto (por ejemplo, Caribe colombiano o Eje Cafetero, *supuesto*) y probar con un grupo pequeño antes de abrir a toda la región.
-4. **Nombre:** verificación legal y de dominio de «Farol» antes de cualquier trabajo de identidad visual.
+3. **¿Hay densidad suficiente?** Coincidir solo sirve si hay viajeros en el mismo lugar y fechas: empezar por el corredor piloto que recomienda `01` (Medellín–Bogotá–Caribe, con el viajero internacional como primer segmento, en español e inglés; el Eje Cafetero queda como extensión) y probar con un grupo pequeño antes de abrir a toda la región.
+4. **Nombre:** verificación legal y de dominio de «Farol» antes de cualquier trabajo de identidad visual. Mientras no se decida, todos los documentos del plan usan «Lumen Travels (nombre de trabajo)».
 
 Lo que no validemos aquí no entra en el MVP (`02`).

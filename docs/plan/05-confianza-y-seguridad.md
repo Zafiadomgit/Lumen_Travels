@@ -1,6 +1,6 @@
 # 05 · Confianza y seguridad
 
-> Responsable: `confianza` · Lumen Travels · Diseñado por Lumen Studio
+> Responsable: `confianza` · Lumen Travels (nombre de trabajo; los textos de ejemplo dirigidos a usuarios usarán el nombre comercial final) · Diseñado por Lumen Studio · **Fuente de verdad** de verificación (niveles 0–3) y SOS para `02`, `03` y `04`
 > En una app donde desconocidos se encuentran para viajar, la seguridad es parte del producto. Cada medida dice **en qué momento del flujo aparece** y **cómo sabemos si funciona**. Las metas numéricas de este documento son **objetivos internos propuestos (supuestos)**, no datos de mercado; se calibran con los primeros meses de operación.
 
 Principios: 1) la persona más vulnerable define el estándar (pensamos primero en mujeres que viajan solas); 2) menores de edad, prohibidos; 3) nada de dinero ni datos sensibles fuera de la app con desconocidos; 4) fricción proporcional al riesgo: explorar es libre, encontrarse exige verificación.

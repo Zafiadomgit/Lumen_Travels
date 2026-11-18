@@ -1,6 +1,6 @@
 # 02 · Producto, MVP y roadmap
 
-**Responsable:** producto · **Base:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza).
+**Responsable:** producto · **Proyecto:** Lumen Travels (nombre de trabajo; propuesta comercial «Farol», ver `00`) · **Base:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza). **Verificación y seguridad:** la fuente de verdad es `05` (niveles 0–3, SOS).
 **Nota:** las metas numéricas de este documento son **supuestos de trabajo** para fijar umbrales de decisión; no son datos de mercado. Se recalibran con lo que encuentre el investigador (`01`) y con la fase de descubrimiento.
 
 ---
@@ -58,7 +58,8 @@ Prioridad MoSCoW para el MVP: **M** = Must, **S** = Should, **C** = Could, **W**
 | | Reportar y bloquear usuarios | M | MVP |
 | | Moderación humana de reportes + reglas automáticas básicas | M | MVP |
 | | Guía de primer encuentro en lugar público (dentro del flujo de aceptar) | M | MVP |
-| | Botón de seguridad / compartir ubicación con contacto de confianza | S | Beta |
+| | Botón SOS básico («Necesito ayuda ya» / «Me siento incómodo/a») y contacto de confianza | M | MVP (imprescindible según `05`) |
+| | Check-in programado y ubicación en vivo con contacto de confianza | S | Beta |
 | | Verificación de redes sociales / referencias | C | L |
 | | Puntaje de reputación compuesto | W | G |
 
@@ -75,7 +76,7 @@ Prioridad MoSCoW para el MVP: **M** = Must, **S** = Should, **C** = Could, **W**
 | Filtro / grupos solo mujeres | Medio | Alto en seguridad | Alta | Bajo | **Entra al MVP** |
 | Alertas por destino y fechas | Alto | Alto (resuelve baja densidad) | Media | Medio | Beta |
 | Itinerario colaborativo | Medio | Bajo para H1 | Alta | Alto | Beta |
-| Botón de seguridad / ubicación en vivo | Medio | Medio | Media | Alto | Beta (en MVP: guía + contacto de emergencia) |
+| Check-in y ubicación en vivo | Medio | Medio | Media | Alto | Beta (en MVP: SOS básico, guía de encuentro y contacto de confianza, por `05`) |
 
 **Entra al MVP:** todos los «M» de la tabla + compatibilidad simple, gastos básicos y filtro de grupos solo mujeres.
 
@@ -108,10 +109,10 @@ Hay dos entradas al loop: el **organizador** (crea y publica) y el **viajero que
 
 **A. Registro y verificación**
 1. Abre la app → pantalla de valor (3 pantallas máximo) → «Crear cuenta» con correo, Google/Apple o teléfono.
-2. Verifica correo o teléfono (código).
+2. Verifica correo y teléfono (código): nivel 1 de `05`.
 3. Perfil mínimo: nombre, foto, fecha de nacimiento (18+ obligatorio), país, idiomas, estilo de viaje.
 4. Acepta normas de la comunidad (resumen de 5 puntos).
-5. Invitación a verificar identidad (documento + selfie). Puede posponerlo para explorar, pero **es obligatorio para publicar un viaje o pedir unirse**.
+5. Invitación a verificar identidad (documento + selfie, nivel 2 de `05`). Puede posponerlo para explorar y planear en privado, pero **es obligatorio para escribir a otra persona, pedir unirse o publicar un viaje**.
 6. Resultado: insignia «Verificado» o pedido de reintento con motivo claro.
 
 **B. Crear itinerario**
@@ -122,7 +123,7 @@ Hay dos entradas al loop: el **organizador** (crea y publica) y el **viajero que
 
 **C. Publicar viaje abierto**
 1. Desde el borrador: «Buscar compañeros».
-2. Define cupos (2–8 en MVP), requisitos opcionales (rango de edad, solo mujeres, idioma) y un texto «a quién busco».
+2. Define cupos (2–8 en MVP; más de 6 requiere nivel 3, ver `05`), requisitos opcionales (rango de edad, solo mujeres, idioma) y un texto «a quién busco».
 3. Vista previa de cómo lo verán otros → Publicar.
 4. El viaje aparece en Explorar; el organizador recibe consejos para obtener solicitudes (foto, itinerario completo).
 
@@ -237,7 +238,7 @@ Duraciones en semanas, sin fechas de calendario. Supuesto: equipo pequeño (1 PM
 | --- | --- | --- | --- |
 | **1. Descubrimiento y validación** | 4–6 sem | 15–20 entrevistas con viajeros objetivo; prototipo navegable del core loop; prueba «concierge» (grupos armados a mano vía formulario + WhatsApp) en 1–2 rutas; definición de destinos semilla. | ≥ 1 de cada 2 entrevistados describe el problema sin que se lo sugieran; en la prueba concierge se forman y viajan ≥ 3 grupos; las personas aceptan verificarse. |
 | **2. MVP (construcción)** | 10–14 sem | App iOS/Android con todos los «M» + compatibilidad, gastos básicos y grupos solo mujeres; moderación y panel interno; analítica instrumentada; normas de comunidad. | Core loop completo sin bloqueos en pruebas internas; verificación y reporte funcionando; eventos validados en el tablero; revisión de seguridad aprobada por `confianza`. |
-| **3. Beta cerrada** | 8–12 sem | Acceso por invitación en 2–3 destinos semilla de Colombia; comunidad de embajadores; alertas por destino; itinerario colaborativo; botón de seguridad; iteraciones semanales. | ≥ 50 % de viajes publicados con solicitud en 7 días; ≥ 50 % de grupos formados viajan; reseñas promedio ≥ 4,3; cero incidentes graves sin respuesta; tendencia creciente de la North Star. |
+| **3. Beta cerrada** | 8–12 sem | Acceso por invitación en el corredor piloto Medellín–Bogotá–Caribe (`01`); comunidad de embajadores; alertas por destino; itinerario colaborativo; check-in y ubicación en vivo; iteraciones semanales. | ≥ 50 % de viajes publicados con solicitud en 7 días; ≥ 50 % de grupos formados viajan; reseñas promedio ≥ 4,3; cero incidentes graves sin respuesta; tendencia creciente de la North Star. |
 | **4. Lanzamiento** | 6–8 sem | Apertura pública en Colombia (y rutas con viajeros internacionales); plantillas de la comunidad; modo «en la ciudad» si la beta lo justifica; campaña con `marketing`. | Crecimiento mes a mes de la North Star; costo de adquisición y retención a 90 días dentro de lo planeado por `06`; moderación sostiene el SLA con el nuevo volumen. |
 | **5. Crecimiento** | Continuo (ciclos de 6 sem) | Nuevos países de la región; recomendaciones personalizadas; pagos/liquidación integrados; alianzas (hostales, tours); monetización según `06`. | Se revisa por ciclo: cada expansión de destino requiere densidad mínima (ver §7) antes de abrir el siguiente. |
 
@@ -249,8 +250,8 @@ Duraciones en semanas, sin fechas de calendario. Supuesto: equipo pequeño (1 PM
 
 Un viaje publicado sin nadie que lo vea muere, y quien busca sin encontrar viajes se va. La densidad que importa no es «usuarios totales», sino **viajes abiertos por destino y ventana de fechas**. Cómo se resuelve en el producto:
 
-1. **Concentrarse antes de expandirse.** Lanzar con pocos destinos semilla (p. ej. 2–3 rutas populares de Colombia, a confirmar con `01`) y no abrir uno nuevo hasta tener densidad mínima. Supuesto inicial: ≥ 10 viajes abiertos activos por destino y mes.
-2. **Valor para un solo jugador.** Planea funciona sin red: el itinerario con mapa sirve aunque nadie se una. Eso atrae usuarios que luego publican.
+1. **Concentrarse antes de expandirse.** Lanzar con pocos destinos semilla (el corredor piloto Medellín–Bogotá–Caribe que recomienda `01`; el Eje Cafetero queda como extensión) y no abrir uno nuevo hasta tener densidad mínima. Supuesto inicial: ≥ 10 viajes abiertos activos por destino y mes.
+2. **Valor para un solo jugador.** Planea funciona sin otros usuarios: el itinerario con mapa sirve aunque nadie se una. Eso atrae usuarios que luego publican.
 3. **Lado de la oferta sembrado.** Embajadores y viajeros frecuentes publican viajes reales en la beta; el equipo puede armar «viajes semilla» con organizadores verificados (nunca perfiles falsos).
 4. **Búsqueda flexible.** Mostrar coincidencias con fechas solapadas parcialmente y destinos cercanos en vez de «0 resultados».
 5. **Alertas en lugar de callejones sin salida.** Si no hay viajes: «Te avisamos cuando alguien publique» o «Publica el tuyo, hay N personas buscando este destino».

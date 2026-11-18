@@ -1,6 +1,6 @@
 # 03 · UX/UI y sistema de diseño
 
-**Responsable:** disenador · **Estado:** propuesta v1 · **Alcance:** app móvil iOS y Android (mobile first), modo oscuro principal y modo claro.
+**Responsable:** disenador · **Proyecto:** Lumen Travels (nombre de trabajo; propuesta comercial «Farol», ver `00`) · **Estado:** propuesta v1 · **Alcance:** app móvil iOS y Android (mobile first), modo oscuro principal y modo claro.
 
 La app hereda de Lumen la calidez de la luz del farol sobre la noche, pero tiene identidad propia: menos «estudio editorial», más «compañero de ruta». Todo lo que sigue se apoya en los cuatro pilares del brief: **Planea, Coincide, Viajen juntos, Confianza**.
 
@@ -55,11 +55,11 @@ Arranque ─ Bienvenida ─ Registro/Ingreso ─ Onboarding (estilo, idiomas, in
 
 ### 3.1 Onboarding y verificación
 1. **Bienvenida** (3 tarjetas: Planea · Coincide · Viajen juntos, con la promesa de confianza al final) → «Empezar».
-2. **Registro**: Apple / Google / correo. Idioma detectado del sistema (es/en/pt), editable.
+2. **Registro**: Apple / Google / correo. Idioma detectado del sistema (es/en en el MVP; pt más adelante), editable.
 3. **Tu estilo**: nombre, foto, idiomas que hablas, estilo de viaje (mochilero, cómodo, aventura, cultural, fiesta, naturaleza) y rango de presupuesto. Todo con chips; máximo 60 s.
 4. **Verificación en dos niveles** (explicada con por qué y qué se guarda):
-   - Nivel 1, obligatorio para chatear: teléfono por SMS/WhatsApp.
-   - Nivel 2, obligatorio para unirse o publicar viajes abiertos: documento + selfie con prueba de vida. Estado «En revisión» no bloquea planear en privado.
+   - Nivel 1 (registro): correo y teléfono confirmados por código, 18+ y normas. Permite planear en privado y explorar; no permite escribir a desconocidos ni unirse.
+   - Nivel 2, obligatorio para escribir a alguien, unirse o publicar viajes abiertos (se pide justo en ese momento): documento + selfie con prueba de vida. Estado «En revisión» no bloquea planear en privado. Niveles definidos en `05`.
 5. **Contactos de confianza** (opcional, sugerido): 1–3 personas que reciben alertas de seguridad.
 6. **Listo** → Explorar con sugerencias según destino/fechas si las dio.
 
@@ -72,7 +72,7 @@ Arranque ─ Bienvenida ─ Registro/Ingreso ─ Onboarding (estilo, idiomas, in
 
 ### 3.3 Descubrir viajes y viajeros, y pedir unirse
 1. **Explorar**: feed de tarjetas de viaje y de viajeros en el mismo destino y fechas; interruptor Lista ⇄ Mapa.
-2. **Filtros** (hoja): destino, fechas (flexibles ±3 días), presupuesto, estilo, tamaño de grupo, idioma, «solo verificados» (activo por defecto), grupos solo de mujeres / solo LGBTIQ+ cuando el organizador lo define.
+2. **Filtros** (hoja): destino, fechas (flexibles ±3 días), presupuesto, estilo, tamaño de grupo, idioma, «solo verificados» (activo por defecto), grupos solo de mujeres cuando el organizador lo define (únicos filtros de identidad permitidos, ver `05` §4.6).
 3. **Detalle de viaje**: itinerario resumido, organizador con señales de confianza, miembros, chip de compatibilidad con su porqué («Mismas fechas · Presupuesto similar · Hablan español»).
 4. **Pedir unirse**: mensaje corto obligatorio (plantillas sugeridas) → estado «Enviada». El organizador acepta/rechaza; al aceptar, entras al grupo y al chat. Rechazos con copy neutro, sin motivo expuesto.
 
@@ -80,6 +80,8 @@ Arranque ─ Bienvenida ─ Registro/Ingreso ─ Onboarding (estilo, idiomas, in
 Orden fijo: foto y nombre → insignias (ID verificada, teléfono, redes opcionales) → «Miembro desde» y viajes completados → reseñas mutuas (solo de viajes compartidos reales) → estilo, idiomas, intereses → viajes publicados. Acciones: «Invitar a mi viaje», «Mensaje» (si hay viaje en común o solicitud aceptada), menú ⋯ con **Reportar** y **Bloquear** siempre visibles.
 
 ### 3.5 Grupo del viaje
+
+> Nota de alcance: las votaciones (aquí y en el wireframe W6) son diseño anticipado para la fase de Lanzamiento; en el MVP el grupo tiene itinerario, chat y gastos (ver `02`).
 Pantalla de viaje con pestañas internas:
 - **Itinerario** colaborativo: cualquiera propone paradas (aparecen como «Propuesta» punteada); el organizador o la mayoría las confirma. Historial de cambios.
 - **Grupo / chat**: chat con mensajes fijados (punto de encuentro, alojamiento), encuestas rápidas desde el campo de texto.
@@ -91,7 +93,7 @@ Pantalla de viaje con pestañas internas:
 2. **Barra en viaje** persistente con el **botón de seguridad** (escudo).
 3. **Check-in de encuentro**: antes de ver a alguien por primera vez, la app sugiere lugar público y hora; al llegar, «Llegué bien» o recordatorio a los 30 min.
 4. **Compartir ubicación** en tiempo real con contactos de confianza (temporizador 1 h / 4 h / hasta terminar el día).
-5. **Botón de seguridad** → pantalla de seguridad: mantener presionado 2 s «Pedir ayuda» (alerta a contactos con ubicación + número de emergencia local: 123 en Colombia), «Compartir mi ubicación», «Salir de una situación» (llamada simulada), «Reportar». Confirmación háptica y cuenta regresiva de 5 s cancelable para evitar falsas alarmas.
+5. **Botón de seguridad** → pantalla de seguridad: mantener presionado 2 s «Necesito ayuda ya» (llama al número de emergencias local, 123 en Colombia, y avisa a los contactos de confianza con ubicación y datos del viaje; también alerta al equipo de seguridad de Lumen, ver `05` §4.4), «Me siento incómodo/a» (salida discreta: llamada simulada, consejos y reporte rápido), «Compartir mi ubicación», «Reportar». Confirmación háptica y cuenta regresiva de 5 s cancelable para evitar falsas alarmas.
 
 ---
 
@@ -169,7 +171,7 @@ Pantalla de viaje con pestañas internas:
 **W4 · Editor de itinerario**
 ```
 ┌──────────────────────────────┐
-│ ← Eje cafetero      Publicar │
+│ ← Santa Marta       Publicar │
 │ ┌──────────────────────────┐ │
 │ │   1●───2●                │ │
 │ │          ╲               │ │
@@ -178,10 +180,10 @@ Pantalla de viaje con pestañas internas:
 │ └──────────────────────────┘ │
 │ (Día 1)[Día 2](Día 3)(+)     │
 │ 6 h 30 · $180.000 · ⚠ largo  │
-│ ≡ 08:00 1 Valle de Cocora 3h │
-│ ≡ 12:30 2 Almuerzo Salento   │
+│ ≡ 08:00 1 Parque Tayrona 3h  │
+│ ≡ 12:30 2 Almuerzo Taganga   │
 │      🚌 25 min               │
-│ ≡ 15:00 3 Finca cafetera     │
+│ ≡ 15:00 3 Finca de café Minca│
 │ ┄ Propuesta de Ana: Mirador ┄│
 │   [Aceptar] [Descartar]      │
 │ [ + Agregar lugar         ]  │
@@ -256,7 +258,7 @@ Pantalla de viaje con pestañas internas:
 │ Hoy · Día 2 · Cartagena      │      │ ✕            Seguridad       │
 │ ┌──────────────────────────┐ │      │                              │
 │ │  mapa: próxima parada    │ │      │      ┌──────────────┐        │
-│ └──────────────────────────┘ │      │      │  PEDIR AYUDA │        │
+│ └──────────────────────────┘ │      │      │   AYUDA YA   │        │
 │ ▸ 10:00 Castillo San Felipe  │      │      │ mantén 2 seg │        │
 │   en 18 min a pie            │      │      └──────────────┘        │
 │ Encuentro con Tomás 16:00    │      │ Avisa a tus 2 contactos con  │
@@ -411,15 +413,15 @@ Estados comunes a todo lo interactivo: **reposo, presionado** (fondo `pressed`, 
 - Texto dinámico hasta 200 % sin cortar contenido; «Reducir movimiento» y «Reducir transparencia» respetados.
 - Formularios con errores descritos en texto, no solo en rojo.
 
-### 7.2 Internacionalización (es · en · pt)
-- Español de Latinoamérica como idioma base; inglés y portugués de Brasil desde el MVP.
+### 7.2 Internacionalización (es · en en el MVP; pt después)
+- Español de Latinoamérica como idioma base; inglés desde el MVP (viajero internacional, según `01`); portugués de Brasil cuando se abra a ese mercado.
 - Presupuestar +35 % de longitud en botones y títulos (el portugués y el inglés técnico se alargan); nada de textos en imágenes.
 - Fechas, horas, monedas y números con formato local (`12 dic` / `Dec 12` / `12 de dez`; `$ 45.000` COP vs `R$ 45,00`); moneda del gasto independiente del idioma.
 - Pluralización con ICU MessageFormat; género neutro donde sea posible («Te damos la bienvenida» en vez de «Bienvenido/a»).
 - Perfil muestra los idiomas que habla cada persona: es criterio de compatibilidad.
 
 ### 7.3 Estados vacíos, errores y microcopy
-Tono: cálido, breve, sin culpas, siempre con una salida. **Champi**, la seta de Lumen, aparece pequeño (máx. 64 pt) y solo en estados vacíos y celebraciones, con su farolito; nunca en errores de seguridad ni en pantallas de reporte.
+Tono: cálido, breve, sin culpas, siempre con una salida. **Champi**, la seta de Lumen, es solo un guiño discreto: aparece pequeño (máx. 64 pt), con su farolito, únicamente en estados vacíos y en la pantalla «Diseñado por Lumen Studio» (Perfil › Acerca de); nunca en la marca principal ni en flujos de seguridad (SOS, verificación, reportes, errores de seguridad).
 
 | Situación | Microcopy (es) |
 | --- | --- |
@@ -427,7 +429,7 @@ Tono: cálido, breve, sin culpas, siempre con una salida. **Champi**, la seta de
 | Explorar sin resultados | «No encontramos viajes con esos filtros. Prueba fechas flexibles o amplía el presupuesto.» → [Ajustar filtros] |
 | Bandeja de mensajes vacía | (Champi) «Silencio de carretera. Cuando te unas a un viaje, aquí empieza la conversación.» |
 | Gastos vacíos | «Nadie ha pagado nada… todavía. Anota el primer gasto y nosotros hacemos las cuentas.» |
-| Sin conexión | «Estás sin señal. Tu itinerario sigue disponible; enviaremos lo pendiente cuando vuelvas.» |
+| Sin conexión | «Estás sin señal. Puedes ver la última versión de tu itinerario que cargaste; enviaremos lo pendiente cuando vuelvas.» (en el MVP solo hay caché de lo último visto; el modo sin conexión completo llega después, ver `02`) |
 | Error genérico | «Algo se nos apagó. Intenta de nuevo en un momento.» → [Reintentar] |
 | Solicitud rechazada | «Este viaje no tiene espacio para ti esta vez. Hay otros parecidos esperándote.» → [Ver similares] |
 | Verificación pendiente | «Estamos revisando tu identidad; suele tardar unos minutos. Mientras, puedes seguir planeando.» |
@@ -436,4 +438,4 @@ Tono: cálido, breve, sin culpas, siempre con una salida. **Champi**, la seta de
 
 ---
 
-*Diseñado por Lumen Studio.* Pendiente de alinear con `02-producto-mvp-roadmap.md` (alcance del MVP) y `05-confianza-y-seguridad.md` (niveles de verificación y protocolo SOS) cuando estén disponibles.
+*Diseñado por Lumen Studio.* Alineado con `02-producto-mvp-roadmap.md` (alcance del MVP) y `05-confianza-y-seguridad.md` (niveles de verificación y protocolo SOS), que es la fuente de verdad en seguridad.

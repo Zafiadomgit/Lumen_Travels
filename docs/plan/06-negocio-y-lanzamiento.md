@@ -10,7 +10,7 @@
 | Bloque | Contenido |
 | --- | --- |
 | **Problema** | 1) Planear una ruta por varias ciudades es disperso (notas, mapas, chats, hojas de gastos). 2) Encontrar con quién viajar o coincidir en destino depende de grupos de Facebook/WhatsApp sin filtro ni confianza. 3) Viajar en grupo genera roces por plan y plata. |
-| **Segmentos** | Primario: mochileros y viajeros independientes de 20–35 años en rutas de Colombia (locales e internacionales). Secundario: grupos de amigos que planean juntos. *Early adopters*: huéspedes de hostales, viajeros solos, nómadas digitales. *(A validar con `01-mercado-y-usuarios.md`.)* |
+| **Segmentos** | Primario (piloto): viajero internacional independiente en el corredor Medellín–Bogotá–Caribe, en español e inglés (`01`); después, mochileros y viajeros colombianos de 20–35 años. Secundario: grupos de amigos que planean juntos. *Early adopters*: huéspedes de hostales, viajeros solos, nómadas digitales. *(A validar con `01-mercado-y-usuarios.md`.)* |
 | **Propuesta única de valor** | «Planea tu ruta, encuentra con quién recorrerla y viajen juntos con confianza, en una sola app.» |
 | **Solución** | Los 4 pilares: **Planea** (itinerario por días sobre mapa), **Coincide** (viajeros por destino, fechas y estilo), **Viajen juntos** (grupo, chat, votos, gastos), **Confianza** (verificación, reseñas mutuas, botón de seguridad). |
 | **Canales** | Hostales aliados (QR en recepción), comunidades de viajeros, TikTok/Instagram con rutas reales, embajadores, App Store/Google Play (ASO), boca a boca por invitación al grupo. |
@@ -49,7 +49,7 @@
 - Moderación y bloqueo.
 - Lo esencial de los pilares: crear itinerarios, buscar y unirse a viajes, chat de grupo y división de gastos básica.
 
-**Plus** suma comodidad, no ventajas para «saltarse» filtros de confianza. Ideas *[S, a validar con `producto`]*: mapas y rutas sin conexión, exportar itinerario a PDF, más viajes y grupos activos, filtros avanzados de coincidencia (estilo, ritmo, idioma), gastos multimoneda y reportes, plantillas de rutas premium, sin anuncios de afiliados. **Nunca en Plus:** ver quién eres sin tu permiso, contactar a alguien que no lo aceptó o aparecer primero por pagar en búsquedas de compañeros.
+**Plus** suma comodidad, no ventajas para «saltarse» filtros de confianza. Ideas *[S, a validar con `producto`]*: mapas y rutas sin conexión, exportar itinerario a PDF, más viajes y grupos activos, filtros avanzados de coincidencia (estilo, ritmo, idioma), reportes y exportación de gastos, plantillas de rutas premium, sin anuncios de afiliados. **Nunca en Plus:** ver quién eres sin tu permiso, contactar a alguien que no lo aceptó o aparecer primero por pagar en búsquedas de compañeros.
 
 ---
 
@@ -104,7 +104,7 @@ Ojo con lo propio del viaje: el uso es **estacional y por episodios** (alguien v
 
 ### Estrategia de densidad
 Una app para coincidir no sirve vacía. Empezamos donde haya muchos viajeros en las mismas fechas:
-- **Ruta piloto propuesta *[a validar con el investigador]*:** Bogotá → Medellín → Eje Cafetero (Salento/Filandia) → Cartagena (y Santa Marta/Tayrona como extensión natural). Es una ruta mochilera muy recorrida y concentra hostales.
+- **Ruta piloto (según `01`):** corredor Medellín → Bogotá → Caribe (Cartagena–Santa Marta–Tayrona/Palomino), en español e inglés. El Eje Cafetero (Salento/Filandia) queda como extensión posterior. Es una ruta mochilera muy recorrida y concentra hostales.
 - Criterio para abrir la siguiente ciudad: que la actual tenga actividad sostenida (meta a fijar, p. ej. un mínimo de viajes abiertos por semana con respuestas en menos de 24 h).
 
 ### Alianzas
@@ -113,18 +113,18 @@ Una app para coincidir no sirve vacía. Empezamos donde haya muchos viajeros en 
 - **Operadores locales pequeños:** primeros aliados de experiencias para la etapa 2.
 
 ### Embajadores
-- 10–20 «Faroleros» (nombre propuesto, guiño a la marca Lumen): viajeros reales y personal de hostales que publican rutas, reciben a nuevos usuarios y reportan problemas.
+- 10–20 embajadores (nombre propuesto «Faroleros», **solo si el nombre comercial final es «Farol»**; si no, un nombre alineado con la marca final): viajeros reales y personal de hostales que publican rutas, reciben a nuevos usuarios y reportan problemas.
 - Recompensa: Plus gratis, merch, acceso anticipado y, más adelante, comisión por aliados que traigan. Código de conducta y verificación obligatoria.
 
 ### Contenido
-- **TikTok/Instagram Reels:** rutas reales en formato «3 días en Salento con 120 USD», «cómo conocí a mi grupo para Tayrona», «checklist de seguridad para encontrarte con alguien que conociste en la app». Grabado con viajeros, no actores.
+- **TikTok/Instagram Reels:** rutas reales en formato «3 días en Santa Marta y Tayrona con 120 USD», «cómo conocí a mi grupo para Tayrona», «checklist de seguridad para encontrarte con alguien que conociste en la app». Grabado con viajeros, no actores.
 - Cada itinerario público se puede compartir como tarjeta visual: el contenido se crea solo.
 - Bilingüe (español primero, inglés para el viajero internacional).
 - La seguridad es contenido, no letra pequeña: refuerza la confianza y diferencia la app.
 
 ### Secuencia
 1. **Lista de espera** (landing en lumenestudio.tech o dominio propio): correo + ruta y fechas de su próximo viaje. Referidos suben puestos en la fila.
-2. **Beta cerrada** (6–8 semanas): 200–500 personas *[S]* de la lista, hostales fundadores y embajadores, solo en la ruta piloto. Entrevistas semanales.
+2. **Beta cerrada** (8–12 semanas, según `02`): 200–500 personas *[S]* de la lista, hostales fundadores y embajadores, solo en la ruta piloto. Entrevistas semanales.
 3. **Beta abierta** en Colombia: tiendas abiertas, sin pauta, ajustando onboarding y precio.
 4. **Lanzamiento:** coincidir con temporada alta (diciembre–enero o Semana Santa), evento en hostales aliados de la ruta, campaña de creadores y nota de prensa en medios de viaje y tecnología de Colombia.
 
@@ -161,7 +161,7 @@ Ritual: tablero semanal de métricas, revisión quincenal con `producto` y `conf
 | Confianza | Perfiles verificados, reseñas reales y un botón de seguridad siempre gratis. | Verified profiles, real reviews and a safety button that's always free. |
 
 **Mensaje de lanzamiento corto**
-- ES: «Ya llegó Lumen Travels. Planea tu ruta por Colombia, encuentra con quién recorrerla y viajen juntos con confianza. Tu ruta, tu gente. Descárgala gratis.»
+- ES (usar el nombre comercial final): «Ya llegó Lumen Travels. Planea tu ruta por Colombia, encuentra con quién recorrerla y viajen juntos con confianza. Tu ruta, tu gente. Descárgala gratis.»
 - EN: «Lumen Travels is here. Plan your route through Colombia, find people to share it with and travel together safely. Your route, your people. Free to download.»
 
 Siempre con la firma «Diseñado por Lumen Studio».
