@@ -1,0 +1,1045 @@
+<title>Lumen Travels</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Plan del producto Lumen Travels: una app para planear tu ruta y encontrar con quién recorrerla. Diseñado por Lumen Studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: una sola columna de lectura sobre la noche; cada sección abre con su rótulo a la izquierda en escritorio y se apila en el celular. El dorado del farol marca solo lo importante. */
+:root {
+  /* Tokens de la app (03 · modo oscuro principal) */
+  --bg: #0E0C12;            /* noche */
+  --surface: #18151E;
+  --raised: #231F2B;
+  --line: #2E2938;
+  --line-strong: #6B6375;
+  --text: #F3EFE6;          /* papel */
+  --text-2: #B8B1A6;
+  --text-3: #8E877C;
+  --accent: #E8B64C;        /* farol */
+  --accent-text: #E8B64C;
+  --accent-pressed: #F2C770;
+  --on-accent: #1A1305;
+  --success: #5BC98E;
+  --warning: #F2A65A;
+  --danger: #FF7A70;
+  --info: #7DB4F5;
+  --trust: #6FD3C4;
+  --safety: #C62F35;
+  --on-safety: #FFFFFF;
+  --glow: rgba(232, 182, 76, .35);
+  --glow-soft: rgba(232, 182, 76, .12);
+  --hatch: rgba(232, 182, 76, .30);
+  --shadow: 0 12px 32px rgba(0, 0, 0, .55);
+  --bezel: #050407;
+  --bezel-edge: #3A3342;
+  /* Fotos ilustradas: iguales en ambos temas */
+  --on-photo: #F3EFE6;
+  --shade: rgba(14, 12, 18, .85);
+  --shade-0: rgba(14, 12, 18, 0);
+  --ill-sky-1: #3B2A4A;
+  --ill-sky-2: #C9774A;
+  --ill-sun: #F2C770;
+  --ill-sea: #1E3A52;
+  --ill-wall: #2A1F26;
+  --ill-hill: #1F3B2C;
+  --ill-hill-2: #2F5A3E;
+  /* Muestras del sistema (valores fijos de 03) */
+  --sw-noche: #0E0C12;
+  --sw-surface: #18151E;
+  --sw-farol: #E8B64C;
+  --sw-papel: #F3EFE6;
+  --sw-trust: #6FD3C4;
+  --sw-safety: #C62F35;
+  --sw-ink: #1A1305;
+
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mark: "Cinzel", "Trajan Pro", Georgia, serif;
+
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #FAF7F0; --surface: #FFFFFF; --raised: #F3EFE6; --line: #E4DED2; --line-strong: #8F8798;
+    --text: #1C1820; --text-2: #5A5361; --text-3: #6B6470;
+    --accent: #E8B64C; --accent-text: #8C5B00; --accent-pressed: #F2C770; --on-accent: #1A1305;
+    --success: #1F7A4D; --warning: #9A5300; --danger: #B3261E; --info: #2361B0; --trust: #0F7468;
+    --safety: #C62F35; --on-safety: #FFFFFF;
+    --glow: rgba(140, 91, 0, .30); --glow-soft: rgba(232, 182, 76, .22); --hatch: rgba(140, 91, 0, .28);
+    --shadow: 0 12px 32px rgba(28, 24, 32, .16);
+    --bezel: #1C1820; --bezel-edge: #5A5361;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #FAF7F0; --surface: #FFFFFF; --raised: #F3EFE6; --line: #E4DED2; --line-strong: #8F8798;
+  --text: #1C1820; --text-2: #5A5361; --text-3: #6B6470;
+  --accent: #E8B64C; --accent-text: #8C5B00; --accent-pressed: #F2C770; --on-accent: #1A1305;
+  --success: #1F7A4D; --warning: #9A5300; --danger: #B3261E; --info: #2361B0; --trust: #0F7468;
+  --safety: #C62F35; --on-safety: #FFFFFF;
+  --glow: rgba(140, 91, 0, .30); --glow-soft: rgba(232, 182, 76, .22); --hatch: rgba(140, 91, 0, .28);
+  --shadow: 0 12px 32px rgba(28, 24, 32, .16);
+  --bezel: #1C1820; --bezel-edge: #5A5361;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.page {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+.inner { max-width: 1120px; margin-inline: auto; }
+
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem); line-height: 1.15; letter-spacing: -0.01em; }
+h3 { font-size: 1.125rem; line-height: 1.35; font-weight: 700; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+a { color: var(--accent-text); text-underline-offset: 3px; }
+a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; border-radius: 6px; }
+.tnum { font-variant-numeric: tabular-nums; }
+.eyebrow { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
+.muted { color: var(--text-2); }
+.small { font-size: .875rem; line-height: 1.5; }
+.prose { max-width: 65ch; }
+.prose > * + * { margin-top: .9em; }
+svg { flex-shrink: 0; }
+.icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Portada ---------- */
+.hero { padding-block: clamp(32px, 6vw, 72px) clamp(40px, 6vw, 80px); border-bottom: 1px solid var(--line); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.hero-grid > * { min-width: 0; }
+.mark { display: flex; align-items: center; gap: 12px; color: var(--text); }
+.mark svg { width: 34px; height: 34px; }
+.mark span { font-family: var(--font-mark); font-weight: 600; letter-spacing: .16em; font-size: .95rem; }
+.hero h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.75rem, 1.6rem + 5vw, 5rem); line-height: 1.02; letter-spacing: -0.02em; margin-top: clamp(28px, 5vw, 56px); }
+.hero .lead { font-size: clamp(1.125rem, 1rem + .5vw, 1.375rem); line-height: 1.5; color: var(--text-2); margin-top: 20px; max-width: 34ch; }
+.slogan { font-family: var(--font-display); font-style: italic; font-weight: 500; font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); color: var(--accent-text); margin-top: 28px; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 32px; list-style: none; }
+.facts li { min-width: 0; font-size: .875rem; color: var(--text-2); }
+.facts strong { display: block; color: var(--text); font-weight: 600; }
+.lantern-stage { position: relative; display: grid; place-items: center; aspect-ratio: 1; max-width: 360px; width: 100%; margin-inline: auto; }
+.lantern-stage::before {
+  content: ""; position: absolute; inset: 8%; border-radius: 50%;
+  background: radial-gradient(circle at 50% 46%, var(--glow) 0%, var(--glow-soft) 38%, transparent 70%);
+  animation: encendido 2.4s var(--ease) both;
+}
+.lantern-stage svg { position: relative; width: 52%; height: auto; color: var(--accent); }
+@keyframes encendido { from { transform: scale(.6); opacity: .35; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .lantern-stage::before { animation: none; } }
+
+.toc { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.toc a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--text-2); text-decoration: none; font-size: .875rem; font-weight: 600; transition: color .2s var(--ease), border-color .2s var(--ease); }
+.toc a:hover { color: var(--text); border-color: var(--line-strong); }
+
+/* ---------- Secciones ---------- */
+.section { padding-block: clamp(48px, 7vw, 96px); border-bottom: 1px solid var(--line); scroll-margin-top: 16px; }
+.section-head { display: grid; gap: 10px; margin-bottom: clamp(28px, 4vw, 48px); max-width: 760px; }
+.section-head p { color: var(--text-2); font-size: 1.0625rem; }
+.section-head .eyebrow { color: var(--accent-text); font-size: .75rem; }
+
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); }
+.two > * { min-width: 0; }
+
+/* Problema */
+.pains { list-style: none; display: grid; gap: 20px; }
+.pains li { display: grid; gap: 4px; padding-left: 18px; border-left: 2px solid var(--line); }
+.pains strong { font-weight: 700; }
+.pains span { color: var(--text-2); }
+.who { margin-top: 32px; display: grid; gap: 14px; }
+.who div { display: grid; gap: 2px; }
+.who dt { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
+.who dd { margin: 0; }
+dl { margin: 0; }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 20px; display: grid; gap: 12px; }
+.map-card svg { width: 100%; max-width: 400px; height: auto; margin-inline: auto; display: block; }
+.map-route { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.map-ext { fill: none; stroke: var(--text-3); stroke-width: 2; stroke-dasharray: 2 6; stroke-linecap: round; }
+.map-dot { fill: var(--accent); stroke: var(--surface); stroke-width: 3; }
+.map-dot.minor { fill: var(--text-2); }
+.map-label { fill: var(--text); font-family: var(--font-body); font-size: 15px; font-weight: 700; }
+.map-sub { fill: var(--text-2); font-family: var(--font-body); font-size: 13px; font-weight: 500; }
+.map-sea { fill: var(--text-3); font-family: var(--font-display); font-style: italic; font-size: 15px; }
+.map-grid { stroke: var(--line); stroke-width: 1; }
+
+/* Pilares */
+.pillars { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; list-style: none; border-top: 1px solid var(--line-strong); }
+.pillars li { min-width: 0; padding: 24px 24px 8px 0; display: grid; align-content: start; gap: 10px; }
+.pillars li + li { padding-left: 24px; border-left: 1px solid var(--line); }
+.pillars .icon { width: 30px; height: 30px; color: var(--accent-text); }
+.pillars li.trust .icon { color: var(--trust); }
+.pillars h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; }
+.pillars .mvp { font-size: .875rem; color: var(--text-2); padding-top: 10px; border-top: 1px dashed var(--line); }
+.pillars .mvp b { color: var(--text); font-weight: 600; }
+
+/* Pantallas */
+.screens { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(28px, 5vw, 64px); align-items: flex-start; }
+.screens figure { margin: 0; display: grid; gap: 14px; justify-items: center; min-width: 0; width: min(312px, 100%); }
+.screens figcaption { font-size: .875rem; color: var(--text-2); text-align: center; max-width: 30ch; }
+.screens figcaption b { color: var(--text); }
+.example-note { display: inline-flex; align-items: center; gap: 8px; font-size: .8125rem; font-weight: 600; color: var(--warning); margin-bottom: 28px; }
+.phone { width: 100%; border-radius: 46px; padding: 10px; background: var(--bezel); box-shadow: 0 0 0 1px var(--bezel-edge), var(--shadow); }
+.screen { position: relative; border-radius: 36px; overflow: hidden; background: var(--bg); height: 640px; display: flex; flex-direction: column; font-size: 13px; line-height: 1.4; color: var(--text); }
+.statusbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 22px 4px; font-size: 12px; font-weight: 700; }
+.statusbar .notch { width: 84px; height: 22px; border-radius: 999px; background: var(--bezel); }
+.app-body { flex: 1; min-height: 0; overflow: hidden; padding: 6px 14px 0; display: grid; align-content: start; gap: 10px; }
+.app-title { display: flex; justify-content: space-between; align-items: center; }
+.app-title h4 { font-family: var(--font-display); font-weight: 600; font-size: 24px; }
+.seg { display: flex; padding: 3px; border-radius: 999px; background: var(--raised); font-size: 12px; font-weight: 700; }
+.seg span { padding: 4px 10px; border-radius: 999px; color: var(--text-2); }
+.seg span.on { background: var(--surface); color: var(--text); box-shadow: 0 0 0 1px var(--line-strong); }
+.search { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 10px; background: var(--raised); border: 1px solid var(--line-strong); color: var(--text-2); }
+.search .icon { width: 18px; height: 18px; }
+.chips { display: flex; gap: 6px; flex-wrap: nowrap; overflow: hidden; }
+.chip { flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px; height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 12px; font-weight: 600; color: var(--text); background: var(--surface); }
+.chip.on { border-color: var(--accent); background: var(--raised); }
+.chip .icon { width: 14px; height: 14px; }
+.trip { border-radius: 16px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
+.photo { position: relative; height: 112px; }
+.photo svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--shade-0) 35%, var(--shade) 100%); }
+.photo .ph-title { position: absolute; z-index: 1; left: 12px; right: 12px; bottom: 9px; color: var(--on-photo); font-weight: 700; font-size: 15px; }
+.tag-example { position: absolute; z-index: 1; top: 9px; left: 9px; font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; background: var(--shade); color: var(--on-photo); }
+.trip-body { padding: 10px 12px 12px; display: grid; gap: 8px; }
+.trip-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; color: var(--text-2); font-size: 12px; font-weight: 600; }
+.compat { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; font-size: 12px; color: var(--text); padding: 3px 10px 3px 3px; border-radius: 999px; background: var(--raised); }
+.ring { --p: 86; width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(var(--accent) calc(var(--p) * 1%), var(--line) 0); display: grid; place-items: center; }
+.ring::after { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--raised); }
+.ring.big { width: 52px; height: 52px; }
+.ring.big::after { width: 40px; height: 40px; background: var(--surface); }
+.person { display: flex; align-items: center; gap: 8px; font-size: 12px; min-width: 0; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; font-weight: 800; color: var(--on-accent); background: var(--info); flex-shrink: 0; }
+.avatar.b { background: var(--success); }
+.avatar.c { background: var(--accent-pressed); }
+.avatar.lg { width: 40px; height: 40px; font-size: 13px; }
+.verified { display: inline-flex; align-items: center; gap: 3px; color: var(--trust); font-weight: 700; }
+.verified .icon { width: 14px; height: 14px; }
+.star { color: var(--text); font-weight: 700; }
+.traveler { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 12px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.traveler .t-name { font-weight: 700; }
+.traveler .t-sub { color: var(--text-2); font-size: 12px; }
+.mini-chips { display: flex; gap: 4px; margin-top: 4px; }
+.mini-chips span { font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; background: var(--raised); color: var(--text-2); }
+.btn-ghost { font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-strong); }
+.tabbar { display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; padding: 8px 6px 18px; background: var(--surface); border-top: 1px solid var(--line); }
+.tabbar span { display: grid; justify-items: center; gap: 2px; font-size: 10.5px; font-weight: 600; color: var(--text-3); }
+.tabbar span.on { color: var(--accent-text); }
+.tabbar .icon { width: 22px; height: 22px; }
+.tabbar .plus { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; margin-inline: auto; }
+.detail-photo { position: relative; height: 158px; flex-shrink: 0; }
+.detail-photo svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.detail-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--shade-0) 30%, var(--shade) 100%); }
+.detail-photo .back { position: absolute; z-index: 1; top: 40px; left: 12px; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--shade); color: var(--on-photo); }
+.detail-photo .back .icon { width: 18px; height: 18px; }
+.detail-photo .tag-example { top: 46px; left: auto; right: 12px; }
+.detail-photo .ph-title { position: absolute; z-index: 1; left: 14px; right: 14px; bottom: 10px; color: var(--on-photo); }
+.detail-photo .ph-title b { display: block; font-family: var(--font-display); font-size: 21px; font-weight: 600; line-height: 1.15; }
+.detail-photo .ph-title span { font-size: 12px; font-weight: 600; }
+.detail-photo .statusbar { position: absolute; z-index: 1; top: 0; left: 0; right: 0; color: var(--on-photo); }
+.d-body { flex: 1; min-height: 0; overflow: hidden; padding: 12px 14px 0; display: grid; align-content: start; gap: 11px; }
+.why { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.why .ring.big { position: relative; }
+.why .pct { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; font-weight: 800; z-index: 1; }
+.why b { display: block; font-size: 13px; }
+.why ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+.why li { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--raised); color: var(--text-2); }
+.org { display: flex; align-items: center; gap: 10px; }
+.org .who-l { display: grid; gap: 1px; font-size: 12px; min-width: 0; }
+.org .who-l b { font-size: 13px; }
+.days { list-style: none; display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px; }
+.days li { position: relative; padding: 0 0 8px 14px; font-size: 12px; color: var(--text-2); }
+.days li b { color: var(--text); font-weight: 700; }
+.days li::before { content: ""; position: absolute; left: -6px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.days li:nth-child(2)::before { background: var(--info); }
+.days li:nth-child(3)::before { background: var(--success); }
+.members { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text-2); }
+.stack { display: flex; }
+.stack .avatar { width: 26px; height: 26px; font-size: 10px; box-shadow: 0 0 0 2px var(--bg); }
+.stack .avatar + .avatar { margin-left: -6px; }
+.stack .open { width: 26px; height: 26px; margin-left: -6px; border-radius: 50%; border: 1.5px dashed var(--line-strong); background: var(--bg); }
+.cta-zone { padding: 10px 14px 20px; display: grid; gap: 6px; background: var(--bg); border-top: 1px solid var(--line); }
+.cta { height: 46px; border-radius: 16px; background: var(--accent); color: var(--on-accent); font-weight: 800; font-size: 14px; display: grid; place-items: center; }
+.cta-note { font-size: 11px; color: var(--text-2); text-align: center; }
+.cta-note b { color: var(--trust); }
+
+.system { margin-top: clamp(40px, 6vw, 64px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.system > * { min-width: 0; }
+.swatches { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 12px; }
+.swatches li { display: grid; gap: 6px; font-size: .8125rem; min-width: 0; }
+.swatches i { display: block; height: 48px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--line-strong); }
+.swatches b { font-weight: 700; }
+.swatches code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .75rem; color: var(--text-2); }
+.typespec { display: grid; gap: 14px; }
+.typespec div { display: grid; gap: 2px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.typespec .t1 { font-family: var(--font-display); font-weight: 600; font-size: 1.75rem; line-height: 1.2; }
+.typespec .t2 { font-family: var(--font-body); font-size: 1rem; }
+.typespec .t3 { font-family: var(--font-mark); font-weight: 600; letter-spacing: .14em; font-size: 1rem; }
+.typespec small { font-size: .8125rem; color: var(--text-2); }
+
+/* MVP */
+.scope { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); }
+.scope > * { min-width: 0; }
+.scope h3 { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line-strong); margin-bottom: 4px; }
+.scope h3 .icon { width: 22px; height: 22px; }
+.in h3 .icon { color: var(--success); }
+.out h3 .icon { color: var(--text-3); }
+.ilist { list-style: none; display: grid; }
+.ilist li { padding: 11px 0; border-bottom: 1px solid var(--line); display: grid; gap: 2px; }
+.ilist li span { color: var(--text-2); font-size: .875rem; }
+.northstar { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; padding: 20px 22px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.northstar .eyebrow { flex-basis: 100%; }
+.northstar strong { font-family: var(--font-display); font-weight: 600; font-size: 1.375rem; }
+.northstar span { color: var(--text-2); min-width: 0; }
+
+/* Roadmap */
+.road-scale, .phase { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); gap: 8px 32px; }
+.road-scale { font-size: .75rem; color: var(--text-3); font-weight: 600; }
+.ticks { position: relative; height: 18px; }
+.ticks span { position: absolute; transform: translateX(-50%); }
+.ticks span:first-child { transform: none; }
+.ticks span:last-child { transform: translateX(-100%); }
+.phases { list-style: none; display: grid; margin-top: 6px; }
+.phase { padding-block: 22px; border-top: 1px solid var(--line); }
+.phase-name { display: grid; gap: 2px; align-content: start; }
+.phase-name .num { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
+.phase-name h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.375rem; }
+.phase-name .weeks { font-weight: 700; color: var(--accent-text); }
+.phase-body { display: grid; gap: 12px; min-width: 0; }
+.track { position: relative; height: 14px; border-radius: 999px; background: var(--raised); overflow: hidden; }
+.track .min { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--min) / 14 * 100%); background: var(--accent); border-radius: 999px; }
+.track .max { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--max) / 14 * 100%); border-radius: 999px; background: repeating-linear-gradient(135deg, var(--hatch) 0 4px, transparent 4px 8px); }
+.track.cycles { background: repeating-linear-gradient(90deg, var(--accent) 0 calc(6 / 14 * 100% - 4px), transparent calc(6 / 14 * 100% - 4px) calc(6 / 14 * 100%)); opacity: .9; }
+.phase-body p { color: var(--text-2); max-width: 70ch; }
+.trayectos { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; padding: 14px 16px; border-radius: 14px; background: var(--glow-soft); border: 1px solid var(--accent); }
+.trayectos .icon { color: var(--accent-text); }
+.trayectos b { display: block; }
+.trayectos span { color: var(--text-2); font-size: .9375rem; }
+.road-total { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line-strong); display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: .9375rem; color: var(--text-2); }
+.road-total b { color: var(--text); }
+.legend { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 22px; height: 10px; border-radius: 999px; background: var(--accent); }
+.legend i.h { background: repeating-linear-gradient(135deg, var(--hatch) 0 4px, var(--raised) 4px 8px); }
+
+/* Tablas */
+.table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 620px; font-size: .9375rem; }
+th, td { text-align: left; vertical-align: top; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); font-weight: 700; background: var(--raised); }
+td.lvl { white-space: nowrap; font-weight: 700; }
+.lvl-badge { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; margin-right: 8px; font-size: .8125rem; background: var(--raised); color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); vertical-align: middle; }
+.lvl-badge.v { background: var(--trust); color: var(--on-accent); box-shadow: none; }
+tr.key td { background: var(--glow-soft); }
+
+/* Seguridad */
+.safety-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: start; margin-top: clamp(32px, 5vw, 56px); }
+.safety-grid > * { min-width: 0; }
+.rules { list-style: none; display: grid; gap: 10px; margin-top: 20px; }
+.rules li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
+.rules .icon { width: 20px; height: 20px; color: var(--trust); margin-top: 3px; }
+.sos { padding: 24px; border-radius: 24px; background: var(--surface); border: 1px solid var(--line); display: grid; gap: 18px; }
+.sos-btn { width: 132px; height: 132px; border-radius: 50%; margin-inline: auto; display: grid; place-items: center; text-align: center; background: var(--safety); color: var(--on-safety); box-shadow: 0 0 0 8px var(--surface), 0 0 0 10px var(--safety); }
+.sos-btn b { display: block; font-size: 1.125rem; letter-spacing: .04em; }
+.sos-btn span { font-size: .75rem; font-weight: 600; }
+.sos-opts { list-style: none; display: grid; gap: 14px; }
+.sos-opts li { display: grid; gap: 2px; }
+.sos-opts b { font-weight: 700; }
+.sos-opts span { color: var(--text-2); font-size: .9375rem; }
+.sos .foot { font-size: .8125rem; color: var(--text-2); border-top: 1px solid var(--line); padding-top: 14px; }
+
+/* Tecnología */
+.stack-list { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(28px, 5vw, 72px); }
+.stack-list div { display: grid; grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr); gap: 16px; padding-block: 13px; border-bottom: 1px solid var(--line); }
+.stack-list dt { font-size: .8125rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); padding-top: 2px; }
+.stack-list dd { margin: 0; min-width: 0; }
+.stack-list dd b { font-weight: 700; }
+.stack-list dd span { color: var(--text-2); }
+
+/* Negocio */
+.money-head { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem); line-height: 1.1; color: var(--accent-text); max-width: 20ch; }
+.money-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 40px); margin-top: 32px; }
+.money-grid > div { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.money-grid h3 { font-size: 1rem; padding-bottom: 10px; border-bottom: 1px solid var(--line-strong); }
+.dot-list { list-style: none; display: grid; gap: 8px; color: var(--text-2); font-size: .9375rem; }
+.dot-list li { padding-left: 16px; position: relative; }
+.dot-list li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); }
+.dot-list.free li::before { background: var(--trust); }
+.dot-list.never li::before { background: var(--danger); border-radius: 1px; }
+.money-table { margin-top: 36px; }
+
+/* Hipótesis */
+.hyps { list-style: none; display: grid; border-top: 1px solid var(--line-strong); }
+.hyp { display: grid; grid-template-columns: 4rem minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px 28px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.hyp > * { min-width: 0; }
+.hyp .id { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; color: var(--accent-text); line-height: 1.1; }
+.hyp .claim { font-weight: 600; font-size: 1.0625rem; }
+.hyp .lbl { display: block; font-size: .6875rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: 2px; }
+.hyp .how, .hyp .signal { color: var(--text-2); font-size: .9375rem; }
+
+/* Equipo */
+.lead-agent { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; padding: 22px; border-radius: 20px; background: var(--surface); border: 1px solid var(--accent); }
+.lead-agent .badge { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); }
+.lead-agent b { font-size: 1.125rem; }
+.lead-agent span { color: var(--text-2); display: block; }
+.agents { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 12px; }
+.agents li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding-block: 14px; border-bottom: 1px solid var(--line); min-width: 0; }
+.agents b { font-weight: 700; }
+.agents .doc { font-size: .75rem; font-weight: 700; color: var(--accent-text); font-variant-numeric: tabular-nums; align-self: center; white-space: nowrap; }
+.agents span:not(.doc) { grid-column: 1 / -1; color: var(--text-2); font-size: .875rem; }
+.humans { list-style: none; display: grid; gap: 0; }
+.humans li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.humans .icon { color: var(--warning); width: 22px; height: 22px; margin-top: 2px; }
+.humans b { display: block; }
+.humans span { color: var(--text-2); font-size: .9375rem; }
+
+/* Próximos pasos */
+.steps { list-style: none; counter-reset: s; display: grid; gap: 0; max-width: 820px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.steps li::before { content: counter(s); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: .9375rem; color: var(--accent-text); box-shadow: inset 0 0 0 1.5px var(--accent-text); }
+.steps b { display: block; font-size: 1.0625rem; }
+.steps span { color: var(--text-2); }
+
+/* Pie */
+.footer { padding-block: 48px 56px; }
+.footer .inner { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between; }
+.sign { display: flex; align-items: center; gap: 12px; font-family: var(--font-mark); font-weight: 600; letter-spacing: .12em; font-size: .9375rem; color: var(--text); }
+.sign svg { width: 26px; height: 26px; color: var(--accent); }
+.footer p { color: var(--text-3); font-size: .8125rem; max-width: 52ch; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pillars li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .pillars li:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .money-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .hyp { grid-template-columns: 3.5rem minmax(0, 1fr) minmax(0, 1fr); }
+  .hyp .claim { grid-column: 2 / -1; }
+  .hyp .how { grid-column: 2; }
+}
+@media (max-width: 820px) {
+  .hero-grid, .two, .scope, .system, .safety-grid, .stack-list { grid-template-columns: minmax(0, 1fr); }
+  .lantern-stage { display: none; }
+  .road-scale { display: none; }
+  .phase { grid-template-columns: minmax(0, 1fr); }
+  .money-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .pillars { grid-template-columns: minmax(0, 1fr); }
+  .pillars li, .pillars li + li { padding: 20px 0 8px; border-left: 0; }
+  .pillars li + li { border-top: 1px solid var(--line); }
+  .hyp { grid-template-columns: 2.75rem minmax(0, 1fr); }
+  .hyp .how, .hyp .signal { grid-column: 2; }
+  .stack-list div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lead-agent { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-lantern" viewBox="0 0 64 64">
+      <path d="M26 6h12M32 6v5" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M22 15h20l-3 -4H25z" fill="currentColor"/>
+      <path d="M21 17h22l-2 30H23z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M32 26c4 4 5 8 5 11a5 5 0 0 1 -10 0c0 -3 1 -7 5 -11z" fill="currentColor"/>
+      <path d="M19 47h26v4a3 3 0 0 1 -3 3H22a3 3 0 0 1 -3 -3z" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M19 9h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1v2l-3-2h-4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.3-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14.5c2.4 0 4 1.5 4.6 4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></symbol>
+    <symbol id="i-later" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M12 3v9M12 16v.5"/><circle cx="12" cy="12" r="10" stroke-dasharray="3 3"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="M3 16v-3l2-5a2 2 0 0 1 2-1h10a2 2 0 0 1 2 1l2 5v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M3 13h18"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+<header class="hero">
+  <div class="inner">
+    <div class="hero-grid">
+      <div>
+        <div class="mark" aria-label="Lumen Travels">
+          <svg aria-hidden="true" style="color:var(--accent)"><use href="#i-lantern"/></svg>
+          <span>LUMEN TRAVELS</span>
+        </div>
+        <p class="eyebrow" style="margin-top:clamp(28px,5vw,56px)">Plan del producto · v1 · noviembre de 2026</p>
+        <h1>Lumen Travels</h1>
+        <p class="lead">Una app móvil para planear tu ruta y encontrar con quién recorrerla, con gente verificada y todo el viaje en un mismo lugar.</p>
+        <p class="slogan">Tu ruta, tu gente.</p>
+        <ul class="facts">
+          <li><strong>iOS y Android</strong>en español e inglés</li>
+          <li><strong>Corredor piloto</strong>Medellín – Bogotá – Caribe</li>
+          <li><strong>North Star</strong>viajes compartidos completados al mes</li>
+        </ul>
+      </div>
+      <div class="lantern-stage" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><use href="#i-lantern"/></svg>
+      </div>
+    </div>
+    <nav aria-label="Secciones del plan">
+      <ul class="toc">
+        <li><a href="#problema">Problema</a></li>
+        <li><a href="#pilares">Pilares</a></li>
+        <li><a href="#pantallas">Pantallas</a></li>
+        <li><a href="#mvp">MVP</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#seguridad">Seguridad</a></li>
+        <li><a href="#tecnologia">Tecnología</a></li>
+        <li><a href="#negocio">Negocio</a></li>
+        <li><a href="#hipotesis">Hipótesis</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#pasos">Próximos pasos</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- 2. Problema -->
+<section class="section" id="problema" aria-labelledby="h-problema">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">El problema y para quién</p>
+      <h2 id="h-problema">Que nadie deje de hacer un viaje por no tener con quién ir.</h2>
+    </div>
+    <div class="two">
+      <div>
+        <ul class="pains">
+          <li><strong>Planear está disperso.</strong><span>El itinerario vive en notas, capturas, mapas guardados y hojas de cálculo, y no se comparte fácil.</span></li>
+          <li><strong>Encontrar compañía es al azar.</strong><span>Se publica en grupos de Facebook o WhatsApp y se espera suerte, sin filtros por fechas, ruta, estilo o presupuesto.</span></li>
+          <li><strong>No sabes con quién te encuentras.</strong><span>Un perfil sin verificar y sin historial genera desconfianza justificada, sobre todo para mujeres que viajan solas.</span></li>
+          <li><strong>Coordinar en grupo se desordena.</strong><span>Cambios de plan, votaciones informales y cuentas en otra app terminan en malentendidos.</span></li>
+        </ul>
+        <dl class="who">
+          <div><dt>Primer segmento</dt><dd>Viajero internacional que viaja solo en Colombia: mochileros y nómadas digitales.</dd></div>
+          <div><dt>Segundo segmento (después)</dt><dd>Jóvenes colombianos de 22 a 35 años que viajan en puentes festivos.</dd></div>
+          <div><dt>Por qué un corredor</dt><dd>Una app para coincidir solo funciona con densidad: mucha gente en las mismas ciudades y fechas. Bogotá, Medellín y Cartagena concentran la mayoría de los visitantes internacionales.</dd></div>
+        </dl>
+      </div>
+      <figure class="map-card" style="margin:0">
+        <svg viewBox="0 0 400 580" role="img" aria-labelledby="map-t map-d">
+          <title id="map-t">Corredor piloto Medellín – Bogotá – Caribe</title>
+          <desc id="map-d">Esquema con posiciones aproximadas: ruta de Bogotá a Medellín, Cartagena, Santa Marta y Tayrona. El Eje Cafetero aparece como extensión punteada.</desc>
+          <line class="map-grid" x1="0" y1="100" x2="400" y2="100"/>
+          <line class="map-grid" x1="0" y1="240" x2="400" y2="240"/>
+          <line class="map-grid" x1="0" y1="380" x2="400" y2="380"/>
+          <line class="map-grid" x1="0" y1="520" x2="400" y2="520"/>
+          <text class="map-sea" x="22" y="40">Mar Caribe</text>
+          <path class="map-ext" d="M130 418 L122 519"/>
+          <path class="map-route" d="M235 526 L130 418 L134 129 L226 69 L244 64"/>
+          <circle class="map-dot" cx="134" cy="129" r="9"/>
+          <circle class="map-dot" cx="226" cy="69" r="7"/>
+          <circle class="map-dot" cx="244" cy="64" r="7"/>
+          <circle class="map-dot" cx="130" cy="418" r="9"/>
+          <circle class="map-dot" cx="235" cy="526" r="9"/>
+          <circle class="map-dot minor" cx="122" cy="519" r="6"/>
+          <text class="map-label" x="150" y="134">Cartagena</text>
+          <text class="map-sub" x="150" y="152">17 % de visitantes int.</text>
+          <text class="map-label" x="212" y="56" text-anchor="end">Santa Marta</text>
+          <text class="map-label" x="254" y="50">Tayrona</text>
+          <text class="map-label" x="116" y="414" text-anchor="end">Medellín</text>
+          <text class="map-sub" x="116" y="432" text-anchor="end">26 % · inicio</text>
+          <text class="map-label" x="250" y="531">Bogotá</text>
+          <text class="map-sub" x="250" y="549">37 % · base de Lumen</text>
+          <text class="map-sub" x="110" y="516" text-anchor="end">Eje Cafetero</text>
+          <text class="map-sub" x="110" y="532" text-anchor="end">extensión</text>
+        </svg>
+        <figcaption class="small muted">Participación de cada ciudad en los visitantes internacionales de Colombia, con fuente en el documento 01. Posiciones aproximadas, no a escala de mapa oficial.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Pilares -->
+<section class="section" id="pilares" aria-labelledby="h-pilares">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Los 4 pilares</p>
+      <h2 id="h-pilares">Del plan al viaje, con la confianza en cada paso.</h2>
+      <p>Cuatro ideas ordenan todo el producto. Cada una tiene su parte en el MVP; el resto llega por fases.</p>
+    </div>
+    <ul class="pillars">
+      <li>
+        <svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>
+        <h3>Planea</h3>
+        <p>Arma tu viaje día a día sobre el mapa, con tiempos y presupuesto claros.</p>
+        <p class="mvp"><b>En el MVP:</b> itinerario por días con lugares y mapa, privado o abierto.</p>
+      </li>
+      <li>
+        <svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg>
+        <h3>Coincide</h3>
+        <p>Encuentra viajeros que van a donde tú vas, cuando tú vas.</p>
+        <p class="mvp"><b>En el MVP:</b> publicar «busco compañeros», explorar con filtros, pedir unirse e indicador de compatibilidad.</p>
+      </li>
+      <li>
+        <svg class="icon" aria-hidden="true"><use href="#i-people"/></svg>
+        <h3>Viajen juntos</h3>
+        <p>Un solo lugar para el plan, el chat, las votaciones y las cuentas.</p>
+        <p class="mvp"><b>En el MVP:</b> chat de grupo y gastos básicos. Votaciones y edición en conjunto, después.</p>
+      </li>
+      <li class="trust">
+        <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
+        <h3>Confianza</h3>
+        <p>Perfiles verificados, reseñas reales y un botón de seguridad siempre gratis.</p>
+        <p class="mvp"><b>En el MVP:</b> verificación, reseñas ciegas, reportar y bloquear, moderación y SOS básico.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 4. Pantallas -->
+<section class="section" id="pantallas" aria-labelledby="h-pantallas">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Así se ve la app</p>
+      <h2 id="h-pantallas">La noche como fondo y el farol para lo importante.</h2>
+      <p>Dos pantallas recreadas con los colores y letras del sistema de diseño (documento 03). La compatibilidad siempre explica su porqué, y la verificación se ve antes de que se pida.</p>
+    </div>
+    <p class="example-note"><svg class="icon" style="width:18px;height:18px" aria-hidden="true"><use href="#i-spark"/></svg>Contenido de ejemplo: nombres, fechas, cifras y porcentajes son ilustrativos.</p>
+    <div class="screens">
+      <figure>
+        <div class="phone">
+          <div class="screen" role="img" aria-label="Ejemplo de la pantalla Explorar: un viaje abierto a Cartagena e Islas del 12 al 17 de diciembre, 2 de 4 cupos, 86 % compatible, organizado por Laura con identidad verificada; debajo, el viajero Tomás, también en Medellín del 10 al 14 de diciembre.">
+            <div class="statusbar" aria-hidden="true"><span class="tnum">9:41</span><span class="notch"></span><span>5G</span></div>
+            <div class="app-body" aria-hidden="true">
+              <div class="app-title"><h4>Explorar</h4><div class="seg"><span class="on">Lista</span><span>Mapa</span></div></div>
+              <div class="search"><svg class="icon"><use href="#i-search"/></svg>¿A dónde vas?</div>
+              <div class="chips">
+                <span class="chip on">Dic 10–20</span><span class="chip">Presupuesto</span><span class="chip">Estilo</span><span class="chip"><svg class="icon"><use href="#i-sliders"/></svg></span>
+              </div>
+              <div class="trip">
+                <div class="photo">
+                  <svg viewBox="0 0 300 112" preserveAspectRatio="xMidYMid slice">
+                    <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ill-sky-1)"/><stop offset="1" style="stop-color:var(--ill-sky-2)"/></linearGradient></defs>
+                    <rect width="300" height="112" fill="url(#sky1)"/>
+                    <circle cx="214" cy="66" r="18" style="fill:var(--ill-sun)"/>
+                    <rect y="78" width="300" height="34" style="fill:var(--ill-sea)"/>
+                    <path d="M0 80V58h22v-8h14v8h30V46l8-10 8 10v12h26V52h18v6h40V40h6v-6h6v6h6v18h30v22z" style="fill:var(--ill-wall)"/>
+                  </svg>
+                  <span class="tag-example">Ejemplo</span>
+                  <span class="ph-title">Cartagena + Islas · 5 días</span>
+                </div>
+                <div class="trip-body">
+                  <div class="trip-meta"><span class="tnum">12–17 dic · 2/4 cupos</span><span class="compat"><span class="ring"></span>86 % compatible</span></div>
+                  <div class="person"><span class="avatar">LG</span><b>Laura</b><span class="verified"><svg class="icon"><use href="#i-shield"/></svg>ID</span><span class="star">★ 4,9</span><span class="muted">· 7 viajes</span></div>
+                </div>
+              </div>
+              <div class="traveler">
+                <span class="avatar b lg">TR</span>
+                <div><div class="t-name">Tomás <span class="verified"><svg class="icon"><use href="#i-shield"/></svg></span></div><div class="t-sub">También en Medellín · 10–14 dic</div><div class="mini-chips"><span>Cultural</span><span>Mochilero</span></div></div>
+                <span class="btn-ghost">Ver</span>
+              </div>
+            </div>
+            <div class="tabbar" aria-hidden="true">
+              <span class="on"><svg class="icon"><use href="#i-compass"/></svg>Explorar</span>
+              <span><svg class="icon"><use href="#i-map"/></svg>Mis viajes</span>
+              <span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></span>
+              <span><svg class="icon"><use href="#i-chat"/></svg>Mensajes</span>
+              <span><svg class="icon"><use href="#i-user"/></svg>Perfil</span>
+            </div>
+          </div>
+        </div>
+        <figcaption><b>Explorar.</b> Viajes abiertos y viajeros en el mismo destino y fechas. «Solo verificados» viene activo por defecto.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone">
+          <div class="screen" role="img" aria-label="Ejemplo del detalle de un viaje: Tayrona y Minca, 4 días, del 20 al 23 de enero, 3 de 5 cupos, 86 % compatible por mismas fechas, presupuesto similar y porque hablan español. Organiza Laura G., identidad verificada. Botón Pedir unirme.">
+            <div class="detail-photo" aria-hidden="true">
+              <svg viewBox="0 0 300 158" preserveAspectRatio="xMidYMid slice">
+                <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ill-sky-1)"/><stop offset="1" style="stop-color:var(--ill-sky-2)"/></linearGradient></defs>
+                <rect width="300" height="158" fill="url(#sky2)"/>
+                <circle cx="80" cy="92" r="20" style="fill:var(--ill-sun)"/>
+                <path d="M0 110 L60 70 L110 100 L170 52 L240 96 L300 74 V158 H0z" style="fill:var(--ill-hill)"/>
+                <path d="M0 130 L80 104 L150 124 L230 100 L300 118 V158 H0z" style="fill:var(--ill-hill-2)"/>
+                <rect y="136" width="300" height="22" style="fill:var(--ill-sea)"/>
+              </svg>
+              <div class="statusbar"><span class="tnum">9:41</span><span class="notch"></span><span>5G</span></div>
+              <span class="back"><svg class="icon"><use href="#i-back"/></svg></span>
+              <span class="tag-example">Ejemplo</span>
+              <div class="ph-title"><b>Tayrona y Minca · 4 días</b><span class="tnum">20–23 ene · 3/5 cupos · Mochilero</span></div>
+            </div>
+            <div class="d-body" aria-hidden="true">
+              <div class="why">
+                <span class="ring big"><span class="pct tnum">86 %</span></span>
+                <div><b>Por qué coinciden</b><ul><li>Mismas fechas</li><li>Presupuesto similar</li><li>Hablan español</li></ul></div>
+              </div>
+              <div class="org">
+                <span class="avatar lg">LG</span>
+                <div class="who-l"><b>Organiza Laura G.</b><span><span class="verified"><svg class="icon"><use href="#i-shield"/></svg>Identidad verificada</span></span><span class="muted">★ 4,9 · 18 reseñas mutuas · 7 viajes</span></div>
+              </div>
+              <ul class="days">
+                <li><b>Día 1</b> · Santa Marta → Minca, finca de café</li>
+                <li><b>Día 2</b> · Minca, cascadas y mirador</li>
+                <li><b>Días 3–4</b> · Parque Tayrona, Cabo San Juan</li>
+              </ul>
+              <div class="members"><span class="stack"><span class="avatar">LG</span><span class="avatar b">AM</span><span class="avatar c">JP</span><span class="open"></span><span class="open"></span></span>3 viajeros · 2 cupos</div>
+            </div>
+            <div class="cta-zone" aria-hidden="true">
+              <div class="cta">Pedir unirme</div>
+              <div class="cta-note">Para unirte te pedimos <b>identidad verificada</b> (nivel&nbsp;2).</div>
+            </div>
+          </div>
+        </div>
+        <figcaption><b>Detalle de viaje.</b> El chip de compatibilidad dice por qué; el organizador muestra sus señales de confianza.</figcaption>
+      </figure>
+    </div>
+
+    <div class="system">
+      <div>
+        <h3 style="margin-bottom:16px">Colores de la app</h3>
+        <ul class="swatches">
+          <li><i style="background:var(--sw-noche)"></i><b>Noche</b><code>#0E0C12</code></li>
+          <li><i style="background:var(--sw-surface)"></i><b>Superficie</b><code>#18151E</code></li>
+          <li><i style="background:var(--sw-papel)"></i><b>Papel</b><code>#F3EFE6</code></li>
+          <li><i style="background:var(--sw-farol)"></i><b>Dorado</b><code>#E8B64C</code></li>
+          <li><i style="background:var(--sw-trust)"></i><b>Verificado</b><code>#6FD3C4</code></li>
+          <li><i style="background:var(--sw-safety)"></i><b>Seguridad</b><code>#C62F35</code></li>
+        </ul>
+        <p class="small muted" style="margin-top:16px">Modo oscuro principal y modo claro sobre papel <code>#FAF7F0</code>. El dorado marca una sola acción por pantalla; la seguridad usa rojo propio y la verificación, turquesa. Contraste AA calculado para cada par.</p>
+      </div>
+      <div class="typespec">
+        <h3>Letras</h3>
+        <div><span class="t1">Fraunces</span><small>Títulos de 22 pt o más · serif cálida</small></div>
+        <div><span class="t2">Manrope para texto, botones y cifras: 12&nbsp;dic · $&nbsp;45.000</span><small>400 a 700 · cifras tabulares para precios y horas</small></div>
+        <div><span class="t3">CINZEL</span><small>Solo en el logotipo y la firma «Diseñado por Lumen Studio»</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. MVP -->
+<section class="section" id="mvp" aria-labelledby="h-mvp">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Alcance del MVP</p>
+      <h2 id="h-mvp">Lo justo para probar que la gente sí viaja junta.</h2>
+      <p>El MVP valida una cosa: que alguien encuentra compañía alrededor de un itinerario y que el viaje sí ocurre.</p>
+    </div>
+    <div class="scope">
+      <div class="in">
+        <h3><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Entra</h3>
+        <ul class="ilist">
+          <li><b>Crear viaje e itinerario</b><span>Días, lugares y mapa.</span></li>
+          <li><b>Publicar «busco compañeros»</b><span>Viaje abierto con cupos, estilo y requisitos.</span></li>
+          <li><b>Explorar con filtros, pedir unirse y aceptar</b><span>Destino, fechas, presupuesto, estilo e idioma.</span></li>
+          <li><b>Indicador de compatibilidad</b><span>Reglas simples con su porqué.</span></li>
+          <li><b>Chat de grupo y gastos básicos</b><span>Registro de quién pagó; no mueve dinero.</span></li>
+          <li><b>Grupos solo de mujeres</b><span>Cuando la organizadora lo define.</span></li>
+          <li><b>Verificación, reseñas ciegas, reportar y bloquear</b><span>Más moderación y SOS básico.</span></li>
+        </ul>
+      </div>
+      <div class="out">
+        <h3><svg class="icon" aria-hidden="true"><use href="#i-later"/></svg>No entra todavía</h3>
+        <ul class="ilist">
+          <li><b>Plantillas de la comunidad</b><span>Requieren volumen de itinerarios.</span></li>
+          <li><b>Recomendaciones por algoritmo</b><span>Sin datos no hay qué entrenar; las reglas bastan.</span></li>
+          <li><b>Pagos y reservas</b><span>Alto costo regulatorio y técnico.</span></li>
+          <li><b>Modo «estoy en la ciudad»</b><span>Otra hipótesis, con más riesgo de seguridad.</span></li>
+          <li><b>Modo sin conexión y votaciones</b><span>Mejoran la retención, no prueban la hipótesis.</span></li>
+          <li><b>Puntaje de reputación</b><span>Con pocas reseñas sería engañoso.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="northstar">
+      <span class="eyebrow">North Star</span>
+      <strong>Viajes compartidos completados por mes</strong>
+      <span>Viajes con 2 o más miembros que confirman haber viajado juntos y dejan al menos una reseña.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Roadmap -->
+<section class="section" id="roadmap" aria-labelledby="h-roadmap">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Roadmap por fases</p>
+      <h2 id="h-roadmap">Cinco fases, medidas en semanas.</h2>
+      <p>Duraciones estimadas, sin fechas de calendario. Cada fase tiene un criterio para pasar a la siguiente.</p>
+    </div>
+    <div class="road-scale" aria-hidden="true">
+      <span></span>
+      <div class="ticks tnum">
+        <span style="left:0">0 sem</span><span style="left:28.57%">4</span><span style="left:42.86%">6</span><span style="left:57.14%">8</span><span style="left:71.43%">10</span><span style="left:85.71%">12</span><span style="left:100%">14</span>
+      </div>
+    </div>
+    <ol class="phases">
+      <li class="phase">
+        <div class="phase-name"><span class="num">Fase 1</span><h3>Descubrimiento y validación</h3><span class="weeks tnum">4–6 semanas</span></div>
+        <div class="phase-body">
+          <div class="track" style="--min:4;--max:6" role="img" aria-label="Entre 4 y 6 semanas"><span class="max"></span><span class="min"></span></div>
+          <p>15–20 entrevistas, prototipo navegable y prueba «concierge»: grupos armados a mano en 1–2 rutas. Pasa si se forman y viajan al menos 3 grupos.</p>
+        </div>
+      </li>
+      <li class="phase">
+        <div class="phase-name"><span class="num">Fase 2</span><h3>MVP</h3><span class="weeks tnum">10–14 semanas</span></div>
+        <div class="phase-body">
+          <div class="track" style="--min:10;--max:14" role="img" aria-label="Entre 10 y 14 semanas"><span class="max"></span><span class="min"></span></div>
+          <p>App iOS y Android con el alcance del MVP, panel de moderación y analítica. Desarrollo la planea en unas 14 semanas, más la revisión de las tiendas.</p>
+        </div>
+      </li>
+      <li class="phase">
+        <div class="phase-name"><span class="num">Fase 3</span><h3>Beta cerrada</h3><span class="weeks tnum">8–12 semanas</span></div>
+        <div class="phase-body">
+          <div class="track" style="--min:8;--max:12" role="img" aria-label="Entre 8 y 12 semanas"><span class="max"></span><span class="min"></span></div>
+          <p>Por invitación en el corredor piloto, con embajadores. Suma alertas por destino, itinerario colaborativo, check-in y ubicación en vivo.</p>
+        </div>
+      </li>
+      <li class="phase">
+        <div class="phase-name"><span class="num">Fase 4</span><h3>Lanzamiento</h3><span class="weeks tnum">6–8 semanas</span></div>
+        <div class="phase-body">
+          <div class="track" style="--min:6;--max:8" role="img" aria-label="Entre 6 y 8 semanas"><span class="max"></span><span class="min"></span></div>
+          <p>Apertura pública en Colombia, plantillas de la comunidad, votaciones y campaña de marketing.</p>
+        </div>
+      </li>
+      <li class="phase">
+        <div class="phase-name"><span class="num">Fase 5</span><h3>Crecimiento</h3><span class="weeks tnum">Ciclos de 6 semanas</span></div>
+        <div class="phase-body">
+          <div class="track cycles" role="img" aria-label="Ciclos continuos de 6 semanas"></div>
+          <p>Nuevas rutas y países de la región, recomendaciones personalizadas, pagos integrados y alianzas con hostales y tours. Cada destino nuevo exige densidad mínima antes de abrir el siguiente.</p>
+          <div class="trayectos">
+            <svg class="icon" aria-hidden="true"><use href="#i-car"/></svg>
+            <div><b>Trayectos: compartir carro entre ciudades</b><span>Al estilo Viatik. Decisión del dueño: entra en esta fase, cuando el corredor ya tenga densidad.</span></div>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <div class="road-total">
+      <span>De la fase 1 al lanzamiento: <b class="tnum">28–40 semanas</b></span>
+      <span class="legend"><i></i>Duración mínima</span>
+      <span class="legend"><i class="h"></i>Hasta la máxima</span>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Seguridad -->
+<section class="section" id="seguridad" aria-labelledby="h-seguridad">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Confianza y seguridad</p>
+      <h2 id="h-seguridad">Explorar es libre. Encontrarse exige verificación.</h2>
+      <p>La verificación se pide justo en el momento de valor, no antes, para no frenar la descarga. Los menores de 18 años no entran.</p>
+    </div>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Niveles de verificación">
+      <table>
+        <thead><tr><th scope="col">Nivel</th><th scope="col">Qué se pide</th><th scope="col">Qué desbloquea</th></tr></thead>
+        <tbody>
+          <tr><td class="lvl"><span class="lvl-badge">0</span>Visitante</td><td>Nada</td><td>Ver rutas y plantillas públicas, sin perfiles de personas.</td></tr>
+          <tr><td class="lvl"><span class="lvl-badge">1</span>Básico</td><td>Correo y teléfono confirmados por código, 18+ y aceptar las normas.</td><td>Planear itinerarios propios y ver viajeros con foto difuminada. No chatea ni se une a grupos.</td></tr>
+          <tr class="key"><td class="lvl"><span class="lvl-badge v">2</span>Identidad verificada</td><td>Documento oficial y selfie con prueba de vida, al escribir, unirse o publicar.</td><td>Chat, unirse y crear viajes abiertos, proponer encuentros, dividir gastos y dejar reseñas.</td></tr>
+          <tr><td class="lvl"><span class="lvl-badge">3</span>Señales de confianza</td><td>Opcionales: red social conectada, reseñas positivas, viajes completados, antigüedad sin reportes.</td><td>Insignias, mejor posición en Coincide y viajes de más personas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="safety-grid">
+      <div>
+        <h3>Reglas que no se negocian</h3>
+        <ul class="rules">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>El nivel 2 no se compra ni se salta, y se repite ante señales de riesgo como un cambio de dispositivo.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Nunca se muestra la ubicación exacta de otros viajeros en Explorar: solo zona o ciudad.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Reseñas mutuas solo de viajes compartidos reales; reportar y bloquear a dos toques como máximo.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Moderación automática que marca o limita; las suspensiones las decide una persona.</span></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span>Antes del primer encuentro, la app sugiere lugar público y hora, y pide un «Llegué bien».</span></li>
+        </ul>
+      </div>
+      <div class="sos">
+        <div class="sos-btn" aria-hidden="true"><div><b>AYUDA YA</b><span>mantén 2 s</span></div></div>
+        <ul class="sos-opts">
+          <li><b>«Necesito ayuda ya»</b><span>Llama al 123 en Colombia, envía tu ubicación y los datos del viaje a tus contactos de confianza y alerta al equipo de seguridad (meta de primera respuesta: menos de 15 minutos, 24/7).</span></li>
+          <li><b>«Me siento incómodo/a»</b><span>Salida discreta: llamada simulada, consejos y reporte rápido.</span></li>
+        </ul>
+        <p class="foot">Cuenta regresiva de 5 s cancelable contra falsas alarmas. Con lector de pantalla: doble toque y confirmación. Siempre gratis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Tecnología -->
+<section class="section" id="tecnologia" aria-labelledby="h-tecnologia">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Tecnología</p>
+      <h2 id="h-tecnologia">Herramientas que Lumen ya domina, una línea por pieza.</h2>
+    </div>
+    <dl class="stack-list">
+      <div><dt>App</dt><dd><b>React Native + Expo + TypeScript</b><span>: un solo código para iOS y Android.</span></dd></div>
+      <div><dt>Backend</dt><dd><b>Supabase</b><span>: Postgres con PostGIS, Auth, Realtime y Edge Functions.</span></dd></div>
+      <div><dt>Web</dt><dd><b>Vercel</b><span>: landing, rutas públicas compartibles y panel de moderación.</span></dd></div>
+      <div><dt>Mapas</dt><dd><b>Mapbox</b><span>: estilo propio de noche y día, rutas y mapas por región.</span></dd></div>
+      <div><dt>Lugares</dt><dd><b>Google Places</b><span>: con caché propia y campos mínimos para controlar el costo.</span></dd></div>
+      <div><dt>Chat</dt><dd><b>Supabase Realtime</b><span>: sin proveedor extra en el MVP.</span></dd></div>
+      <div><dt>Identidad</dt><dd><b>Truora</b><span>; Veriff o Persona para pasaportes. Solo se guarda el resultado.</span></dd></div>
+      <div><dt>Avisos</dt><dd><b>Expo Push</b><span>: notificaciones sobre APNs y FCM.</span></dd></div>
+      <div><dt>Moderación</dt><dd><b>Clasificadores de texto e imagen</b><span> más cola humana.</span></dd></div>
+      <div><dt>Analítica</dt><dd><b>PostHog</b><span>: eventos y experimentos, sin datos personales.</span></dd></div>
+      <div><dt>Errores</dt><dd><b>Sentry</b><span>: errores y rendimiento de app y funciones.</span></dd></div>
+      <div><dt>Entregas</dt><dd><b>GitHub Actions + EAS</b><span>: builds, envío a tiendas y parches.</span></dd></div>
+      <div><dt>Pagos</dt><dd><b>Ninguno en el MVP</b><span>; después, RevenueCat para la suscripción.</span></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 9. Negocio -->
+<section class="section" id="negocio" aria-labelledby="h-negocio">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Modelo de negocio</p>
+      <h2 id="h-negocio" class="money-head">La seguridad nunca se cobra.</h2>
+      <p>Gratis al inicio para aprender, no para facturar. Después, ingresos por comodidad y por viajar en grupo, nunca por saltarse la confianza.</p>
+    </div>
+    <div class="money-grid">
+      <div>
+        <h3>Gratis siempre</h3>
+        <ul class="dot-list free">
+          <li>Verificación de identidad, reseñas y reportes</li>
+          <li>Botón de seguridad y ubicación con contactos de confianza</li>
+          <li>Moderación y bloqueo</li>
+          <li>Crear itinerarios, unirse a viajes, chat y gastos básicos</li>
+        </ul>
+      </div>
+      <div>
+        <h3>«Plus» suma comodidad</h3>
+        <ul class="dot-list">
+          <li>Mapas y rutas sin conexión</li>
+          <li>Exportar itinerario y gastos</li>
+          <li>Filtros avanzados de coincidencia</li>
+          <li>Precio: rango por probar, aún no definido</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Nunca en Plus</h3>
+        <ul class="dot-list never">
+          <li>Ver quién eres sin tu permiso</li>
+          <li>Contactar a quien no lo aceptó</li>
+          <li>Aparecer primero por pagar en búsquedas de compañeros</li>
+        </ul>
+      </div>
+    </div>
+    <div class="table-wrap money-table" tabindex="0" role="region" aria-label="Ingresos por etapa">
+      <table>
+        <thead><tr><th scope="col">Etapa</th><th scope="col">Cómo gana dinero</th><th scope="col">Objetivo</th></tr></thead>
+        <tbody>
+          <tr><td><b>Beta cerrada</b></td><td>Todo gratis; afiliación solo como prueba técnica.</td><td>Aprender.</td></tr>
+          <tr><td><b>Lanzamiento</b> <span class="muted tnum">(0–6 meses)</span></td><td>Suscripción Plus y afiliación de alojamiento y transporte. Hostales aliados gratis.</td><td>Validar la disposición a pagar.</td></tr>
+          <tr><td><b>Densidad</b> <span class="muted tnum">(6–18 meses)</span></td><td>Lo anterior más comisión por experiencias en grupo en las ciudades más activas.</td><td>Ingreso ligado a «Viajen juntos».</td></tr>
+          <tr><td><b>Escala</b></td><td>Todo lo anterior más planes para hostales y operadores.</td><td>Ingreso recurrente y nuevas rutas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Hipótesis -->
+<section class="section" id="hipotesis" aria-labelledby="h-hipotesis">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Qué validar primero</p>
+      <h2 id="h-hipotesis">Cinco hipótesis, probadas barato antes de construir.</h2>
+      <p>H1 y H3 van en paralelo durante un mes, con costo casi cero.</p>
+    </div>
+    <ul class="hyps">
+      <li class="hyp"><span class="id">H1</span><p class="claim">Los viajeros solos sí quieren unirse a la ruta de otros, no solo charlar.</p><p class="how"><span class="lbl">Prueba</span>20 entrevistas en hostales y coworkings de Medellín y Bogotá.</p><p class="signal"><span class="lbl">Señal</span>60 % o más lo hizo en su último viaje y le resultó molesto.</p></li>
+      <li class="hyp"><span class="id">H2</span><p class="claim">Verificación y reseñas son la razón principal para dejar Facebook y WhatsApp.</p><p class="how"><span class="lbl">Prueba</span>Ordenar 6 funciones en entrevistas y probar dos mensajes en una landing.</p><p class="signal"><span class="lbl">Señal</span>El mensaje de confianza gana en registros.</p></li>
+      <li class="hyp"><span class="id">H3</span><p class="claim">Se logra densidad suficiente en un corredor.</p><p class="how"><span class="lbl">Prueba</span>Grupo «conserje» manual para Santa Marta–Tayrona durante 4–6 semanas.</p><p class="signal"><span class="lbl">Señal</span>30 % o más de quienes piden compañía consigue grupo en 72 h.</p></li>
+      <li class="hyp"><span class="id">H4</span><p class="claim">El viajero extranjero paga por un pase o por Plus.</p><p class="how"><span class="lbl">Prueba</span>Landing bilingüe con precios y lista de espera con depósito simbólico.</p><p class="signal"><span class="lbl">Señal</span>5 % deja su correo y 1 % intenta pagar.</p></li>
+      <li class="hyp"><span class="id">H5</span><p class="claim">Hostales y coworkings quieren ser aliados de distribución.</p><p class="how"><span class="lbl">Prueba</span>10 reuniones en Medellín con prueba gratis de un tablero de rutas.</p><p class="signal"><span class="lbl">Señal</span>3 o más aceptan el piloto.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 11. Equipo -->
+<section class="section" id="equipo" aria-labelledby="h-equipo">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">El equipo</p>
+      <h2 id="h-equipo">Lumen Studio: un gerente y siete agentes especialistas.</h2>
+      <p>Cada agente escribió su parte del plan y la sigue llevando. Algunas cosas, sin embargo, solo las pueden hacer personas o cuentas reales.</p>
+    </div>
+    <div class="two">
+      <div>
+        <div class="lead-agent">
+          <span class="badge"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></span>
+          <div><b>Gerente (Claude)</b><span>Coordina a los agentes, mantiene el plan alineado y lleva las decisiones al dueño.</span></div>
+        </div>
+        <ul class="agents">
+          <li><b>Director</b><span class="doc">00 · plan</span><span>Visión, marca y coherencia del plan maestro.</span></li>
+          <li><b>Investigador</b><span class="doc">01</span><span>Mercado, personas e hipótesis.</span></li>
+          <li><b>Producto</b><span class="doc">02</span><span>MVP, métricas y roadmap.</span></li>
+          <li><b>Diseñador</b><span class="doc">03</span><span>Experiencia, pantallas y sistema de diseño.</span></li>
+          <li><b>Desarrollo</b><span class="doc">04</span><span>Arquitectura, datos y plan de construcción.</span></li>
+          <li><b>Confianza</b><span class="doc">05</span><span>Verificación, SOS, moderación y temas legales.</span></li>
+          <li><b>Marketing</b><span class="doc">06</span><span>Negocio, lanzamiento y mensajes.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-bottom:6px">Lo que requiere personas o cuentas reales</h3>
+        <ul class="humans">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><div><b>El dueño, que decide</b><span>Aprueba alcance, presupuesto y cada paso de fase.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><div><b>Asesoría legal</b><span>Datos personales (Ley 1581), biométricos, términos y filtros de grupo, antes de lanzar.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><div><b>Moderadores humanos en la beta</b><span>Las alertas críticas necesitan respuesta de una persona, 24/7.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><div><b>Cuentas de Apple y Google Play</b><span>Para firmar y publicar la app en las tiendas.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><div><b>Pruebas con viajeros reales</b><span>Entrevistas, prueba concierge y prototipo con 8–10 viajeros.</span></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg><div><b>Un celular real para probar</b><span>Mapas, cámara de verificación, avisos y SOS no se validan solo en simulador.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Próximos pasos -->
+<section class="section" id="pasos" aria-labelledby="h-pasos">
+  <div class="inner">
+    <div class="section-head">
+      <p class="eyebrow">Próximos pasos</p>
+      <h2 id="h-pasos">Lo que sigue, en orden.</h2>
+    </div>
+    <ol class="steps">
+      <li><div><b>Asegurar el nombre Lumen Travels</b><span>Verificar dominio, tiendas, redes y registro de marca en la SIC.</span></div></li>
+      <li><div><b>Ejecutar H1 y H3 durante un mes</b><span>Entrevistas y grupo conserje Santa Marta–Tayrona, con costo casi cero.</span></div></li>
+      <li><div><b>Pedir cotizaciones y asesoría</b><span>Verificación de identidad (Truora, Veriff) y abogado de datos y términos.</span></div></li>
+      <li><div><b>Probar el prototipo navegable</b><span>El flujo completo del documento 03, con 8–10 viajeros.</span></div></li>
+      <li><div><b>Abrir las cuentas de las tiendas</b><span>Apple Developer y Google Play, a nombre del estudio.</span></div></li>
+      <li><div><b>Fijar fechas de la fase 2</b><span>Solo con los resultados de la fase 1 en la mano.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="inner">
+    <div class="sign"><svg aria-hidden="true"><use href="#i-lantern"/></svg><span>Diseñado por Lumen Studio · lumenestudio.tech</span></div>
+    <p>Metas y rangos son supuestos de trabajo; las cifras de mercado llevan fuente en el documento 01.</p>
+  </div>
+</footer>
+
+</div>
