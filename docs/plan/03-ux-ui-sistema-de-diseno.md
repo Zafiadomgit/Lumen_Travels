@@ -1,6 +1,6 @@
 # 03 · UX/UI y sistema de diseño
 
-**Responsable:** disenador · **Proyecto:** Lumen Travels (nombre de trabajo; propuesta comercial «Farol», ver `00`) · **Estado:** propuesta v1 · **Alcance:** app móvil iOS y Android (mobile first), modo oscuro principal y modo claro.
+**Responsable:** disenador · **Proyecto:** Lumen Travels · **Estado:** propuesta v1 · **Alcance:** app móvil iOS y Android (mobile first), modo oscuro principal y modo claro.
 
 La app hereda de Lumen la calidez de la luz del farol sobre la noche, pero tiene identidad propia: menos «estudio editorial», más «compañero de ruta». Todo lo que sigue se apoya en los cuatro pilares del brief: **Planea, Coincide, Viajen juntos, Confianza**.
 

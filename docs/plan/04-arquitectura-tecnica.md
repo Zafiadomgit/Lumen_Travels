@@ -1,6 +1,6 @@
 # 04 · Arquitectura técnica
 
-**Responsable:** desarrollo (arquitectura de software) · **Proyecto:** Lumen Travels (nombre de trabajo; propuesta comercial «Farol», ver `00`) · **Insumos:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza).
+**Responsable:** desarrollo (arquitectura de software) · **Proyecto:** Lumen Travels · **Insumos:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza).
 **Principio rector:** construir rápido con piezas administradas que Lumen Studio ya domina (Supabase y Vercel), con privacidad y seguridad desde el diseño, y sin atarnos a servicios caros antes de validar el producto.
 
 > **Nota sobre precios:** ninguna cifra de este documento es un precio garantizado. Cada costo remite a la página oficial de precios del proveedor y debe verificarse al contratar; los rangos son **estimaciones** con supuestos explícitos.
@@ -258,6 +258,7 @@ erDiagram
 - **Bloqueos simétricos:** una función `is_blocked(a, b)` se usa en RLS y en matching; ni uno ni otro se ven en búsquedas, viajes ni chats nuevos.
 - **Gastos en moneda original** con conversión solo de visualización (tasa diaria cacheada); los saldos se calculan con una vista.
 - **Índices clave:** GiST sobre `trips.destination_area` y `trips.dates`; GIN sobre `interests` y `languages`; índice compuesto `messages(group_id, created_at)`.
+- **Trayectos (fase posterior):** el modelo ya admite trayectos; se añadirían una tabla de vehículos (conductor, placa, datos verificados) y una de trayectos (origen, destino, fecha, asientos, aporte por asiento) reutilizando perfiles, solicitudes, grupos, chat y gastos. No entra en el MVP (`02`).
 - **Auditoría:** tabla `audit_log` (solo inserción) para acciones sensibles: cambios de verificación, sanciones, exportaciones y borrados.
 
 ---
@@ -352,13 +353,15 @@ El destino no suma: es filtro. Las razones se muestran al usuario («Coinciden 5
 | 6 | Confianza | Verificación de identidad (Truora/Veriff), niveles de confianza, reportar/bloquear, moderación automática, panel interno, botón de seguridad, reseñas doble ciego |
 | 7 | Endurecimiento y lanzamiento | Pruebas E2E, auditoría RLS y de seguridad, rendimiento, beta cerrada (TestFlight / prueba interna), envío a tiendas |
 
-**Equipo recomendado (MVP)**
-- 1 líder técnico / arquitecto (backend Supabase, seguridad, revisiones).
-- 2 desarrolladores React Native (uno con experiencia en mapas y offline).
-- 1 diseñador UX/UI (medio tiempo desde el sprint 2).
-- 1 QA (medio tiempo desde el sprint 3; automatización E2E).
-- 1 product manager (puede ser el dueño de producto de Lumen).
-- Apoyo puntual: asesoría legal en datos personales y un moderador de contenido al abrir la beta.
+**Equipo (MVP): Lumen Studio**
+- **Gerente (Claude) y 7 agentes especialistas:** producto, diseño, desarrollo, confianza, marketing, investigación y dirección. Desarrollo cubre arquitectura, backend Supabase, app React Native, pruebas y seguridad técnica.
+- **Siguen requiriendo personas o cuentas reales:**
+  - el dueño, que aprueba y decide;
+  - asesoría legal (datos personales, términos, Trayectos);
+  - moderadores humanos para la beta y el lanzamiento (`05` lo exige);
+  - cuenta de desarrollador de Apple (USD 99/año) y de Google Play (USD 25, pago único); verificar precios vigentes en las páginas oficiales;
+  - pruebas con viajeros reales;
+  - un celular real para probar la app.
 
 **Costos de infraestructura mensuales (estimación)**
 
@@ -376,7 +379,7 @@ El destino no suma: es filtro. Las razones se muestran al usuario («Coinciden 5
 | PostHog | Nivel gratuito | Nivel gratuito o bajo | Pago por eventos | <https://posthog.com/pricing> |
 | Sentry | Nivel gratuito / Team | Team | Business | <https://sentry.io/pricing> |
 | Push (Expo) | Sin costo | Sin costo | Sin costo (evaluar FCM/APNs directo) | <https://docs.expo.dev/push-notifications/overview/> |
-| Tiendas | Cuenta Apple Developer (anual) + Google Play (pago único) | Igual | Igual | Apple / Google |
+| Tiendas | Cuenta Apple Developer (USD 99/año) + Google Play (USD 25, pago único) | Igual | Igual | Apple / Google |
 | **Rango orientativo total** | **Bajo: decenas a pocos cientos de USD/mes** | **Medio: cientos de USD/mes, dominado por Places y verificación** | **Alto: de varios miles de USD/mes; requiere optimización y negociación** | Estimación, no cotización |
 
 **Palancas de costo:** caché agresiva de lugares y autocompletado con *session tokens*; verificación solo en el momento de valor (publicar o unirse); compresión de imágenes; alertas de presupuesto en Google Cloud, Mapbox y Supabase desde el día uno. Antes de presupuestar en firme, el gerente debe pedir cotizaciones a Truora/Veriff y simular el uso de Places con datos de la beta.

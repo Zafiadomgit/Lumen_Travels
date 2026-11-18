@@ -1,6 +1,6 @@
 # 05 · Confianza y seguridad
 
-> Responsable: `confianza` · Lumen Travels (nombre de trabajo; los textos de ejemplo dirigidos a usuarios usarán el nombre comercial final) · Diseñado por Lumen Studio · **Fuente de verdad** de verificación (niveles 0–3) y SOS para `02`, `03` y `04`
+> Responsable: `confianza` · Lumen Travels · Diseñado por Lumen Studio · **Fuente de verdad** de verificación (niveles 0–3) y SOS para `02`, `03` y `04`
 > En una app donde desconocidos se encuentran para viajar, la seguridad es parte del producto. Cada medida dice **en qué momento del flujo aparece** y **cómo sabemos si funciona**. Las metas numéricas de este documento son **objetivos internos propuestos (supuestos)**, no datos de mercado; se calibran con los primeros meses de operación.
 
 Principios: 1) la persona más vulnerable define el estándar (pensamos primero en mujeres que viajan solas); 2) menores de edad, prohibidos; 3) nada de dinero ni datos sensibles fuera de la app con desconocidos; 4) fricción proporcional al riesgo: explorar es libre, encontrarse exige verificación.
@@ -116,7 +116,7 @@ Qué se califica (1 a 5 + texto opcional): puntualidad y compromiso con el plan;
 **Moderación automática + humana.**
 - Automática (antes de publicar o enviar): filtro de lenguaje sexual y de odio, detección de datos de pago y teléfonos en los primeros mensajes, enlaces sospechosos, imágenes explícitas, spam (mensajes repetidos), señales de menor de edad, cuentas múltiples por dispositivo.
 - La automatización **marca, oculta temporalmente o limita**; las sanciones fuertes (suspensión, expulsión) las decide una persona.
-- Humana: equipo propio, al inicio pequeño y con turnos que cubran horarios de viaje; formación en violencia de género y atención a víctimas; guías escritas y revisión cruzada de casos graves.
+- Humana: **moderadores humanos** (personas reales, no agentes; imprescindibles desde la beta y el lanzamiento), al inicio un equipo pequeño y con turnos que cubran horarios de viaje; formación en violencia de género y atención a víctimas; guías escritas y revisión cruzada de casos graves.
 
 **Cola de revisión y tiempos objetivo (supuestos):**
 
@@ -206,7 +206,10 @@ Simulacro de este plan antes del lanzamiento y luego cada seis meses.
 - **Cooperación con autoridades:** qué datos se entregan, con qué orden judicial y en qué plazos; conservación de evidencia en incidentes.
 - **Pagos:** si se integra pago entre usuarios, regulación financiera aplicable y responsabilidades del proveedor de pagos; tratamiento de disputas.
 - **Moderación y sanciones:** debido proceso, derecho de apelación y cómo comunicar decisiones para reducir riesgo legal.
+- **Trayectos (fase posterior, ver `02`):** legalidad del transporte compartido entre ciudades en Colombia (aportes a gastos frente a transporte público no autorizado, seguros, responsabilidad por el vehículo y el conductor); revisar con el abogado antes de diseñar la función.
 - **Responsabilidad por funciones de seguridad:** el SOS y el check-in no deben presentarse como servicio de emergencia garantizado; redacción de avisos y descargos.
+
+**Nota sobre Trayectos (fase posterior).** El conductor que publica un trayecto necesita **nivel 3 más licencia de conducción y datos del vehículo verificados**; el pasajero necesita al menos nivel 2. No se activa hasta cerrar la revisión legal de §9.
 
 ---
 

@@ -1,6 +1,6 @@
 # 02 · Producto, MVP y roadmap
 
-**Responsable:** producto · **Proyecto:** Lumen Travels (nombre de trabajo; propuesta comercial «Farol», ver `00`) · **Base:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza). **Verificación y seguridad:** la fuente de verdad es `05` (niveles 0–3, SOS).
+**Responsable:** producto · **Proyecto:** Lumen Travels · **Base:** `docs/brief.md` (4 pilares: Planea, Coincide, Viajen juntos, Confianza). **Verificación y seguridad:** la fuente de verdad es `05` (niveles 0–3, SOS).
 **Nota:** las metas numéricas de este documento son **supuestos de trabajo** para fijar umbrales de decisión; no son datos de mercado. Se recalibran con lo que encuentre el investigador (`01`) y con la fase de descubrimiento.
 
 ---
@@ -35,6 +35,7 @@ Prioridad MoSCoW para el MVP: **M** = Must, **S** = Should, **C** = Could, **W**
 | | Plantillas de rutas de la comunidad (copiar itinerario) | C | L |
 | | Itinerario sin conexión (offline) | W | G |
 | | Reservas integradas (hospedaje, tours, transporte) | W | G |
+| | **Trayectos** (compartir carro entre ciudades): publicar trayecto con asientos, solicitar asiento, aporte a gastos de gasolina y peajes sin ánimo de lucro, verificación de conductor (licencia y vehículo). Sujeto a revisión legal (`05` §9) | C | Fase posterior (G) |
 | **Coincide** | Publicar viaje abierto («busco compañeros») | M | MVP |
 | | Explorar viajes por destino y fechas, con filtros (estilo, presupuesto, edad, idioma) | M | MVP |
 | | Ficha de viaje: itinerario, organizador, cupos, compatibilidad | M | MVP |
@@ -232,7 +233,7 @@ Hay dos entradas al loop: el **organizador** (crea y publica) y el **viajero que
 
 ## 6. Roadmap por fases
 
-Duraciones en semanas, sin fechas de calendario. Supuesto: equipo pequeño (1 PM, 1 diseño, 2–3 desarrollo, apoyo de confianza y marketing).
+Duraciones en semanas, sin fechas de calendario. Supuesto: Lumen Studio trabaja con el gerente y sus agentes especialistas (producto, diseño, desarrollo, confianza, marketing, investigación, dirección); las duraciones suponen que el dueño aprueba a tiempo y que hay personas reales para moderación, asesoría legal y pruebas con viajeros.
 
 | Fase | Duración estimada | Entregables | Criterio para pasar de fase |
 | --- | --- | --- | --- |
@@ -240,7 +241,7 @@ Duraciones en semanas, sin fechas de calendario. Supuesto: equipo pequeño (1 PM
 | **2. MVP (construcción)** | 10–14 sem | App iOS/Android con todos los «M» + compatibilidad, gastos básicos y grupos solo mujeres; moderación y panel interno; analítica instrumentada; normas de comunidad. | Core loop completo sin bloqueos en pruebas internas; verificación y reporte funcionando; eventos validados en el tablero; revisión de seguridad aprobada por `confianza`. |
 | **3. Beta cerrada** | 8–12 sem | Acceso por invitación en el corredor piloto Medellín–Bogotá–Caribe (`01`); comunidad de embajadores; alertas por destino; itinerario colaborativo; check-in y ubicación en vivo; iteraciones semanales. | ≥ 50 % de viajes publicados con solicitud en 7 días; ≥ 50 % de grupos formados viajan; reseñas promedio ≥ 4,3; cero incidentes graves sin respuesta; tendencia creciente de la North Star. |
 | **4. Lanzamiento** | 6–8 sem | Apertura pública en Colombia (y rutas con viajeros internacionales); plantillas de la comunidad; modo «en la ciudad» si la beta lo justifica; campaña con `marketing`. | Crecimiento mes a mes de la North Star; costo de adquisición y retención a 90 días dentro de lo planeado por `06`; moderación sostiene el SLA con el nuevo volumen. |
-| **5. Crecimiento** | Continuo (ciclos de 6 sem) | Nuevos países de la región; recomendaciones personalizadas; pagos/liquidación integrados; alianzas (hostales, tours); monetización según `06`. | Se revisa por ciclo: cada expansión de destino requiere densidad mínima (ver §7) antes de abrir el siguiente. |
+| **5. Crecimiento** | Continuo (ciclos de 6 sem) | Nuevos países de la región; recomendaciones personalizadas; pagos/liquidación integrados; alianzas (hostales, tours); monetización según `06`; **Trayectos** (compartir carro entre ciudades, decidido: fase posterior), con publicar trayecto con asientos, solicitar asiento, aporte a gastos de gasolina y peajes sin ánimo de lucro y verificación de conductor (licencia y vehículo), tras la revisión legal de `05` §9. | Se revisa por ciclo: cada expansión de destino requiere densidad mínima (ver §7) antes de abrir el siguiente. |
 
 ---
 

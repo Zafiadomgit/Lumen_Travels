@@ -1,6 +1,6 @@
 # 06 · Negocio y lanzamiento
 
-> Responsable: `marketing` · Lumen Travels (nombre de trabajo) · Diseñado por Lumen Studio
+> Responsable: `marketing` · Lumen Travels · Diseñado por Lumen Studio
 > Regla de este documento: **todo número propio es un supuesto** (marcado *[S]*), con rango y forma de validarlo. Los precios de terceros llevan fuente y fecha de consulta (nov. 2026); pueden variar por país y tienda.
 
 ---
@@ -113,7 +113,7 @@ Una app para coincidir no sirve vacía. Empezamos donde haya muchos viajeros en 
 - **Operadores locales pequeños:** primeros aliados de experiencias para la etapa 2.
 
 ### Embajadores
-- 10–20 embajadores (nombre propuesto «Faroleros», **solo si el nombre comercial final es «Farol»**; si no, un nombre alineado con la marca final): viajeros reales y personal de hostales que publican rutas, reciben a nuevos usuarios y reportan problemas.
+- 10–20 embajadores (nombre propuesto «Faroleros»: el farol es el símbolo de Lumen): viajeros reales y personal de hostales que publican rutas, reciben a nuevos usuarios y reportan problemas.
 - Recompensa: Plus gratis, merch, acceso anticipado y, más adelante, comisión por aliados que traigan. Código de conducta y verificación obligatoria.
 
 ### Contenido

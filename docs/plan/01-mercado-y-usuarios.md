@@ -1,6 +1,6 @@
 # 01 · Mercado y usuarios
 
-*Lumen Travels (nombre de trabajo; propuesta comercial «Farol», ver `00`) · Diseñado por Lumen Studio · Investigación: noviembre de 2026*
+*Lumen Travels · Diseñado por Lumen Studio · Investigación: noviembre de 2026*
 
 > **Cómo leer este documento.** Cada cifra lleva enlace y año. Lo marcado como **[Hipótesis]** es criterio nuestro, sin dato que lo respalde todavía. Nota de método: la consulta se hizo con buscador web; varias páginas originales (Forbes Argentina, iProfesional) no se pudieron abrir desde este entorno, así que algunas cifras vienen del resumen del buscador sobre esas notas. Antes de usar una cifra en un pitch o ante inversionistas, ábrela en la fuente.
 

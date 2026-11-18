@@ -1,20 +1,20 @@
 # Plan maestro · Lumen Travels
 
-*Resumen ejecutivo para el dueño. Nombre de trabajo: Lumen Travels. Todas las metas y rangos son supuestos de trabajo, salvo las cifras de mercado, que llevan fuente en `01`.*
+*Resumen ejecutivo para el dueño. Nombre: Lumen Travels. Todas las metas y rangos son supuestos de trabajo, salvo las cifras de mercado, que llevan fuente en `01`.*
 
 ## La idea en una frase
 
 Una app móvil (iOS y Android) para planear tu ruta y encontrar con quién recorrerla, con gente verificada y todo el viaje en un mismo lugar.
 
-## Nombre propuesto
+## Nombre
 
-**Farol** (recomendación de `00`): corto, funciona en español e inglés y lleva la luz del farol de Lumen a una idea de producto. **Pendiente obligatorio:** verificar dominio, tiendas, redes y registro de marca en la SIC. Si no está disponible, se sigue con «Lumen Travels». Los embajadores «Faroleros» (`06`) dependen de esta decisión. Matiz: en España «echarse un farol» es fanfarronear.
+**Lumen Travels** (decidido por el dueño; se descartó «Farol»): hereda la marca del estudio y es claro en español e inglés. **Pendiente obligatorio:** verificar dominio, tiendas, redes y registro de marca en la SIC. Los embajadores «Faroleros» (`06`) conservan su nombre: el farol es el símbolo de Lumen.
 
 ## Para quién y dónde empezar
 
 - **Primer segmento:** viajero internacional que viaja solo (mochilero, nómada digital) en Colombia. Segundo segmento, en fase 2: jóvenes colombianos de 22–35 años en puentes festivos (`01`).
 - **Dónde:** corredor piloto **Medellín – Bogotá – Caribe** (Cartagena, Santa Marta, Tayrona), en **español e inglés**. El Eje Cafetero queda como extensión. Razón: Bogotá, Medellín y Cartagena concentran la mayoría de los visitantes internacionales, y la compañía solo funciona con densidad.
-- **Sobre Viatik:** es carpooling entre ciudades, no *social travel*. Lo tomamos como referencia por el espíritu de compartir viajes. Compartir trayectos queda como posible función futura, a confirmar con el dueño.
+- **Sobre Viatik:** es carpooling entre ciudades, no *social travel*. Lo tomamos como referencia por el espíritu de compartir viajes. Compartir carro entre ciudades queda como «Trayectos», decidido: fase posterior (`02`), sujeto a revisión legal (`05`).
 
 ## Los 4 pilares
 
@@ -43,7 +43,7 @@ No entra: plantillas de comunidad, recomendaciones por algoritmo, pagos y reserv
 | 2. MVP | 10–14 | Construcción (`04` la planea en unas 14 semanas, más revisión de tiendas) |
 | 3. Beta cerrada | 8–12 | Por invitación en el corredor piloto, con embajadores |
 | 4. Lanzamiento | 6–8 | Apertura pública en Colombia |
-| 5. Crecimiento | Ciclos de 6 | Nuevas rutas y países, pagos, alianzas |
+| 5. Crecimiento | Ciclos de 6 | Nuevas rutas y países, pagos, alianzas, Trayectos |
 
 ## Las 5 hipótesis a validar primero (`01`)
 
@@ -64,19 +64,19 @@ No entra: plantillas de comunidad, recomendaciones por algoritmo, pagos y reserv
 
 ## Presupuesto y equipo (rangos de los documentos)
 
-- **Equipo MVP (`04`):** 1 líder técnico, 2 desarrolladores React Native, 1 diseñador (medio tiempo), 1 QA (medio tiempo), 1 producto; apoyo legal puntual y un moderador al abrir la beta.
+- **Equipo (`04`):** Lumen Studio, es decir, el gerente (Claude) y sus 7 agentes especialistas (producto, diseño, desarrollo, confianza, marketing, investigación, dirección). **Siguen requiriendo personas o cuentas reales:** el dueño (aprueba y decide); asesoría legal; moderadores humanos para la beta y el lanzamiento (`05`); cuenta de desarrollador de Apple (USD 99/año) y de Google Play (USD 25, pago único); pruebas con viajeros reales; un celular real para probar.
 - **Infraestructura mensual (`04`, estimación, no cotización):** decenas a pocos cientos de USD en MVP o beta; cientos de USD con 10.000 usuarios; varios miles con 100.000. Falta cotizar la verificación de identidad.
 - **Marketing (`06`, supuesto):** prelanzamiento USD 1.500–5.000; lanzamiento (3 meses) USD 5.000–15.000; densidad USD 2.000–6.000 al mes; con reserva de 10–15 % para comunicación de seguridad.
-- **No hay cifra de costo de desarrollo del equipo en los documentos.** Hay que cotizarlo por separado.
+- **No hay costo de nómina de desarrollo:** lo hace Lumen Studio con agentes. Quedan por presupuestar la asesoría legal, los moderadores humanos, las cuentas de tiendas y las pruebas con viajeros; sin cifra en los documentos, hay que cotizarlos por separado.
 
 ## Próximos pasos
 
-1. Decidir el nombre y lanzar la verificación de marca y dominio (en paralelo, sin gasto de identidad visual hasta tenerla).
+1. Lanzar la verificación de dominio, tiendas y marca de «Lumen Travels» (sin gasto de identidad visual hasta tenerla).
 2. Ejecutar H1 y H3 en paralelo durante un mes, con costo casi cero (fase 1).
-3. Confirmar con el dueño si compartir trayectos entre ciudades (Viatik) es función futura.
+3. Dejar «Trayectos» en el roadmap como fase posterior y pedir al abogado la revisión del transporte compartido.
 4. Pedir cotizaciones de verificación (Truora, Veriff) y contratar asesoría legal en datos y términos.
 5. Construir el prototipo navegable del flujo completo con `03` y probarlo con 8–10 viajeros.
-6. Fijar el equipo y las fechas de la fase 2 solo tras los resultados de la fase 1.
+6. Fijar las fechas de la fase 2 solo tras los resultados de la fase 1, y reservar moderadores humanos, asesoría legal y las cuentas de tiendas.
 
 ## Índice
 

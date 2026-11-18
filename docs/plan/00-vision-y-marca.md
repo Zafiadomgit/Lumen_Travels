@@ -30,22 +30,17 @@
 
 *Cualquier comparación de tamaño, usuarios o precios de estos competidores debe venir con fuente en `01`.*
 
-**Nota sobre Viatik.** La investigación (`01`) encontró que Viatik es carpooling entre ciudades (Uruguay y Argentina), no una app de *social travel*. Tomamos la referencia del dueño por el espíritu de compartir viajes. Compartir trayectos entre ciudades queda como posible función futura, a validar con el dueño; no es parte del MVP.
+**Nota sobre Viatik.** La investigación (`01`) encontró que Viatik es carpooling entre ciudades (Uruguay y Argentina), no una app de *social travel*. Tomamos la referencia del dueño por el espíritu de compartir viajes. Compartir trayectos entre ciudades queda como función de fase posterior, bajo el nombre «Trayectos» (decidido por el dueño; ver `02`); no es parte del MVP.
 
 ## 4. Nombre comercial
 
-**Recomendación: Farol.**
+**Decidido por el dueño: Lumen Travels.** Se descartó «Farol».
 
-- **Por qué:** es el símbolo de Lumen (la luz del farol, el dorado) llevado a una idea de producto: un farol alumbra el camino y avisa «aquí estoy» a otros viajeros. Conecta con el estudio sin depender de su nombre, así la app tiene identidad propia.
-- **Funciona en dos idiomas:** corto (dos sílabas), fácil de pronunciar y de escribir en inglés, sin tildes ni letras especiales. En inglés se lee como nombre propio, sin connotación negativa conocida.
-- **Matiz a considerar:** en España «echarse un farol» significa fanfarronear; en Latinoamérica predomina el sentido de lámpara. Es un riesgo menor para el mercado inicial.
-- **Uso:** «Farol» como marca; descriptor opcional en tiendas: «Farol · viajes compartidos» / «Farol · travel together».
+- **Por qué:** hereda la marca del estudio (Lumen, la luz del farol y el dorado) y se entiende de inmediato en español y en inglés.
+- **Uso:** «Lumen Travels» como marca; firma «Diseñado por Lumen Studio».
+- **Símbolo:** el farol sigue siendo el símbolo de la marca (luz, camino, «aquí estoy»), sin ser el nombre.
 
-**Alternativas de respaldo:**
-1. **Lumen Travels** (nombre de trabajo): transmite el respaldo del estudio, pero «Lumen» es una palabra muy usada por otras marcas y es menos distintivo.
-2. **Coincide:** misma palabra en español e inglés y describe el pilar central; como verbo es menos memorable como marca.
-
-**Pendiente obligatorio antes de decidir:** verificar disponibilidad de dominio (.com, .app, .co), nombre en App Store y Google Play, redes sociales y registro de marca (clases de software y servicios de viaje) en Colombia (SIC) y en los mercados objetivo. Si Farol no está disponible, pasar a la alternativa 1.
+**Pendiente obligatorio:** verificar disponibilidad de dominio (.com, .app, .co), nombre en App Store y Google Play, redes sociales y registro de marca (clases de software y servicios de viaje) en Colombia (SIC) y en los mercados objetivo. «Lumen» es una palabra de uso común: la verificación de marca debe confirmar que no choca con registros existentes en esas clases.
 
 ## 5. Personalidad de marca
 
@@ -81,6 +76,6 @@
 1. **¿Existe la necesidad de compañía?** Entrevistas con viajeros solos (con atención a mujeres) en Colombia: cómo buscan compañía hoy y qué los frena. Es la hipótesis que sostiene todo.
 2. **¿Confían lo suficiente para encontrarse?** Qué nivel de verificación y qué señales necesitan para aceptar unirse al viaje de alguien (trabajo con `confianza`).
 3. **¿Hay densidad suficiente?** Coincidir solo sirve si hay viajeros en el mismo lugar y fechas: empezar por el corredor piloto que recomienda `01` (Medellín–Bogotá–Caribe, con el viajero internacional como primer segmento, en español e inglés; el Eje Cafetero queda como extensión) y probar con un grupo pequeño antes de abrir a toda la región.
-4. **Nombre:** verificación legal y de dominio de «Farol» antes de cualquier trabajo de identidad visual. Mientras no se decida, todos los documentos del plan usan «Lumen Travels (nombre de trabajo)».
+4. **Nombre:** el nombre ya está decidido (Lumen Travels); falta verificar dominio, tiendas y registro de marca antes de cualquier trabajo de identidad visual.
 
 Lo que no validemos aquí no entra en el MVP (`02`).
