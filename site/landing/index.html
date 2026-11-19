@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="meta.title">Lumen Travels · Plan your route and find travel companions in Colombia</title>
 <meta name="description" data-i18n-attr="content:meta.desc" content="Plan your trip day by day and find verified travelers heading your way across Colombia. Join the waitlist. Your route, your people.">
-<meta name="theme-color" content="#0a090d">
-<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="color-scheme" content="light">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph / Twitter -->
@@ -27,10 +27,9 @@
 
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
-<link rel="preload" as="image" href="/assets/brand/farol-tira.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/styles.css">
 <!-- Síncrono a propósito: decide variante e idioma antes de pintar (sin parpadeo entre A y B). -->
 <script src="/app.js"></script>
@@ -42,6 +41,9 @@
 
 <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
+    <!-- el logo moderno de Lumen: la llama del farol en un círculo -->
+    <linearGradient id="llama-g" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#e2742a"/><stop offset=".55" stop-color="#f2a93b"/><stop offset="1" stop-color="#ffd27a"/></linearGradient>
+    <symbol id="lumen-mark" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="currentColor"/><path d="M32 14c8 9 12 15 12 21.5a12 12 0 0 1-24 0C20 29 24 23 32 14z" fill="url(#llama-g)"/><path d="M32 30c3 3.5 4.5 6 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2.5 1.5-5 4.5-8.5z" fill="#fff4dc"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
     <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.6-1.6 1.7-2.3 3-2.3s2.4.7 3 2.3M14.5 10H18M14.5 13.5H18"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
@@ -64,9 +66,9 @@
 <div class="pointer-glow" aria-hidden="true"></div>
 
 <header class="topbar">
-  <a class="wordmark" href="#top">
-    <span class="farol farol--s" aria-hidden="true"></span>
-    <span>Lumen <em>Travels</em></span>
+  <a class="wordmark" href="#top" aria-label="Lumen Travels">
+    <svg class="mark" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg>
+    <span>lumen <span class="wm-b">travels</span></span>
   </a>
   <div class="topbar-actions">
     <div class="lang-switch" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">
@@ -78,23 +80,14 @@
 </header>
 
 <main id="main">
-  <!-- 1 · Hero de noche (lo único que cambia entre A y B es el texto) -->
+  <!-- 1 · Hero claro: el símbolo de Lumen sobre la rejilla (lo único que cambia entre A y B es el texto) -->
   <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="hero-scene" aria-hidden="true">
-      <img src="/assets/img/cartagena-noche.webp"
-           srcset="/assets/img/cartagena-noche-1000.webp 1000w, /assets/img/cartagena-noche.webp 2000w"
-           sizes="100vw" width="2000" height="1250" alt="" fetchpriority="high" decoding="async">
-    </div>
-    <div class="hero-light" aria-hidden="true"></div>
-
-    <div class="lamp-rig">
-      <button class="lamp" type="button" id="lamp" data-i18n-attr="aria-label:lamp.label" aria-label="Tap the lantern">
-        <span class="farol farol--hero" aria-hidden="true"></span>
-      </button>
-    </div>
-
+    <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-copy">
-      <p class="hero-kicker"><span>Colombia</span> Medellín <span class="kick-line" aria-hidden="true"></span> Tayrona</p>
+      <button class="lamp" type="button" id="lamp" data-i18n-attr="aria-label:lamp.label" aria-label="Tap the lantern">
+        <svg class="mark mark--hero" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg>
+      </button>
+      <p class="hero-badge"><span aria-hidden="true"></span>Colombia · Medellín → Tayrona</p>
       <h1 id="hero-title">
         <span class="hv hv-a" data-i18n="hero.A.title">Travel Colombia with people who are who they say they are.</span>
         <span class="hv hv-b" data-i18n="hero.B.title">Plan your route and find your group in one place.</span>
@@ -106,29 +99,33 @@
       <div class="hero-actions">
         <a class="btn btn--l" href="#waitlist" id="hero-cta" data-scroll-form>
           <span data-i18n="hero.cta">Join the waitlist</span>
-          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
         <p class="hero-note" data-i18n="footer.small">This page is a test. Lumen Travels is not available yet and we don't charge anything.</p>
       </div>
     </div>
+    <figure class="hero-panorama">
+      <img src="/assets/img/cartagena.webp" srcset="/assets/img/cartagena-1000.webp 1000w, /assets/img/cartagena.webp 2000w"
+           sizes="(min-width: 1440px) 1320px, calc(100vw - 40px)" width="2000" height="750" fetchpriority="high" decoding="async"
+           data-i18n-attr="alt:hero.alt" alt="Illustration of Cartagena at dusk: the city wall, the Clock Tower and the domes over the water.">
+    </figure>
   </section>
 
   <!-- 2 · La ruta: cómo funciona y los cuatro pilares, recorridos sobre el corredor -->
   <section class="route" id="how" aria-labelledby="how-title">
     <header class="route-head">
-      <p class="eyebrow" data-i18n="pillars.h">Four things, one app</p>
-      <h2 id="how-title" class="h-xl" data-i18n="how.h">How it will work</h2>
+      <h2 id="how-title" class="h-xl sec-title" data-i18n="how.h">How it will work</h2>
+      <p class="sec-lead" data-i18n="pillars.h">Four things, one app</p>
     </header>
 
     <div class="route-body">
       <figure class="route-map" data-stop="0">
         <svg viewBox="0 0 400 520" role="img" data-i18n-attr="aria-label:route.map" aria-label="The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.">
           <defs>
-            <pattern id="mapdots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="#f3efe6" fill-opacity=".09"/></pattern>
-            <linearGradient id="seafade" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#6fd3c4" stop-opacity=".09"/><stop offset="1" stop-color="#6fd3c4" stop-opacity="0"/></linearGradient>
+            <pattern id="mapdots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="#141218" fill-opacity=".12"/></pattern>
+            <linearGradient id="seafade" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#3f8f86" stop-opacity=".12"/><stop offset="1" stop-color="#3f8f86" stop-opacity="0"/></linearGradient>
             <radialGradient id="fadeR"><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
             <mask id="gridfade"><rect width="400" height="520" fill="url(#fadeR)"/></mask>
-            <radialGradient id="pinglow"><stop offset="0" stop-color="#e8b64c" stop-opacity=".55"/><stop offset="1" stop-color="#e8b64c" stop-opacity="0"/></radialGradient>
+            <radialGradient id="pinglow"><stop offset="0" stop-color="#e8a33a" stop-opacity=".45"/><stop offset="1" stop-color="#e8a33a" stop-opacity="0"/></radialGradient>
           </defs>
           <!-- papel de mapa: una retícula de puntos, el mar Caribe y la costa -->
           <rect class="map-grid" x="0" y="0" width="400" height="520" fill="url(#mapdots)" mask="url(#gridfade)"/>
@@ -145,13 +142,13 @@
           <g class="pin" data-pin="4"><circle class="pin-glow" cx="252" cy="74" r="26"/><circle class="pin-dot" cx="252" cy="74" r="5"/><text x="240" y="100" text-anchor="middle">Santa Marta</text></g>
           <g class="pin" data-pin="4"><circle class="pin-glow" cx="306" cy="66" r="26"/><circle class="pin-dot" cx="306" cy="66" r="6"/><text x="318" y="92" text-anchor="start">Tayrona</text></g>
         </svg>
-        <span class="map-farol" aria-hidden="true"><span class="farol farol--map"></span></span>
+        <span class="map-farol" aria-hidden="true"><svg class="mark mark--map" focusable="false"><use href="#lumen-mark"/></svg></span>
       </figure>
 
       <ol class="stops">
         <li class="stop" data-stop="1">
           <img class="stop-art" src="/assets/img/medellin.webp" width="1200" height="933" loading="lazy" decoding="async"
-               data-i18n-attr="alt:route.alt1" alt="Illustration of Medellín at night: the valley full of lights and the Metrocable cars.">
+               data-i18n-attr="alt:route.alt1" alt="Illustration of Medellín at dusk: the valley, its first lights and the Metrocable cars.">
           <div class="stop-text">
             <p class="stop-place"><span class="tnum">01</span> Medellín</p>
             <h3 data-i18n="pillars.1t">Plan.</h3>
@@ -160,7 +157,7 @@
         </li>
         <li class="stop" data-stop="2">
           <img class="stop-art" src="/assets/img/bogota.webp" width="1200" height="933" loading="lazy" decoding="async"
-               data-i18n-attr="alt:route.alt2" alt="Illustration of Bogotá at night: Monserrate lit up on the summit and the city below.">
+               data-i18n-attr="alt:route.alt2" alt="Illustration of Bogotá at dusk: Monserrate lit up on the summit and the city below.">
           <div class="stop-text">
             <p class="stop-place"><span class="tnum">02</span> Bogotá</p>
             <h3 data-i18n="pillars.2t">Match up.</h3>
@@ -169,7 +166,7 @@
         </li>
         <li class="stop" data-stop="3">
           <img class="stop-art" src="/assets/img/cartagena-calle.webp" width="1200" height="933" loading="lazy" decoding="async"
-               data-i18n-attr="alt:route.alt3" alt="Illustration of a street in Cartagena at night: colorful facades, wooden balconies, bougainvillea and a lit lantern.">
+               data-i18n-attr="alt:route.alt3" alt="Illustration of a street in Cartagena at dusk: colorful facades, wooden balconies, bougainvillea and a lit lantern.">
           <div class="stop-text">
             <p class="stop-place"><span class="tnum">03</span> Cartagena</p>
             <h3 data-i18n="pillars.3t">Travel together.</h3>
@@ -178,7 +175,7 @@
         </li>
         <li class="stop" data-stop="4">
           <img class="stop-art" src="/assets/img/tayrona.webp" width="1200" height="933" loading="lazy" decoding="async"
-               data-i18n-attr="alt:route.alt4" alt="Illustration of Tayrona at night: palm trees, round rocks by the sea and a lit hut under the moon.">
+               data-i18n-attr="alt:route.alt4" alt="Illustration of Tayrona at sunset: palm trees, round rocks by the sea and a lit hut.">
           <div class="stop-text">
             <p class="stop-place"><span class="tnum">04</span> Santa Marta · Tayrona</p>
             <h3 data-i18n="pillars.4t">Trust.</h3>
@@ -192,7 +189,7 @@
   <!-- 3 · Seguridad: papel, tono sereno, del perfil verificado al botón de ayuda -->
   <section class="safety" id="safety" aria-labelledby="safety-title">
     <div class="safety-intro">
-      <h2 id="safety-title" class="h-xl" data-i18n="safety.h">Safety comes first</h2>
+      <h2 id="safety-title" class="h-xl sec-title" data-i18n="safety.h">Safety comes first</h2>
       <p class="safety-text" data-i18n="safety.text">Exploring is free. Meeting people takes one extra step: you verify your identity before you message, join or post a trip. This is what we're building:</p>
     </div>
     <ol class="safety-path">
@@ -211,7 +208,7 @@
   <!-- 4 · Precios (H4): ningún cobro -->
   <section class="pricing" id="pricing" aria-labelledby="pricing-title">
     <header class="pricing-head">
-      <h2 id="pricing-title" class="h-l" data-i18n="price.h">What would you pay for? Help us get it right.</h2>
+      <h2 id="pricing-title" class="h-xl sec-title sec-title--m" data-i18n="price.h">What would you pay for? Help us get it right.</h2>
       <p data-i18n="price.intro">Lumen Travels will have a free base. These are the paid options we're testing. Nothing is charged today.</p>
     </header>
 
@@ -231,7 +228,7 @@
     </div>
 
     <div class="reserve-msg" id="reserve-msg" role="status" aria-live="polite" tabindex="-1" hidden>
-      <span class="farol farol--msg" aria-hidden="true"></span>
+      <svg class="mark mark--msg" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg>
       <div>
         <p class="reserve-title" data-i18n="price.okT">Your spot is saved.</p>
         <p data-i18n="price.okD">We don't charge anything yet. We'll let you know when we open, and the launch price stays saved for you. No payment needed now.</p>
@@ -249,8 +246,8 @@
   <!-- 5 · Lista de espera -->
   <section class="join" id="waitlist" aria-labelledby="form-title">
     <div class="join-side">
-      <div class="join-lamp" aria-hidden="true"><span class="farol farol--join"></span></div>
-      <h2 id="form-title" class="h-xl" data-i18n="form.h">Join the waitlist</h2>
+      <div class="join-lamp" aria-hidden="true"><svg class="mark mark--join" focusable="false"><use href="#lumen-mark"/></svg></div>
+      <h2 id="form-title" class="h-xl sec-title" data-i18n="form.h">Join the waitlist</h2>
       <p class="join-intro" data-i18n="form.intro">Leave your details and we'll write to you when Lumen Travels opens. No spam.</p>
     </div>
 
@@ -329,14 +326,14 @@
 
       <div class="success" id="form-success" tabindex="-1" hidden>
         <p data-i18n="form.success">You're on the list. We'll write to you when Lumen Travels opens. If you ticked the test group, we'll contact you about Santa Marta–Tayrona. Your route, your people.</p>
-        <span class="champi" aria-hidden="true"></span>
+        <span class="success-sign" aria-hidden="true"><span class="farol farol--wink"></span><span class="champi"></span></span>
       </div>
     </div>
   </section>
 
   <!-- 6 · Preguntas frecuentes -->
   <section class="faq-sec" id="faq" aria-labelledby="faq-title">
-    <h2 id="faq-title" class="h-l" data-i18n="faq.h">Questions</h2>
+    <h2 id="faq-title" class="h-xl sec-title" data-i18n="faq.h">Questions</h2>
     <div class="faq">
       <details><summary data-i18n="faq.1q">Is Lumen Travels available yet?</summary><p data-i18n="faq.1a">Not yet. We're validating the idea and building it. Join the list and we'll write to you when it opens.</p></details>
       <details><summary data-i18n="faq.2q">Where will it work first?</summary><p data-i18n="faq.2a">Colombia, along the Medellín – Bogotá – Caribbean route (Cartagena, Santa Marta, Tayrona). The app will be in English and Spanish.</p></details>
@@ -355,7 +352,7 @@
   <p class="footer-slogan" data-i18n="footer.slogan">Your route, your people.</p>
   <div class="footer-row">
     <div class="footer-brand">
-      <p class="wordmark wordmark--foot"><span class="farol farol--s" aria-hidden="true"></span><span>Lumen <em>Travels</em></span></p>
+      <p class="wordmark wordmark--foot"><svg class="mark" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg><span>lumen <span class="wm-b">travels</span></span></p>
       <p class="footer-small" data-i18n="footer.small">This page is a test. Lumen Travels is not available yet and we don't charge anything.</p>
       <p class="footer-small" data-i18n="footer.art">Illustrations: Lumen Studio.</p>
     </div>
@@ -370,7 +367,7 @@
     </div>
   </div>
   <a class="sign" href="https://www.lumenestudio.tech" rel="noopener">
-    <span class="farol farol--sign" aria-hidden="true"></span>
+    <svg class="mark mark--sign" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg>
     <span data-i18n="footer.sign">Designed by Lumen Studio</span>
   </a>
 </footer>
