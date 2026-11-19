@@ -108,6 +108,9 @@
       'lamp.label': 'Tap the Lumen light',
       'hero.badge': 'Colombia, from Medellín to Tayrona',
       'route.s4': 'Santa Marta and Tayrona',
+      'route.step': 'Stop {n} of 4',
+      'route.km': 'About {km} km in a straight line from Medellín',
+      'route.start': 'Where the route starts',
       'hero.alt': 'Illustration: three small travelers, seen from behind, walk together along a mountain path through coffee fields, above green valleys and a river glowing at sunset.',
       'route.map': 'The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.',
       'route.sea': 'Caribbean Sea',
@@ -210,6 +213,9 @@
       'lamp.label': 'Toca la luz de Lumen',
       'hero.badge': 'Colombia, de Medellín a Tayrona',
       'route.s4': 'Santa Marta y Tayrona',
+      'route.step': 'Parada {n} de 4',
+      'route.km': 'Unos {km} km en línea recta desde Medellín',
+      'route.start': 'Aquí empieza la ruta',
       'hero.alt': 'Ilustración: tres viajeros pequeños, de espaldas, caminan juntos por un sendero de montaña entre cafetales; abajo, valles verdes y un río dorado al atardecer.',
       'route.map': 'La ruta: Medellín, Bogotá, Cartagena, Santa Marta y Tayrona.',
       'route.sea': 'Mar Caribe',
@@ -571,7 +577,7 @@
   }
 
   // Expuesto solo para pruebas automáticas (sin datos personales).
-  window.__lumenLanding = { variant: function () { return variant; }, lang: function () { return lang; }, session: function () { return sessionId; } };
+  window.__lumenLanding = { variant: function () { return variant; }, lang: function () { return lang; }, session: function () { return sessionId; }, t: function (k) { return t(k); } };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
