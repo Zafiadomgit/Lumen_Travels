@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="meta.title">Lumen Travels · Plan your route and find travel companions in Colombia</title>
 <meta name="description" data-i18n-attr="content:meta.desc" content="Plan your trip day by day and find verified travelers heading your way across Colombia. Join the waitlist. Your route, your people.">
-<meta name="theme-color" content="#0E0C12" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)">
-<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0a090d">
+<meta name="color-scheme" content="dark">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph / Twitter -->
@@ -26,217 +25,236 @@
 <meta name="twitter:description" data-i18n-attr="content:meta.desc" content="Plan your trip day by day and find verified travelers heading your way across Colombia. Join the waitlist. Your route, your people.">
 <meta name="twitter:image" content="/og-image.png">
 
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="preload" as="image" href="/assets/brand/farol-tira.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/styles.css">
 <!-- Síncrono a propósito: decide variante e idioma antes de pintar (sin parpadeo entre A y B). -->
 <script src="/app.js"></script>
+<!-- Efectos (luz, farol, chispas, ruta): mejora progresiva, nada depende de ellos. -->
+<script src="/fx.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
 <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
-    <symbol id="i-lantern" viewBox="0 0 64 64">
-      <path d="M26 6h12M32 6v5" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M22 15h20l-3 -4H25z" fill="currentColor"/>
-      <path d="M21 17h22l-2 30H23z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M32 26c4 4 5 8 5 11a5 5 0 0 1 -10 0c0 -3 1 -7 5 -11z" fill="currentColor"/>
-      <path d="M19 47h26v4a3 3 0 0 1 -3 3H22a3 3 0 0 1 -3 -3z" fill="currentColor"/>
-    </symbol>
-    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
-    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
-    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.3-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14.5c2.4 0 4 1.5 4.6 4"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
     <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.6-1.6 1.7-2.3 3-2.3s2.4.7 3 2.3M14.5 10H18M14.5 13.5H18"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
-    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.2v.3"/></symbol>
     <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <!-- iconos de las ciudades (chips del formulario) -->
+    <symbol id="c-medellin" viewBox="0 0 24 24"><path d="M2 6l20 7"/><path d="M11 9.2v2.3"/><rect x="7.5" y="11.5" width="7" height="6" rx="1.5"/><path d="M8.5 14h5"/></symbol>
+    <symbol id="c-bogota" viewBox="0 0 24 24"><path d="M2 20l6-8 3 3 3-7 8 12z"/><path d="M14 8V5.5M13 6.5h2"/></symbol>
+    <symbol id="c-cartagena" viewBox="0 0 24 24"><path d="M8 21V10h8v11M10 10V7h4v3M12 3l2 4h-4z"/><circle cx="12" cy="13.5" r="1.6"/><path d="M4 21h16"/></symbol>
+    <symbol id="c-santamarta" viewBox="0 0 24 24"><path d="M6 14a6 6 0 0 1 12 0"/><path d="M12 4.5v2M5.2 7.2l1.4 1.4M18.8 7.2l-1.4 1.4"/><path d="M3 17.5c2 0 2-1 4.5-1s2.5 1 4.5 1 2-1 4.5-1 2.5 1 4.5 1M5 20.5c1.6 0 1.6-.8 3.5-.8s1.9.8 3.5.8 1.6-.8 3.5-.8 1.9.8 3.5.8"/></symbol>
+    <symbol id="c-tayrona" viewBox="0 0 24 24"><path d="M12 21c0-5 .6-8 1.8-11"/><path d="M13.8 10C11 7 7 7 4.5 9M13.8 10c1-3.5 4-5 7-4M13.8 10c3 0 5.5 1.6 6.5 4.5M13.8 10c-1.5-2.5-1.3-5 0-7"/><path d="M3 21h18"/></symbol>
   </defs>
 </svg>
 
+<div class="pointer-glow" aria-hidden="true"></div>
+
 <header class="topbar">
-  <div class="inner topbar-row">
-    <a class="mark" href="#top" aria-label="Lumen Travels">
-      <svg aria-hidden="true" viewBox="0 0 64 64"><use href="#i-lantern"/></svg>
-      <span>LUMEN TRAVELS</span>
-    </a>
-    <div class="topbar-actions">
-      <div class="lang-switch" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">
-        <button type="button" class="lang-btn" data-lang="en" lang="en" aria-pressed="true">EN</button>
-        <button type="button" class="lang-btn" data-lang="es" lang="es" aria-pressed="false">ES</button>
-      </div>
-      <a class="btn btn-small" href="#waitlist" data-scroll-form data-i18n="nav.join">Join the waitlist</a>
+  <a class="wordmark" href="#top">
+    <span class="farol farol--s" aria-hidden="true"></span>
+    <span>Lumen <em>Travels</em></span>
+  </a>
+  <div class="topbar-actions">
+    <div class="lang-switch" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang="en" lang="en" aria-pressed="true">EN</button>
+      <button type="button" class="lang-btn" data-lang="es" lang="es" aria-pressed="false">ES</button>
     </div>
+    <a class="btn btn--s topbar-cta" href="#waitlist" data-scroll-form data-i18n="nav.join">Join the waitlist</a>
   </div>
 </header>
 
 <main id="main">
-  <!-- 2 · Bloque principal (lo único que cambia entre A y B) -->
-  <section class="hero page" id="top" aria-labelledby="hero-title">
-    <div class="inner hero-grid">
-      <div class="hero-copy">
-        <h1 id="hero-title">
-          <span class="hv hv-a" data-i18n="hero.A.title">Travel Colombia with people who are who they say they are.</span>
-          <span class="hv hv-b" data-i18n="hero.B.title">Plan your route and find your group in one place.</span>
-        </h1>
-        <p class="lead">
-          <span class="hv hv-a" data-i18n="hero.A.sub">Verified travelers, public first meetups and a safety button, so finding company on the road feels calm. Your route, your people.</span>
-          <span class="hv hv-b" data-i18n="hero.B.sub">Build your trip day by day, see who is heading your way and keep the chat and the bills together. Your route, your people.</span>
-        </p>
-        <a class="btn btn-primary btn-hero" href="#waitlist" id="hero-cta" data-scroll-form>
+  <!-- 1 · Hero de noche (lo único que cambia entre A y B es el texto) -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-scene" aria-hidden="true">
+      <img src="/assets/img/cartagena-noche.webp"
+           srcset="/assets/img/cartagena-noche-1000.webp 1000w, /assets/img/cartagena-noche.webp 2000w"
+           sizes="100vw" width="2000" height="1250" alt="" fetchpriority="high" decoding="async">
+    </div>
+    <div class="hero-light" aria-hidden="true"></div>
+
+    <div class="lamp-rig">
+      <button class="lamp" type="button" id="lamp" data-i18n-attr="aria-label:lamp.label" aria-label="Tap the lantern">
+        <span class="farol farol--hero" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="hero-copy">
+      <p class="hero-kicker"><span>Colombia</span> Medellín <span class="kick-line" aria-hidden="true"></span> Tayrona</p>
+      <h1 id="hero-title">
+        <span class="hv hv-a" data-i18n="hero.A.title">Travel Colombia with people who are who they say they are.</span>
+        <span class="hv hv-b" data-i18n="hero.B.title">Plan your route and find your group in one place.</span>
+      </h1>
+      <p class="hero-lead">
+        <span class="hv hv-a" data-i18n="hero.A.sub">Verified travelers, public first meetups and a safety button, so finding company on the road feels calm. Your route, your people.</span>
+        <span class="hv hv-b" data-i18n="hero.B.sub">Build your trip day by day, see who is heading your way and keep the chat and the bills together. Your route, your people.</span>
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn--l" href="#waitlist" id="hero-cta" data-scroll-form>
           <span data-i18n="hero.cta">Join the waitlist</span>
           <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
         <p class="hero-note" data-i18n="footer.small">This page is a test. Lumen Travels is not available yet and we don't charge anything.</p>
       </div>
-
-      <figure class="hero-visual">
-        <div class="glow" aria-hidden="true"></div>
-        <div class="phone">
-          <div class="screen" role="img" data-i18n-attr="aria-label:mock.label" aria-label="Example of the app: a route across Colombia from Medellín to Bogotá, Cartagena, Santa Marta and Tayrona, with a group of verified travelers heading to Tayrona on the same dates.">
-            <div class="statusbar" aria-hidden="true"><span class="tnum">9:41</span><span class="notch"></span><span>5G</span></div>
-            <div class="map" aria-hidden="true">
-              <svg viewBox="0 0 280 380" preserveAspectRatio="xMidYMid slice">
-                <rect class="m-water" width="280" height="380"/>
-                <path class="m-land" d="M44 0h236v380H30c-6-34 8-64 2-98s-24-52-18-88 26-44 22-82S38 34 44 0z"/>
-                <path class="m-park" d="M196 92c18-8 40-2 46 12s-6 28-24 28-34-8-34-20 2-16 12-20z"/>
-                <path class="m-road" d="M60 360c26-44 34-96 74-128s66-66 76-130"/>
-                <path class="m-road" d="M30 170c48 12 86 0 132 22s58 42 118 34"/>
-                <path class="m-route" d="M88 262 L170 300 M88 262 L104 150 L178 96 L226 116"/>
-                <g class="m-pin p1"><circle cx="88" cy="262" r="11"/><text x="88" y="266">1</text></g>
-                <g class="m-pin p2"><circle cx="170" cy="300" r="11"/><text x="170" y="304">2</text></g>
-                <g class="m-pin p3"><circle cx="104" cy="150" r="11"/><text x="104" y="154">3</text></g>
-                <g class="m-pin p4"><circle cx="178" cy="96" r="11"/><text x="178" y="100">4</text></g>
-                <g class="m-pin p5 on"><circle cx="226" cy="116" r="13"/><text x="226" y="120">5</text></g>
-                <text class="m-label" x="88" y="290" text-anchor="middle">Medellín</text>
-                <text class="m-label" x="170" y="328" text-anchor="middle">Bogotá</text>
-                <text class="m-label" x="88" y="132" text-anchor="end">Cartagena</text>
-                <text class="m-label" x="164" y="78" text-anchor="middle">Santa Marta</text>
-                <text class="m-label" x="226" y="146" text-anchor="middle">Tayrona</text>
-              </svg>
-              <span class="tag-example" data-i18n="mock.example">Example</span>
-            </div>
-            <div class="sheet" aria-hidden="true">
-              <div class="grab"></div>
-              <div class="sheet-head">
-                <b data-i18n="mock.day">Day 5 · Tayrona</b>
-                <span class="tnum muted">12–15</span>
-              </div>
-              <div class="group-row">
-                <div class="avatars"><span class="av a1">LG</span><span class="av a2">TR</span><span class="av a3">MK</span></div>
-                <div class="group-txt">
-                  <span data-i18n="mock.group">3 travelers on your dates</span>
-                  <span class="verified"><svg class="icon"><use href="#i-shield"/></svg><span data-i18n="mock.verified">Verified</span></span>
-                </div>
-              </div>
-              <div class="sheet-tabs">
-                <span class="on"><svg class="icon"><use href="#i-map"/></svg><span data-i18n="mock.plan">Plan</span></span>
-                <span><svg class="icon"><use href="#i-people"/></svg><span data-i18n="mock.match">Match up</span></span>
-                <span><svg class="icon"><use href="#i-shield"/></svg><span data-i18n="mock.trust">Trust</span></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </figure>
     </div>
   </section>
 
-  <!-- 3 · Cómo funciona -->
-  <section class="section page" id="how" aria-labelledby="how-title">
-    <div class="inner">
-      <h2 id="how-title" data-i18n="how.h">How it will work</h2>
-      <ol class="steps">
-        <li><span class="step-n tnum">1</span><p><strong data-i18n="how.1t">Plan.</strong> <span data-i18n="how.1d">Build your route on the map, day by day, with times and budget.</span></p></li>
-        <li><span class="step-n tnum">2</span><p><strong data-i18n="how.2t">Find.</strong> <span data-i18n="how.2d">See travelers going where you're going, when you're going.</span></p></li>
-        <li><span class="step-n tnum">3</span><p><strong data-i18n="how.3t">Travel together.</strong> <span data-i18n="how.3d">Verified people, one group chat, shared bills.</span></p></li>
+  <!-- 2 · La ruta: cómo funciona y los cuatro pilares, recorridos sobre el corredor -->
+  <section class="route" id="how" aria-labelledby="how-title">
+    <header class="route-head">
+      <p class="eyebrow" data-i18n="pillars.h">Four things, one app</p>
+      <h2 id="how-title" class="h-xl" data-i18n="how.h">How it will work</h2>
+    </header>
+
+    <div class="route-body">
+      <figure class="route-map" data-stop="0">
+        <svg viewBox="0 0 400 520" role="img" data-i18n-attr="aria-label:route.map" aria-label="The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.">
+          <defs>
+            <radialGradient id="pinglow"><stop offset="0" stop-color="#e8b64c" stop-opacity=".55"/><stop offset="1" stop-color="#e8b64c" stop-opacity="0"/></radialGradient>
+          </defs>
+          <!-- mar Caribe y costa -->
+          <path class="map-sea" d="M0 0H400V48C360 46 330 58 300 62C268 66 248 58 220 70C190 84 160 78 132 92C110 103 92 120 70 128C46 137 22 132 0 140Z"/>
+          <path class="map-coast" d="M400 48C360 46 330 58 300 62C268 66 248 58 220 70C190 84 160 78 132 92C110 103 92 120 70 128C46 137 22 132 0 140"/>
+          <text class="map-sea-label" x="200" y="30" text-anchor="middle" data-i18n="route.sea">Caribbean Sea</text>
+          <!-- cordilleras sugeridas -->
+          <path class="map-range" d="M96 470C110 400 120 330 150 260C170 210 176 170 196 130"/>
+          <path class="map-range" d="M190 500C200 430 214 370 246 300C266 254 286 200 300 150"/>
+          <path class="map-range thin" d="M60 440C70 380 76 320 100 250"/>
+          <!-- la ruta -->
+          <path class="route-ghost" d="M128 318C160 340 196 360 236 404C214 340 168 300 150 240C134 186 116 140 112 112C150 96 196 92 252 74C272 70 288 66 306 66"/>
+          <path class="route-line" pathLength="1" d="M128 318C160 340 196 360 236 404C214 340 168 300 150 240C134 186 116 140 112 112C150 96 196 92 252 74C272 70 288 66 306 66"/>
+          <!-- paradas -->
+          <g class="pin" data-pin="1"><circle class="pin-glow" cx="128" cy="318" r="26"/><circle class="pin-dot" cx="128" cy="318" r="6"/><text x="114" y="322" text-anchor="end">Medellín</text></g>
+          <g class="pin" data-pin="2"><circle class="pin-glow" cx="236" cy="404" r="26"/><circle class="pin-dot" cx="236" cy="404" r="6"/><text x="250" y="408">Bogotá</text></g>
+          <g class="pin" data-pin="3"><circle class="pin-glow" cx="112" cy="112" r="26"/><circle class="pin-dot" cx="112" cy="112" r="6"/><text x="100" y="140" text-anchor="middle">Cartagena</text></g>
+          <g class="pin" data-pin="4"><circle class="pin-glow" cx="252" cy="74" r="26"/><circle class="pin-dot" cx="252" cy="74" r="5"/><text x="240" y="100" text-anchor="middle">Santa Marta</text></g>
+          <g class="pin" data-pin="4"><circle class="pin-glow" cx="306" cy="66" r="26"/><circle class="pin-dot" cx="306" cy="66" r="6"/><text x="318" y="92" text-anchor="start">Tayrona</text></g>
+        </svg>
+        <span class="map-farol" aria-hidden="true"><span class="farol farol--map"></span></span>
+      </figure>
+
+      <ol class="stops">
+        <li class="stop" data-stop="1">
+          <img class="stop-art" src="/assets/img/medellin.webp" width="1200" height="933" loading="lazy" decoding="async"
+               data-i18n-attr="alt:route.alt1" alt="Illustration of Medellín at night: the valley full of lights and the Metrocable cars.">
+          <div class="stop-text">
+            <p class="stop-place"><span class="tnum">01</span> Medellín</p>
+            <h3 data-i18n="pillars.1t">Plan.</h3>
+            <p data-i18n="pillars.1d">Plan your trip day by day on the map, with clear times and budget.</p>
+          </div>
+        </li>
+        <li class="stop" data-stop="2">
+          <img class="stop-art" src="/assets/img/bogota.webp" width="1200" height="933" loading="lazy" decoding="async"
+               data-i18n-attr="alt:route.alt2" alt="Illustration of Bogotá at night: Monserrate lit up on the summit and the city below.">
+          <div class="stop-text">
+            <p class="stop-place"><span class="tnum">02</span> Bogotá</p>
+            <h3 data-i18n="pillars.2t">Match up.</h3>
+            <p data-i18n="pillars.2d">Meet travelers heading where you're going, when you're going.</p>
+          </div>
+        </li>
+        <li class="stop" data-stop="3">
+          <img class="stop-art" src="/assets/img/cartagena-calle.webp" width="1200" height="933" loading="lazy" decoding="async"
+               data-i18n-attr="alt:route.alt3" alt="Illustration of a street in Cartagena at night: colorful facades, wooden balconies, bougainvillea and a lit lantern.">
+          <div class="stop-text">
+            <p class="stop-place"><span class="tnum">03</span> Cartagena</p>
+            <h3 data-i18n="pillars.3t">Travel together.</h3>
+            <p data-i18n="pillars.3d">One place for the plan, the chat, the votes and the bills.</p>
+          </div>
+        </li>
+        <li class="stop" data-stop="4">
+          <img class="stop-art" src="/assets/img/tayrona.webp" width="1200" height="933" loading="lazy" decoding="async"
+               data-i18n-attr="alt:route.alt4" alt="Illustration of Tayrona at night: palm trees, round rocks by the sea and a lit hut under the moon.">
+          <div class="stop-text">
+            <p class="stop-place"><span class="tnum">04</span> Santa Marta · Tayrona</p>
+            <h3 data-i18n="pillars.4t">Trust.</h3>
+            <p data-i18n="pillars.4d">Verified profiles, real reviews and a safety button that's always free.</p>
+          </div>
+        </li>
       </ol>
     </div>
   </section>
 
-  <!-- 4 · Los 4 pilares -->
-  <section class="section page" id="pillars" aria-labelledby="pillars-title">
-    <div class="inner">
-      <h2 id="pillars-title" data-i18n="pillars.h">Four things, one app</h2>
-      <ul class="pillars">
-        <li><svg class="icon" aria-hidden="true"><use href="#i-map"/></svg><h3 data-i18n="pillars.1t">Plan.</h3><p data-i18n="pillars.1d">Plan your trip day by day on the map, with clear times and budget.</p></li>
-        <li><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg><h3 data-i18n="pillars.2t">Match up.</h3><p data-i18n="pillars.2d">Meet travelers heading where you're going, when you're going.</p></li>
-        <li><svg class="icon" aria-hidden="true"><use href="#i-people"/></svg><h3 data-i18n="pillars.3t">Travel together.</h3><p data-i18n="pillars.3d">One place for the plan, the chat, the votes and the bills.</p></li>
-        <li class="trust"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><h3 data-i18n="pillars.4t">Trust.</h3><p data-i18n="pillars.4d">Verified profiles, real reviews and a safety button that's always free.</p></li>
-      </ul>
+  <!-- 3 · Seguridad: papel, tono sereno, del perfil verificado al botón de ayuda -->
+  <section class="safety" id="safety" aria-labelledby="safety-title">
+    <div class="safety-intro">
+      <h2 id="safety-title" class="h-xl" data-i18n="safety.h">Safety comes first</h2>
+      <p class="safety-text" data-i18n="safety.text">Exploring is free. Meeting people takes one extra step: you verify your identity before you message, join or post a trip. This is what we're building:</p>
     </div>
+    <ol class="safety-path">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-id"/></svg><p data-i18n="safety.1">Identity check with an ID and a selfie, done by a specialist provider.</p></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><p data-i18n="safety.2">Reviews from both sides, written after the trip.</p></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><p data-i18n="safety.3">A suggestion to hold the first meetup in a public place.</p></li>
+      <li class="is-sos">
+        <span class="sos" aria-hidden="true"><svg class="icon"><use href="#i-shield"/></svg></span>
+        <p data-i18n="safety.4">A safety button, free for everyone, always.</p>
+      </li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg><p data-i18n="safety.5">Reports, blocking and a team that reviews them.</p></li>
+    </ol>
+    <p class="safety-close" data-i18n="safety.close">No app can remove every risk. We design to lower it and we'll tell you plainly how it works.</p>
   </section>
 
-  <!-- 5 · Seguridad -->
-  <section class="section page" id="safety" aria-labelledby="safety-title">
-    <div class="inner safety-grid">
-      <div class="safety-head">
-        <svg class="safety-badge" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-shield"/></svg>
-        <h2 id="safety-title" data-i18n="safety.h">Safety comes first</h2>
-        <p class="muted" data-i18n="safety.text">Exploring is free. Meeting people takes one extra step: you verify your identity before you message, join or post a trip. This is what we're building:</p>
-      </div>
+  <!-- 4 · Precios (H4): ningún cobro -->
+  <section class="pricing" id="pricing" aria-labelledby="pricing-title">
+    <header class="pricing-head">
+      <h2 id="pricing-title" class="h-l" data-i18n="price.h">What would you pay for? Help us get it right.</h2>
+      <p data-i18n="price.intro">Lumen Travels will have a free base. These are the paid options we're testing. Nothing is charged today.</p>
+    </header>
+
+    <div class="plans">
+      <article class="plan plan--main" aria-labelledby="plan1-name">
+        <span class="plan-light" aria-hidden="true"></span>
+        <h3 id="plan1-name" data-i18n="price.1name">Plus, monthly</h3>
+        <p class="price tnum" data-i18n="price.1price">USD 3.99 / month</p>
+        <p class="plan-desc" data-i18n="price.1desc">Offline maps and routes, itinerary export to PDF, more active trips and groups, advanced match filters (style, pace, language).</p>
+        <button type="button" class="btn reserve" data-plan="plus_monthly" aria-describedby="plan1-name" data-i18n="price.btn">Reserve my spot</button>
+      </article>
+      <article class="plan plan--alt" aria-labelledby="plan2-name">
+        <h3 id="plan2-name" data-i18n="price.2name">Trip Pass, 30 days</h3>
+        <p class="price tnum" data-i18n="price.2price">USD 4.99, one-time payment</p>
+        <p class="plan-desc" data-i18n="price.2desc">The Plus extras for one trip, no subscription.</p>
+        <button type="button" class="btn btn--ghost reserve" data-plan="trip_pass" aria-describedby="plan2-name" data-i18n="price.btn">Reserve my spot</button>
+      </article>
+    </div>
+
+    <div class="reserve-msg" id="reserve-msg" role="status" aria-live="polite" tabindex="-1" hidden>
+      <span class="farol farol--msg" aria-hidden="true"></span>
       <div>
-        <ul class="safety-list">
-          <li><svg class="icon" aria-hidden="true"><use href="#i-id"/></svg><span data-i18n="safety.1">Identity check with an ID and a selfie, done by a specialist provider.</span></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><span data-i18n="safety.2">Reviews from both sides, written after the trip.</span></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="safety.3">A suggestion to hold the first meetup in a public place.</span></li>
-          <li><svg class="icon icon-safety" aria-hidden="true"><use href="#i-alert"/></svg><span data-i18n="safety.4">A safety button, free for everyone, always.</span></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg><span data-i18n="safety.5">Reports, blocking and a team that reviews them.</span></li>
-        </ul>
-        <p class="safety-close" data-i18n="safety.close">No app can remove every risk. We design to lower it and we'll tell you plainly how it works.</p>
+        <p class="reserve-title" data-i18n="price.okT">Your spot is saved.</p>
+        <p data-i18n="price.okD">We don't charge anything yet. We'll let you know when we open, and the launch price stays saved for you. No payment needed now.</p>
+        <p class="reserve-more"><a href="#waitlist" data-scroll-form data-i18n="price.okMore">Want us to write to you? Leave your email below.</a></p>
       </div>
     </div>
+
+    <p class="free-safety">
+      <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
+      <strong data-i18n="price.lineA">Safety is never paid.</strong>
+      <span data-i18n="price.lineB">Verification and the safety button are free for everyone.</span>
+    </p>
   </section>
 
-  <!-- 6 · Precios (H4) — ningún cobro -->
-  <section class="section page" id="pricing" aria-labelledby="pricing-title">
-    <div class="inner">
-      <div class="section-head">
-        <h2 id="pricing-title" data-i18n="price.h">What would you pay for? Help us get it right.</h2>
-        <p data-i18n="price.intro">Lumen Travels will have a free base. These are the paid options we're testing. Nothing is charged today.</p>
-      </div>
-      <div class="plans">
-        <article class="plan" aria-labelledby="plan1-name">
-          <h3 id="plan1-name" data-i18n="price.1name">Plus, monthly</h3>
-          <p class="price tnum" data-i18n="price.1price">USD 3.99 / month</p>
-          <p class="plan-desc" data-i18n="price.1desc">Offline maps and routes, itinerary export to PDF, more active trips and groups, advanced match filters (style, pace, language).</p>
-          <button type="button" class="btn btn-secondary reserve" data-plan="plus_monthly" aria-describedby="plan1-name" data-i18n="price.btn">Reserve my spot</button>
-        </article>
-        <article class="plan" aria-labelledby="plan2-name">
-          <h3 id="plan2-name" data-i18n="price.2name">Trip Pass, 30 days</h3>
-          <p class="price tnum" data-i18n="price.2price">USD 4.99, one-time payment</p>
-          <p class="plan-desc" data-i18n="price.2desc">The Plus extras for one trip, no subscription.</p>
-          <button type="button" class="btn btn-secondary reserve" data-plan="trip_pass" aria-describedby="plan2-name" data-i18n="price.btn">Reserve my spot</button>
-        </article>
-      </div>
-      <p class="plans-line"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="price.line">Safety is never paid: verification and the safety button are free for everyone.</span></p>
-
-      <div class="reserve-msg" id="reserve-msg" role="status" aria-live="polite" tabindex="-1" hidden>
-        <svg class="lantern-on" aria-hidden="true" viewBox="0 0 64 64"><use href="#i-lantern"/></svg>
-        <div>
-          <p class="reserve-title" data-i18n="price.okT">Your spot is saved.</p>
-          <p data-i18n="price.okD">We don't charge anything yet. We'll let you know when we open, and the launch price stays saved for you. No payment needed now.</p>
-          <p class="reserve-more"><a href="#waitlist" data-scroll-form data-i18n="price.okMore">Want us to write to you? Leave your email below.</a></p>
-        </div>
-      </div>
+  <!-- 5 · Lista de espera -->
+  <section class="join" id="waitlist" aria-labelledby="form-title">
+    <div class="join-side">
+      <div class="join-lamp" aria-hidden="true"><span class="farol farol--join"></span></div>
+      <h2 id="form-title" class="h-xl" data-i18n="form.h">Join the waitlist</h2>
+      <p class="join-intro" data-i18n="form.intro">Leave your details and we'll write to you when Lumen Travels opens. No spam.</p>
     </div>
-  </section>
 
-  <!-- 7 · Lista de espera -->
-  <section class="section page" id="waitlist" aria-labelledby="form-title">
-    <div class="inner form-wrap">
-      <div class="section-head">
-        <h2 id="form-title" data-i18n="form.h">Join the waitlist</h2>
-        <p data-i18n="form.intro">Leave your details and we'll write to you when Lumen Travels opens. No spam.</p>
-      </div>
-
+    <div class="join-main">
       <form id="waitlist-form" class="form" novalidate>
         <div class="plan-chip" id="plan-chip" hidden>
           <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
@@ -246,52 +264,52 @@
           </button>
         </div>
 
-        <div class="field">
+        <div class="field field--email">
           <label for="f-email"><span data-i18n="form.email">Email</span> <span class="req" data-i18n="form.required">(required)</span></label>
-          <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" required aria-describedby="e-email">
+          <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" required aria-describedby="e-email" placeholder="you@email.com">
           <p class="err" id="e-email" hidden></p>
         </div>
 
-        <div class="field">
-          <label for="f-country"><span data-i18n="form.country">Country you're from</span> <span class="req" data-i18n="form.required">(required)</span></label>
-          <div class="select-wrap">
-            <select id="f-country" name="country" autocomplete="country" required aria-describedby="e-country">
-              <option value="" data-i18n="form.choose">Choose…</option>
-            </select>
-            <svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg>
+        <div class="form-group">
+          <div class="field">
+            <label for="f-country"><span data-i18n="form.country">Country you're from</span> <span class="req" data-i18n="form.required">(required)</span></label>
+            <div class="select-wrap">
+              <select id="f-country" name="country" autocomplete="country" required aria-describedby="e-country">
+                <option value="" data-i18n="form.choose">Choose…</option>
+              </select>
+              <svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg>
+            </div>
+            <p class="err" id="e-country" hidden></p>
           </div>
-          <p class="err" id="e-country" hidden></p>
+
+          <div class="field">
+            <label for="f-dates"><span data-i18n="form.dates">Approximate dates of your trip to Colombia</span> <span class="req" data-i18n="form.required">(required)</span></label>
+            <p class="hint" id="h-dates" data-i18n="form.datesHint">Month and year or a range</p>
+            <input id="f-dates" name="travel_dates" type="text" maxlength="80" autocomplete="off" required aria-describedby="h-dates e-dates">
+            <p class="err" id="e-dates" hidden></p>
+            <label class="check check--inline" for="f-unsure">
+              <input id="f-unsure" type="checkbox">
+              <span data-i18n="form.unsure">Not sure yet</span>
+            </label>
+          </div>
         </div>
 
-        <div class="field">
-          <label for="f-dates"><span data-i18n="form.dates">Approximate dates of your trip to Colombia</span> <span class="req" data-i18n="form.required">(required)</span></label>
-          <p class="hint" id="h-dates" data-i18n="form.datesHint">Month and year or a range</p>
-          <input id="f-dates" name="travel_dates" type="text" maxlength="80" autocomplete="off" required aria-describedby="h-dates e-dates">
-          <p class="err" id="e-dates" hidden></p>
-          <label class="check check-inline" for="f-unsure">
-            <input id="f-unsure" type="checkbox">
-            <span data-i18n="form.unsure">Not sure yet</span>
-          </label>
-        </div>
-
-        <fieldset class="field">
+        <fieldset class="field cities">
           <legend><span data-i18n="form.cities">Cities of the route you'd like to visit</span> <span class="req" data-i18n="form.optional">(optional)</span></legend>
           <div class="city-grid">
-            <label class="check pill"><input type="checkbox" name="cities" value="medellin"><span>Medellín</span></label>
-            <label class="check pill"><input type="checkbox" name="cities" value="bogota"><span>Bogotá</span></label>
-            <label class="check pill"><input type="checkbox" name="cities" value="cartagena"><span>Cartagena</span></label>
-            <label class="check pill"><input type="checkbox" name="cities" value="santa_marta"><span>Santa Marta</span></label>
-            <label class="check pill"><input type="checkbox" name="cities" value="tayrona"><span>Tayrona</span></label>
-            <label class="check pill"><input type="checkbox" name="cities" value="other"><span data-i18n="form.other">Other</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="medellin"><svg class="icon" aria-hidden="true"><use href="#c-medellin"/></svg><span>Medellín</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="bogota"><svg class="icon" aria-hidden="true"><use href="#c-bogota"/></svg><span>Bogotá</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="cartagena"><svg class="icon" aria-hidden="true"><use href="#c-cartagena"/></svg><span>Cartagena</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="santa_marta"><svg class="icon" aria-hidden="true"><use href="#c-santamarta"/></svg><span>Santa Marta</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="tayrona"><svg class="icon" aria-hidden="true"><use href="#c-tayrona"/></svg><span>Tayrona</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="other"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span data-i18n="form.other">Other</span></label>
           </div>
         </fieldset>
 
-        <div class="field">
-          <label class="check" for="f-concierge">
-            <input id="f-concierge" name="concierge_opt_in" type="checkbox">
-            <span><span data-i18n="form.concierge">I want to join the Santa Marta–Tayrona test group</span> <span class="req" data-i18n="form.optional">(optional)</span></span>
-          </label>
-        </div>
+        <label class="check check--card" for="f-concierge">
+          <input id="f-concierge" name="concierge_opt_in" type="checkbox">
+          <span><span data-i18n="form.concierge">I want to join the Santa Marta–Tayrona test group</span> <span class="req" data-i18n="form.optional">(optional)</span></span>
+        </label>
 
         <div class="field consent">
           <label class="check" for="f-consent">
@@ -303,43 +321,44 @@
 
         <p class="err err-server" id="e-server" role="alert" hidden></p>
 
-        <button type="submit" class="btn btn-primary btn-submit" id="f-submit">
+        <button type="submit" class="btn btn--l btn-submit" id="f-submit">
           <span class="spinner" aria-hidden="true"></span>
           <span data-i18n="form.submit">Join the waitlist</span>
         </button>
       </form>
 
       <div class="success" id="form-success" tabindex="-1" hidden>
-        <svg class="lantern-on" aria-hidden="true" viewBox="0 0 64 64"><use href="#i-lantern"/></svg>
+        <span class="farol farol--success" aria-hidden="true"></span>
         <p data-i18n="form.success">You're on the list. We'll write to you when Lumen Travels opens. If you ticked the test group, we'll contact you about Santa Marta–Tayrona. Your route, your people.</p>
+        <span class="champi" aria-hidden="true"></span>
       </div>
     </div>
   </section>
 
-  <!-- 8 · Preguntas frecuentes -->
-  <section class="section page" id="faq" aria-labelledby="faq-title">
-    <div class="inner faq-wrap">
-      <h2 id="faq-title" data-i18n="faq.h">Questions</h2>
-      <div class="faq">
-        <details><summary data-i18n="faq.1q">Is Lumen Travels available yet?</summary><p data-i18n="faq.1a">Not yet. We're validating the idea and building it. Join the list and we'll write to you when it opens.</p></details>
-        <details><summary data-i18n="faq.2q">Where will it work first?</summary><p data-i18n="faq.2a">Colombia, along the Medellín – Bogotá – Caribbean route (Cartagena, Santa Marta, Tayrona). The app will be in English and Spanish.</p></details>
-        <details><summary data-i18n="faq.3q">Is it free?</summary><p data-i18n="faq.3a">The plan is a free base. A paid "Plus" for extra comfort and a 30-day Trip Pass are being tested; see the prices above. Nothing is charged today.</p></details>
-        <details><summary data-i18n="faq.4q">Does "Reserve my spot" charge me?</summary><p data-i18n="faq.4a">No. It only saves your interest. We don't take payments on this page.</p></details>
-        <details><summary data-i18n="faq.5q">Will safety features ever be paid?</summary><p data-i18n="faq.5a">No. Verification and the safety button stay free.</p></details>
-        <details><summary data-i18n="faq.6q">How do you verify people?</summary><p data-i18n="faq.6a">With an ID and a selfie, through a specialist provider. You'll do it before you message, join or post a trip.</p></details>
-        <details id="faq-data"><summary data-i18n="faq.7q">What do you do with my data?</summary><p data-i18n="faq.7a">We use your email and answers only to contact you about Lumen Travels and to improve it. You can ask us to delete them at any time.</p></details>
-        <details><summary data-i18n="faq.8q">Can I join if I'm under 18?</summary><p data-i18n="faq.8a">No. Lumen Travels is for people aged 18 and over.</p></details>
-      </div>
+  <!-- 6 · Preguntas frecuentes -->
+  <section class="faq-sec" id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title" class="h-l" data-i18n="faq.h">Questions</h2>
+    <div class="faq">
+      <details><summary data-i18n="faq.1q">Is Lumen Travels available yet?</summary><p data-i18n="faq.1a">Not yet. We're validating the idea and building it. Join the list and we'll write to you when it opens.</p></details>
+      <details><summary data-i18n="faq.2q">Where will it work first?</summary><p data-i18n="faq.2a">Colombia, along the Medellín – Bogotá – Caribbean route (Cartagena, Santa Marta, Tayrona). The app will be in English and Spanish.</p></details>
+      <details><summary data-i18n="faq.3q">Is it free?</summary><p data-i18n="faq.3a">The plan is a free base. A paid "Plus" for extra comfort and a 30-day Trip Pass are being tested; see the prices above. Nothing is charged today.</p></details>
+      <details><summary data-i18n="faq.4q">Does "Reserve my spot" charge me?</summary><p data-i18n="faq.4a">No. It only saves your interest. We don't take payments on this page.</p></details>
+      <details><summary data-i18n="faq.5q">Will safety features ever be paid?</summary><p data-i18n="faq.5a">No. Verification and the safety button stay free.</p></details>
+      <details><summary data-i18n="faq.6q">How do you verify people?</summary><p data-i18n="faq.6a">With an ID and a selfie, through a specialist provider. You'll do it before you message, join or post a trip.</p></details>
+      <details id="faq-data"><summary data-i18n="faq.7q">What do you do with my data?</summary><p data-i18n="faq.7a">We use your email and answers only to contact you about Lumen Travels and to improve it. You can ask us to delete them at any time.</p></details>
+      <details><summary data-i18n="faq.8q">Can I join if I'm under 18?</summary><p data-i18n="faq.8a">No. Lumen Travels is for people aged 18 and over.</p></details>
     </div>
   </section>
 </main>
 
-<!-- 9 · Pie -->
-<footer class="footer page">
-  <div class="inner footer-grid">
+<!-- 7 · Pie -->
+<footer class="footer">
+  <p class="footer-slogan" data-i18n="footer.slogan">Your route, your people.</p>
+  <div class="footer-row">
     <div class="footer-brand">
-      <p class="footer-line"><span class="mark-txt">LUMEN TRAVELS</span> · <span data-i18n="footer.slogan">Your route, your people.</span></p>
+      <p class="wordmark wordmark--foot"><span class="farol farol--s" aria-hidden="true"></span><span>Lumen <em>Travels</em></span></p>
       <p class="footer-small" data-i18n="footer.small">This page is a test. Lumen Travels is not available yet and we don't charge anything.</p>
+      <p class="footer-small" data-i18n="footer.art">Illustrations: Lumen Studio.</p>
     </div>
     <nav class="footer-links" data-i18n-attr="aria-label:footer.nav" aria-label="Legal">
       <a href="#faq-data" data-open-faq data-i18n="footer.privacy">Privacy policy</a>
@@ -348,14 +367,13 @@
     </nav>
     <div class="footer-lang" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">
       <button type="button" class="link-btn" data-lang="en" lang="en" aria-pressed="true">English</button>
-      <span aria-hidden="true">|</span>
       <button type="button" class="link-btn" data-lang="es" lang="es" aria-pressed="false">Español</button>
     </div>
-    <a class="sign" href="https://www.lumenestudio.tech" rel="noopener">
-      <svg aria-hidden="true" viewBox="0 0 64 64"><use href="#i-lantern"/></svg>
-      <span data-i18n="footer.sign">Designed by Lumen Studio</span>
-    </a>
   </div>
+  <a class="sign" href="https://www.lumenestudio.tech" rel="noopener">
+    <span class="farol farol--sign" aria-hidden="true"></span>
+    <span data-i18n="footer.sign">Designed by Lumen Studio</span>
+  </a>
 </footer>
 </body>
 </html>
