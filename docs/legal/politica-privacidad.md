@@ -91,6 +91,8 @@ Cada evento lleva un **identificador de sesión aleatorio** generado en tu naveg
 
 Puedes borrar todo esto desde la configuración de tu navegador cuando quieras. La página sigue funcionando sin ello.
 
+Las tipografías se sirven desde nuestro propio sitio; tu navegador no se conecta a servicios de terceros para mostrarlas.
+
 ## 4. Para qué usamos tus datos (finalidades)
 
 1. **Avisarte cuando la app abra** y escribirte sobre Lumen Travels.
@@ -109,7 +111,6 @@ No compartimos tus datos con nadie para sus propios fines. Usamos proveedores qu
 | --- | --- | --- | --- |
 | **Supabase** | Base de datos donde se guarda la lista de espera y los eventos anónimos | Estados Unidos (región us-east-1) | Los del formulario y los eventos anónimos |
 | **Vercel** | Alojamiento y entrega de la página | Estados Unidos y red global de servidores | Datos técnicos de la visita (como la dirección IP) en sus registros de servidor |
-| **Google Fonts** (Google) | Entrega de las tipografías de la página | Servidores de Google | Tu dirección IP y datos técnicos del navegador, al cargar las fuentes |
 
 `[CONFIRMAR: si el envío de correos usa otra herramienta (por ejemplo, un servicio de correo masivo), añadirla aquí como encargado antes de enviar el primer mensaje.]`
 
@@ -117,7 +118,7 @@ También podemos entregar datos a una **autoridad competente** cuando una norma 
 
 ## 6. Transferencia y transmisión internacional de datos
 
-Supabase y Vercel procesan datos en **Estados Unidos**, y Google Fonts en los servidores de Google. Por eso tus datos salen de Colombia (y, si estás en Europa, del Espacio Económico Europeo).
+Supabase y Vercel procesan datos en **Estados Unidos**. Por eso tus datos salen de Colombia (y, si estás en Europa, del Espacio Económico Europeo).
 
 - **Colombia:** se trata de una **transmisión** a encargados que actúan por nuestra cuenta, y, en lo que corresponda, de una **transferencia internacional** (Ley 1581, art. 26). Al marcar la casilla de consentimiento, autorizas de forma expresa este envío a Estados Unidos. Además, exigimos a los proveedores condiciones de seguridad y confidencialidad mediante sus contratos de tratamiento de datos. `[CONFIRMAR con abogado: ver Anexo B, punto 3.]`
 - **Unión Europea (GDPR):** las transferencias se amparan en las **cláusulas contractuales tipo** de la Comisión Europea que forman parte de los acuerdos de tratamiento de datos de esos proveedores. `[CONFIRMAR con abogado y con los acuerdos vigentes de cada proveedor.]`
@@ -281,6 +282,8 @@ Each event carries a **random session ID** generated in your browser, the page v
 
 You can clear all of this from your browser settings at any time. The page keeps working without it.
 
+The typefaces are served from our own site; your browser does not connect to third-party services to display them.
+
 ## 4. What we use your data for (purposes)
 
 1. **To let you know when the app opens** and to write to you about Lumen Travels.
@@ -299,7 +302,6 @@ We don't share your data with anyone for their own purposes. We use providers wh
 | --- | --- | --- | --- |
 | **Supabase** | Database that stores the waitlist and the anonymous events | United States (us-east-1 region) | Form data and anonymous events |
 | **Vercel** | Hosting and delivery of the page | United States and a global server network | Technical visit data (such as your IP address) in its server logs |
-| **Google Fonts** (Google) | Delivery of the page's typefaces | Google servers | Your IP address and browser technical data when the fonts load |
 
 `[CONFIRM: if emails are sent with another tool (for example, a bulk email service), add it here as a processor before sending the first message.]`
 
@@ -307,7 +309,7 @@ We may also disclose data to a **competent authority** when a law or a legal ord
 
 ## 6. International transfers
 
-Supabase and Vercel process data in the **United States**, and Google Fonts on Google's servers. This means your data leaves Colombia (and, if you are in Europe, the European Economic Area).
+Supabase and Vercel process data in the **United States**. This means your data leaves Colombia (and, if you are in Europe, the European Economic Area).
 
 - **Colombia:** this is a **transmission** to processors acting on our behalf and, where applicable, an **international transfer** (Law 1581, Art. 26). By ticking the consent box you expressly authorize this transfer to the United States. We also require security and confidentiality commitments from our providers through their data processing agreements. `[CONFIRM with a lawyer: see Annex B, point 3.]`
 - **European Union (GDPR):** transfers rely on the European Commission's **standard contractual clauses** included in those providers' data processing agreements. `[CONFIRM with a lawyer and with each provider's current agreement.]`
@@ -409,7 +411,6 @@ For any question or request about your data: **pietersd05@gmail.com** `[CONFIRM]
 1. **Correo de contacto de la página.** En `site/landing/app.js`, `contactEmail` está vacío y la landing muestra «[correo de contacto por definir]». El mismo correo debe aparecer en el pie y en la política.
 2. **Enlace de la política.** El texto de consentimiento ya enlaza «Política de privacidad». Hay que publicar este documento en una URL (en ES y EN) y apuntar el enlace del formulario y del pie a ella. La política debe poder abrirse sin haber marcado la casilla.
 3. **`consent_version` y fecha del consentimiento.** `app.js` no envía esos dos campos en `onSubmit` (envía `consent: true`). Si la base los llena por defecto (valor por defecto o disparador), hay que **verificar que el valor por defecto sea `v1-2026-11`** y que guarde la fecha y hora. Si no, la política dice algo que no está pasando. Comprobarlo antes de publicar.
-4. **Google Fonts.** La página carga las tipografías desde Google, que recibe la IP de cada visitante antes de que acepte nada. Recomendación: **alojar las fuentes en el propio sitio** (self-host); así se elimina ese proveedor y esa transferencia, y la política se simplifica. Si se deja, mantener la mención.
 5. **Almacenamiento local y consentimiento.** La política dice «sin cookies», lo cual es cierto, pero el almacenamiento local es una tecnología equivalente en algunas normas europeas. Se dejó descrito con transparencia; lo valida el abogado (Anexo B, punto 5).
 6. **Procedimiento interno para derechos.** Definir quién responde, en cuánto tiempo, cómo se verifica la identidad y dónde se registra cada solicitud (consulta de 10 días hábiles, reclamo de 15). Sin proceso, el plazo legal se incumple fácil.
 7. **Cómo se borra un registro.** Tener a mano la consulta para eliminar por correo la fila de `waitlist` (y, si se pidiera, relacionar eventos). Los eventos no se pueden ligar al correo, así que su borrado individual no es posible; eso es coherente con la política.
@@ -423,11 +424,10 @@ For any question or request about your data: **pietersd05@gmail.com** `[CONFIRM]
 
 1. **Registro en el RNBD (Registro Nacional de Bases de Datos) de la SIC.** Determinar si Lumen Studio está obligado a registrar esta base de datos, según el tipo de responsable (persona natural o jurídica) y sus activos totales (el decreto reglamentario fija obligación para sociedades y entidades sin ánimo de lucro con activos totales superiores a un umbral en UVT, y para entidades públicas; el umbral y los plazos cambian, por lo que **se debe verificar el vigente**). Si aplica, definir fecha y quién la registra. Aun si hoy no aplica, anticipar que la app (con documentos y selfies) probablemente cambie la respuesta.
 2. **Validez del consentimiento por casilla.** Confirmar que una casilla no premarcada, con enlace a la política y el texto visible, cumple como autorización «previa, expresa e informada» (Ley 1581, art. 9; Decreto 1377), y como consentimiento inequívoco bajo GDPR (arts. 4.11 y 7). Revisar: (a) si la casilla única mezcla varias finalidades (avisar, mejorar el producto) y si conviene separarlas; (b) si el texto actual cubre la autorización expresa de la **transferencia internacional**, que hoy solo se explica en la política y no en el texto de la casilla; (c) la forma de conservar la prueba (fecha, versión, IP no se guarda).
-3. **Transferencias a Estados Unidos.** Revisar: (a) si, bajo el art. 26 de la Ley 1581, la transferencia a EE. UU. cuenta como país con nivel adecuado (verificar la lista vigente de la SIC, Circular Externa 005 de 2017 y sus actualizaciones) o si se apoya en la autorización expresa del titular; (b) si la relación con Supabase, Vercel y Google es una **transmisión** al amparo del Decreto 1377 / 1074 (que exige, en ciertos casos, un contrato de transmisión) y qué contratos hay que firmar o aceptar; (c) bajo GDPR, el mecanismo real de cada proveedor (cláusulas contractuales tipo, certificación del Marco de Privacidad de Datos UE-EE. UU. u otro) y si hace falta una evaluación de impacto de la transferencia; (d) si se requiere representante en la UE (GDPR art. 27) dado que se ofrece el servicio a personas en la Unión.
+3. **Transferencias a Estados Unidos.** Revisar: (a) si, bajo el art. 26 de la Ley 1581, la transferencia a EE. UU. cuenta como país con nivel adecuado (verificar la lista vigente de la SIC, Circular Externa 005 de 2017 y sus actualizaciones) o si se apoya en la autorización expresa del titular; (b) si la relación con Supabase y Vercel es una **transmisión** al amparo del Decreto 1377 / 1074 (que exige, en ciertos casos, un contrato de transmisión) y qué contratos hay que firmar o aceptar; (c) bajo GDPR, el mecanismo real de cada proveedor (cláusulas contractuales tipo, certificación del Marco de Privacidad de Datos UE-EE. UU. u otro) y si hace falta una evaluación de impacto de la transferencia; (d) si se requiere representante en la UE (GDPR art. 27) dado que se ofrece el servicio a personas en la Unión.
 4. **Texto del aviso corto del formulario.** Revisar la casilla de consentimiento publicada («Acepto que Lumen Studio use mis datos para escribirme sobre Lumen Travels y mejorarlo… Ley 1581 de 2012 y GDPR») frente a los requisitos de información del Decreto 1377 (finalidad, carácter facultativo, derechos, identificación y contacto del responsable): hoy **no nombra al responsable por su nombre legal ni da el canal de contacto**, y hay que decidir si eso se completa en el aviso corto o basta con el enlace a la política. También: que «Soy mayor de 18 años» en la misma casilla sea aceptable, y que la frase «hasta cuando quieras» no prometa más de lo que la política permite (excepciones de conservación legal).
 5. **Almacenamiento local y normas de privacidad electrónica.** Verificar si el uso de localStorage/sessionStorage (variante, identificador de sesión, idioma) exige aviso o consentimiento previo según la normativa de la UE (Directiva ePrivacy, que se aplica a «cookies y tecnologías similares»), en particular el **identificador aleatorio persistente** que no es estrictamente necesario para prestar el servicio. Si exige consentimiento, habría que bloquearlo hasta aceptar. Además, la afirmación «anónimo» (el identificador es un seudónimo) y el supuesto de que no se cruza con el correo: confirmar la redacción.
 6. **Conservación.** Validar el plazo propuesto (12 meses tras el lanzamiento) frente al principio de necesidad y las reglas de supresión.
-7. **Google Fonts.** Valorar el riesgo de dejar la carga desde servidores de Google sin consentimiento previo (envío de IP a un tercero en EE. UU.) frente a alojar las fuentes localmente.
 8. **Datos de la landing frente a la app futura.** La política cubre solo la lista de espera. Cuando haya app (verificación con documento y selfie, ubicación, chat, SOS) se necesitará otra política con **autorización específica y facultativa para datos sensibles** (biométricos, ubicación), plazos de conservación del documento y protocolo con autoridades (ver `docs/plan/05-confianza-y-seguridad.md` §9).
 9. **Plazos legales citados.** Confirmar los plazos que aparecen en el texto (consultas 10 días hábiles +5; reclamos 15 días hábiles +8; GDPR un mes, prorrogable) y la mención del requisito de procedibilidad ante la SIC (Ley 1581, art. 16).
 10. **Perfil de responsable.** Si Lumen Studio es persona natural, revisar cómo se identifica y si cambian las obligaciones frente a las de una sociedad.
