@@ -104,14 +104,20 @@
       'footer.contact': 'Contact',
       'footer.small': "This page is a test. Lumen Travels is not available yet and we don't charge anything.",
       'footer.sign': 'Designed by Lumen Studio',
-      'footer.art': 'Illustrations: Lumen Studio.',
-      'lamp.label': 'Tap the lantern',
+      'footer.art': 'Illustrations made for Lumen Studio. Icons: Lucide (ISC license).',
+      'lamp.label': 'Tap the Lumen light',
+      'hero.badge': 'Colombia, from Medellín to Tayrona',
+      'route.s4': 'Santa Marta and Tayrona',
+      'route.step': 'Stop {n} of 4',
+      'route.km': 'About {km} km in a straight line from Medellín',
+      'route.start': 'Where the route starts',
+      'hero.alt': 'Illustration: three small travelers, seen from behind, walk together along a mountain path through coffee fields, above green valleys and a river glowing at sunset.',
       'route.map': 'The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.',
       'route.sea': 'Caribbean Sea',
-      'route.alt1': 'Illustration of Medellín at night: the valley full of lights and the Metrocable cars.',
-      'route.alt2': 'Illustration of Bogotá at night: Monserrate lit up on the summit and the city below.',
-      'route.alt3': 'Illustration of a street in Cartagena at night: colorful facades, wooden balconies, bougainvillea and a lit lantern.',
-      'route.alt4': 'Illustration of Tayrona at night: palm trees, round rocks by the sea and a lit hut under the moon.',
+      'route.alt1': 'Illustration of Medellín: Metrocable cable cars glide over hillside brick houses, with the Aburrá Valley below.',
+      'route.alt2': 'Illustration of Bogotá: a cobblestone street in La Candelaria lined with white and ochre houses with wooden balconies; two travelers stroll together beneath Monserrate hill and its sanctuary.',
+      'route.alt3': 'Illustration of Cartagena: a street in the walled city with ochre facades, balconies with bougainvillea and a church dome at the end.',
+      'route.alt4': 'Illustration of Tayrona National Park: Cabo San Juan beach with large rounded boulders, palm trees and a hut on the point.',
       'price.lineA': 'Safety is never paid.',
       'price.lineB': 'Verification and the safety button are free for everyone.'
     },
@@ -203,14 +209,20 @@
       'footer.contact': 'Contacto',
       'footer.small': 'Esta página es una prueba. Lumen Travels aún no está disponible y no cobramos nada.',
       'footer.sign': 'Diseñado por Lumen Studio',
-      'footer.art': 'Ilustraciones: Lumen Studio.',
-      'lamp.label': 'Toca el farol',
+      'footer.art': 'Ilustraciones generadas para Lumen Studio. Iconos: Lucide (licencia ISC).',
+      'lamp.label': 'Toca la luz de Lumen',
+      'hero.badge': 'Colombia, de Medellín a Tayrona',
+      'route.s4': 'Santa Marta y Tayrona',
+      'route.step': 'Parada {n} de 4',
+      'route.km': 'Unos {km} km en línea recta desde Medellín',
+      'route.start': 'Aquí empieza la ruta',
+      'hero.alt': 'Ilustración: tres viajeros pequeños, de espaldas, caminan juntos por un sendero de montaña entre cafetales; abajo, valles verdes y un río dorado al atardecer.',
       'route.map': 'La ruta: Medellín, Bogotá, Cartagena, Santa Marta y Tayrona.',
       'route.sea': 'Mar Caribe',
-      'route.alt1': 'Ilustración de Medellín de noche: el valle lleno de luces y las cabinas del Metrocable.',
-      'route.alt2': 'Ilustración de Bogotá de noche: Monserrate iluminado en la cima y la ciudad a sus pies.',
-      'route.alt3': 'Ilustración de una calle de Cartagena de noche: fachadas de colores, balcones de madera, buganvilla y un farol encendido.',
-      'route.alt4': 'Ilustración de Tayrona de noche: palmeras, rocas redondas junto al mar y una choza iluminada bajo la luna.',
+      'route.alt1': 'Ilustración de Medellín: cabinas del Metrocable sobre las casas de ladrillo de la ladera, con el valle de Aburrá al fondo.',
+      'route.alt2': 'Ilustración de Bogotá: calle empedrada de La Candelaria con casas blancas y ocres de balcones de madera; dos viajeros pasean juntos y al fondo se alza el cerro de Monserrate con su santuario.',
+      'route.alt3': 'Ilustración de Cartagena: calle de la ciudad amurallada con fachadas ocres, balcones con buganvilias y la cúpula de una iglesia al fondo.',
+      'route.alt4': 'Ilustración del Parque Tayrona: playa de Cabo San Juan con grandes rocas redondas, palmeras y una cabaña sobre la punta.',
       'price.lineA': 'La seguridad nunca se cobra.',
       'price.lineB': 'La verificación y el botón de seguridad son gratis para todos.'
     }
@@ -390,7 +402,7 @@
       cards[i].closest('.plan').classList.toggle('picked', cards[i].getAttribute('data-plan') === reservedPlan);
     }
     if (!reservedPlan) { chip.hidden = true; return; }
-    txt.textContent = t(PLAN_LABEL[reservedPlan][0]) + ' · ' + t(PLAN_LABEL[reservedPlan][1]);
+    txt.textContent = t(PLAN_LABEL[reservedPlan][0]) + ': ' + t(PLAN_LABEL[reservedPlan][1]);
     chip.hidden = false;
   }
 
@@ -565,7 +577,7 @@
   }
 
   // Expuesto solo para pruebas automáticas (sin datos personales).
-  window.__lumenLanding = { variant: function () { return variant; }, lang: function () { return lang; }, session: function () { return sessionId; } };
+  window.__lumenLanding = { variant: function () { return variant; }, lang: function () { return lang; }, session: function () { return sessionId; }, t: function (k) { return t(k); } };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
