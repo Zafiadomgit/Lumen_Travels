@@ -3,7 +3,7 @@
 **Responsable:** ilustrador · **Fecha:** 2026-11-19 · **Estilo:** ver `docs/arte/estilo.md`
 
 ## Estado en una línea
-Iconos listos. Escenas **incompletas**: el hero y Medellín ya se generaron, pero la red de esta sesión no deja descargarlas, y las otras cuatro no arrancaron porque la cuenta de ElevenLabs llegó al límite diario de imágenes del plan gratuito. La og-image que hay ahora es **provisional** (sin arte).
+Listos y revisados: iconos, hero, Medellín y og-image (con el hero de fondo). Faltan cuatro escenas (Bogotá, Cartagena, Santa Marta–Minca y Tayrona): no arrancaron porque la cuenta de ElevenLabs llegó al límite diario de imágenes del plan gratuito. No se relanzan; el dueño decide si espera a que se renueve el cupo o si sube de plan.
 
 ## Archivos
 
@@ -11,10 +11,10 @@ Iconos listos. Escenas **incompletas**: el hero y Medellín ya se generaron, per
 | --- | --- | --- | --- | --- | --- |
 | `site/landing/assets/icons/sprite.svg` | 24 símbolos, viewBox 24×24 | 5,7 KB | 1:1 | Todos los iconos de la landing | Listo |
 | `site/landing/assets/icons/LICENSE-icons.txt` | — | 3,4 KB | — | Licencia del set (ISC, y MIT para lo que viene de Feather) | Listo |
-| `site/landing/assets/art/og-image.jpg` | 1200×630 | 23 KB | 1,91:1 | `og:image` y `twitter:image` | Provisional: llama + texto sobre crema, sin arte |
-| `site/landing/assets/art/hero-2400.webp` | 2400×1350 | < 220 KB | 16:9 | Hero, `srcset` 2400w | Pendiente de descarga |
-| `site/landing/assets/art/hero-1200.webp` | 1200×675 | < 90 KB | 16:9 | Hero, `srcset` 1200w; celular | Pendiente de descarga |
-| `site/landing/assets/art/medellin-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Parada 1 de la ruta | Pendiente de descarga |
+| `site/landing/assets/art/og-image.jpg` | 1200×630 | 127 KB | 1,91:1 | `og:image` y `twitter:image` | Listo: hero de fondo, llama y texto en Plus Jakarta Sans |
+| `site/landing/assets/art/hero-2400.webp` | 2400×1350 | 195 KB | 16:9 | Hero, `srcset` 2400w | Listo |
+| `site/landing/assets/art/hero-1200.webp` | 1200×675 | 72 KB | 16:9 | Hero, `srcset` 1200w; celular | Listo |
+| `site/landing/assets/art/medellin-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | 126 / 40 KB | 4:5 | Parada 1 de la ruta | Listo (recorte a 4:5 desde 1824×2288) |
 | `site/landing/assets/art/bogota-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Parada 2 | Pendiente de generar |
 | `site/landing/assets/art/cartagena-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Parada 3 | Pendiente de generar |
 | `site/landing/assets/art/santa-marta-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Parada 4 (Santa Marta–Minca) | Pendiente de generar |
@@ -25,7 +25,7 @@ Para el `srcset` de las verticales: `medellin-640.webp 640w, medellin-1200.webp 
 
 ## Cómo terminar las escenas
 1. En el canvas de ElevenLabs (flujo «Lumen Travels · escenas landing», https://elevenlabs.io/app/flows/PQQ4BPEnICmCS8KqzL16) ya están los seis nodos de Krea 3 con el prompt y los ajustes definitivos (4:5 o 16:9, 2K, calidad):
-   - `hero` y `medellin`: generados. Descarga el PNG original de cada uno.
+   - `hero` y `medellin`: generados, descargados, revisados y procesados.
    - `bogota`, `cartagena`, `santa-marta-minca` y `tayrona`: sin generar. Ejecuta cada nodo **una vez** con 1 variación cuando se renueve el cupo diario o si se sube de plan (unos 600 créditos por imagen).
 2. Guarda los PNG en una carpeta con estos nombres: `hero.png`, `medellin.png`, `bogota.png`, `cartagena.png`, `santa-marta.png`, `tayrona.png`.
 3. Ejecuta:
@@ -33,11 +33,11 @@ Para el `srcset` de las verticales: `medellin-640.webp 640w, medellin-1200.webp 
    Exporta los WebP con el peso objetivo, rehace la og-image con el hero y arma la hoja de contacto.
 4. Antes de publicar, **mira cada imagen**: que no tenga texto, caras ni manos deformes, y que se vea del mismo estilo que las demás. Si alguna falla de verdad, se hace como máximo una toma nueva con el prompt corregido.
 
-Otra opción: si el gerente permite el dominio `elevenlabsusercontent.com` en la red de la sesión, el ilustrador descarga, revisa y procesa todo en una pasada.
+El dominio `elevenlabsusercontent.com` ya está permitido en la red de la sesión: cuando se generen las cuatro que faltan, el ilustrador las descarga, revisa y procesa en una pasada.
 
 ## Texto alternativo
 
-Ajusta el texto alternativo cuando veas la imagen final: describe lo que el prompt pidió.
+El texto del hero y de Medellín ya está revisado contra la imagen final. El de las otras cuatro describe lo que pidió el prompt: ajústalo cuando estén las imágenes.
 
 | Escena | ES | EN |
 | --- | --- | --- |
