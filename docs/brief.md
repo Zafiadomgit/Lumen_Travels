@@ -4,7 +4,11 @@
 
 **La idea:** una app móvil (iOS y Android) de viajes compartidos, en la línea de startups de *social travel* como Viatik: permite **planear ciudades y rutas** (itinerarios por días, lugares, mapas) y hace que **las personas se encuentren y compartan viajes**: unirse al itinerario de otro, armar grupo para una ruta, coincidir con viajeros en la misma ciudad y fechas, dividir gastos.
 
-**Nombre de trabajo:** Lumen Travels (se puede proponer un nombre comercial).
+**Nombre:** Lumen Travels (decidido por el dueño; pendiente verificar dominio y tiendas).
+
+**Equipo:** Lumen Studio es el gerente (Claude) y sus 7 agentes especialistas; no hay un equipo humano contratado. El dueño aprueba y decide.
+
+**Fase posterior (decidido):** compartir carro entre ciudades, al estilo Viatik, entra en el roadmap como «Trayectos»; no es parte del MVP.
 
 **Qué se pide ahora:** un plan profesional y completo de la app, no el código: estrategia, mercado, producto, diseño, tecnología, seguridad y negocio.
 
