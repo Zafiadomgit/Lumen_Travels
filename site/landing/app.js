@@ -106,6 +106,8 @@
       'footer.sign': 'Designed by Lumen Studio',
       'footer.art': 'Illustrations: Lumen Studio.',
       'lamp.label': 'Tap the Lumen light',
+      'hero.badge': 'Colombia, from Medellín to Tayrona',
+      'route.s4': 'Santa Marta and Tayrona',
       'hero.alt': 'Illustration of Cartagena at dusk: the city wall, the Clock Tower and the domes over the water.',
       'route.map': 'The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.',
       'route.sea': 'Caribbean Sea',
@@ -206,6 +208,8 @@
       'footer.sign': 'Diseñado por Lumen Studio',
       'footer.art': 'Ilustraciones: Lumen Studio.',
       'lamp.label': 'Toca la luz de Lumen',
+      'hero.badge': 'Colombia, de Medellín a Tayrona',
+      'route.s4': 'Santa Marta y Tayrona',
       'hero.alt': 'Ilustración de Cartagena al atardecer: la muralla, la Torre del Reloj y las cúpulas sobre el agua.',
       'route.map': 'La ruta: Medellín, Bogotá, Cartagena, Santa Marta y Tayrona.',
       'route.sea': 'Mar Caribe',
@@ -392,7 +396,7 @@
       cards[i].closest('.plan').classList.toggle('picked', cards[i].getAttribute('data-plan') === reservedPlan);
     }
     if (!reservedPlan) { chip.hidden = true; return; }
-    txt.textContent = t(PLAN_LABEL[reservedPlan][0]) + ' · ' + t(PLAN_LABEL[reservedPlan][1]);
+    txt.textContent = t(PLAN_LABEL[reservedPlan][0]) + ': ' + t(PLAN_LABEL[reservedPlan][1]);
     chip.hidden = false;
   }
 

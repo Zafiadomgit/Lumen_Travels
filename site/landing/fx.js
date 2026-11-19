@@ -1,5 +1,5 @@
 /* Lumen Travels · efectos de la landing (mejora progresiva).
-   La luz del farol, el balanceo con chispas, la ruta que se recorre y el farol que se enciende al registrarte.
+   La luz cálida del hero, el latido del símbolo con chispas, la ruta que se recorre y el farol que se enciende al registrarte.
    Nada de esto es necesario para leer la página ni para enviar el formulario (eso vive en app.js). */
 (function () {
   'use strict';
@@ -18,10 +18,10 @@
       sp.className = 'spark';
       document.body.appendChild(sp);
       var a = (-90 + dir * 35 + (Math.random() - 0.5) * 140) * Math.PI / 180;
-      var d = 50 + Math.random() * 110, dx = Math.cos(a) * d, dy = Math.sin(a) * d;
+      var d = 40 + Math.random() * 80, dx = Math.cos(a) * d, dy = Math.sin(a) * d;
       var sz = 3 + Math.random() * 5;
       sp.style.width = sp.style.height = sz.toFixed(1) + 'px';
-      if (Math.random() < 0.35) sp.style.background = '#fff3c4';
+      if (Math.random() < 0.35) sp.style.background = '#ffd27a';
       var anim = sp.animate([
         { transform: 'translate(' + x + 'px,' + y + 'px) scale(1)', opacity: 1 },
         { transform: 'translate(' + (x + dx) + 'px,' + (y + dy + 60) + 'px) scale(.2)', opacity: 0 }
@@ -68,34 +68,17 @@
       }, { passive: true });
     }
 
-    /* ---------- 2. tocar el farol: péndulo amortiguado y chispas ---------- */
+    /* ---------- 2. tocar el símbolo: late y suelta unas chispas discretas ---------- */
     if (lamp) {
-      var ang = 0, vel = 0, swinging = false, last = 0;
-      var K = 55, DAMP = 2.1, MAX = 30;
-      var step = function (t) {
-        var dt = Math.min(0.032, (t - last) / 1000 || 0.016); last = t;
-        vel += (-K * ang - DAMP * vel) * dt;
-        ang += vel * dt;
-        if (ang > MAX) { ang = MAX; vel *= -0.4; } else if (ang < -MAX) { ang = -MAX; vel *= -0.4; }
-        lamp.style.transform = 'rotate(' + ang.toFixed(2) + 'deg)';
-        if (Math.abs(ang) < 0.25 && Math.abs(vel) < 2) {
-          swinging = false; ang = 0; vel = 0;
-          lamp.style.transform = ''; lamp.classList.remove('is-hit');
-          return;
-        }
-        requestAnimationFrame(step);
-      };
+      var hitTimer = 0;
       lamp.addEventListener('click', function (e) {
         var r = lamp.getBoundingClientRect();
-        var x = e.clientX || (r.left + r.width / 2 + (Math.random() < 0.5 ? -1 : 1) * r.width * 0.4);
-        var y = e.clientY || (r.top + r.height * 0.55);
-        var dir = x < r.left + r.width / 2 ? 1 : -1;
-        sparks(x, y, dir);
-        if (reduce) return;
-        var force = 0.6 + Math.min(1, Math.abs(x - (r.left + r.width / 2)) / (r.width / 2)) * 0.6;
-        vel += dir * 240 * force;
-        lamp.classList.add('is-hit');
-        if (!swinging) { swinging = true; last = performance.now(); requestAnimationFrame(step); }
+        var x = e.clientX || (r.left + r.width / 2);
+        var y = e.clientY || (r.top + r.height / 2);
+        sparks(x, y, x < r.left + r.width / 2 ? 1 : -1, 8);
+        lamp.classList.remove('is-hit'); void lamp.offsetWidth; lamp.classList.add('is-hit');
+        clearTimeout(hitTimer);
+        hitTimer = setTimeout(function () { lamp.classList.remove('is-hit'); }, 520);
       });
     }
 
@@ -128,11 +111,11 @@
         if (success.hidden) return;
         if (join) join.classList.add('is-lit');
         setTimeout(function () {
-          burstFrom(document.querySelector('.farol--join'), 14);
+          burstFrom(document.querySelector('.mark--join'), 10);
         }, 120);
       }).observe(success, { attributes: true, attributeFilter: ['hidden'] });
       if (reserveMsg) new MutationObserver(function () {
-        if (!reserveMsg.hidden) setTimeout(function () { burstFrom(reserveMsg.querySelector('.farol'), 6); }, 80);
+        if (!reserveMsg.hidden) setTimeout(function () { burstFrom(reserveMsg.querySelector('.mark'), 5); }, 80);
       }).observe(reserveMsg, { attributes: true, attributeFilter: ['hidden'] });
     }
   }
