@@ -27,9 +27,7 @@
 
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles.css">
 <!-- Síncrono a propósito: decide variante e idioma antes de pintar (sin parpadeo entre A y B). -->
 <script src="/app.js"></script>
@@ -317,7 +315,7 @@
         <div class="field consent">
           <label class="check" for="f-consent">
             <input id="f-consent" name="consent" type="checkbox" required aria-describedby="e-consent">
-            <span><span data-i18n="form.consentPre">I agree that Lumen Studio uses my details to contact me about Lumen Travels and to improve it. I can ask to see, correct or delete them at any time, and withdraw consent whenever I want. I'm 18 or older. See the</span> <a href="#faq-data" data-i18n="form.consentLink">Privacy policy</a><span data-i18n="form.consentPost">. (Colombia Law 1581 of 2012 and GDPR.)</span> <span class="req" data-i18n="form.required">(required)</span></span>
+            <span><span data-i18n="form.consentPre">I agree that Lumen Studio uses my details to contact me about Lumen Travels and to improve it. I can ask to see, correct or delete them at any time, and withdraw consent whenever I want. I'm 18 or older. See the</span> <a href="/privacidad" target="_blank" rel="noopener" data-i18n="form.consentLink">Privacy policy</a><span data-i18n="form.consentPost">. (Colombia Law 1581 of 2012 and GDPR.)</span> <span class="req" data-i18n="form.required">(required)</span></span>
           </label>
           <p class="err" id="e-consent" hidden></p>
         </div>
@@ -363,8 +361,8 @@
       <p class="footer-small" data-i18n="footer.art">Illustrations made for Lumen Studio. Icons: Lucide (ISC license).</p>
     </div>
     <nav class="footer-links" data-i18n-attr="aria-label:footer.nav" aria-label="Legal">
-      <a href="#faq-data" data-open-faq data-i18n="footer.privacy">Privacy policy</a>
-      <a href="#faq-data" data-open-faq data-i18n="footer.requests">Data requests</a>
+      <a href="/privacidad" data-i18n="footer.privacy">Privacy policy</a>
+      <a href="/privacidad#derechos" data-i18n="footer.requests">Data requests</a>
       <a href="#" id="contact-link" hidden></a>
     </nav>
     <div class="footer-lang" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">
