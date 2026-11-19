@@ -103,7 +103,17 @@
       'footer.requests': 'Data requests',
       'footer.contact': 'Contact',
       'footer.small': "This page is a test. Lumen Travels is not available yet and we don't charge anything.",
-      'footer.sign': 'Designed by Lumen Studio'
+      'footer.sign': 'Designed by Lumen Studio',
+      'footer.art': 'Illustrations: Lumen Studio.',
+      'lamp.label': 'Tap the lantern',
+      'route.map': 'The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.',
+      'route.sea': 'Caribbean Sea',
+      'route.alt1': 'Illustration of Medellín at night: the valley full of lights and the Metrocable cars.',
+      'route.alt2': 'Illustration of Bogotá at night: Monserrate lit up on the summit and the city below.',
+      'route.alt3': 'Illustration of a street in Cartagena at night: colorful facades, wooden balconies, bougainvillea and a lit lantern.',
+      'route.alt4': 'Illustration of Tayrona at night: palm trees, round rocks by the sea and a lit hut under the moon.',
+      'price.lineA': 'Safety is never paid.',
+      'price.lineB': 'Verification and the safety button are free for everyone.'
     },
     es: {
       'meta.title': 'Lumen Travels · Planea tu ruta y encuentra compañeros de viaje en Colombia',
@@ -192,7 +202,17 @@
       'footer.requests': 'Solicitudes sobre tus datos',
       'footer.contact': 'Contacto',
       'footer.small': 'Esta página es una prueba. Lumen Travels aún no está disponible y no cobramos nada.',
-      'footer.sign': 'Diseñado por Lumen Studio'
+      'footer.sign': 'Diseñado por Lumen Studio',
+      'footer.art': 'Ilustraciones: Lumen Studio.',
+      'lamp.label': 'Toca el farol',
+      'route.map': 'La ruta: Medellín, Bogotá, Cartagena, Santa Marta y Tayrona.',
+      'route.sea': 'Mar Caribe',
+      'route.alt1': 'Ilustración de Medellín de noche: el valle lleno de luces y las cabinas del Metrocable.',
+      'route.alt2': 'Ilustración de Bogotá de noche: Monserrate iluminado en la cima y la ciudad a sus pies.',
+      'route.alt3': 'Ilustración de una calle de Cartagena de noche: fachadas de colores, balcones de madera, buganvilla y un farol encendido.',
+      'route.alt4': 'Ilustración de Tayrona de noche: palmeras, rocas redondas junto al mar y una choza iluminada bajo la luna.',
+      'price.lineA': 'La seguridad nunca se cobra.',
+      'price.lineB': 'La verificación y el botón de seguridad son gratis para todos.'
     }
   };
   var PLAN_LABEL = { plus_monthly: ['price.1name', 'price.1price'], trip_pass: ['price.2name', 'price.2price'] };
@@ -447,8 +467,8 @@
       variant: variant,
       lang: lang,
       consent: true,
-      utm_source: clip(params.get('utm_source'), 100),
-      utm_campaign: clip(params.get('utm_campaign'), 100)
+      utm_source: clip(params.get('utm_source'), 80),
+      utm_campaign: clip(params.get('utm_campaign'), 80)
     };
 
     setBusy(btn, true);
@@ -521,7 +541,12 @@
     ['f-email', 'f-country', 'f-dates', 'f-consent'].forEach(function (id) {
       var el = document.getElementById(id);
       // Valida al salir del campo solo si ya tenía error o contenido; corrige en vivo cuando ya hay error.
-      el.addEventListener('blur', function () { if (el.type !== 'checkbox' && (el.value || shownErrors[id])) validateField(el); });
+      // Si el foco va al botón de enviar, no se valida aquí: el error movería el botón entre mousedown y mouseup
+      // y se perdería el clic. El envío valida todo igualmente.
+      el.addEventListener('blur', function (e) {
+        if (e.relatedTarget && e.relatedTarget.id === 'f-submit') return;
+        if (el.type !== 'checkbox' && (el.value || shownErrors[id])) validateField(el);
+      });
       el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', function () { if (shownErrors[id]) validateField(el); });
     });
 
