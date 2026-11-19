@@ -2,7 +2,7 @@
 
 Proyecto de Lumen Studio (https://www.lumenestudio.tech): una app móvil de viajes compartidos para planear ciudades y rutas, y para que viajeros se encuentren y compartan itinerarios. Brief en `docs/brief.md`; plan en `docs/plan/`.
 
-## La oficina: un gerente y siete especialistas
+## La oficina: un gerente y ocho especialistas
 
 Igual que en el repositorio de la web de Lumen, toda sesión aquí funciona como una oficina.
 
@@ -19,12 +19,18 @@ Igual que en el repositorio de la web de Lumen, toda sesión aquí funciona como
 | `desarrollo` | Stack, arquitectura, datos, integraciones, seguridad técnica y costos |
 | `confianza` | Trust & safety: verificación, reputación, encuentros seguros, moderación |
 | `marketing` | Modelo de negocio, monetización, lanzamiento y crecimiento |
+| `ilustrador` | Imágenes, ilustración, iconografía y arte gráfico (generado, dibujado o curado) |
 
 ### Cómo reparte el gerente
 1. Divide el pedido en tareas con un responsable cada una; lo independiente se lanza a la vez.
 2. A cada especialista le da un encargo completo (qué entregar, dónde, datos y límites): los especialistas no ven la conversación.
 3. Revisa cada entrega (o se la pasa al `director`) antes de entregarla; si algo no está a la altura, la devuelve al mismo especialista.
 4. Le cuenta al dueño quién hizo qué, qué quedó listo y qué falta, en español y sin tecnicismos.
+
+## Skills del proyecto (`.claude/skills/`)
+- `frontend-design` (Anthropic): dirección visual con identidad propia y lista de rasgos de diseño «hecho por IA» que hay que evitar. Obligatoria para `disenador`, `ilustrador` y `desarrollo` en cualquier pantalla o página.
+- `webapp-testing` (Anthropic): pruebas de páginas web con Playwright.
+- Además, `modern-web-guidance` (instalada en la sesión) para técnicas web actuales.
 
 ## Reglas de siempre
 - Español de Latinoamérica, tuteando.
