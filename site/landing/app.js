@@ -447,8 +447,8 @@
       variant: variant,
       lang: lang,
       consent: true,
-      utm_source: clip(params.get('utm_source'), 100),
-      utm_campaign: clip(params.get('utm_campaign'), 100)
+      utm_source: clip(params.get('utm_source'), 80),
+      utm_campaign: clip(params.get('utm_campaign'), 80)
     };
 
     setBusy(btn, true);
