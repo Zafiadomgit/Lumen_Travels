@@ -124,23 +124,24 @@
       <figure class="route-map" data-stop="0">
         <svg viewBox="0 0 400 520" role="img" data-i18n-attr="aria-label:route.map" aria-label="The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.">
           <defs>
+            <pattern id="mapdots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="#f3efe6" fill-opacity=".09"/></pattern>
+            <linearGradient id="seafade" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#6fd3c4" stop-opacity=".09"/><stop offset="1" stop-color="#6fd3c4" stop-opacity="0"/></linearGradient>
+            <radialGradient id="fadeR"><stop offset=".55" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+            <mask id="gridfade"><rect width="400" height="520" fill="url(#fadeR)"/></mask>
             <radialGradient id="pinglow"><stop offset="0" stop-color="#e8b64c" stop-opacity=".55"/><stop offset="1" stop-color="#e8b64c" stop-opacity="0"/></radialGradient>
           </defs>
-          <!-- mar Caribe y costa -->
-          <path class="map-sea" d="M0 0H400V48C360 46 330 58 300 62C268 66 248 58 220 70C190 84 160 78 132 92C110 103 92 120 70 128C46 137 22 132 0 140Z"/>
+          <!-- papel de mapa: una retícula de puntos, el mar Caribe y la costa -->
+          <rect class="map-grid" x="0" y="0" width="400" height="520" fill="url(#mapdots)" mask="url(#gridfade)"/>
+          <path class="map-sea" d="M0 0H400V48C360 46 330 58 300 62C268 66 248 58 220 70C190 84 160 78 132 92C110 103 92 120 70 128C46 137 22 132 0 140Z" fill="url(#seafade)" mask="url(#gridfade)"/>
           <path class="map-coast" d="M400 48C360 46 330 58 300 62C268 66 248 58 220 70C190 84 160 78 132 92C110 103 92 120 70 128C46 137 22 132 0 140"/>
-          <text class="map-sea-label" x="200" y="30" text-anchor="middle" data-i18n="route.sea">Caribbean Sea</text>
-          <!-- cordilleras sugeridas -->
-          <path class="map-range" d="M96 470C110 400 120 330 150 260C170 210 176 170 196 130"/>
-          <path class="map-range" d="M190 500C200 430 214 370 246 300C266 254 286 200 300 150"/>
-          <path class="map-range thin" d="M60 440C70 380 76 320 100 250"/>
+          <text class="map-sea-label" x="230" y="34" text-anchor="middle" data-i18n="route.sea">Caribbean Sea</text>
           <!-- la ruta -->
           <path class="route-ghost" d="M128 318C160 340 196 360 236 404C214 340 168 300 150 240C134 186 116 140 112 112C150 96 196 92 252 74C272 70 288 66 306 66"/>
           <path class="route-line" pathLength="1" d="M128 318C160 340 196 360 236 404C214 340 168 300 150 240C134 186 116 140 112 112C150 96 196 92 252 74C272 70 288 66 306 66"/>
           <!-- paradas -->
           <g class="pin" data-pin="1"><circle class="pin-glow" cx="128" cy="318" r="26"/><circle class="pin-dot" cx="128" cy="318" r="6"/><text x="114" y="322" text-anchor="end">Medellín</text></g>
           <g class="pin" data-pin="2"><circle class="pin-glow" cx="236" cy="404" r="26"/><circle class="pin-dot" cx="236" cy="404" r="6"/><text x="250" y="408">Bogotá</text></g>
-          <g class="pin" data-pin="3"><circle class="pin-glow" cx="112" cy="112" r="26"/><circle class="pin-dot" cx="112" cy="112" r="6"/><text x="100" y="140" text-anchor="middle">Cartagena</text></g>
+          <g class="pin" data-pin="3"><circle class="pin-glow" cx="112" cy="112" r="26"/><circle class="pin-dot" cx="112" cy="112" r="6"/><text x="98" y="104" text-anchor="end">Cartagena</text></g>
           <g class="pin" data-pin="4"><circle class="pin-glow" cx="252" cy="74" r="26"/><circle class="pin-dot" cx="252" cy="74" r="5"/><text x="240" y="100" text-anchor="middle">Santa Marta</text></g>
           <g class="pin" data-pin="4"><circle class="pin-glow" cx="306" cy="66" r="26"/><circle class="pin-dot" cx="306" cy="66" r="6"/><text x="318" y="92" text-anchor="start">Tayrona</text></g>
         </svg>
@@ -328,7 +329,6 @@
       </form>
 
       <div class="success" id="form-success" tabindex="-1" hidden>
-        <span class="farol farol--success" aria-hidden="true"></span>
         <p data-i18n="form.success">You're on the list. We'll write to you when Lumen Travels opens. If you ticked the test group, we'll contact you about Santa Marta–Tayrona. Your route, your people.</p>
         <span class="champi" aria-hidden="true"></span>
       </div>

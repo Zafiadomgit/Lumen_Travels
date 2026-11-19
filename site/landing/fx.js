@@ -128,8 +128,7 @@
         if (success.hidden) return;
         if (join) join.classList.add('is-lit');
         setTimeout(function () {
-          burstFrom(document.querySelector('.farol--success'), 12);
-          burstFrom(document.querySelector('.farol--join'), 10);
+          burstFrom(document.querySelector('.farol--join'), 14);
         }, 120);
       }).observe(success, { attributes: true, attributeFilter: ['hidden'] });
       if (reserveMsg) new MutationObserver(function () {

@@ -541,7 +541,12 @@
     ['f-email', 'f-country', 'f-dates', 'f-consent'].forEach(function (id) {
       var el = document.getElementById(id);
       // Valida al salir del campo solo si ya tenía error o contenido; corrige en vivo cuando ya hay error.
-      el.addEventListener('blur', function () { if (el.type !== 'checkbox' && (el.value || shownErrors[id])) validateField(el); });
+      // Si el foco va al botón de enviar, no se valida aquí: el error movería el botón entre mousedown y mouseup
+      // y se perdería el clic. El envío valida todo igualmente.
+      el.addEventListener('blur', function (e) {
+        if (e.relatedTarget && e.relatedTarget.id === 'f-submit') return;
+        if (el.type !== 'checkbox' && (el.value || shownErrors[id])) validateField(el);
+      });
       el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', function () { if (shownErrors[id]) validateField(el); });
     });
 
