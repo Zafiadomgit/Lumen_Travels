@@ -104,23 +104,23 @@
           <div class="screen" role="img" data-i18n-attr="aria-label:mock.label" aria-label="Example of the app: a route across Colombia from Medellín to Bogotá, Cartagena, Santa Marta and Tayrona, with a group of verified travelers heading to Tayrona on the same dates.">
             <div class="statusbar" aria-hidden="true"><span class="tnum">9:41</span><span class="notch"></span><span>5G</span></div>
             <div class="map" aria-hidden="true">
-              <svg viewBox="0 0 300 330" preserveAspectRatio="xMidYMid slice">
-                <rect class="m-water" width="300" height="330"/>
-                <path class="m-land" d="M60 0h240v330H40c-8-30 6-58 0-88s-30-48-22-80 30-40 26-74S52 30 60 0z"/>
-                <path class="m-park" d="M210 40c22-6 44 4 50 20s-8 30-28 30-38-10-38-24 4-22 16-26z"/>
-                <path class="m-road" d="M70 300c30-40 40-90 80-120s70-60 80-110"/>
-                <path class="m-road" d="M40 120c50 10 90 0 140 20s60 40 110 30"/>
-                <path class="m-route" d="M96 238 L170 268 M96 238 L120 120 L196 62 L240 52 L262 66"/>
-                <g class="m-pin p1"><circle cx="96" cy="238" r="11"/><text x="96" y="242">1</text></g>
-                <g class="m-pin p2"><circle cx="170" cy="268" r="11"/><text x="170" y="272">2</text></g>
-                <g class="m-pin p3"><circle cx="120" cy="120" r="11"/><text x="120" y="124">3</text></g>
-                <g class="m-pin p4"><circle cx="196" cy="62" r="11"/><text x="196" y="66">4</text></g>
-                <g class="m-pin p5 on"><circle cx="262" cy="66" r="13"/><text x="262" y="70">5</text></g>
-                <text class="m-label" x="72" y="262">Medellín</text>
-                <text class="m-label" x="150" y="296">Bogotá</text>
-                <text class="m-label" x="62" y="108">Cartagena</text>
-                <text class="m-label" x="160" y="44">Santa Marta</text>
-                <text class="m-label" x="236" y="94">Tayrona</text>
+              <svg viewBox="0 0 280 380" preserveAspectRatio="xMidYMid slice">
+                <rect class="m-water" width="280" height="380"/>
+                <path class="m-land" d="M44 0h236v380H30c-6-34 8-64 2-98s-24-52-18-88 26-44 22-82S38 34 44 0z"/>
+                <path class="m-park" d="M196 92c18-8 40-2 46 12s-6 28-24 28-34-8-34-20 2-16 12-20z"/>
+                <path class="m-road" d="M60 360c26-44 34-96 74-128s66-66 76-130"/>
+                <path class="m-road" d="M30 170c48 12 86 0 132 22s58 42 118 34"/>
+                <path class="m-route" d="M88 262 L170 300 M88 262 L104 150 L178 96 L226 116"/>
+                <g class="m-pin p1"><circle cx="88" cy="262" r="11"/><text x="88" y="266">1</text></g>
+                <g class="m-pin p2"><circle cx="170" cy="300" r="11"/><text x="170" y="304">2</text></g>
+                <g class="m-pin p3"><circle cx="104" cy="150" r="11"/><text x="104" y="154">3</text></g>
+                <g class="m-pin p4"><circle cx="178" cy="96" r="11"/><text x="178" y="100">4</text></g>
+                <g class="m-pin p5 on"><circle cx="226" cy="116" r="13"/><text x="226" y="120">5</text></g>
+                <text class="m-label" x="88" y="290" text-anchor="middle">Medellín</text>
+                <text class="m-label" x="170" y="328" text-anchor="middle">Bogotá</text>
+                <text class="m-label" x="88" y="132" text-anchor="end">Cartagena</text>
+                <text class="m-label" x="164" y="78" text-anchor="middle">Santa Marta</text>
+                <text class="m-label" x="226" y="146" text-anchor="middle">Tayrona</text>
               </svg>
               <span class="tag-example" data-i18n="mock.example">Example</span>
             </div>
@@ -267,11 +267,11 @@
           <label for="f-dates"><span data-i18n="form.dates">Approximate dates of your trip to Colombia</span> <span class="req" data-i18n="form.required">(required)</span></label>
           <p class="hint" id="h-dates" data-i18n="form.datesHint">Month and year or a range</p>
           <input id="f-dates" name="travel_dates" type="text" maxlength="80" autocomplete="off" required aria-describedby="h-dates e-dates">
+          <p class="err" id="e-dates" hidden></p>
           <label class="check check-inline" for="f-unsure">
             <input id="f-unsure" type="checkbox">
             <span data-i18n="form.unsure">Not sure yet</span>
           </label>
-          <p class="err" id="e-dates" hidden></p>
         </div>
 
         <fieldset class="field">
