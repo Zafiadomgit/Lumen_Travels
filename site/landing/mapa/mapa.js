@@ -401,6 +401,7 @@ function iniciar(raiz) {
         canvasContextAttributes: { antialias: true }
       });
     } catch (e) { clearTimeout(tope); return aEstatico('no se pudo crear el mapa'); }
+    raiz._mapa = mapa;   // para pruebas (Playwright)
     gestos(false);
     mapa.getCanvas().tabIndex = -1;
     // teselas que no llegan (red, CSP, servicio caído): sin ninguna tesela base, mejor la imagen fija
