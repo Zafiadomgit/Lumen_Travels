@@ -3,7 +3,7 @@
 **Responsable:** ilustrador · **Fecha:** 2026-11-19 · **Estilo:** ver `docs/arte/estilo.md`
 
 ## Estado en una línea
-Listos y revisados: iconos, hero, Medellín, Bogotá y og-image (con el hero de fondo). Faltan tres escenas (Cartagena, Santa Marta–Minca y Tayrona): el plan gratuito de ElevenLabs sigue en el límite diario (error 429, comprobado de nuevo el 2026-11-19). No se relanzan en bucle; el dueño decide si espera a que se renueve el cupo o si sube de plan.
+Listos y revisados: iconos, hero, Medellín, Bogotá, Cartagena, Tayrona y og-image (con el hero de fondo). Las cinco escenas que usa el HTML están completas. Solo queda Santa Marta–Minca, que es opcional porque el HTML actual no la usa; no se generó.
 
 ## Archivos
 
@@ -16,9 +16,9 @@ Listos y revisados: iconos, hero, Medellín, Bogotá y og-image (con el hero de 
 | `site/landing/assets/art/hero-1200.webp` | 1200×675 | 72 KB | 16:9 | Hero, `srcset` 1200w; celular | Listo |
 | `site/landing/assets/art/medellin-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | 126 / 40 KB | 4:5 | Parada 1 de la ruta | Listo (recorte a 4:5 desde 1824×2288) |
 | `site/landing/assets/art/bogota-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | 213 / 50 KB | 4:5 | Parada 2 | Listo (recorte a 4:5; retocado: se quitaron cuatro avioncitos que el modelo pintó en la bruma) |
-| `site/landing/assets/art/cartagena-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Parada 3 | Pendiente de generar |
-| `site/landing/assets/art/santa-marta-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Alternativa o complemento para la parada Santa Marta–Tayrona; el HTML actual no la usa | Pendiente de generar |
-| `site/landing/assets/art/tayrona-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Parada «Santa Marta–Tayrona»: es la que espera el HTML (`tayrona-*.webp`) | Pendiente de generar |
+| `site/landing/assets/art/cartagena-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | 193 / 72 KB | 4:5 | Parada 3 | Listo (recorte a 4:5; retocado: se quitaron dos avioncitos que el modelo pintó en el cielo junto a la torre) |
+| `site/landing/assets/art/santa-marta-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | < 220 / < 90 KB | 4:5 | Alternativa o complemento para la parada Santa Marta–Tayrona; el HTML actual no la usa | Opcional, sin generar |
+| `site/landing/assets/art/tayrona-1200.webp` / `-640.webp` | 1200×1500 / 640×800 | 164 / 47 KB | 4:5 | Parada «Santa Marta–Tayrona»: es la que espera el HTML (`tayrona-*.webp`) | Listo (recorte a 4:5) |
 | `docs/arte/procesar-arte.py` | — | — | — | Recorta, exporta los WebP, compone la og-image con el hero y arma la hoja de contacto | Listo |
 
 Para el `srcset` de las verticales: `medellin-640.webp 640w, medellin-1200.webp 1200w` con `sizes="(min-width: 960px) 360px, 100vw"`.
@@ -26,7 +26,8 @@ Para el `srcset` de las verticales: `medellin-640.webp 640w, medellin-1200.webp 
 ## Cómo terminar las escenas
 1. En el canvas de ElevenLabs (flujo «Lumen Travels · escenas landing», https://elevenlabs.io/app/flows/PQQ4BPEnICmCS8KqzL16) ya están los seis nodos de Krea 3 con el prompt y los ajustes definitivos (4:5 o 16:9, 2K, calidad):
    - `hero`, `medellin` y `bogota`: generados, descargados, revisados y procesados.
-   - `cartagena`, `santa-marta-minca` y `tayrona`: sin generar. Prioridad: `tayrona` y `cartagena` (las espera el HTML); `santa-marta-minca` es opcional. Ejecuta cada nodo **una vez** con 1 variación cuando se renueve el cupo diario o si se sube de plan (unos 600 créditos por imagen).
+   - `cartagena` y `tayrona`: generados el 2026-11-20, descargados, revisados y procesados.
+   - `santa-marta-minca`: opcional, sin generar. Si algún día se quiere, se ejecuta el nodo **una vez** con 1 variación (unos 600 créditos).
 2. Guarda los PNG en una carpeta con estos nombres: `hero.png`, `medellin.png`, `bogota.png`, `cartagena.png`, `santa-marta.png`, `tayrona.png`.
 3. Ejecuta:
    `python3 -I docs/arte/procesar-arte.py <carpeta> <hoja.png> PlusJakartaSans-700.ttf PlusJakartaSans-500.ttf`
@@ -37,16 +38,16 @@ El dominio `elevenlabsusercontent.com` ya está permitido en la red de la sesió
 
 ## Texto alternativo
 
-El texto del hero, de Medellín y de Bogotá ya está revisado contra la imagen final. El de las otras tres describe lo que pidió el prompt: ajústalo cuando estén las imágenes.
+Todos los textos de las escenas generadas están revisados contra la imagen final. El de Santa Marta–Minca describe lo que pidió el prompt: ajústalo si se llega a generar.
 
 | Escena | ES | EN |
 | --- | --- | --- |
 | hero | Ilustración: tres viajeros pequeños, de espaldas, caminan juntos por un sendero de montaña entre cafetales; abajo, valles verdes y un río dorado al atardecer. | Illustration: three small travelers, seen from behind, walk together along a mountain path through coffee fields, above green valleys and a river glowing at sunset. |
 | medellín | Ilustración de Medellín: cabinas del Metrocable sobre las casas de ladrillo de la ladera, con el valle de Aburrá al fondo. | Illustration of Medellín: Metrocable cable cars glide over hillside brick houses, with the Aburrá Valley below. |
 | bogotá | Ilustración de Bogotá: calle empedrada de La Candelaria con casas blancas y ocres de balcones de madera; dos viajeros pasean juntos y al fondo se alza el cerro de Monserrate con su santuario. | Illustration of Bogotá: a cobblestone street in La Candelaria lined with white and ochre houses with wooden balconies; two travelers stroll together beneath Monserrate hill and its sanctuary. |
-| cartagena | Ilustración de Cartagena: calle de la ciudad amurallada con fachadas ocres, balcones con buganvilias y la cúpula de una iglesia al fondo. | Illustration of Cartagena: a street in the walled city with ochre facades, balconies with bougainvillea and a church dome at the end. |
+| cartagena | Ilustración de Cartagena: calle estrecha de la ciudad amurallada entre fachadas ocres y rojizas con balcones de madera y buganvilias; dos viajeros caminan juntos hacia la torre y la cúpula de la catedral. | Illustration of Cartagena: a narrow street in the walled city between ochre and red facades with wooden balconies and bougainvillea; two travelers walk together toward the cathedral's tower and dome. |
 | santa-marta (Minca) | Ilustración de Minca: terraza de una finca cafetera con dos hamacas, frente a montañas con niebla que bajan hasta el mar de Santa Marta. | Illustration of Minca: a coffee farm terrace with two hammocks, facing misty mountains that roll down to the sea at Santa Marta. |
-| tayrona | Ilustración del Parque Tayrona: playa de Cabo San Juan con grandes rocas redondas, palmeras y una cabaña sobre la punta. | Illustration of Tayrona National Park: Cabo San Juan beach with large rounded boulders, palm trees and a hut on the point. |
+| tayrona | Ilustración del Parque Tayrona: cala de arena clara con grandes rocas redondas, palmeras y una cabaña de palma sobre la punta; dos viajeros sentados en la playa miran el mar al atardecer. | Illustration of Tayrona National Park: a pale sandy cove with large rounded boulders, palm trees and a thatched hut on the point; two travelers sit on the beach watching the sea at sunset. |
 
 ## Crédito y origen
 - Escenas: «Ilustraciones generadas para Lumen Studio» (Krea 3 en ElevenLabs, dirigidas con el prompt base de `estilo.md`). Se presentan como ilustración, no como foto documental. Sin personas reconocibles.
