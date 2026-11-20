@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Base fija: con cleanUrls y trailingSlash:false, Vercel sirve esta página en /prototipo (sin barra final),
+     así que las rutas relativas (proto.css, ../assets/…) se resuelven siempre desde /prototipo/. -->
+<base href="/prototipo/">
+<title>Lumen Travels · Prototipo</title>
+<meta name="description" content="Prototipo navegable de la app Lumen Travels. Los datos son de ejemplo.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="icon" href="../assets/brand/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png">
+<link rel="preload" href="../assets/fonts/plus-jakarta-sans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/manrope-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="proto.css">
+<script src="data.js" defer></script>
+<script src="proto.js" defer></script>
+</head>
+<body>
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- el símbolo de Lumen: la llama del farol en un círculo (igual que en la landing) -->
+    <linearGradient id="llama-g" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#e2742a"/><stop offset=".55" stop-color="#f2a93b"/><stop offset="1" stop-color="#ffd27a"/></linearGradient>
+    <symbol id="lumen-mark" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="currentColor"/><path d="M32 14c8 9 12 15 12 21.5a12 12 0 0 1-24 0C20 29 24 23 32 14z" fill="url(#llama-g)"/><path d="M32 30c3 3.5 4.5 6 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2.5 1.5-5 4.5-8.5z" fill="#fff4dc"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <aside class="note" aria-labelledby="note-title">
+    <p class="note-brand"><svg class="mark" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg><span>lumen <span class="wm-b">travels</span></span></p>
+    <h2 class="note-title" id="note-title" data-i18n="proto.tag">Prototipo · los datos son de ejemplo</h2>
+    <p class="note-body" data-i18n="proto.noteBody">Los datos son de ejemplo. Nada se guarda ni se envía: la verificación y el botón de seguridad son simulados.</p>
+    <div class="note-actions">
+      <div class="seg seg--s" role="group" aria-label="Idioma" data-i18n-attr="aria-label:lang.label">
+        <button type="button" class="seg-btn" data-act="lang" data-v="es" lang="es" aria-pressed="true">ES</button>
+        <button type="button" class="seg-btn" data-act="lang" data-v="en" lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="btn btn--ghost btn--s" data-act="reset"><svg class="icon" aria-hidden="true"><use href="icons.svg#i-reset"/></svg><span data-i18n="proto.reset">Reiniciar prototipo</span></button>
+    </div>
+    <p class="note-sign"><svg class="mark mark--xs" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg><span data-i18n="pf.signed">Diseñado por Lumen Studio</span></p>
+  </aside>
+
+  <div class="device">
+    <div class="app" id="app">
+      <main class="screen" id="screen" tabindex="-1"></main>
+      <div class="tripbar-slot" id="tripbar"></div>
+      <nav class="tabbar" id="tabbar" aria-label="Navegación principal"></nav>
+      <div class="sheet-layer" id="sheet" hidden></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+<noscript><p class="noscript">Este prototipo necesita JavaScript.</p></noscript>
+</body>
+</html>
