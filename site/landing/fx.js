@@ -62,10 +62,6 @@
     if (hero && finePointer && !reduce) {
       hero.addEventListener('pointermove', function (e) { inHero = true; tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop); });
       hero.addEventListener('pointerleave', function () { inHero = false; var r = lamp.getBoundingClientRect(); tx = r.left + r.width / 2; ty = r.top + r.height * 0.55; if (!raf) raf = requestAnimationFrame(loop); });
-      addEventListener('pointermove', function (e) {
-        doc.style.setProperty('--mx', e.clientX + 'px');
-        doc.style.setProperty('--my', e.clientY + 'px');
-      }, { passive: true });
     }
 
     /* ---------- 2. tocar el símbolo: late y suelta unas chispas discretas ---------- */
@@ -186,15 +182,7 @@
       update();
     }
 
-    /* ---------- 4. barra: alternativa al scroll-driven ---------- */
-    if (!(window.CSS && CSS.supports && CSS.supports('animation-timeline', 'scroll()'))) {
-      var bar = document.querySelector('.topbar');
-      var onScroll = function () { bar.classList.toggle('is-scrolled', window.scrollY > 40); };
-      onScroll();
-      addEventListener('scroll', onScroll, { passive: true });
-    }
-
-    /* ---------- 5. confirmaciones: el farol se enciende con chispas ---------- */
+    /* ---------- 4. confirmaciones: el farol se enciende con chispas ---------- */
     var success = document.getElementById('form-success');
     var join = document.querySelector('.join');
     var reserveMsg = document.getElementById('reserve-msg');

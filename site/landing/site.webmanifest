@@ -1,0 +1,16 @@
+{
+  "name": "Lumen Travels",
+  "short_name": "Lumen Travels",
+  "description": "Tu ruta, tu gente. Diseñado por Lumen Studio.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f6f4ef",
+  "theme_color": "#f6f4ef",
+  "icons": [
+    { "src": "/assets/brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/assets/brand/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
