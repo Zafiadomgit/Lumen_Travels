@@ -17,17 +17,20 @@
      Las coordenadas de la ruta y de las ciudades viven en el SVG de index.html (px de la imagen del mapa).
      Aquí solo se afina el encuadre: foco y zoom de cada parada (1 = la lámina entera cabe en pantalla). */
   var CFG = {
-    zoomMax: 3.2,              // resolución de la capa: la lámina se pinta a este tamaño y la cámara la reduce
-    zoomVuelo: 1.5,            // en mitad de cada tramo la cámara se abre un poco, como un plano aéreo
+    // foco de cada parada (centro de la viñeta pintada, px del mapa) y zoom en escritorio
     paradas: [
-      { x: 900, y: 1900, zoom: 2.5 },    // Medellín
-      { x: 1470, y: 2420, zoom: 2.5 },   // Bogotá
-      { x: 840, y: 780, zoom: 2.5 },     // Cartagena
-      { x: 1590, y: 520, zoom: 2.25 }    // Santa Marta y Tayrona
+      { x: 760, y: 890, zoom: 2.3 },     // Medellín
+      { x: 2110, y: 1270, zoom: 2.05 },  // Bogotá
+      { x: 360, y: 470, zoom: 2.35 },    // Cartagena
+      { x: 1745, y: 640, zoom: 2.35 }    // Santa Marta y Tayrona
     ],
-    // ancla: dónde queda el foco en la pantalla (fracción del ancho y del alto del escenario)
-    horizontal: { intro: [.5, .56], zIntro: 1, parada: [.3, .54], fin: [.29, .54], zFin: 1 },
-    vertical:   { intro: [.5, .42], zIntro: 1, parada: [.5, .31], fin: [.5, .31], zFin: .62 },
+    // por formato: resolución de la capa (zoomMax), multiplicador del zoom de las paradas, apertura en mitad de cada tramo,
+    // encuadre de la entrada y del final, ancla (dónde queda el foco, en fracción del escenario) y tamaño del símbolo
+    // alto: fracción del escenario que la lámina debe cubrir siempre (en vertical, hasta donde empieza el texto)
+    horizontal: { zoomMax: 2.7, escala: 1, vuelo: 1.4, intro: [.5, .5], introFoco: [.5, .5], zIntro: 1,
+                  parada: [.31, .54], fin: [.37, .53], zFin: .7, llama: 1, alto: 1 },
+    vertical:   { zoomMax: 4.2, escala: 1.7, vuelo: 2.5, intro: [.5, .32], introFoco: [.66, .42], zIntro: 2.1,
+                  parada: [.5, .31], fin: [.5, .35], zFin: 1.04, llama: 1.5, alto: .62 },
     beat: 46                   // alto de cada «tiempo» de la coreografía, en svh (lo usa también styles.css)
   };
   var Q_HORIZ = '(min-width: 760px) and (min-aspect-ratio: 1/1)';
@@ -101,40 +104,48 @@
     W = escena.clientWidth; H = escena.clientHeight;
     modo = window.matchMedia(Q_HORIZ).matches ? CFG.horizontal : CFG.vertical;
     BS = Math.min(W * .9 / MW, H * .86 / MH);           // px de pantalla por px del mapa con la lámina entera
-    var lw = MW * BS * CFG.zoomMax, lh = MH * BS * CFG.zoomMax;
+    var lw = MW * BS * modo.zoomMax, lh = MH * BS * modo.zoomMax;
     lam.style.width = lw.toFixed(1) + 'px';
     lam.style.height = lh.toFixed(1) + 'px';
     img.sizes = Math.round(lw) + 'px';
   }
-  function cam(fx, fy, z, ax, ay) {
-    var k = z / CFG.zoomMax, ps = BS * z;
-    lam.style.transform = 'translate3d(' + (ax * W - fx * ps).toFixed(2) + 'px,' + (ay * H - fy * ps).toFixed(2) + 'px,0) scale(' + k.toFixed(5) + ')';
+  // cover (0–1): cuánto evita la cámara mostrar el borde de la lámina cuando está acercada
+  function cam(fx, fy, z, ax, ay, cover) {
+    var k = z / modo.zoomMax, ps = BS * z, tx = ax * W - fx * ps, ty = ay * H - fy * ps;
+    var lw = MW * ps, lh = MH * ps;
+    if (cover > 0) {
+      if (lw > W) tx = mix(tx, clamp(tx, W - lw, 0), cover);
+      var hc = H * modo.alto;
+      if (lh > hc) ty = mix(ty, clamp(ty, hc - lh, 0), cover);
+    }
+    lam.style.transform = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0) scale(' + k.toFixed(5) + ')';
     return z;
   }
   var lastP = -1, lastD = -1;
+  function zp(i) { return CFG.paradas[i].zoom * modo.escala; }
   function render() {
     var C = CFG.paradas, m = modo, z, p;
     if (st.outro > 0) {
       var o = st.outro, c3 = C[3];
       p = 1;
-      z = cam(mix(c3.x, MW / 2, o), mix(c3.y, MH / 2, o), mix(c3.zoom, m.zFin, o), mix(m.parada[0], m.fin[0], o), mix(m.parada[1], m.fin[1], o));
+      z = cam(mix(c3.x, MW / 2, o), mix(c3.y, MH / 2, o), mix(zp(3), m.zFin, o), mix(m.parada[0], m.fin[0], o), mix(m.parada[1], m.fin[1], o), 1 - smooth(0, .5, o));
     } else if (st.intro < 1) {
       var e = st.intro, c0 = C[0];
       p = 0;
-      z = cam(mix(MW / 2, c0.x, e), mix(MH / 2, c0.y, e), mix(m.zIntro, c0.zoom, e), mix(m.intro[0], m.parada[0], e), mix(m.intro[1], m.parada[1], e));
+      z = cam(mix(m.introFoco[0] * MW, c0.x, e), mix(m.introFoco[1] * MH, c0.y, e), mix(m.zIntro, zp(0), e), mix(m.intro[0], m.parada[0], e), mix(m.intro[1], m.parada[1], e), smooth(.5, 1, e));
     } else {
       var i = Math.min(2, Math.floor(st.leg)), t = clamp(st.leg - i, 0, 1), a = C[i], b = C[i + 1];
       p = mix(P[i], P[i + 1], t);
       var q = at(p);
       var fx = mix(mix(a.x, q[0], smooth(0, .32, t)), b.x, smooth(.68, 1, t));
       var fy = mix(mix(a.y, q[1], smooth(0, .32, t)), b.y, smooth(.68, 1, t));
-      var zb = mix(a.zoom, b.zoom, t);
-      z = cam(fx, fy, zb - (zb - CFG.zoomVuelo) * Math.sin(Math.PI * t), m.parada[0], m.parada[1]);
+      var zb = mix(zp(i), zp(i + 1), t);
+      z = cam(fx, fy, zb - (zb - m.vuelo) * Math.sin(Math.PI * t), m.parada[0], m.parada[1], 1);
     }
     // la pincelada fresca llega hasta el símbolo; la tinta seca la sigue en cada parada
     if (Math.abs(p - lastP) > 1e-5) { mascara.style.strokeDashoffset = (L * (1 - p)).toFixed(1); lastP = p; }
     if (Math.abs(st.dry - lastD) > 1e-5) { seca.style.strokeDashoffset = (L * (1 - st.dry)).toFixed(1); lastD = st.dry; }
-    var pos = at(p), sc = clamp(Math.pow(2.5 / z, .7), .8, 1.9);
+    var pos = at(p), sc = clamp(Math.pow(zp(0) / z, .7), .8, 1.9) * m.llama;
     llama.setAttribute('transform', 'translate(' + pos[0].toFixed(1) + ' ' + pos[1].toFixed(1) + ') scale(' + sc.toFixed(3) + ')');
   }
 
@@ -174,15 +185,14 @@
       tl.fromTo(marco, { rotationX: 52, rotationZ: -8, scale: .82, yPercent: 16 }, { rotationX: 30, rotationZ: -5, scale: .92, yPercent: 2, duration: E, ease: 'power1.out' }, 0);
       tl.fromTo('.bruma--a', { xPercent: -4, yPercent: 18 }, { xPercent: 0, yPercent: 0, duration: E }, 0);
       tl.fromTo('.bruma--b', { xPercent: 6, yPercent: -10 }, { xPercent: 0, yPercent: 0, duration: E }, 0);
-      tl.fromTo('.viaje-velo', { opacity: 0 }, { opacity: 0, duration: .01 }, 0);
-      tl.fromTo(llama, { opacity: 0 }, { opacity: 0, duration: .01 }, 0);
+      gsap.set(['.viaje-velo', llama], { opacity: 0 });
 
       /* 2 · la cámara se endereza y baja hasta Medellín; la bruma se abre hacia los lados */
       var T = E;
       tl.to(marco, { rotationX: 0, rotationZ: 0, scale: 1, yPercent: 0, duration: 1.5, ease: 'power2.inOut' }, T);
       tl.to(st, { intro: 1, duration: 1.5, ease: 'power3.inOut' }, T);
-      tl.to('.bruma--a', { xPercent: -78, yPercent: 30, scale: 1.5, duration: 1.3, ease: 'power2.in' }, T);
-      tl.to('.bruma--b', { xPercent: 80, yPercent: -40, scale: 1.4, duration: 1.3, ease: 'power2.in' }, T + .05);
+      tl.to('.bruma--a', { xPercent: -115, yPercent: 40, scale: 1.5, duration: 1.3, ease: 'power2.in' }, T);
+      tl.to('.bruma--b', { xPercent: 115, yPercent: -50, scale: 1.4, duration: 1.3, ease: 'power2.in' }, T + .05);
       tl.to('.viaje-velo', { opacity: 1, duration: .5 }, T + 1.1);
       tl.to(llama, { opacity: 1, duration: .3 }, T + 1.2);
       T += 1.3;
@@ -227,7 +237,7 @@
           tl.to(st, { leg: i + 1, duration: LEG[i], ease: 'power1.inOut' }, T);
           if (i === 1) { // el tramo largo cruza una nube
             tl.fromTo('.bruma--paso', { xPercent: 85, yPercent: 10, scale: 1.1 }, { xPercent: -120, yPercent: -12, scale: 1.8, duration: LEG[i] * .9 }, T + .1);
-            tl.fromTo('.bruma--paso', { opacity: 0 }, { opacity: .92, duration: LEG[i] * .35, ease: 'sine.out' }, T + .1);
+            tl.fromTo('.bruma--paso', { opacity: 0 }, { opacity: .85, duration: LEG[i] * .35, ease: 'sine.out' }, T + .1);
             tl.to('.bruma--paso', { opacity: 0, duration: LEG[i] * .35, ease: 'sine.in' }, T + .1 + LEG[i] * .55);
           }
           T += LEG[i];

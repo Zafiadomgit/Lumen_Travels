@@ -109,19 +109,21 @@
       <div class="viaje-escena">
         <div class="lamina-marco">
           <figure class="lamina">
-            <!-- MAPA: provisional hasta que llegue mapa-2400.webp del ilustrador. Al cambiarlo: src/srcset/width/height de esta imagen,
-                 viewBox del SVG, el trazado (d) de las rutas y las coordenadas de los sellos; viaje.js lo lee todo de aquí. -->
-            <img class="lamina-img" src="/assets/art/mapa-provisional-1200.webp"
-                 srcset="/assets/art/mapa-provisional-1200.webp 1200w, /assets/art/mapa-provisional-2400.webp 2400w"
-                 sizes="(min-width: 1000px) 520px, 92vw" width="2400" height="3000" loading="lazy" decoding="async"
+            <!-- MAPA pintado (ilustrador), 2720×1536. Al cambiar el arte: src/srcset/width/height de esta imagen, viewBox del SVG,
+                 el trazado #ruta-d y los sellos (data-x/y = punto de la ruta junto a la ciudad; transform = dónde va el sello).
+                 viaje.js lo lee todo de aquí; el encuadre de la cámara (foco y zoom de cada parada) está en CFG, en viaje.js. -->
+            <img class="lamina-img" src="/assets/art/mapa-1600.webp"
+                 srcset="/assets/art/mapa-960.webp 960w, /assets/art/mapa-1600.webp 1600w, /assets/art/mapa-2720.webp 2720w"
+                 sizes="(min-width: 1000px) 56vw, 92vw" width="2720" height="1536" loading="lazy" decoding="async"
                  data-i18n-attr="alt:route.map" alt="The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.">
-            <!-- la ruta en coordenadas del mapa (px de la imagen de 2400). Puntos de paso: Medellín 924,1920 · 1170,2230 · Bogotá 1488,2460 ·
-                 1420,2130 · 1270,1650 · 1110,1180 · Cartagena 852,786 · 1120,690 · Santa Marta 1488,546 · Tayrona 1680,486 (Catmull-Rom) -->
-            <svg class="lamina-ruta" viewBox="0 0 2400 3000" aria-hidden="true" focusable="false">
+            <!-- la ruta en px del mapa. Puntos de paso (Catmull-Rom): Medellín 770,975 · 1000,1075 · 1250,1150 · 1500,1195 · 1780,1300 ·
+                 Bogotá 1990,1390 · 1880,1160 · 1640,970 · 1360,905 · 1010,770 · 720,620 · Cartagena 575,500 · 780,548 · 1000,602 ·
+                 1340,678 · Santa Marta y Tayrona 1720,700. Provisional: medido a ojo hasta tener docs/arte/mapa-coordenadas.md -->
+            <svg class="lamina-ruta" viewBox="0 0 2720 1536" aria-hidden="true" focusable="false">
               <defs>
-                <path id="ruta-d" d="M924 1920C965 1972 1076 2140 1170 2230C1264 2320 1446 2477 1488 2460C1530 2443 1456 2265 1420 2130C1384 1995 1322 1808 1270 1650C1218 1492 1180 1324 1110 1180C1040 1036 850 868 852 786C854 704 1014 730 1120 690C1226 650 1395 580 1488 546C1581 512 1648 496 1680 486"/>
+                <path id="ruta-d" d="M770 975C808 992 920 1046 1000 1075C1080 1104 1167 1130 1250 1150C1333 1170 1412 1170 1500 1195C1588 1220 1698 1268 1780 1300C1862 1332 1973 1413 1990 1390C2007 1367 1938 1230 1880 1160C1822 1090 1727 1012 1640 970C1553 928 1465 938 1360 905C1255 872 1117 818 1010 770C903 722 792 665 720 620C648 575 565 512 575 500C585 488 709 531 780 548C851 565 907 580 1000 602C1093 624 1220 662 1340 678C1460 694 1657 696 1720 700"/>
                 <path id="sello-arco" d="M-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/>
-                <mask id="ruta-revela" maskUnits="userSpaceOnUse" x="0" y="0" width="2400" height="3000">
+                <mask id="ruta-revela" maskUnits="userSpaceOnUse" x="0" y="0" width="2720" height="1536">
                   <use class="ruta-mascara" href="#ruta-d"/>
                 </mask>
               </defs>
@@ -132,19 +134,19 @@
                 <g class="ruta-fresca" mask="url(#ruta-revela)">
                   <use class="trazo trazo-borde" href="#ruta-d"/>
                   <use class="trazo trazo-cuerpo" href="#ruta-d"/>
-                  <use class="trazo trazo-sombra" href="#ruta-d" x="5" y="5"/>
-                  <use class="trazo trazo-brillo" href="#ruta-d" x="-5" y="-4"/>
+                  <use class="trazo trazo-sombra" href="#ruta-d" x="3" y="3"/>
+                  <use class="trazo trazo-brillo" href="#ruta-d" x="-3" y="-2.5"/>
                 </g>
                 <use class="ruta-luz" href="#ruta-d"/>
               </g>
               <g class="sellos">
-                <g class="sello" data-stop="1" data-x="924" data-y="1920" transform="translate(924 1920)"><g class="sello-tinta" transform="rotate(-12)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">1</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">MEDELLÍN · MEDELLÍN</textPath></text></g></g>
-                <g class="sello" data-stop="2" data-x="1488" data-y="2460" transform="translate(1488 2460)"><g class="sello-tinta" transform="rotate(9)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">2</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">BOGOTÁ · BOGOTÁ · BOGOTÁ</textPath></text></g></g>
-                <g class="sello" data-stop="3" data-x="852" data-y="786" transform="translate(852 786)"><g class="sello-tinta" transform="rotate(-6)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">3</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">CARTAGENA · CARTAGENA</textPath></text></g></g>
-                <g class="sello" data-stop="4" data-x="1680" data-y="486" transform="translate(1680 486)"><g class="sello-tinta" transform="rotate(14)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">4</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">TAYRONA · SANTA MARTA</textPath></text></g></g>
+                <g class="sello" data-stop="1" data-x="770" data-y="975" transform="translate(560 930)"><g class="sello-tinta" transform="rotate(-12)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">1</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">MEDELLÍN · MEDELLÍN</textPath></text></g></g>
+                <g class="sello" data-stop="2" data-x="1990" data-y="1390" transform="translate(2470 1250)"><g class="sello-tinta" transform="rotate(9)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">2</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">BOGOTÁ · BOGOTÁ · BOGOTÁ</textPath></text></g></g>
+                <g class="sello" data-stop="3" data-x="575" data-y="500" transform="translate(330 330)"><g class="sello-tinta" transform="rotate(-6)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">3</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">CARTAGENA · CARTAGENA</textPath></text></g></g>
+                <g class="sello" data-stop="4" data-x="1720" data-y="700" transform="translate(1760 470)"><g class="sello-tinta" transform="rotate(14)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">4</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">TAYRONA · SANTA MARTA</textPath></text></g></g>
               </g>
               <!-- el símbolo de Lumen recorre la ruta; sin JS descansa al final -->
-              <g class="llama" transform="translate(1680 486)"><circle class="llama-luz" r="70"/><use href="#lumen-mark" x="-42" y="-42" width="84" height="84"/></g>
+              <g class="llama" transform="translate(1720 700)"><circle class="llama-luz" r="40"/><use href="#lumen-mark" x="-24" y="-24" width="48" height="48"/></g>
             </svg>
           </figure>
         </div>
