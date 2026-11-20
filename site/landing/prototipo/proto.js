@@ -550,7 +550,7 @@
       var g = LT.GROUP;
       var html = '<header class="hdr-root"><h1 class="t1" data-focus>' + tx("mt.title") + "</h1></header><div class=\"pad stack\">" +
         '<section class="sec" aria-labelledby="now-h"><h2 class="t3" id="now-h">' + tx("mt.now") + "</h2>" +
-        '<article class="gcard"><div class="gcard-art">' + '<img src="' + LT.ART.sierra.src + '" alt="" width="1200" height="675" loading="lazy" decoding="async">' + "</div>" +
+        '<article class="gcard"><div class="gcard-art">' + '<img src="' + LT.ART.cartagena.src + '" alt="" width="1200" height="1500" loading="lazy" decoding="async">' + "</div>" +
           '<div class="gcard-body"><p class="gcard-day">' + tx("mt.dayOf", { n: g.day, m: g.totalDays }) + "</p>" +
           '<h3 class="t3"><button type="button" class="tcard-link" data-act="openGroup" data-v="chat">' + esc(L(g.title)) + "</button></h3>" +
           '<p class="tcard-meta"><span>' + icon("ic-calendar") + esc(range(g.start, g.end)) + '</span><span class="avstack avstack--s">' + g.members.map(function (m) { return avatar(m); }).join("") + "</span></p></div></article>" +

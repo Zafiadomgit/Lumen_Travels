@@ -754,12 +754,16 @@
     }
   };
 
-  /* Arte: escenas gouache de la landing. Las que faltan usan el hueco con el icono de la ciudad. */
+  /* Arte: escenas gouache de la landing. Si una ciudad no tuviera escena, la portada usa el hueco con el icono de la ciudad. */
   var ART = {
     medellin: { src: "../assets/art/medellin-640.webp", srcset: "../assets/art/medellin-640.webp 640w, ../assets/art/medellin-1200.webp 1200w", w: 1200, h: 1500,
       alt: { es: "Ilustración de Medellín: cabinas del Metrocable sobre las casas de ladrillo de la ladera, con el valle de Aburrá al fondo.", en: "Illustration of Medellín: Metrocable cable cars glide over hillside brick houses, with the Aburrá Valley below." } },
     bogota: { src: "../assets/art/bogota-640.webp", srcset: "../assets/art/bogota-640.webp 640w, ../assets/art/bogota-1200.webp 1200w", w: 1200, h: 1500,
       alt: { es: "Ilustración de Bogotá: calle empedrada de La Candelaria con casas de balcones de madera; dos viajeros pasean y al fondo se alza Monserrate.", en: "Illustration of Bogotá: a cobblestone street in La Candelaria with wooden balconies; two travelers stroll beneath Monserrate hill." } },
+    cartagena: { src: "../assets/art/cartagena-640.webp", srcset: "../assets/art/cartagena-640.webp 640w, ../assets/art/cartagena-1200.webp 1200w", w: 1200, h: 1500,
+      alt: { es: "Ilustración de Cartagena: calle estrecha de la ciudad amurallada entre fachadas ocres y rojizas con balcones de madera y buganvilias; dos viajeros caminan juntos hacia la torre y la cúpula de la catedral.", en: "Illustration of Cartagena: a narrow street in the walled city between ochre and red facades with wooden balconies and bougainvillea; two travelers walk together toward the cathedral’s tower and dome." } },
+    tayrona: { src: "../assets/art/tayrona-640.webp", srcset: "../assets/art/tayrona-640.webp 640w, ../assets/art/tayrona-1200.webp 1200w", w: 1200, h: 1500,
+      alt: { es: "Ilustración del Parque Tayrona: cala de arena clara con grandes rocas redondas, palmeras y una cabaña de palma sobre la punta; dos viajeros sentados en la playa miran el mar al atardecer.", en: "Illustration of Tayrona National Park: a pale sandy cove with large rounded boulders, palm trees and a thatched hut on the point; two travelers sit on the beach watching the sea at sunset." } },
     sierra: { src: "../assets/art/hero-1200.webp", srcset: "../assets/art/hero-1200.webp 1200w, ../assets/art/hero-2400.webp 2400w", w: 2400, h: 1350,
       alt: { es: "Ilustración: tres viajeros pequeños, de espaldas, caminan por un sendero de montaña entre cafetales, sobre valles verdes y un río dorado.", en: "Illustration: three small travelers, seen from behind, walk a mountain path through coffee fields above green valleys and a golden river." } }
   };
@@ -793,7 +797,7 @@
   function D(es, en) { return { es: es, en: en }; }
 
   var TRIPS = [
-    { id: "t1", city: "cartagena", art: null, title: D("Cartagena y las Islas del Rosario", "Cartagena and the Rosario Islands"),
+    { id: "t1", city: "cartagena", art: "cartagena", title: D("Cartagena y las Islas del Rosario", "Cartagena and the Rosario Islands"),
       start: "2026-12-12", end: "2026-12-16", spots: 2, max: 4, budget: 1350000, styles: ["cultural", "beach"], host: "laura", members: ["laura", "sara"],
       match: 86, why: [["dates", 5], ["budget"], ["lang"], ["style", "cultural"]], meet: D("la Torre del Reloj", "the Clock Tower"),
       days: [
@@ -825,7 +829,7 @@
         D(["09:00 Cascada de Pozo Azul", "14:00 Hamacas y descanso"], ["09:00 Pozo Azul waterfall", "14:00 Hammocks and rest"]),
         D(["07:00 Entrada al Tayrona por El Zaino", "11:30 Cabo San Juan", "17:00 Noche en el parque"], ["07:00 Enter Tayrona at El Zaino", "11:30 Cabo San Juan", "17:00 Night in the park"])
       ] },
-    { id: "t5", city: "tayrona", art: null, title: D("Tayrona y Palomino sin afanes", "Tayrona and Palomino, slow"),
+    { id: "t5", city: "tayrona", art: "tayrona", title: D("Tayrona y Palomino sin afanes", "Tayrona and Palomino, slow"),
       start: "2027-01-08", end: "2027-01-12", spots: 3, max: 4, budget: 1050000, styles: ["beach", "chill"], host: "laura", members: ["laura"],
       match: 58, why: [["lang"], ["style", "beach"]], meet: D("la terminal de buses de Santa Marta", "Santa Marta bus terminal"),
       days: [

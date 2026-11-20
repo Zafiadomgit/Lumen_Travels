@@ -1,6 +1,0 @@
-/* Solo para demo.html: relleno antes y después de la réplica de la sección. No se integra en la landing. */
-.demo-intro { min-height: 82svh; display: grid; align-content: end; gap: 20px; padding: 140px var(--m) 72px; max-width: 900px; }
-.demo-kicker { font-weight: 700; font-size: var(--t-s); color: var(--ink-2); }
-.demo-after { min-height: 70svh; display: grid; place-items: center; padding: var(--gap) var(--m); background: var(--surface-2); }
-.demo-foot { padding: 32px var(--m); font-size: var(--t-s); color: var(--ink-2); }
-@media (min-width: 1440px) { .demo-intro { padding-inline: max(var(--m), calc((100vw - 1320px) / 2)); } }
