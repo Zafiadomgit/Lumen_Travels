@@ -467,7 +467,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .cover-slot-note { position: relative; justify-self: start; font-size: 12px; font-weight: 700; color: #5a4e3a; background: rgba(255, 255, 255, .7); padding: 4px 10px; border-radius: 999px; }
 
 /* mapa del corredor */
-.cmap { position: relative; aspect-ratio: 328 / 410; max-height: 58vh; margin-inline: auto; border-radius: var(--r-lg); overflow: hidden; background: var(--map-land); box-shadow: 0 0 0 1px #e2d5bb; }
+.cmap { position: relative; aspect-ratio: 328 / 410; width: min(100%, calc(62vh * .8)); margin-inline: auto; border-radius: var(--r-lg); overflow: hidden; background: var(--map-land); box-shadow: 0 0 0 1px #e2d5bb; }
 .cmap-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .m-land { fill: var(--map-land); }
 .m-sea { fill: var(--map-sea); }
@@ -655,7 +655,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .selfie { position: relative; display: grid; place-items: center; width: min(220px, 62%); aspect-ratio: 220 / 280; margin: 4px auto 0; }
 .selfie-ring { position: absolute; inset: 0; width: 100%; height: 100%; }
 .selfie-bg { fill: #221f25; stroke: var(--surface-3); stroke-width: 6; }
-.selfie-fg { fill: none; stroke: var(--trust); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 1s var(--ease); rotate: -90deg; transform-origin: center; transform-box: fill-box; }
+.selfie-fg { fill: none; stroke: var(--trust); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 1s var(--ease); }
 .selfie--s1 .selfie-fg { stroke-dashoffset: 72; }
 .selfie--s2 .selfie-fg { stroke-dashoffset: 45; }
 .selfie--s3 .selfie-fg { stroke-dashoffset: 18; }

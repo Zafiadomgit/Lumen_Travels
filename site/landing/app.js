@@ -17,7 +17,7 @@
   /* ---------- Textos (copiados tal cual de landing-copy.md) ---------- */
   var T = {
     en: {
-      'meta.title': 'Lumen Travels · Plan your route and find travel companions in Colombia',
+      'meta.title': 'Lumen Travels: plan your route and find travel companions in Colombia',
       'meta.desc': 'Plan your trip day by day and find verified travelers heading your way across Colombia. Join the waitlist. Your route, your people.',
       'a11y.skip': 'Skip to content',
       'nav.lang': 'Language',
@@ -37,76 +37,85 @@
       'mock.trust': 'Trust',
       'how.h': 'How it will work',
       'how.1t': 'Plan.', 'how.1d': 'Build your route on the map, day by day, with times and budget.',
-      'how.2t': 'Find.', 'how.2d': "See travelers going where you're going, when you're going.",
+      'how.2t': 'Find.', 'how.2d': 'See travelers going where you’re going, when you’re going.',
       'how.3t': 'Travel together.', 'how.3d': 'Verified people, one group chat, shared bills.',
       'pillars.h': 'Four things, one app',
       'pillars.1t': 'Plan.', 'pillars.1d': 'Plan your trip day by day on the map, with clear times and budget.',
-      'pillars.2t': 'Match up.', 'pillars.2d': "Meet travelers heading where you're going, when you're going.",
+      'pillars.2t': 'Match up.', 'pillars.2d': 'Meet travelers heading where you’re going, when you’re going.',
       'pillars.3t': 'Travel together.', 'pillars.3d': 'One place for the plan, the chat, the votes and the bills.',
-      'pillars.4t': 'Trust.', 'pillars.4d': "Verified profiles, real reviews and a safety button that's always free.",
+      'pillars.4t': 'Trust.', 'pillars.4d': 'Verified profiles, real reviews and a safety button that’s always free.',
       'safety.h': 'Safety comes first',
-      'safety.text': "Exploring is free. Meeting people takes one extra step: you verify your identity before you message, join or post a trip. This is what we're building:",
+      'safety.text': 'Exploring is free. Meeting people takes one extra step: you verify your identity before you message, join or post a trip. This is what we’re building:',
       'safety.1': 'Identity check with an ID and a selfie, done by a specialist provider.',
       'safety.2': 'Reviews from both sides, written after the trip.',
       'safety.3': 'A suggestion to hold the first meetup in a public place.',
       'safety.4': 'A safety button, free for everyone, always.',
       'safety.5': 'Reports, blocking and a team that reviews them.',
-      'safety.close': "No app can remove every risk. We design to lower it and we'll tell you plainly how it works.",
+      'safety.close': 'No app can remove every risk. We design to lower it and we’ll tell you plainly how it works.',
       'price.h': 'What would you pay for? Help us get it right.',
-      'price.intro': "Lumen Travels will have a free base. These are the paid options we're testing. Nothing is charged today.",
+      'price.intro': 'Lumen Travels will have a free base. These are the paid options we’re testing. Nothing is charged today.',
       'price.1name': 'Plus, monthly',
-      'price.1price': 'USD 3.99 / month',
+      'price.1price': 'USD 3.99 per month',
+      'price.1amt': 'USD 3.99', 'price.1per': 'per month',
       'price.1desc': 'Offline maps and routes, itinerary export to PDF, more active trips and groups, advanced match filters (style, pace, language).',
       'price.2name': 'Trip Pass, 30 days',
       'price.2price': 'USD 4.99, one-time payment',
+      'price.2amt': 'USD 4.99', 'price.2per': 'one-time payment',
       'price.2desc': 'The Plus extras for one trip, no subscription.',
       'price.line': 'Safety is never paid: verification and the safety button are free for everyone.',
       'price.btn': 'Reserve my spot',
+      'price.btnDone': 'Spot reserved',
       'price.okT': 'Your spot is saved.',
-      'price.okD': "We don't charge anything yet. We'll let you know when we open, and the launch price stays saved for you. No payment needed now.",
+      'price.okD': 'We don’t charge anything yet. We’ll let you know when we open, and the launch price stays saved for you. No payment needed now.',
       'price.okMore': 'Want us to write to you? Leave your email below.',
       'form.h': 'Join the waitlist',
-      'form.intro': "Leave your details and we'll write to you when Lumen Travels opens. No spam.",
+      'form.intro': 'Leave your details and we’ll write to you when Lumen Travels opens. No spam.',
+      'form.hDone': 'You’re on the list',
+      'form.introDone': 'We’ll write to you when Lumen Travels opens. Nothing else to do for now.',
       'form.email': 'Email',
-      'form.country': "Country you're from",
+      'form.emailPh': 'you@email.com',
+      'form.country': 'Country you’re from',
       'form.choose': 'Choose…',
       'form.dates': 'Approximate dates of your trip to Colombia',
       'form.datesHint': 'Month and year or a range',
       'form.unsure': 'Not sure yet',
-      'form.cities': "Cities of the route you'd like to visit",
+      'form.cities': 'Cities of the route you’d like to visit',
       'form.other': 'Other',
       'form.concierge': 'I want to join the Santa Marta–Tayrona test group',
-      'form.consentPre': "I agree that Lumen Studio uses my details to contact me about Lumen Travels and to improve it. I can ask to see, correct or delete them at any time, and withdraw consent whenever I want. I'm 18 or older. See the",
+      'form.consentPre': 'I agree that Lumen Studio uses my details to contact me about Lumen Travels and to improve it. I can ask to see, correct or delete them at any time, and withdraw consent whenever I want. I’m 18 or older. See the',
       'form.consentLink': 'Privacy policy',
-      'form.consentPost': '. (Colombia Law 1581 of 2012 and GDPR.)',
+      'form.consentPost': '.',
+      'form.consentLaw': 'Colombia Law 1581 of 2012 and GDPR.',
       'form.required': '(required)',
       'form.optional': '(optional)',
       'form.planRemove': 'Remove',
       'form.submit': 'Join the waitlist',
-      'form.success': "You're on the list. We'll write to you when Lumen Travels opens. If you ticked the test group, we'll contact you about Santa Marta–Tayrona. Your route, your people.",
-      'err.email': "That email doesn't look right. Check it and try again.",
+      'form.success': 'You’re on the list. We’ll write to you when Lumen Travels opens. If you ticked the test group, we’ll contact you about Santa Marta–Tayrona. Your route, your people.',
+      'err.email': 'That email doesn’t look right. Check it and try again.',
       'err.consent': 'To join, we need you to accept the data use.',
       'err.required': 'Please fill in this field.',
-      'err.server': 'Something went out on our side. Your answers are still on screen; try again in a moment.',
+      'err.emailReq': 'Enter your email.',
+      'err.countryReq': 'Choose your country.',
+      'err.datesReq': 'Enter your dates or tick “Not sure yet”.',
+      'err.server': 'We couldn’t save your details. Check your connection and try again. Your answers are still here.',
       'faq.h': 'Questions',
-      'faq.1q': 'Is Lumen Travels available yet?', 'faq.1a': "Not yet. We're validating the idea and building it. Join the list and we'll write to you when it opens.",
+      'faq.1q': 'Is Lumen Travels available yet?', 'faq.1a': 'Not yet. We’re validating the idea and building it. Join the list and we’ll write to you when it opens.',
       'faq.2q': 'Where will it work first?', 'faq.2a': 'Colombia, along the Medellín – Bogotá – Caribbean route (Cartagena, Santa Marta, Tayrona). The app will be in English and Spanish.',
-      'faq.3q': 'Is it free?', 'faq.3a': 'The plan is a free base. A paid "Plus" for extra comfort and a 30-day Trip Pass are being tested; see the prices above. Nothing is charged today.',
-      'faq.4q': 'Does "Reserve my spot" charge me?', 'faq.4a': "No. It only saves your interest. We don't take payments on this page.",
+      'faq.3q': 'Is it free?', 'faq.3a': 'The plan is a free base. A paid “Plus” for extra comfort and a 30-day Trip Pass are being tested; see the prices above. Nothing is charged today.',
+      'faq.4q': 'Does “Reserve my spot” charge me?', 'faq.4a': 'No. It only saves your interest. We don’t take payments on this page.',
       'faq.5q': 'Will safety features ever be paid?', 'faq.5a': 'No. Verification and the safety button stay free.',
-      'faq.6q': 'How do you verify people?', 'faq.6a': "With an ID and a selfie, through a specialist provider. You'll do it before you message, join or post a trip.",
+      'faq.6q': 'How do you verify people?', 'faq.6a': 'With an ID and a selfie, through a specialist provider. You’ll do it before you message, join or post a trip.',
       'faq.7q': 'What do you do with my data?', 'faq.7a': 'We use your email and answers only to contact you about Lumen Travels and to improve it. You can ask us to delete them at any time.',
-      'faq.8q': "Can I join if I'm under 18?", 'faq.8a': 'No. Lumen Travels is for people aged 18 and over.',
+      'faq.8q': 'Can I join if I’m under 18?', 'faq.8a': 'No. Lumen Travels is for people aged 18 and over.',
       'footer.slogan': 'Your route, your people.',
       'footer.nav': 'Legal',
       'footer.privacy': 'Privacy policy',
       'footer.requests': 'Data requests',
       'footer.contact': 'Contact',
-      'footer.small': "This page is a test. Lumen Travels is not available yet and we don't charge anything.",
+      'footer.small': 'This page is a test. Lumen Travels is not available yet and we don’t charge anything.',
       'footer.sign': 'Designed by Lumen Studio',
-      'footer.art': 'Illustrations made for Lumen Studio. Icons: Lucide (ISC license).',
+      'footer.art': 'Illustrations made for Lumen Studio. Icons: Lucide (ISC\u00a0license).',
       'lamp.label': 'Tap the Lumen light',
-      'hero.badge': 'Colombia, from Medellín to Tayrona',
       'route.s4': 'Santa Marta and Tayrona',
       'route.step': 'Stop {n} of 4',
       'route.km': 'About {km} km in a straight line from Medellín',
@@ -122,11 +131,11 @@
       'price.lineB': 'Verification and the safety button are free for everyone.'
     },
     es: {
-      'meta.title': 'Lumen Travels · Planea tu ruta y encuentra compañeros de viaje en Colombia',
+      'meta.title': 'Lumen Travels: planea tu ruta y encuentra compañeros de viaje en Colombia',
       'meta.desc': 'Planea tu viaje día a día y encuentra viajeros verificados que van por tu camino en Colombia. Únete a la lista de espera. Tu ruta, tu gente.',
       'a11y.skip': 'Saltar al contenido',
       'nav.lang': 'Idioma',
-      'nav.join': 'Unirme a la lista',
+      'nav.join': 'Unirme a la lista de espera',
       'hero.A.title': 'Recorre Colombia con gente que es quien dice ser.',
       'hero.A.sub': 'Viajeros verificados, primeros encuentros en lugares públicos y un botón de seguridad, para que buscar compañía en el camino se sienta tranquilo. Tu ruta, tu gente.',
       'hero.B.title': 'Planea tu ruta y encuentra tu grupo en un solo lugar.',
@@ -157,22 +166,28 @@
       'safety.4': 'Un botón de seguridad, gratis para todos, siempre.',
       'safety.5': 'Reportes, bloqueo y un equipo que los revisa.',
       'safety.close': 'Ninguna app elimina todos los riesgos. Diseñamos para reducirlos y te contamos con claridad cómo funciona.',
-      'price.h': '¿Por qué pagarías? Ayúdanos a acertar.',
+      'price.h': '¿Qué pagarías? Ayúdanos a acertar.',
       'price.intro': 'Lumen Travels tendrá una base gratuita. Estas son las opciones de pago que estamos probando. Hoy no se cobra nada.',
       'price.1name': 'Plus mensual',
       'price.1price': 'USD 3,99 al mes',
+      'price.1amt': 'USD 3,99', 'price.1per': 'al mes',
       'price.1desc': 'Mapas y rutas sin conexión, exportar el itinerario a PDF, más viajes y grupos activos, filtros avanzados de coincidencia (estilo, ritmo, idioma).',
       'price.2name': 'Pase de viaje, 30 días',
       'price.2price': 'USD 4,99, pago único',
+      'price.2amt': 'USD 4,99', 'price.2per': 'pago único',
       'price.2desc': 'Los extras de Plus para un viaje, sin suscripción.',
       'price.line': 'La seguridad nunca se cobra: la verificación y el botón de seguridad son gratis para todos.',
       'price.btn': 'Reservar mi lugar',
+      'price.btnDone': 'Lugar reservado',
       'price.okT': 'Tu lugar quedó guardado.',
       'price.okD': 'Todavía no cobramos nada. Te avisaremos cuando abramos y el precio de lanzamiento queda guardado para ti. No tienes que pagar ahora.',
       'price.okMore': '¿Quieres que te escribamos? Deja tu correo abajo.',
-      'form.h': 'Únete a la lista de espera',
+      'form.h': 'Lista de espera',
       'form.intro': 'Déjanos tus datos y te escribimos cuando Lumen Travels abra. Sin spam.',
+      'form.hDone': 'Ya estás en la lista',
+      'form.introDone': 'Te escribiremos cuando Lumen Travels abra. Por ahora no tienes que hacer nada más.',
       'form.email': 'Correo electrónico',
+      'form.emailPh': 'tu@correo.com',
       'form.country': 'País de origen',
       'form.choose': 'Elige…',
       'form.dates': 'Fechas aproximadas de tu viaje a Colombia',
@@ -183,7 +198,8 @@
       'form.concierge': 'Quiero entrar al grupo de prueba Santa Marta–Tayrona',
       'form.consentPre': 'Acepto que Lumen Studio use mis datos para escribirme sobre Lumen Travels y mejorarlo. Puedo pedir ver, corregir o borrar mis datos cuando quiera y retirar mi consentimiento en cualquier momento. Soy mayor de 18 años. Consulta la',
       'form.consentLink': 'Política de privacidad',
-      'form.consentPost': '. (Ley 1581 de 2012 y GDPR.)',
+      'form.consentPost': '.',
+      'form.consentLaw': 'Ley 1581 de 2012 (Colombia) y GDPR.',
       'form.required': '(obligatorio)',
       'form.optional': '(opcional)',
       'form.planRemove': 'Quitar',
@@ -191,8 +207,11 @@
       'form.success': 'Ya estás en la lista. Te escribimos cuando Lumen Travels abra. Si marcaste el grupo de prueba, te contactaremos por lo de Santa Marta–Tayrona. Tu ruta, tu gente.',
       'err.email': 'Ese correo no parece correcto. Revísalo e inténtalo de nuevo.',
       'err.consent': 'Para unirte necesitamos que aceptes el uso de tus datos.',
-      'err.required': 'Completa este campo, por favor.',
-      'err.server': 'Algo se apagó de nuestro lado. Tus respuestas siguen en pantalla; intenta de nuevo en un momento.',
+      'err.required': 'Completa este campo.',
+      'err.emailReq': 'Escribe tu correo.',
+      'err.countryReq': 'Elige tu país.',
+      'err.datesReq': 'Escribe las fechas o marca «Aún no lo sé».',
+      'err.server': 'No pudimos guardar tus datos. Revisa tu conexión e inténtalo de nuevo; tus respuestas siguen aquí.',
       'faq.h': 'Preguntas frecuentes',
       'faq.1q': '¿Ya puedo usar Lumen Travels?', 'faq.1a': 'Todavía no. Estamos validando la idea y construyéndola. Apúntate y te escribimos cuando abra.',
       'faq.2q': '¿Dónde va a funcionar primero?', 'faq.2a': 'En Colombia, por la ruta Medellín – Bogotá – Caribe (Cartagena, Santa Marta, Tayrona). La app será en español e inglés.',
@@ -209,9 +228,8 @@
       'footer.contact': 'Contacto',
       'footer.small': 'Esta página es una prueba. Lumen Travels aún no está disponible y no cobramos nada.',
       'footer.sign': 'Diseñado por Lumen Studio',
-      'footer.art': 'Ilustraciones generadas para Lumen Studio. Iconos: Lucide (licencia ISC).',
+      'footer.art': 'Ilustraciones generadas para Lumen Studio. Iconos: Lucide (licencia\u00a0ISC).',
       'lamp.label': 'Toca la luz de Lumen',
-      'hero.badge': 'Colombia, de Medellín a Tayrona',
       'route.s4': 'Santa Marta y Tayrona',
       'route.step': 'Parada {n} de 4',
       'route.km': 'Unos {km} km en línea recta desde Medellín',
@@ -338,7 +356,9 @@
     var btns = document.querySelectorAll('[data-lang]');
     for (var b = 0; b < btns.length; b++) btns[b].setAttribute('aria-pressed', String(btns[b].getAttribute('data-lang') === lang));
     fillCountries();
+    syncLegalLinks();
     renderPlanChip();
+    renderJoinHead();
     refreshErrors();
     var c = document.getElementById('contact-link');
     if (c && CONFIG.contactEmail) {
@@ -390,6 +410,24 @@
     }
   }
 
+  /* ---------- Cabecera de la lista: tras unirte deja de invitar a unirse ---------- */
+  var joinedNow = false;
+  function renderJoinHead() {
+    var h = document.getElementById('form-title');
+    var intro = document.querySelector('.join-intro');
+    if (h) h.textContent = t(joinedNow ? 'form.hDone' : 'form.h');
+    if (intro) intro.textContent = t(joinedNow ? 'form.introDone' : 'form.intro');
+  }
+
+  /* ---------- Los enlaces a la política llevan el idioma: no cambia al pasar de página ---------- */
+  function syncLegalLinks() {
+    var links = document.querySelectorAll('a[href^="/privacidad"]');
+    for (var i = 0; i < links.length; i++) {
+      var hash = links[i].getAttribute('href').split('#')[1] || '';
+      links[i].setAttribute('href', '/privacidad?lang=' + lang + (hash ? '#' + hash : ''));
+    }
+  }
+
   /* ---------- Plan reservado (sin cobro) ---------- */
   var reservedPlan = (function () { var p = ssGet(STORE.plan); return PLANS.indexOf(p) >= 0 ? p : null; })();
 
@@ -399,7 +437,10 @@
     if (!chip || !txt) return;
     var cards = document.querySelectorAll('.reserve');
     for (var i = 0; i < cards.length; i++) {
-      cards[i].closest('.plan').classList.toggle('picked', cards[i].getAttribute('data-plan') === reservedPlan);
+      var on = cards[i].getAttribute('data-plan') === reservedPlan;
+      cards[i].closest('.plan').classList.toggle('picked', on);
+      cards[i].setAttribute('aria-pressed', String(on));
+      cards[i].textContent = t(on ? 'price.btnDone' : 'price.btn');
     }
     if (!reservedPlan) { chip.hidden = true; return; }
     txt.textContent = t(PLAN_LABEL[reservedPlan][0]) + ': ' + t(PLAN_LABEL[reservedPlan][1]);
@@ -422,6 +463,8 @@
 
   /* ---------- Formulario ---------- */
   var shownErrors = {}; // id del campo -> clave del error, para retraducir al cambiar de idioma
+  // cada campo vacío dice qué falta, en vez de un «completa este campo» igual para todos
+  var REQ_KEY = { 'f-email': 'err.emailReq', 'f-country': 'err.countryReq', 'f-dates': 'err.datesReq' };
 
   function showError(input, key) {
     var errId = input.id === 'f-consent' ? 'e-consent' : 'e-' + input.id.replace('f-', '');
@@ -443,7 +486,7 @@
     var v = input.validity;
     var key = null;
     if (input.id === 'f-consent') key = input.checked ? null : 'err.consent';
-    else if (v.valueMissing || (input.type !== 'checkbox' && !input.value.trim())) key = 'err.required';
+    else if (v.valueMissing || (input.type !== 'checkbox' && !input.value.trim())) key = REQ_KEY[input.id] || 'err.required';
     else if (input.type === 'email' && (v.typeMismatch || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(input.value.trim()))) key = 'err.email';
     showError(input, key);
     return !key;
@@ -493,6 +536,8 @@
       lsSet(STORE.joined, '1');
       if (result === 'ok') track('waitlist_signup', reservedPlan);
       form.hidden = true;
+      joinedNow = true;
+      renderJoinHead();
       var ok = document.getElementById('form-success');
       ok.hidden = false;
       ok.focus();
@@ -502,6 +547,7 @@
       srv.textContent = t('err.server');
       srv.hidden = false;
       setBusy(btn, false);
+      srv.focus(); // el botón estuvo deshabilitado: sin esto el foco cae en <body>
     });
   }
 

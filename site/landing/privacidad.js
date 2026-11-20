@@ -11,8 +11,9 @@
   var q = null;
   try { q = (new URLSearchParams(location.search).get('lang') || '').toLowerCase(); } catch (e) { q = null; }
   var saved = lsGet('lt_lang');
-  var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'es';
-  var lang = (q === 'es' || q === 'en') ? q : (saved === 'es' || saved === 'en') ? saved : (/^en\b/i.test(nav) ? 'en' : 'es');
+  // mismo criterio que app.js: español solo si el navegador lo pide; cualquier otro idioma, inglés
+  var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+  var lang = (q === 'es' || q === 'en') ? q : (saved === 'es' || saved === 'en') ? saved : (/^es\b/i.test(nav) ? 'es' : 'en');
   root.setAttribute('lang', lang);
 
   // las secciones en español tienen el id sin prefijo; las de inglés, con «en-»
@@ -33,6 +34,9 @@
     document.title = TITLE[lang];
     var btns = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', String(btns[i].getAttribute('data-lang') === lang));
+    // volver a la landing conserva el idioma
+    var home = document.querySelectorAll('a[href="/"], a[href^="/?lang="]');
+    for (var h = 0; h < home.length; h++) home[h].setAttribute('href', '/?lang=' + lang);
   }
 
   function init() {
