@@ -1,0 +1,30 @@
+{
+  "nota": "Datos de la ruta piloto de Lumen Travels. Distancias por carretera calculadas con OSRM (router.project-osrm.org, perfil driving) sobre OpenStreetMap el 2026-11-20; son aproximadas. El tramo Bogotá-Cartagena se dibuja como vuelo: km en avión = distancia ortodrómica entre los aeropuertos El Dorado (BOG) y Rafael Núñez (CTG). La geometría está en ruta.geojson.",
+  "paradas": [
+    { "id": "medellin", "nombre": "Medellín", "rotulo": "Medellín", "lngLat": [-75.5634, 6.2517], "lado": "izq", "icono": "ic-medellin",
+      "camara": { "zoom": 8.5, "pitch": 54, "bearing": -14 } },
+    { "id": "bogota", "nombre": "Bogotá", "rotulo": "Bogotá", "lngLat": [-74.0754, 4.5983], "lado": "der", "icono": "ic-bogota",
+      "camara": { "zoom": 8.4, "pitch": 58, "bearing": 10 } },
+    { "id": "cartagena", "nombre": "Cartagena", "rotulo": "Cartagena", "lngLat": [-75.55, 10.4228], "lado": "izq", "icono": "ic-cartagena",
+      "camara": { "zoom": 9.1, "pitch": 52, "bearing": -8 } },
+    { "id": "santamarta", "nombre": "Santa Marta", "rotulo": "Santa Marta", "lngLat": [-74.2114, 11.2419], "lado": "izq", "icono": "ic-santamarta",
+      "camara": { "zoom": 9.6, "pitch": 56, "bearing": 16 } },
+    { "id": "tayrona", "nombre": { "es": "Parque Tayrona", "en": "Tayrona Park" }, "rotulo": "Tayrona", "sub": { "es": "Sector Cañaveral", "en": "Cañaveral sector" },
+      "lngLat": [-73.9293, 11.3059], "lado": "der", "icono": "ic-tayrona",
+      "camara": { "zoom": 10.3, "pitch": 60, "bearing": 26 } }
+  ],
+  "tramos": [
+    { "desde": 0, "hasta": 1, "modo": "carretera", "km": 405.4, "horas": 7.4, "zoomMedio": 6.9 },
+    { "desde": 1, "hasta": 2, "modo": "avion", "km": 656, "kmCarreteraOSRM": 1040.7, "horasCarreteraOSRM": 13.8, "zoomMedio": 5.6 },
+    { "desde": 2, "hasta": 3, "modo": "carretera", "km": 225.9, "horas": 3.2, "zoomMedio": 7.7 },
+    { "desde": 3, "hasta": 4, "modo": "carretera", "km": 42.1, "horas": 0.8, "zoomMedio": 9.4 }
+  ],
+  "acumulado": [
+    { "carretera": 0, "avion": 0 },
+    { "carretera": 405.4, "avion": 0 },
+    { "carretera": 405.4, "avion": 656 },
+    { "carretera": 631.3, "avion": 656 },
+    { "carretera": 673.4, "avion": 656 }
+  ],
+  "vistaGeneral": { "bounds": [[-79.2, -4.3], [-66.8, 12.6]] }
+}

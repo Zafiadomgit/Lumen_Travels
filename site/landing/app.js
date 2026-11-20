@@ -70,7 +70,7 @@
       'price.okMore': 'Want us to write to you? Leave your email below.',
       'form.h': 'Join the waitlist',
       'form.intro': 'Leave your details and we’ll write to you when Lumen Travels opens. No spam.',
-      'form.hDone': 'You’re on the list',
+      'form.hDone': 'You’re in',
       'form.introDone': 'We’ll write to you when Lumen Travels opens. Nothing else to do for now.',
       'form.email': 'Email',
       'form.emailPh': 'you@email.com',
@@ -125,8 +125,8 @@
       'route.sea': 'Caribbean Sea',
       'route.alt1': 'Illustration of Medellín: Metrocable cable cars glide over hillside brick houses, with the Aburrá Valley below.',
       'route.alt2': 'Illustration of Bogotá: a cobblestone street in La Candelaria lined with white and ochre houses with wooden balconies; two travelers stroll together beneath Monserrate hill and its sanctuary.',
-      'route.alt3': 'Illustration of Cartagena: a street in the walled city with ochre facades, balconies with bougainvillea and a church dome at the end.',
-      'route.alt4': 'Illustration of Tayrona National Park: Cabo San Juan beach with large rounded boulders, palm trees and a hut on the point.',
+      'route.alt3': 'Illustration of Cartagena: a narrow street in the walled city between ochre and red facades with wooden balconies and bougainvillea; two travelers walk together toward the cathedral’s tower and dome.',
+      'route.alt4': 'Illustration of Tayrona National Park: a pale sandy cove with large rounded boulders, palm trees and a thatched hut on the point; two travelers sit on the beach watching the sea at sunset.',
       'price.lineA': 'Safety is never paid.',
       'price.lineB': 'Verification and the safety button are free for everyone.'
     },
@@ -184,7 +184,7 @@
       'price.okMore': '¿Quieres que te escribamos? Deja tu correo abajo.',
       'form.h': 'Lista de espera',
       'form.intro': 'Déjanos tus datos y te escribimos cuando Lumen Travels abra. Sin spam.',
-      'form.hDone': 'Ya estás en la lista',
+      'form.hDone': 'Listo, ya estás dentro',
       'form.introDone': 'Te escribiremos cuando Lumen Travels abra. Por ahora no tienes que hacer nada más.',
       'form.email': 'Correo electrónico',
       'form.emailPh': 'tu@correo.com',
@@ -239,8 +239,8 @@
       'route.sea': 'Mar Caribe',
       'route.alt1': 'Ilustración de Medellín: cabinas del Metrocable sobre las casas de ladrillo de la ladera, con el valle de Aburrá al fondo.',
       'route.alt2': 'Ilustración de Bogotá: calle empedrada de La Candelaria con casas blancas y ocres de balcones de madera; dos viajeros pasean juntos y al fondo se alza el cerro de Monserrate con su santuario.',
-      'route.alt3': 'Ilustración de Cartagena: calle de la ciudad amurallada con fachadas ocres, balcones con buganvilias y la cúpula de una iglesia al fondo.',
-      'route.alt4': 'Ilustración del Parque Tayrona: playa de Cabo San Juan con grandes rocas redondas, palmeras y una cabaña sobre la punta.',
+      'route.alt3': 'Ilustración de Cartagena: calle estrecha de la ciudad amurallada entre fachadas ocres y rojizas con balcones de madera y buganvilias; dos viajeros caminan juntos hacia la torre y la cúpula de la catedral.',
+      'route.alt4': 'Ilustración del Parque Tayrona: cala de arena clara con grandes rocas redondas, palmeras y una cabaña de palma sobre la punta; dos viajeros sentados en la playa miran el mar al atardecer.',
       'price.lineA': 'La seguridad nunca se cobra.',
       'price.lineB': 'La verificación y el botón de seguridad son gratis para todos.'
     }
@@ -359,6 +359,7 @@
     syncLegalLinks();
     renderPlanChip();
     renderJoinHead();
+    tuckPunctuation();
     refreshErrors();
     var c = document.getElementById('contact-link');
     if (c && CONFIG.contactEmail) {
@@ -407,6 +408,22 @@
       var success = document.getElementById('form-success');
       var el = (success && !success.hidden) ? success : email;
       if (el) setTimeout(function () { el.focus({ preventScroll: true }); }, reduce ? 0 : 450);
+    }
+  }
+
+  /* ---------- Titulares grandes: la coma y el punto se acercan a la letra anterior ----------
+     Plus Jakarta deja mucho aire a la izquierda de «,» y «.»; a 90 px con tracking negativo se ve un hueco. */
+  function tuckPunctuation() {
+    var nodes = document.querySelectorAll('.hero h1 .hv, .footer-slogan');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i], txt = el.textContent, frag = document.createDocumentFragment();
+      var parts = txt.split(/([,.])/);
+      for (var k = 0; k < parts.length; k++) {
+        if (!parts[k]) continue;
+        if (parts[k] === ',' || parts[k] === '.') { var sp = document.createElement('span'); sp.className = 'punct'; sp.textContent = parts[k]; frag.appendChild(sp); }
+        else frag.appendChild(document.createTextNode(parts[k]));
+      }
+      el.textContent = ''; el.appendChild(frag);
     }
   }
 

@@ -58,7 +58,7 @@
   --map-ridge: #b9ae8f;
   --map-sierra: #a6a47a;
   --map-route: #7a6e5c;
-  --map-label: #3d6a62;
+  --map-label: #2f5a53;
 
   /* letra */
   --display: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
@@ -189,7 +189,7 @@ button { -webkit-tap-highlight-color: transparent; }
     width: 414px; height: min(868px, calc(100vh - 48px)); padding: 12px; border-radius: 60px;
     background: #141218; box-shadow: 0 0 0 1px #3a3540 inset, 0 40px 90px -40px rgba(40, 30, 10, .55), 0 0 0 1px rgba(20, 18, 24, .08);
   }
-  .app { border-radius: 48px; --sa-t: 50px; --sa-b: 26px; --sa-l: 0px; --sa-r: 0px; }
+  .app { inset: 12px; border-radius: 48px; --sa-t: 50px; --sa-b: 26px; --sa-l: 0px; --sa-r: 0px; }
   .app::after {
     content: ""; position: absolute; z-index: 80; top: 12px; left: 50%; width: 118px; height: 34px; translate: -50% 0;
     border-radius: 20px; background: #000; pointer-events: none;
@@ -698,7 +698,7 @@ input[type="text"], input[type="date"], textarea {
   appearance: none; -webkit-appearance: none; transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
 }
 textarea { resize: vertical; min-height: 112px; }
-input::placeholder, textarea::placeholder { color: #8a8276; }
+input::placeholder, textarea::placeholder { color: #6f675b; }
 input:focus-visible, textarea:focus-visible { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px rgba(232, 163, 58, .4); }
 [aria-invalid="true"] { border-color: var(--danger) !important; }
 .err { display: flex; gap: 8px; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--danger); }
@@ -1020,3 +1020,7 @@ html:active-view-transition-type(backward)::view-transition-new(screen) { animat
   .hold { width: 188px; height: 188px; }
   .citygrid { grid-template-columns: 1fr; }
 }
+
+/* los campos de fecha nativos tienen ancho mínimo propio: que no empujen la rejilla */
+.flow-body > *, .field, .field-row > * { min-width: 0; }
+input[type="date"] { min-width: 0; max-width: 100%; display: block; }

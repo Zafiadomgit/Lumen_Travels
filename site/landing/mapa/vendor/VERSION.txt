@@ -1,0 +1,4 @@
+MapLibre GL JS 6.16.0 (npm maplibre-gl@6.16.0, publicado el 2026-10-25 en npm).
+Licencia BSD-3-Clause: ver LICENSE-maplibre-gl.txt.
+Archivos copiados sin cambios desde node_modules/maplibre-gl/dist/, salvo la línea final sourceMappingURL (los .map no se publican).
+maplibre-gl.mjs carga maplibre-gl-worker.mjs desde esta misma carpeta como worker de módulo (import.meta.url), así que la CSP solo necesita worker-src 'self'.

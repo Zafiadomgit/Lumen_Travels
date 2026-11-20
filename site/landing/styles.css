@@ -75,6 +75,8 @@ button, input, select { font: inherit; color: inherit; }
 p, li, summary, legend, .check > span { text-wrap: pretty; }
 h1, h2, h3 { text-wrap: balance; }
 [hidden] { display: none !important; }
+/* avisos que reciben el foco por programa (para el lector de pantalla): no son controles, sin aro */
+#form-success:focus, #reserve-msg:focus, #e-server:focus { outline: none; }
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 .icon { width: 1.25em; height: 1.25em; flex: none; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 .tnum { font-variant-numeric: tabular-nums; }
@@ -296,9 +298,9 @@ html.fx .map-card { display: flex; }
 .plan--eq { padding: clamp(28px, 4vw, 48px); }
 .plan--eq + .plan--eq { border-top: 1px solid var(--line); }
 .plan h3 { font: 700 var(--t-body)/1.3 var(--text); color: var(--ink-2); }
-.price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font: 700 clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem)/1.1 var(--display); letter-spacing: -.035em; }
+.price { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; font: 700 clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem)/1.1 var(--display); letter-spacing: -.035em; }
 .price-amt { white-space: nowrap; }
-.price-per { font: 500 1rem/1.3 var(--text); letter-spacing: 0; color: var(--ink-2); }
+.price-per { font: 500 1rem/1.35 var(--text); letter-spacing: 0; color: var(--ink-2); }
 .plan-desc { color: var(--ink-2); max-width: 44ch; }
 /* ancho fijo: «Reservar mi lugar» y «Lugar reservado» + visto ocupan lo mismo, el botón no salta */
 .plan .btn { justify-self: start; align-self: end; margin-top: 16px; min-width: 15.5rem; }
@@ -426,6 +428,7 @@ select { padding-right: 44px; cursor: pointer; }
 /* ================= PIE ================= */
 .footer { background: var(--surface); padding: clamp(72px, 9vw, 128px) var(--m) 32px; border-top: 1px solid var(--line); display: grid; gap: 56px; }
 .footer-slogan { font: 700 clamp(2.5rem, 1rem + 6vw, 6rem)/.98 var(--display); letter-spacing: -.045em; word-spacing: 0; text-wrap: balance; }
+.punct { margin-left: -.07em; }
 .footer-row { display: grid; gap: 32px; }
 .footer-brand { display: grid; gap: 10px; }
 .wordmark--foot { min-height: auto; }
@@ -461,12 +464,13 @@ select { padding-right: 44px; cursor: pointer; }
   .lamp { margin-bottom: 18px; }
   .mark--hero { width: 52px; height: 52px; }
   .hero h1 { font-size: clamp(2.125rem, 1.3rem + 3.6vw, 2.5rem); }
-  .hero-lead { margin-top: 16px; font-size: 1.0625rem; line-height: 1.5; }
+  .hero-lead { margin-top: 14px; font-size: 1rem; line-height: 1.5; }
   .hero-actions { margin-top: 22px; gap: 12px; }
   .hero-actions .btn { width: 100%; }
   .stop-art { width: 82%; }
-  .hero-art { margin-top: -8px; }
-  .hero-art img { aspect-ratio: 4 / 3; object-position: 78% 100%; }
+  /* la escena sube: su cielo crema queda bajo la nota y las colinas asoman en el primer pantallazo */
+  .hero-art { position: relative; z-index: 0; margin-top: -96px; }
+  .hero-art img { aspect-ratio: 1 / 1; object-position: 76% 100%; }
 }
 @media (min-width: 720px) {
   .city-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -504,6 +508,18 @@ select { padding-right: 44px; cursor: pointer; }
   .topbar, .hero, .route, .pricing, .join, .faq-sec, .footer, .safety { padding-inline: max(var(--m), calc((100vw - 1320px) / 2)); }
   .hero-art { margin-inline: calc(max(var(--m), calc((100vw - 1320px) / 2)) * -1); }
 }
+
+/* ================= 404 ================= */
+.lost { min-height: 100svh; display: grid; align-content: center; justify-items: start; gap: 20px; padding: 120px var(--m) 72px; max-width: calc(760px + var(--m) * 2); }
+.mark--lost { width: 64px; height: 64px; margin-bottom: 8px; filter: grayscale(1) opacity(.5); }
+.lost-title { font: 700 var(--t-xl)/1.02 var(--display); letter-spacing: -.04em; }
+.lost-text { font-size: clamp(1.0625rem, 1rem + .35vw, 1.3125rem); color: var(--ink-2); max-width: 44ch; }
+.lost .btn { margin-top: 8px; }
+.lost-en { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-2); font-size: var(--t-s); }
+.lost-en-title { font-weight: 700; color: var(--ink); }
+.lost-en a { color: var(--ink); font-weight: 700; text-underline-offset: 4px; text-decoration-color: var(--accent); }
+.footer--lost { padding-top: 32px; }
+@media (min-width: 1440px) { .lost { padding-inline: max(var(--m), calc((100vw - 1320px) / 2)); max-width: none; } }
 
 /* ================= POLÍTICA DE PRIVACIDAD (privacidad.html) ================= */
 html[lang="es"] [data-l="en"], html[lang="en"] [data-l="es"] { display: none !important; }
