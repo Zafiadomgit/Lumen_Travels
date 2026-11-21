@@ -1,0 +1,17 @@
+promo-ruta · Lumen Travels · Diseñado por Lumen Studio
+
+Imágenes
+- hero, Medellín, Bogotá, Cartagena, Tayrona y mapa pintado (mapa-2720): ilustraciones de Lumen Travels generadas para Lumen Studio (ver docs/arte/estilo.md). Uso propio. No se generó ninguna imagen nueva para este video.
+
+Tipografías (se cargan desde assets/fonts/)
+- Plus Jakarta Sans, SIL Open Font License 1.1 (assets/fonts/OFL-PlusJakartaSans.txt)
+- Manrope, SIL Open Font License 1.1 (assets/fonts/OFL-Manrope.txt)
+
+Símbolo
+- La llama de Lumen (#lumen-mark): marca de Lumen Studio, trazada de nuevo a partir del SVG de la landing.
+
+Código y estilo
+- Motor de render y estilo «Watercolor Brush» de la librería Lemo-Opuscar (github.com/lemomo-ai/lemo-opuscar): código bajo licencia MIT; se usó la gramática del estilo (pincelada, borde de pincel seco, papel), sin copiar su demo. El código de este video (index.html, mix.py, build.sh) es propio.
+
+Audio
+- Música y sonidos: sintetizados con numpy y pluck.py (MIT) de la librería. Sin muestras, sin voz humana y sin material de terceros.

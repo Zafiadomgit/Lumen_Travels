@@ -4,7 +4,7 @@
    - color: fondo #f6f4ef, superficies #ffffff / #efebe3 / #e5dfd3, tinta #141218, secundario #635b4f,
      acento #e8a33a (solo formas, nunca texto) y dorado de texto #9a6a10 (solo texto grande sobre el fondo, o sobre blanco).
    - letra: Plus Jakarta Sans 700 compacta para títulos (la minúscula queda solo para el wordmark) y Manrope para el texto.
-   - lo memorable es una sola cosa: la ruta que se dibuja con el scroll y el símbolo de Lumen que la recorre.
+   - lo memorable es una sola cosa: «El viaje pintado», la lámina en gouache que la cámara recorre con el scroll.
      Todo lo demás, sobrio: sin rótulos en mayúsculas, sin numeración decorativa, sin kit de tarjetas. */
 
 /* Fuentes alojadas en el propio sitio (sin Google Fonts): subconjunto latino, variables. Licencia OFL en assets/fonts/. */
@@ -183,95 +183,132 @@ h1, h2, h3, .price, .footer-slogan, .free-safety strong, .faq summary { word-spa
   mask-image: linear-gradient(180deg, transparent 0, #000 26%, #000 84%, rgba(0, 0, 0, .55) 93%, transparent 100%);
 }
 
-/* escenas de la ruta: 4:5; mientras falta una, su hueco muestra el icono de la ciudad */
-.art { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
-.art-slot {
-  display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 5; border-radius: 6px;
-  background: radial-gradient(120% 80% at 50% 0%, #f6f1e8 0, var(--surface-2) 70%); box-shadow: inset 0 0 0 1px var(--line);
-}
-.art-slot .icon { width: 64px; height: 64px; stroke-width: 1.1; color: var(--ink-2); opacity: .7; }
-
-/* ================= LA RUTA (lo memorable) ================= */
-.route { padding: var(--gap) var(--m) calc(var(--gap) * .7); }
-.route-head { display: grid; gap: 16px; max-width: 760px; margin-bottom: clamp(48px, 7vw, 104px); }
+/* ================= EL VIAJE PINTADO (lo memorable) =================
+   Una lámina pintada en gouache que la cámara recorre con el scroll (viaje.js).
+   Base (sin JS o con movimiento reducido): la lámina con la ruta completa y las cuatro paradas como lista.
+   .viaje-on (GSAP cargado): escenario sticky a pantalla completa; las paradas y el final se superponen.
+   Tokens de la pieza: pincelada fresca #eda53a con brillo #ffd27a y sombra #b8742a; tinta seca #b8813a;
+   sellos terracota #b8613a; plan pendiente en tinta cálida #3a3330; velo crema rgba(246,244,239,.93). */
+.viaje { padding: var(--gap) var(--m) calc(var(--gap) * .7); }
+.viaje-head { display: grid; gap: 16px; max-width: 760px; margin-bottom: clamp(48px, 7vw, 96px); }
 .sec-lead { font-size: clamp(1.0625rem, 1rem + .35vw, 1.3125rem); color: var(--ink-2); }
-.route-body { display: grid; gap: 48px; }
-/* el mapa ilustrado: la pieza memorable de la página */
-.route-map { position: relative; margin: 0; z-index: 5; }
-.map-sheet {
-  position: relative; overflow: hidden; border-radius: 20px; background: #efe4cf;
-  box-shadow: 0 0 0 1px #e2d5bb, 0 40px 80px -48px rgba(60, 40, 10, .45);
-}
-.map-svg { display: block; width: 100%; height: auto; }
-.map-paper { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: multiply; opacity: .35; }
-.map-sea { fill: url(#sea-g); }
-.map-waves path { fill: none; stroke: #8fb5aa; stroke-width: 1.4; stroke-linecap: round; opacity: .7; }
-.map-coast { fill: none; stroke: #7fa79c; stroke-width: 2; stroke-linecap: round; }
-.map-river { fill: none; stroke: #9cc1c4; stroke-width: 2.2; stroke-linecap: round; opacity: .85; }
-.mt { fill: #cbc59f; }
-.mt-s { fill: #a6a47a; }
-.mt-snow { fill: #fbf6ea; }
-.map-label { font: 600 11px var(--text); paint-order: stroke; stroke: #efe4cf; stroke-width: 4px; stroke-linejoin: round; }
-.map-label--sea { font-style: italic; fill: #3d6a62; stroke: #cfe0d6; letter-spacing: .02em; }
-.map-label--soft { fill: #6e6148; font-size: 10px; font-style: italic; }
-.map-north path { fill: #6e6148; }
-.map-north text { font: 700 10px var(--display); fill: #6e6148; }
+.viaje-escena { display: grid; gap: clamp(56px, 8vw, 96px); }
 
-.route-halo { fill: none; stroke: #f8f1e3; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; opacity: .9; }
-.route-ghost { fill: none; stroke: #7a6e5c; stroke-width: 2.2; stroke-dasharray: .5 7; stroke-linecap: round; }
-.route-under, .route-line { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: calc(1 - var(--p, 1)); }
-.route-under { stroke: #9a6a10; stroke-width: 8; opacity: .55; }
-.route-line { stroke: #f0a73a; stroke-width: 5.5; }
+.lamina { position: relative; margin: 0; overflow: hidden; border-radius: 10px; background: #e9dcc0; box-shadow: 0 0 0 1px #e2d5bb, 0 40px 80px -48px rgba(60, 40, 10, .45); }
+.lamina-img { display: block; width: 100%; height: auto; aspect-ratio: 2720 / 1536; }
+.lamina-ruta { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ruta-plan { fill: none; stroke: #3a3330; stroke-width: 5; stroke-linecap: round; stroke-dasharray: .1 15; opacity: .5; }
+.ruta-seca, .trazo, .ruta-mascara, .ruta-luz { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.ruta-seca { stroke: #b8813a; stroke-width: 12; opacity: .95; }
+.trazo-borde { stroke: #e8a33a; stroke-width: 22; opacity: .32; stroke-dasharray: 150 6 52 4 210 8; }
+.trazo-cuerpo { stroke: #eda53a; stroke-width: 13; }
+.trazo-sombra { stroke: #b8742a; stroke-width: 3.5; opacity: .55; stroke-dasharray: 40 22 110 12 60 30; }
+.trazo-brillo { stroke: #ffd27a; stroke-width: 4; opacity: .85; stroke-dasharray: 80 16 30 9 130 22; }
+.ruta-mascara { stroke: #fff; stroke-width: 40; }
+.ruta-luz { stroke: #ffe3a3; stroke-width: 5; opacity: 0; }
+.sello { opacity: .9; }
+.sello-tinta circle { fill: none; stroke: #b8613a; stroke-width: 6; }
+.sello-tinta .sello-in { stroke-width: 3; }
+.sello-n { font: 700 44px var(--display); fill: #b8613a; text-anchor: middle; }
+.sello-txt { font: 700 15px var(--text); letter-spacing: 2.4px; fill: #b8613a; text-anchor: middle; }
+.llama { color: var(--ink); }
+.llama-luz { fill: #f2a93b; opacity: .35; }
 
-.pin-glow { fill: #f0a73a; opacity: 0; transition: opacity .4s ease; }
-.pin-dot-g { transform-box: fill-box; transform-origin: center; transition: scale .5s var(--ease); }
-.pin-dot { fill: #fffaf0; stroke: var(--ink); stroke-width: 2.2; transition: fill .3s ease; }
-.pin .pin-n { font: 700 12px var(--display); fill: var(--ink); transition: fill .3s ease; }
-.pin-name { font: 700 13px var(--text); fill: #4a4136; paint-order: stroke; stroke: #efe4cf; stroke-width: 4px; stroke-linejoin: round; transition: font-size .4s var(--ease), fill .3s ease; }
-.pin-name--s { font-size: 11px; font-weight: 600; }
-.pin.is-visited .pin-dot { fill: var(--ink); }
-.pin.is-visited .pin-n { fill: #fff; }
-.pin.is-active .pin-glow { opacity: .28; }
-.pin.is-active .pin-dot-g { scale: 1.35; }
-.pin.is-active .pin-name { font-size: 17px; fill: var(--ink); }
-.pin--via.is-visited .pin-dot { fill: var(--ink); }
-.traveler { display: none; }
-html.fx .traveler { display: inline; }
-.traveler use { color: var(--ink); }
-.traveler-glow { fill: #f0a73a; opacity: .3; }
+.bruma, .viaje-velo, .viaje-telon, .postal--final, .parada-paso { display: none; }
+.paradas { display: grid; gap: clamp(64px, 9vw, 112px); counter-reset: none; }
+.parada { display: grid; gap: 24px 40px; align-items: center; }
+.parada-texto { display: grid; gap: 12px; align-content: start; }
+.postal {
+  margin: 0; width: min(280px, 72%); padding: 10px 10px 26px; background: #fffaf2; border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(60, 40, 10, .08), 0 26px 44px -24px rgba(60, 40, 10, .5); rotate: -2deg;
+}
+.viaje:not(.viaje-on) .parada:nth-child(even) .postal { rotate: 2.5deg; }
+.postal-img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 100%; }
+.parada-ciudad { font: 700 var(--t-l)/1.02 var(--display); letter-spacing: -.035em; }
+.parada-pilar { display: flex; align-items: center; gap: 12px; font: 700 var(--t-m)/1.2 var(--display); letter-spacing: -.02em; }
+.parada-pilar .icon { flex: none; width: 24px; height: 24px; color: var(--ink); }
+.parada-desc { max-width: 34ch; font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); color: var(--ink-2); }
+.viaje-lema { font: 700 var(--t-l)/1.05 var(--display); letter-spacing: -.035em; }
+.vh-viaje { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.pal { display: inline-block; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; white-space: nowrap; vertical-align: top; }
+.ch { display: inline-block; }
 
-/* la tarjeta de la parada: ciudad, escena y distancia aproximada en línea recta */
-.map-card {
-  position: absolute; left: 14px; bottom: 14px; display: none; align-items: center; gap: 14px;
-  max-width: calc(100% - 28px); padding: 10px 18px 10px 10px; border-radius: 14px;
-  background: rgba(255, 255, 255, .94); box-shadow: 0 0 0 1px var(--line), 0 14px 30px -18px rgba(40, 30, 10, .35);
-}
-html.fx .map-card { display: flex; }
-.map-thumb {
-  flex: none; display: grid; place-items: center; width: 56px; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden;
-  background: var(--surface-2) center / cover no-repeat; box-shadow: inset 0 0 0 1px var(--line);
-}
-.map-thumb .icon { width: 26px; height: 26px; color: var(--ink-2); }
-.map-card-text { display: grid; gap: 2px; min-width: 0; }
-.map-step { font-size: var(--t-xs); font-weight: 600; color: var(--ink-2); }
-.map-city { font: 700 clamp(1.25rem, 1rem + 1vw, 1.6rem)/1.1 var(--display); letter-spacing: -.03em; }
-.map-km { font-size: var(--t-xs); color: var(--ink-2); font-variant-numeric: tabular-nums; }
-@media (prefers-reduced-motion: no-preference) {
-  .map-card.is-new { animation: tarjeta .5s var(--ease); }
-}
-@keyframes tarjeta { from { opacity: .4; translate: 0 6px; } }
+/* movimiento reducido: sin cámara; cada parada aparece con un fundido sencillo */
+.viaje-suave .parada, .viaje-suave .viaje-lema { opacity: 0; transition: opacity .7s ease; }
+.viaje-suave .is-visible { opacity: 1; }
 
-.stops { display: grid; gap: clamp(64px, 9vw, 128px); }
-.stop { display: grid; gap: 24px; }
-.stop-text { display: grid; gap: 12px; max-width: 34ch; align-content: start; }
-.stop-place { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: var(--t-s); color: var(--ink-2); }
-.stop-place .icon { width: 22px; height: 22px; color: var(--ink); }
-.stop-n {
-  display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
-  background: var(--ink); color: #fff; font: 700 14px/1 var(--display);
+/* ---------- la coreografía (.viaje-on) ---------- */
+.viaje-on { padding-top: calc(var(--gap) * .5); padding-bottom: 0; }
+/* el encabezado vive dentro del escenario: grande, sobre la lámina que llega, y se va cuando la cámara baja */
+.viaje-on .viaje-head { position: absolute; z-index: 7; top: clamp(96px, 13svh, 140px); left: max(var(--m), calc((100vw - 1320px) / 2)); right: var(--m); margin: 0; max-width: none; gap: 14px; pointer-events: none; }
+.viaje-on .viaje-head .sec-title { max-width: 11ch; font-size: clamp(2.75rem, 1.2rem + 4.6vw, 5.5rem); line-height: .96; letter-spacing: -.045em; }
+.viaje-on .viaje-head .sec-lead { font-size: clamp(1.125rem, 1rem + .5vw, 1.5rem); }
+.viaje-on + .safety { padding-top: calc(var(--gap) * .45); }
+.viaje-on .viaje-pista { position: relative; margin-inline: calc(50% - 50vw); height: calc(100svh + var(--beats, 18) * var(--beat, 38) * 1svh); }
+.viaje-on .viaje-escena {
+  position: sticky; top: 0; display: block; height: 100svh; overflow: clip; background: var(--bg);
+  perspective: 1700px; perspective-origin: 50% 30%;
 }
-.stop h3 { font: 700 var(--t-l)/1.1 var(--display); letter-spacing: -.025em; }
-.stop-text > p:last-child { font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); color: var(--ink-2); text-wrap: pretty; }
+.viaje-on .lamina-marco { position: absolute; inset: 0; z-index: 1; }
+.viaje-on .lamina { position: absolute; left: 0; top: 0; transform-origin: 0 0; border-radius: 14px; box-shadow: 0 0 0 1px #d9c9a6, 0 90px 120px -60px rgba(60, 40, 10, .5); }
+.viaje-on .lamina-img { width: 100%; height: 100%; }
+.viaje-on.is-activa .lamina { will-change: transform; }
+.viaje-on .bruma { display: block; position: absolute; z-index: 2; pointer-events: none; }
+.viaje-on .bruma img { display: block; width: 100%; height: auto; }
+.bruma--a { left: -14%; bottom: -18%; width: 92%; }
+.bruma--b { right: -16%; top: -8%; width: 80%; }
+.bruma--paso { left: 0; top: 14%; width: 110%; opacity: 0; }
+.viaje-on.is-activa .bruma { will-change: transform, opacity; }
+.viaje-on .viaje-velo { display: block; position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.viaje-on .paradas, .viaje-on .viaje-final { position: absolute; inset: 0; display: grid; gap: 0; }
+.viaje-on .paradas { z-index: 4; }
+.viaje-on .parada { position: relative; grid-area: 1 / 1; }
+.viaje-on .parada-texto { display: contents; }
+.viaje-on .parada-paso { display: block; grid-area: paso; font-size: var(--t-s); font-weight: 700; color: var(--ink-2); }
+.viaje-on .parada-ciudad { grid-area: ciudad; font-size: clamp(3.5rem, 1.2rem + 5vw, 7rem); line-height: .95; letter-spacing: -.045em; }
+.viaje-on .parada[data-stop="4"] .parada-ciudad { font-size: clamp(2.5rem, .8rem + 3.4vw, 4.75rem); }
+.viaje-on .parada-pilar { grid-area: pilar; align-self: end; }
+.viaje-on .parada-desc { grid-area: desc; align-self: start; }
+.viaje-on .postal { grid-area: postal; rotate: none; backface-visibility: hidden; }
+.viaje-on .viaje-telon { display: block; position: absolute; inset: 0; z-index: 5; background: var(--surface-2); }
+.viaje-on .viaje-final { z-index: 6; pointer-events: none; }
+.viaje-on .postal--final { grid-area: auto; }
+.viaje-on .viaje-lema { align-self: center; }
+
+/* escritorio y tabletas horizontales: la lámina a pantalla completa; el texto a la derecha sobre un velo de papel */
+@media (min-width: 760px) and (min-aspect-ratio: 1/1) {
+  .viaje-on .viaje-velo { background: linear-gradient(90deg, rgba(246, 244, 239, 0) 42%, rgba(246, 244, 239, .82) 56%, rgba(246, 244, 239, .97) 72%); }
+  .viaje-on .viaje-velo--izq { background: linear-gradient(270deg, rgba(246, 244, 239, 0) 42%, rgba(246, 244, 239, .82) 56%, rgba(246, 244, 239, .97) 72%); }
+  .viaje-on .paradas { padding: 84px var(--m) 40px; }
+  .viaje-on .parada {
+    align-self: center; justify-self: end; width: calc(43vw - var(--m)); grid-template-columns: minmax(150px, 15vw) minmax(0, 1fr); gap: 10px clamp(24px, 2.4vw, 40px);
+    grid-template-areas: "paso paso" "ciudad ciudad" "postal pilar" "postal desc";
+  }
+  .viaje-on .parada[data-lado="izq"] { justify-self: start; }
+  .viaje-on .parada-ciudad { margin-bottom: clamp(16px, 2.4vh, 32px); }
+  .viaje-on .postal { width: 100%; }
+  .viaje-on .viaje-final { grid-template-columns: calc(43vw - var(--m)); justify-content: end; padding: 84px var(--m) 40px; align-content: center; gap: 32px; }
+  .viaje-on .postal--final { display: block; width: min(300px, 100%); }
+  .viaje-on .postal--final .postal-img { aspect-ratio: 16 / 9; }
+  .viaje-on .viaje-lema { font-size: clamp(2.5rem, 1rem + 2.8vw, 4.25rem); line-height: .98; letter-spacing: -.045em; }
+}
+/* teléfonos y verticales: la lámina arriba con zoom y paneo; postal y texto abajo, sobre el papel */
+@media not all and (min-width: 760px) and (min-aspect-ratio: 1/1) {
+  .viaje-on .viaje-velo { background: linear-gradient(180deg, rgba(246, 244, 239, 0) 50%, rgba(246, 244, 239, .92) 58%, var(--bg) 63%); }
+  .viaje-on .paradas { padding: 0 var(--m) max(24px, env(safe-area-inset-bottom)); }
+  .viaje-on .parada {
+    align-self: end; grid-template-columns: minmax(0, 1fr) 31vw; gap: 6px 16px;
+    grid-template-areas: "paso postal" "ciudad postal" "pilar pilar" "desc desc";
+  }
+  .viaje-on .parada-ciudad { font-size: clamp(2.25rem, 1.2rem + 4vw, 3rem); align-self: end; padding-bottom: 6px; }
+  .viaje-on .parada[data-stop="4"] .parada-ciudad { font-size: clamp(1.625rem, 1rem + 2.6vw, 2.125rem); }
+  .viaje-on .parada-paso { align-self: end; }
+  .viaje-on .postal { width: 100%; align-self: end; margin-top: -24vw; padding: 6px 6px 16px; }
+  .viaje-on .parada-pilar { margin-top: 12px; font-size: 1.25rem; }
+  .viaje-on .parada-desc { font-size: 1rem; }
+  .viaje-on .viaje-final { grid-template-columns: minmax(0, 1fr); padding: 56svh var(--m) 0; align-content: start; }
+  .viaje-on .viaje-lema { font-size: clamp(2.5rem, 1.4rem + 4.4vw, 3.25rem); line-height: 1; letter-spacing: -.045em; }
+}
 
 /* ================= SEGURIDAD ================= */
 .safety { background: var(--surface-2); padding: var(--gap) var(--m); display: grid; gap: 48px 72px; }
@@ -444,19 +481,6 @@ select { padding-right: 44px; cursor: pointer; }
 .mark--sign { width: 28px; height: 28px; }
 
 /* ================= RESPONSIVE ================= */
-@media (max-width: 999px) {
-  .route-map {
-    position: sticky; top: 64px; margin-inline: calc(var(--m) * -1); padding: 12px var(--m);
-    display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center;
-    background: rgba(246, 244, 239, .96); box-shadow: 0 1px 0 var(--line);
-    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  }
-  .map-sheet { height: min(38svh, 380px); aspect-ratio: 400 / 520; border-radius: 14px; }
-  .map-svg { height: 100%; width: 100%; }
-  .map-card { position: static; flex-direction: column; align-items: flex-start; gap: 10px; padding: 0; background: none; box-shadow: none; max-width: none; }
-  .map-city { font-size: clamp(1.25rem, 1rem + 2vw, 1.75rem); }
-  .stops { padding-top: 32px; }
-}
 @media (max-width: 719px) {
   .topbar-cta { display: none; }
   /* primer pantallazo en teléfonos: símbolo más chico, titular y lead más compactos, para que asome la pintura */
@@ -467,7 +491,6 @@ select { padding-right: 44px; cursor: pointer; }
   .hero-lead { margin-top: 14px; font-size: 1rem; line-height: 1.5; }
   .hero-actions { margin-top: 22px; gap: 12px; }
   .hero-actions .btn { width: 100%; }
-  .stop-art { width: 82%; }
   /* la escena sube: su cielo crema queda bajo la nota y las colinas asoman en el primer pantallazo */
   .hero-art { position: relative; z-index: 0; margin-top: -96px; }
   .hero-art img { aspect-ratio: 1 / 1; object-position: 76% 100%; }
@@ -477,14 +500,13 @@ select { padding-right: 44px; cursor: pointer; }
   .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .plan--eq + .plan--eq { border-top: 0; border-left: 1px solid var(--line); }
   .plan { grid-row: span 4; grid-template-rows: subgrid; }
-  .stop { grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); align-items: center; gap: 40px; }
   .footer-row { grid-template-columns: 1.4fr auto auto; align-items: start; gap: 48px; }
+  .viaje:not(.viaje-on) .parada { grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); }
+  .viaje:not(.viaje-on) .postal { width: 100%; }
 }
 @media (min-width: 1000px) {
-  .route-body { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(48px, 5vw, 96px); align-items: start; }
-  .route-map { position: sticky; top: max(92px, calc(50svh - 400px)); width: min(100%, calc((100svh - 124px) * .77)); }
-  .route-body .stop { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); }
-  .stops { padding-bottom: 18svh; }
+  .viaje:not(.viaje-on) .viaje-escena { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; column-gap: clamp(48px, 5vw, 88px); }
+  .viaje:not(.viaje-on) .lamina-marco { position: sticky; top: 112px; grid-row: span 2; }
   .safety { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
   .safety-intro { position: sticky; top: 120px; grid-row: span 2; }
   .safety-close { grid-column: 2; }
@@ -505,7 +527,7 @@ select { padding-right: 44px; cursor: pointer; }
   .hero-actions { margin-top: 26px; }
 }
 @media (min-width: 1440px) {
-  .topbar, .hero, .route, .pricing, .join, .faq-sec, .footer, .safety { padding-inline: max(var(--m), calc((100vw - 1320px) / 2)); }
+  .topbar, .hero, .viaje, .pricing, .join, .faq-sec, .footer, .safety { padding-inline: max(var(--m), calc((100vw - 1320px) / 2)); }
   .hero-art { margin-inline: calc(max(var(--m), calc((100vw - 1320px) / 2)) * -1); }
 }
 

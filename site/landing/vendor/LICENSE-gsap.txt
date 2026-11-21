@@ -1,0 +1,13 @@
+GSAP 3.15.1 y ScrollTrigger 3.15.1 (gsap.min.js, ScrollTrigger.min.js)
+Copyright 2026, GreenSock. All rights reserved.
+
+Copiados sin cambios del paquete npm «gsap» 3.15.1 (carpeta dist/).
+Licencia: «Standard 'no charge' license» de GreenSock, https://gsap.com/standard-license
+(así figura en el campo "license" del package.json y en la cabecera de cada archivo).
+Según el README del paquete, desde que Webflow adquirió GreenSock GSAP es 100 % gratis,
+incluido el uso comercial y todos los plugins.
+
+El paquete npm no trae el texto completo de la licencia: hay que leerlo en la dirección de arriba
+(no se pudo descargar desde la sesión de trabajo por restricciones de red).
+
+Lo usa viaje.js («El viaje pintado»), que fx.js carga solo cuando la sección se acerca.

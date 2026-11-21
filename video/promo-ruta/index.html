@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Lumen Travels · promo «Tu ruta, tu gente.»</title>
+<style>
+  @font-face { font-family: 'PJS'; src: url('assets/fonts/plus-jakarta-sans-latin-var.woff2') format('woff2'); font-weight: 200 800; }
+  @font-face { font-family: 'Manrope'; src: url('assets/fonts/manrope-latin-var.woff2') format('woff2'); font-weight: 200 800; }
+  html, body { margin: 0; background: #f6f4ef; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script type="module">
+// Lumen Travels · promo-ruta
+// Estilo base: Lemo-Opuscar «Watercolor Brush» (papel que se pinta: pasadas de pincel, borde de pincel seco,
+// niebla de papel), adaptado a nuestras láminas de gouache y a la paleta de Lumen.
+// Todo es función de t: render(t) dibuja el cuadro del segundo t, sin estado entre cuadros.
+import { clamp, lerp, seg, ss, eio, eo, back, spring, mulberry, hash, vnoise } from '/core/lib.js';
+
+const W = innerWidth, H = innerHeight, PORT = H > W;
+const cv = document.getElementById('c'); cv.width = W; cv.height = H;
+const g = cv.getContext('2d');
+const mkc = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+
+// ---------- marca ----------
+const C = { crema: '#f6f4ef', tinta: '#141218', tinta2: '#3a3330', oro: '#e8a33a', terra: '#9a4a28', terraClaro: '#b8613a' };
+const FONT_H = "'PJS', 'Plus Jakarta Sans', sans-serif", FONT_B = "'Manrope', sans-serif";
+
+// ---------- línea de tiempo (única fuente de verdad) ----------
+const DUR = 30;
+const SC = [
+  { id: 'hero', t: 0 },
+  { id: 'mapa', t: 4.5 },
+  { id: 'stop0', t: 10.5 },
+  { id: 'stop1', t: 14.0 },
+  { id: 'stop2', t: 17.5 },
+  { id: 'stop3', t: 21.0 },
+  { id: 'fin', t: 24.5 },
+];
+const WIPE = 0.8;
+
+const STOPS = [
+  { name: 'Medellín',  sub: 'Aquí empieza.',      img: 'medellin',  dot: 0, side: 1 },
+  { name: 'Bogotá',    sub: 'Viajen juntos.',     img: 'bogota',    dot: 1, side: 0 },
+  { name: 'Cartagena', sub: 'Gente verificada.',  img: 'cartagena', dot: 2, side: 1 },
+  { name: 'Tayrona',   sub: 'Y el mar al final.', img: 'tayrona',   dot: 4, side: 0 },
+];
+
+// ---------- ruta sobre mapa-2720.webp (px de la imagen; docs/arte/mapa-coordenadas.md) ----------
+const MAP_W = 2720, MAP_H = 1536;
+const LEGS = [
+  [[755,885],[900,880],[1060,910],[1220,980],[1380,1060],[1528,1125],[1700,1200],[1860,1270],[2000,1310],[2130,1300]],
+  [[2130,1300],[1990,1195],[1780,1050],[1640,990],[1550,905],[1430,800],[1320,725],[1050,700],[700,615],[340,450]],
+  [[340,450],[520,462],[760,562],[1000,638],[1200,676],[1330,690],[1450,692],[1560,688]],
+  [[1560,688],[1620,690],[1690,675],[1730,645],[1760,615]],
+];
+const CITIES = [
+  { n: 'Medellín',    p: [755, 885],  lab: [0, 54, 'center'] },
+  { n: 'Bogotá',      p: [2130, 1300], lab: [-26, -34, 'right'] },
+  { n: 'Cartagena',   p: [340, 450],  lab: [0, 56, 'center'] },
+  { n: 'Santa Marta', p: [1560, 688], lab: [-6, 62, 'center'] },
+  { n: 'Tayrona',     p: [1760, 615], lab: [-64, -4, 'right'] },
+];
+// Catmull-Rom por tramo: la ruta pasa exacta por cada ciudad
+function crom(pts, step = 5) {
+  const out = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+    const d = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]), n = Math.max(2, Math.round(d / step));
+    for (let k = 0; k < n; k++) {
+      const t = k / n, t2 = t * t, t3 = t2 * t;
+      out.push([0, 1].map(a => .5 * ((2 * p1[a]) + (-p0[a] + p2[a]) * t + (2 * p0[a] - 5 * p1[a] + 4 * p2[a] - p3[a]) * t2 + (-p0[a] + 3 * p1[a] - 3 * p2[a] + p3[a]) * t3)));
+    }
+  }
+  out.push(pts[pts.length - 1].slice());
+  return out;
+}
+const ROUTE = [], CUM = [], CITY_LEN = [0];
+LEGS.forEach(l => { const s = crom(l); (ROUTE.length ? s.slice(1) : s).forEach(p => ROUTE.push(p)); CITY_LEN.push(ROUTE.length - 1); });
+CUM.push(0); for (let i = 1; i < ROUTE.length; i++) CUM.push(CUM[i - 1] + Math.hypot(ROUTE[i][0] - ROUTE[i - 1][0], ROUTE[i][1] - ROUTE[i - 1][1]));
+const CITY_CUM = CITY_LEN.map(i => CUM[i]), ROUTE_LEN = CUM[CUM.length - 1];
+// tiempos del tramo (s, dentro de la escena del mapa): salida, 4 tramos, pausa corta en cada ciudad
+const R0 = 0.45, LEG_T = [1.2, 1.75, 1.1, 0.55], DWELL = 0.15;
+const LEG_START = [], LEG_END = []; { let c = R0; LEG_T.forEach((d, i) => { LEG_START.push(c); c += d; LEG_END.push(c); c += DWELL; }); }
+const ARRIVE = [R0 - 0.15, LEG_END[0], LEG_END[1], LEG_END[2], LEG_END[3]];   // cuándo "cae" el pin de cada ciudad
+function routeLen(lt) {   // longitud recorrida (px de mapa) en el instante local lt
+  if (lt <= LEG_START[0]) return 0;
+  for (let i = 0; i < 4; i++) {
+    if (lt < LEG_START[i]) return CITY_CUM[i];
+    if (lt <= LEG_END[i]) { const u = (lt - LEG_START[i]) / LEG_T[i], e = lerp(u, ss(u), .55); return lerp(CITY_CUM[i], CITY_CUM[i + 1], e); }
+  }
+  return ROUTE_LEN;
+}
+function posAtLen(L) {
+  let lo = 0, hi = CUM.length - 1; while (lo < hi - 1) { const m = (lo + hi) >> 1; if (CUM[m] <= L) lo = m; else hi = m; }
+  const a = ROUTE[lo], b = ROUTE[Math.min(hi, ROUTE.length - 1)], d = CUM[hi] - CUM[lo] || 1, u = clamp((L - CUM[lo]) / d);
+  return [lerp(a[0], b[0], u), lerp(a[1], b[1], u)];
+}
+
+// ---------- recursos ----------
+const IMG = {};
+const loadImg = n => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('img ' + n)); i.src = `assets/art/${n}.webp`; });
+let PAPER, GRAIN;
+function makePaper() {
+  const c = mkc(W, H), p = c.getContext('2d'), R = mulberry(77);
+  p.fillStyle = C.crema; p.fillRect(0, 0, W, H);
+  for (let i = 0; i < 70; i++) {                           // manchas suaves de pulpa
+    const x = R() * W, y = R() * H, r = (.15 + R() * .35) * Math.max(W, H) * .5, gr = p.createRadialGradient(x, y, 0, x, y, r);
+    const warm = R() < .6; gr.addColorStop(0, warm ? 'rgba(232,215,180,.10)' : 'rgba(255,255,255,.10)'); gr.addColorStop(1, warm ? 'rgba(232,215,180,0)' : 'rgba(255,255,255,0)');
+    p.fillStyle = gr; p.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+  p.lineCap = 'round';
+  for (let i = 0; i < 2600; i++) {                         // fibras cortas
+    const x = R() * W, y = R() * H, a = R() * 6.28, l = 6 + R() * 16;
+    p.strokeStyle = R() < .5 ? 'rgba(200,180,140,.10)' : 'rgba(255,255,255,.22)'; p.lineWidth = .8 + R() * .6;
+    p.beginPath(); p.moveTo(x, y); p.quadraticCurveTo(x + Math.cos(a + .6) * l * .5, y + Math.sin(a + .6) * l * .5, x + Math.cos(a) * l, y + Math.sin(a) * l); p.stroke();
+  }
+  return c;
+}
+function makeGrain() {
+  const c = mkc(W, H), p = c.getContext('2d'), d = p.createImageData(W, H), R = mulberry(5);
+  for (let i = 0; i < d.data.length; i += 4) { const v = 252 - R() * R() * 26 | 0; d.data[i] = v; d.data[i + 1] = v - 1; d.data[i + 2] = v - 3; d.data[i + 3] = 255; }
+  p.putImageData(d, 0, 0);
+  const vg = p.createRadialGradient(W / 2, H / 2, Math.min(W, H) * .45, W / 2, H / 2, Math.max(W, H) * .78);   // viñeta mínima
+  vg.addColorStop(0, 'rgba(120,90,50,0)'); vg.addColorStop(1, 'rgba(120,90,50,.10)'); p.fillStyle = vg; p.fillRect(0, 0, W, H);
+  return c;
+}
+
+// ---------- el símbolo de la llama (#lumen-mark) ----------
+const FLAME = new Path2D('M32 14c8 9 12 15 12 21.5a12 12 0 0 1-24 0C20 29 24 23 32 14z');
+const FLAME_IN = new Path2D('M32 30c3 3.5 4.5 6 4.5 8.5a4.5 4.5 0 0 1-9 0c0-2.5 1.5-5 4.5-8.5z');
+function drawMark(x, y, size, o = {}) {
+  const k = size / 64; g.save(); g.translate(x - size / 2, y - size / 2); g.scale(k, k);
+  if (o.glow) { const gl = g.createRadialGradient(32, 32, 10, 32, 32, 32 + 60 * o.glow); gl.addColorStop(0, 'rgba(255,200,110,.55)'); gl.addColorStop(1, 'rgba(255,200,110,0)'); g.fillStyle = gl; g.beginPath(); g.arc(32, 32, 32 + 60 * o.glow, 0, 6.3); g.fill(); }
+  g.fillStyle = C.tinta; g.beginPath(); g.arc(32, 32, 28, 0, 6.3); g.fill();
+  const gr = g.createLinearGradient(0, 47.5, 0, 14); gr.addColorStop(0, '#e2742a'); gr.addColorStop(.55, '#f2a93b'); gr.addColorStop(1, '#ffd27a');
+  g.fillStyle = gr; g.fill(FLAME); g.fillStyle = '#fff4dc'; g.fill(FLAME_IN); g.restore();
+}
+
+// ---------- texto: se «abre» de izquierda a derecha, con halo de papel ----------
+let TX = [];   // textos visibles en este cuadro (para readcheck)
+function txt(id, str, x, y, size, o = {}) {
+  const { font = FONT_H, weight = 800, color = C.tinta, align = 'left', t0 = 0, lt = 0, dur = .55, halo = .85, track = 0, rise = 14 } = o;
+  const p = eo((lt - t0) / dur); if (p <= 0) return 0;
+  g.save(); g.font = `${weight} ${size}px ${font}`; g.textBaseline = 'alphabetic'; g.lineJoin = 'round'; g.fontKerning = 'normal'; g.textRendering = 'optimizeLegibility'; g.letterSpacing = '0px';
+  if (track) g.letterSpacing = track + 'px';
+  // la Plus Jakarta Sans deja la coma y el punto muy separados en los pesos altos: los acerco a mano
+  const pull = font === FONT_H ? size * .085 : 0, parts = str.split(/(?=[.,])/);
+  const place = []; let cx = 0; parts.forEach((pt, k) => { if (k) cx -= pull; place.push([pt, cx]); cx += g.measureText(pt).width; });
+  const w = cx, x0 = align === 'center' ? x - w / 2 : align === 'right' ? x - w : x;
+  g.beginPath(); g.rect(x0 - size * .3, y - size * 1.2, (w + size * .6) * p, size * 1.8); g.clip();   // la «pasada» de pincel
+  g.globalAlpha = clamp(p * 1.6); const yy = y + (1 - p) * rise; g.textAlign = 'left';
+  if (halo) { g.strokeStyle = `rgba(246,244,239,${halo})`; g.lineWidth = size * .2; place.forEach(([pt, dx]) => g.strokeText(pt, x0 + dx, yy)); }
+  g.fillStyle = color; place.forEach(([pt, dx]) => g.fillText(pt, x0 + dx, yy)); g.restore();
+  TX.push({ id, text: str, x0, y0: y - size * .8, x1: x0 + w, y1: y + size * .25, full: p >= 1 });
+  return w;
+}
+function fitSize(str, maxW, size, weight = 800, font = FONT_H) { g.save(); g.font = `${weight} ${size}px ${font}`; const w = g.measureText(str).width; g.restore(); return w > maxW ? size * maxW / w : size; }
+
+// ---------- pincel: cinta con ancho irregular + cerdas con «blanco volado» ----------
+function ribbon(pts, n, base, seed, fill, alpha) {
+  const m = Math.min(pts.length - 1, Math.floor(n)); if (m < 2) return;
+  const L = [], Rr = [];
+  for (let i = 0; i <= m; i++) {
+    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+    let dx = b[0] - a[0], dy = b[1] - a[1]; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+    const tp = Math.min(1, i / 14, (m - i) / 10 + .15);                       // punta de pincel al inicio y al final
+    const w = base * (.78 + .4 * vnoise(i * .045 + seed) + .14 * vnoise(i * .31 + seed * 3)) * (.35 + .65 * ss(tp)) / 2;
+    L.push([pts[i][0] - dy * w, pts[i][1] + dx * w]); Rr.push([pts[i][0] + dy * w, pts[i][1] - dx * w]);
+  }
+  g.beginPath(); g.moveTo(...L[0]); for (let i = 1; i < L.length; i++) g.lineTo(...L[i]); for (let i = Rr.length - 1; i >= 0; i--) g.lineTo(...Rr[i]); g.closePath();
+  g.globalAlpha = alpha; g.fillStyle = fill; g.fill(); g.globalAlpha = 1;
+  return { L, R: Rr, m };
+}
+function bristles(pts, n, base, seed, color, alpha, count = 5) {
+  const m = Math.min(pts.length - 1, Math.floor(n)); if (m < 4) return;
+  g.save(); g.lineCap = 'butt'; g.strokeStyle = color; g.globalAlpha = alpha;
+  for (let k = 0; k < count; k++) {
+    const off = (k / (count - 1) - .5) * base * .82, R = mulberry(seed * 100 + k);
+    g.lineWidth = Math.max(1, base * .045); g.setLineDash([base * (1 + R() * 3), base * (.3 + R() * 1.4), base * (3 + R() * 5), base * (.4 + R() * 1.2)]); g.lineDashOffset = R() * 99;
+    g.beginPath();
+    for (let i = 0; i <= m; i++) {
+      const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)]; let dx = b[0] - a[0], dy = b[1] - a[1]; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+      const x = pts[i][0] - dy * off, y = pts[i][1] + dx * off; i ? g.lineTo(x, y) : g.moveTo(x, y);
+    }
+    g.stroke();
+  }
+  g.restore();
+}
+// una pincelada de oro (subrayado, adorno) entre dos puntos con una curva suave
+function swash(x0, y0, x1, y1, bow, lt, t0, dur, width) {
+  const p = eo((lt - t0) / dur); if (p <= 0) return;
+  const pts = []; for (let i = 0; i <= 60; i++) { const u = i / 60; pts.push([lerp(x0, x1, u), lerp(y0, y1, u) + Math.sin(u * Math.PI) * bow]); }
+  const n = p * 60;
+  ribbon(pts, n, width, 3.3, C.oro, .96); bristles(pts, n, width, 9, 'rgba(246,244,239,.75)', .7, 4);
+}
+
+// ---------- mapa + ruta ----------
+function mapCam(lt) {
+  const hz = (tt) => posAtLen(routeLen(tt));
+  let sx = 0, sy = 0, N = 9; for (let i = 0; i < N; i++) { const p = hz(lt - .35 + i * .14); sx += p[0]; sy += p[1]; } sx /= N; sy /= N;
+  let s;
+  if (PORT) s = 1.38;
+  else s = lerp(.8, .72, ss(seg(lt, 3.8, 5.6)));
+  const hw = W / (2 * s), hh = (H - BAND) / (2 * s);
+  return { s, oy: BAND + (H - BAND) / 2, cx: clamp(sx, Math.min(hw, MAP_W / 2), Math.max(MAP_W - hw, MAP_W / 2)), cy: clamp(sy, Math.min(hh, MAP_H / 2), Math.max(MAP_H - hh, MAP_H / 2)) };
+}
+const BAND = PORT ? 620 : 300;   // franja de papel arriba, solo para el texto del mapa: nada del mapa pasa por debajo de él
+const toScr = (cam, p) => [(p[0] - cam.cx) * cam.s + W / 2, (p[1] - cam.cy) * cam.s + (cam.oy ?? H / 2)];
+function drawMap(cam, alpha = 1) {
+  g.save(); g.globalAlpha = alpha; g.imageSmoothingQuality = 'high';
+  g.drawImage(IMG.mapa, (0 - cam.cx) * cam.s + W / 2, (0 - cam.cy) * cam.s + (cam.oy ?? H / 2), MAP_W * cam.s, MAP_H * cam.s); g.restore();
+}
+function drawRoute(cam, L, o = {}) {
+  const idx = (() => { let lo = 0, hi = CUM.length - 1; while (lo < hi - 1) { const m = (lo + hi) >> 1; if (CUM[m] <= L) lo = m; else hi = m; } return lo; })();
+  const pts = ROUTE.slice(0, idx + 2).map(p => toScr(cam, p)); const head = toScr(cam, posAtLen(L)); pts[pts.length - 1] = head;
+  const base = 22 * cam.s * (o.thin || (PORT ? .72 : 1)), n = pts.length - 1;
+  if (n < 2) return head;
+  if (o.faint) { ribbon(pts, n, base * .9, 4, '#e8a33a', .55); return head; }
+  ribbon(pts, n, base * 1.42, 11, 'rgb(246,244,239)', .92);                    // cama de papel bajo el oro, para que se lea sobre el verde
+  ribbon(pts, n, base * 1.12, 4, '#e8a33a', 1);
+  bristles(pts, n, base * 1.0, 6, 'rgba(255,236,190,.7)', .7, 4);
+  bristles(pts, n, base * 1.12, 8, 'rgba(176,86,40,.7)', .9, 2);              // borde terracota: la única «línea» (como la sombra de pigmento)
+  return head;
+}
+function pin(cam, ci, lt, o = {}) {
+  const c = CITIES[ci], a = ARRIVE[ci] ?? 0; if (lt < a) return;
+  const k = spring((lt - a) / .9, 7, .4), [x, y] = toScr(cam, c.p), r = (PORT ? 18 : 17) * clamp(k, 0, 1.35);
+  g.save(); g.fillStyle = 'rgba(20,18,24,.25)'; g.beginPath(); g.ellipse(x + 2, y + r * .9, r * 1.1, r * .45, 0, 0, 6.3); g.fill();
+  g.fillStyle = C.crema; g.beginPath(); g.arc(x, y, r * 1.25, 0, 6.3); g.fill(); g.fillStyle = C.tinta; g.beginPath(); g.arc(x, y, r * .95, 0, 6.3); g.fill();
+  g.fillStyle = C.oro; g.beginPath(); g.arc(x, y, r * .55, 0, 6.3); g.fill(); g.restore();
+  if (!o.noLabel) { const [dx, dy, al] = c.lab, sz = PORT ? 46 : 44; txt('lab-' + c.n, c.n, x + dx, y + dy * (PORT ? 1.1 : 1), sz, { weight: 800, align: al, t0: a + .6, lt, dur: .5, halo: .92 }); }
+}
+// placa de niebla (papel) bajo un texto sobre el mapa: borde irregular y suave
+function mist(x0, y0, x1, y1, lt, t0) {   // una pincelada ancha de color papel, pintada de izquierda a derecha, para escribir encima
+  const p = eo((lt - t0) / .8); if (p <= 0) return; const yc = (y0 + y1) / 2, h = y1 - y0, pts = [];
+  for (let i = 0; i <= 80; i++) { const u = i / 80; pts.push([lerp(x0, x1, u), yc + Math.sin(u * 3.1) * h * .04]); }
+  g.save(); g.filter = 'blur(3px)'; ribbon(pts, p * 80, h, 21, 'rgb(246,244,239)', .94); ribbon(pts, p * 80, h * .72, 5, 'rgb(246,244,239)', 1); g.restore();
+  bristles(pts, p * 80, h, 12, 'rgba(232,163,58,.28)', .6, 3);
+}
+
+// ---------- tira de progreso de la ruta (5 puntos) ----------
+function tracker(x, y, wid, cur, lt, t0) {
+  const a = ss((lt - t0) / .5); if (a <= 0) return; g.save(); g.globalAlpha = a;
+  const xs = [0, 1, 2, 3, 4].map(i => x + wid * i / 4);
+  g.strokeStyle = 'rgba(58,51,48,.4)'; g.lineWidth = 3; g.setLineDash([2, 10]); g.lineCap = 'round'; g.beginPath(); g.moveTo(xs[0], y); g.lineTo(xs[4], y); g.stroke(); g.setLineDash([]);
+  g.strokeStyle = C.oro; g.lineWidth = 6; g.beginPath(); g.moveTo(xs[0], y); g.lineTo(xs[cur], y); g.stroke();
+  xs.forEach((px, i) => { g.fillStyle = i <= cur ? C.oro : C.crema; g.strokeStyle = C.tinta; g.lineWidth = 3; g.beginPath(); g.arc(px, y, i === cur ? 0 : 9, 0, 6.3); g.fill(); if (i !== cur) g.stroke(); });
+  drawMark(xs[cur], y, 46, { glow: .35 }); g.restore();
+}
+function wordmark(x, y, size, lt, t0) {
+  const a = ss((lt - t0) / .5); if (a <= 0) return; g.save(); g.globalAlpha = a;
+  drawMark(x + size / 2, y, size);
+  g.font = `700 ${size * .62}px ${FONT_H}`; g.textBaseline = 'middle'; g.fillStyle = C.tinta; g.fillText('lumen', x + size * 1.25, y + 1);
+  const w = g.measureText('lumen ').width; g.font = `500 ${size * .62}px ${FONT_H}`; g.fillStyle = C.tinta2; g.fillText('travels', x + size * 1.25 + w, y + 1); g.restore();
+  TX.push({ id: 'wordmark', text: 'lumen travels', x0: x, y0: y - size / 2, x1: x + size * 4.4, y1: y + size / 2, pass: true });
+}
+
+// ---------- imágenes con cámara lenta ----------
+function cover(img, cx, cy, s) {       // cx,cy: centro de la vista en px de la imagen; s: escala imagen→pantalla
+  g.save(); g.imageSmoothingQuality = 'high'; g.drawImage(img, W / 2 - cx * s, H / 2 - cy * s, img.width * s, img.height * s); g.restore();
+}
+
+// ---------- escenas ----------
+function sHero(lt) {
+  g.drawImage(PAPER, 0, 0);
+  const im = IMG.hero;
+  if (PORT) {
+    const s = H / im.height * (1 + .05 * seg(lt, 0, 6)), hw = W / (2 * s);
+    const cx = lerp(1450, 1950, eio(seg(lt, 0, 4.4))); cover(im, clamp(cx, hw, im.width - hw), im.height / 2, s);
+  } else {
+    const s = W / im.width * (1 + .07 * seg(lt, 0, 6)); const hw = W / (2 * s), hh = H / (2 * s);
+    cover(im, clamp(1500 + 160 * seg(lt, 0, 6), hw, im.width - hw), clamp(im.height * .56, hh, im.height - hh), s);
+  }
+  if (PORT) {
+    wordmark(90, 232, 58, lt, .5);
+    txt('hero-1', 'Planea tu ruta', 90, 420, 100, { lt, t0: .55 });
+    txt('hero-2', 'por Colombia.', 90, 535, 100, { lt, t0: .8 });
+    swash(92, 575, 640, 568, 10, lt, 1.2, .6, 17);
+  } else {
+    wordmark(110, 100, 58, lt, .5);
+    txt('hero-1', 'Planea tu ruta', 110, 270, 108, { lt, t0: .55 });
+    txt('hero-2', 'por Colombia.', 110, 392, 108, { lt, t0: .8 });
+    swash(112, 432, 760, 424, 10, lt, 1.2, .6, 18);
+  }
+}
+function sMapa(lt) {
+  g.drawImage(PAPER, 0, 0);
+  const cam = mapCam(lt), L = routeLen(lt);
+  g.save(); g.beginPath(); g.moveTo(-10, H + 10); g.lineTo(-10, BAND);   // borde de pincel seco entre el papel del texto y el mapa
+  for (let x = -10; x <= W + 10; x += 6) g.lineTo(x, BAND + (vnoise(x * .011 + 3) - .5) * 22 + (hash(Math.floor(x / 5)) - .5) * 7);
+  g.lineTo(W + 10, H + 10); g.closePath(); g.clip();
+  drawMap(cam);
+  const head = drawRoute(cam, L);
+  for (let i = 0; i < CITIES.length; i++) pin(cam, i, lt);
+  if (L > 1) { const pulse = .5 + .5 * Math.sin(lt * 6); drawMark(head[0], head[1], (PORT ? 104 : 78), { glow: .45 + .15 * pulse }); }
+  g.restore();
+  if (PORT) { txt('map-1', 'Encuentra viajeros', 80, 330, 76, { lt, t0: .6, halo: 0 }); txt('map-2', 'que van a donde', 80, 420, 76, { lt, t0: .8, halo: 0 }); txt('map-3', 'tú vas.', 80, 510, 76, { lt, t0: 1.0, halo: 0 }); }
+  else { txt('map-1', 'Encuentra viajeros que', 110, 115, 70, { lt, t0: .6, halo: 0 }); txt('map-2', 'van a donde tú vas.', 110, 200, 70, { lt, t0: .85, halo: 0 }); }
+}
+function sStop(i, lt) {
+  const S = STOPS[i], im = IMG[S.img];
+  g.drawImage(PAPER, 0, 0);
+  if (PORT) {
+    const s = H / im.height * (1.0 + .09 * seg(lt, 0, 4.3)), hw = W / (2 * s);
+    cover(im, clamp(im.width / 2 + (i % 2 ? -40 : 40) * lt, hw, im.width - hw), im.height / 2, s);
+    wordmark(90, 232, 52, lt, .4);
+    const sz = fitSize(S.name, 880, 168);
+    txt('n' + i, S.name, 90, 440, sz, { lt, t0: .45 });
+    swash(92, 480, 92 + Math.min(620, sz * 3.4), 474, 10, lt, .8, .55, 16);
+    txt('s' + i, S.sub, 90, 580, 60, { font: FONT_B, weight: 700, color: C.tinta2, lt, t0: .85 });
+    tracker(110, 666, 500, S.dot, lt, 1.1);
+  } else {
+    const cw = 1200, cx0 = S.side ? W - cw : 0;
+    // lámina a escala 1:1 (sin ampliar, nítida) con una subida de cámara muy lenta
+    const s = 1 + .05 * seg(lt, 0, 4.3), vh = H / s, y0 = lerp(im.height - vh - 90, im.height - vh, seg(lt, 0, 4.3));
+    // borde de la lámina: pincel seco (irregular), como una pasada de gouache que se queda en el papel
+    const ex = S.side ? cx0 : cx0 + cw, dir = S.side ? 1 : -1; g.save(); g.beginPath();
+    g.moveTo(ex - dir * 40, -10); for (let y = -10; y <= H + 10; y += 6) g.lineTo(ex + dir * ((vnoise(y * .012 + i * 5) - .5) * 26 + (hash(Math.floor(y / 5) + i * 99) - .5) * 9), y);
+    g.lineTo(ex - dir * 40, H + 10); g.lineTo(ex + dir * cw * 1.2, H + 10); g.lineTo(ex + dir * cw * 1.2, -10); g.closePath(); g.clip();
+    g.beginPath(); g.rect(Math.min(ex, ex + dir * cw) - 60, -10, cw + 120, H + 20); g.clip(); g.imageSmoothingQuality = 'high';
+    const iw = im.width * s; g.drawImage(im, cx0 + (cw - iw) / 2, -y0 * s, iw, im.height * s); g.restore();
+    const tx = S.side ? 100 : cw + 90, colW = W - cw - 190;
+    wordmark(tx, 100, 54, lt, .4);
+    const sz = fitSize(S.name, colW, 150);
+    txt('n' + i, S.name, tx, 470, sz, { lt, t0: .45, halo: 0 });
+    swash(tx + 2, 512, tx + Math.min(560, sz * 3.3), 506, 9, lt, .8, .55, 17);
+    txt('s' + i, S.sub, tx, 614, 56, { font: FONT_B, weight: 700, color: C.tinta2, lt, t0: .85, halo: 0 });
+    tracker(tx + 20, 900, 520, S.dot, lt, 1.1);
+  }
+}
+function sFin(lt) {
+  g.drawImage(PAPER, 0, 0);
+  // el mapa, muy tenue, con la ruta ya completa: eco del recorrido
+  const cam = PORT ? { s: 1.25, cx: 1250, cy: 768 } : { s: W / MAP_W, cx: MAP_W / 2, cy: MAP_H / 2 };
+  drawMap(cam, .4 * ss(lt / .8));
+  drawRoute(cam, ROUTE_LEN, { thin: PORT ? .8 : 1, faint: true });
+  CITIES.forEach((c, i) => { const [x, y] = toScr(cam, c.p); g.fillStyle = C.tinta; g.beginPath(); g.arc(x, y, 9, 0, 6.3); g.fill(); g.fillStyle = C.oro; g.beginPath(); g.arc(x, y, 5, 0, 6.3); g.fill(); });
+  g.save(); const pl = g.createRadialGradient(W / 2, H * (PORT ? .43 : .5), 0, W / 2, H * (PORT ? .43 : .5), Math.max(W, H) * .6);
+  pl.addColorStop(0, 'rgba(246,244,239,.97)'); pl.addColorStop(.4, 'rgba(246,244,239,.9)'); pl.addColorStop(.85, 'rgba(246,244,239,.25)'); pl.addColorStop(1, 'rgba(246,244,239,.1)'); g.fillStyle = pl; g.fillRect(0, 0, W, H); g.restore();
+  const cx = W / 2, pulse = .5 + .5 * Math.sin(lt * 2.2);
+  if (PORT) {
+    const k = spring((lt - .25) / .9, 6, .5); drawMark(cx, 470, 210 * clamp(k, 0, 1.2), { glow: .6 + .15 * pulse });
+    txt('f-k', 'Muy pronto', cx, 655, 38, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: .7, halo: 0 });
+    txt('f-1', 'Tu ruta,', cx, 790, 132, { align: 'center', lt, t0: .85, halo: 0 }); txt('f-2', 'tu gente.', cx, 925, 132, { align: 'center', lt, t0: 1.1, halo: 0 });
+    swash(cx - 250, 965, cx + 250, 960, 9, lt, 1.5, .55, 18);
+    txt('f-3', 'Únete a la lista de espera', cx, 1110, 52, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: 1.7, halo: 0 });
+    txt('f-4', 'lumentravels.vercel.app', cx, 1195, 56, { weight: 800, align: 'center', lt, t0: 2.0, halo: 0 });
+    txt('f-5', 'Diseñado por Lumen Studio', cx, 1390, 34, { font: FONT_B, weight: 600, color: C.tinta2, align: 'center', lt, t0: 2.4, halo: 0 });
+  } else {
+    const k = spring((lt - .25) / .9, 6, .5); drawMark(cx, 250, 190 * clamp(k, 0, 1.2), { glow: .6 + .15 * pulse });
+    txt('f-k', 'Muy pronto', cx, 425, 36, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: .7, halo: 0 });
+    txt('f-1', 'Tu ruta, tu gente.', cx, 590, 130, { align: 'center', lt, t0: .85, halo: 0 });
+    swash(cx - 430, 630, cx + 430, 624, 9, lt, 1.5, .6, 17);
+    txt('f-3', 'Únete a la lista de espera', cx, 745, 52, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: 1.7, halo: 0 });
+    txt('f-4', 'lumentravels.vercel.app', cx, 835, 58, { weight: 800, align: 'center', lt, t0: 2.0, halo: 0 });
+    txt('f-5', 'Diseñado por Lumen Studio', cx, 1010, 28, { font: FONT_B, weight: 600, color: C.tinta2, align: 'center', lt, t0: 2.4, halo: 0 });
+  }
+}
+const DRAW = { hero: sHero, mapa: sMapa, stop0: lt => sStop(0, lt), stop1: lt => sStop(1, lt), stop2: lt => sStop(2, lt), stop3: lt => sStop(3, lt), fin: sFin };
+
+// ---------- transición: borde de pincel seco que barre el papel ----------
+function wipeRegion(p) {
+  const M = 120, len = PORT ? H : W, cross = PORT ? W : H, front = p * (len + 2 * M) - M, pts = [];
+  const wob = a => 46 * Math.sin(a / 137 + 1.3) + 26 * Math.sin(a / 51 + 4.1) + (hash(Math.floor(a / 7)) - .5) * 26;
+  for (let a = -20; a <= cross + 20; a += 7) {
+    const o = front + wob(a);
+    pts.push(PORT ? [a, H - o] : [o, a]);
+  }
+  const P = new Path2D();
+  if (PORT) { P.moveTo(-30, H + 30); pts.forEach(q => P.lineTo(...q)); P.lineTo(W + 30, H + 30); }
+  else { P.moveTo(-30, -30); pts.forEach(q => P.lineTo(...q)); P.lineTo(-30, H + 30); }
+  P.closePath(); return { P, pts };
+}
+function wipeEdge(pts, p) {
+  g.save(); g.lineJoin = 'round';
+  g.filter = 'blur(16px)'; g.strokeStyle = 'rgba(246,244,239,.55)'; g.lineWidth = 90; g.beginPath(); pts.forEach((q, i) => i ? g.lineTo(...q) : g.moveTo(...q)); g.stroke(); g.filter = 'none';
+  g.strokeStyle = 'rgba(232,163,58,.55)'; g.lineWidth = 4; g.setLineDash([40, 9, 70, 16]); g.beginPath(); pts.forEach((q, i) => i ? g.lineTo(...q) : g.moveTo(...q)); g.stroke();
+  g.strokeStyle = 'rgba(154,74,40,.30)'; g.lineWidth = 2; g.setLineDash([]); g.beginPath(); pts.forEach((q, i) => i ? g.lineTo(...q) : g.moveTo(...q)); g.stroke(); g.restore();
+}
+
+function render(t) {
+  TX = [];
+  let i = 0; for (let k = 0; k < SC.length; k++) if (t >= SC[k].t) i = k;
+  const sc = SC[i], lt = t - sc.t;
+  const p = clamp((t - sc.t + (i === 0 ? .25 : 0)) / WIPE);
+  g.clearRect(0, 0, W, H);
+  if (i === 0) { g.drawImage(PAPER, 0, 0); }
+  else { const pv = SC[i - 1]; DRAW[pv.id](t - pv.t); }
+  if (p < 1) {
+    const { P, pts } = wipeRegion(eio(p) * .96 + p * .04);
+    g.save(); g.clip(P); DRAW[sc.id](lt); g.restore(); wipeEdge(pts, p);
+    // los textos del escenario anterior ya no cuentan
+    TX = TX.filter(x => x.id !== 'wordmark');
+  } else DRAW[sc.id](lt);
+  g.save(); g.globalCompositeOperation = 'multiply'; g.drawImage(GRAIN, 0, 0); g.restore();
+}
+
+window.DUR = DUR;
+window.render = render;
+window.TEXTS = t => { render(t); return TX.filter(x => x.full || true).map(x => ({ id: x.id, text: x.text, x0: x.x0, y0: x.y0, x1: x.x1, y1: x.y1, ...(x.pass ? { pass: true } : {}) })); };
+(async () => {
+  try {
+    await Promise.all([
+      new FontFace('PJS', "url(assets/fonts/plus-jakarta-sans-latin-var.woff2)", { weight: '200 800' }).load().then(f => document.fonts.add(f)),
+      new FontFace('Manrope', "url(assets/fonts/manrope-latin-var.woff2)", { weight: '200 800' }).load().then(f => document.fonts.add(f)),
+      ...['hero-2400', 'medellin-1200', 'bogota-1200', 'cartagena-1200', 'tayrona-1200', 'mapa-2720'].map(async n => { IMG[n.split('-')[0]] = await loadImg(n); }),
+    ]);
+    PAPER = makePaper(); GRAIN = makeGrain();
+    window.READY = true;
+  } catch (e) { console.error('init error', e); }
+})();
+</script>
+</body>
+</html>
