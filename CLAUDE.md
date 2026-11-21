@@ -2,6 +2,9 @@
 
 Proyecto de Lumen Studio (https://www.lumenestudio.tech): una app móvil de viajes compartidos para planear ciudades y rutas, y para que viajeros se encuentren y compartan itinerarios. Brief en `docs/brief.md`; plan en `docs/plan/`.
 
+## Primero en cada sesión
+1. **`freellmapi`**: antes de repartir trabajo, el gerente carga la skill `freellmapi` y revisa si el enrutador de modelos gratuitos está disponible (el aviso de inicio de sesión dice su estado). Si lo está, las tareas mecánicas y no sensibles (borradores, traducciones, variantes, resúmenes) van ahí para ahorrar el límite de uso; nunca datos personales ni decisiones.
+
 ## La oficina: un gerente y ocho especialistas
 
 Igual que en el repositorio de la web de Lumen, toda sesión aquí funciona como una oficina.
@@ -31,6 +34,11 @@ Igual que en el repositorio de la web de Lumen, toda sesión aquí funciona como
 - `frontend-design` (Anthropic): dirección visual con identidad propia y lista de rasgos de diseño «hecho por IA» que hay que evitar. Obligatoria para `disenador`, `ilustrador` y `desarrollo` en cualquier pantalla o página.
 - `webapp-testing` (Anthropic): pruebas de páginas web con Playwright.
 - **open-higgsfield-skills** (37 skills, MIT, de `mojomast/open-higgsfield-skills`; licencias en `.claude/skills/_licencias/`): equipo de cine con modelos abiertos en ComfyUI. `video-director` convierte una idea en story bible, plan de tomas, fotogramas, video, voz, música, subtítulos y montaje final. **Necesita un servidor ComfyUI con GPU** (propio, hosteado o Google Colab vía `google-colab-runner`); no corre dentro de esta sesión sin él. Uso: videos para redes y promos de Lumen Travels.
+- **skill-inspector** (NVIDIA SkillSpector, Apache-2.0): revisión de seguridad de cualquier skill antes de instalarla. Obligatoria antes de sumar skills nuevas.
+- **freellmapi** (wrapper propio sobre `tashfeenahmed/freellmapi`, MIT): modelos LLM gratuitos para trabajo pesado y no sensible. Requiere `FREELLMAPI_URL` y `FREELLMAPI_KEY` de un servidor FreeLLMAPI propio.
+- **lemo-opuscar** (`lemomo-ai/lemo-opuscar`): 99 estilos de película hechos en código (acuarela, óleo, ukiyo-e, satélite…) para promos y animaciones. Descarga su librería al usarse. Sus textos son **CC BY-NC 4.0** (no comercial) y su código MIT: úsala como referencia de técnica; para piezas comerciales, que el resultado sea obra nuestra y revisa la licencia de cada estilo y sus recursos.
+- **ponytail** (`DietrichGebert/ponytail`, MIT): modo «senior perezoso» para código: la solución más pequeña que resuelve todo. Incluye `ponytail-review`, `ponytail-audit`, `ponytail-debt`, `ponytail-gain` y `ponytail-help`. Recomendada para `desarrollo` y `disenador` al programar.
+- **agent-reach** (`Panniantong/Agent-Reach`, MIT): lectura de Twitter/X, Reddit, YouTube (subtítulos), GitHub, Instagram, LinkedIn y más cuando la búsqueda web normal no alcanza. Solo lectura; necesita su CLI `agent-reach`. Útil para `investigador` y `marketing`.
 - Además, `modern-web-guidance` (instalada en la sesión) para técnicas web actuales.
 
 ## Reglas de siempre
