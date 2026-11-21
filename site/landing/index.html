@@ -123,7 +123,7 @@
               <defs>
                 <path id="ruta-d" d="M915 885C939 889 1009 894 1060 910C1111 926 1167 955 1220 980C1273 1005 1329 1036 1380 1060C1431 1084 1475 1102 1528 1125C1581 1148 1646 1173 1700 1200C1754 1227 1820 1291 1850 1288C1880 1285 1892 1220 1880 1180C1868 1140 1820 1082 1780 1050C1740 1018 1678 1014 1640 990C1602 966 1585 937 1550 905C1515 873 1468 830 1430 800C1392 770 1383 742 1320 725C1257 708 1153 718 1050 700C947 682 778 648 700 615C622 582 570 511 580 502C590 493 690 539 760 562C830 585 927 619 1000 638C1073 657 1145 667 1200 676C1255 685 1288 687 1330 690C1372 693 1412 692 1450 692C1488 692 1532 688 1560 688C1588 688 1598 692 1620 690C1642 688 1673 681 1690 675C1707 669 1717 656 1722 652"/>
                 <path id="sello-arco" d="M-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/>
-                <mask id="ruta-revela" maskUnits="userSpaceOnUse" x="0" y="0" width="2720" height="1536">
+                <mask id="ruta-revela" maskUnits="userSpaceOnUse" x="520" y="430" width="1440" height="1010">
                   <use class="ruta-mascara" href="#ruta-d"/>
                 </mask>
               </defs>
@@ -141,7 +141,7 @@
               </g>
               <g class="sellos">
                 <g class="sello" data-stop="1" data-x="915" data-y="885" transform="translate(590 1010)"><g class="sello-tinta" transform="rotate(-12)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">1</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">MEDELLÍN · MEDELLÍN</textPath></text></g></g>
-                <g class="sello" data-stop="2" data-x="1850" data-y="1288" transform="translate(2470 1250)"><g class="sello-tinta" transform="rotate(9)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">2</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">BOGOTÁ · BOGOTÁ · BOGOTÁ</textPath></text></g></g>
+                <g class="sello" data-stop="2" data-x="1850" data-y="1288" transform="translate(2400 1115)"><g class="sello-tinta" transform="rotate(9)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">2</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">BOGOTÁ · BOGOTÁ · BOGOTÁ</textPath></text></g></g>
                 <g class="sello" data-stop="3" data-x="580" data-y="502" transform="translate(330 330)"><g class="sello-tinta" transform="rotate(-6)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">3</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">CARTAGENA · CARTAGENA</textPath></text></g></g>
                 <g class="sello" data-stop="4" data-x="1722" data-y="652" transform="translate(1760 470)"><g class="sello-tinta" transform="rotate(14)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">4</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">TAYRONA · SANTA MARTA</textPath></text></g></g>
               </g>
@@ -154,7 +154,8 @@
         <div class="bruma bruma--a" aria-hidden="true"><img src="/assets/art/bruma-a.webp" width="1600" height="800" alt="" loading="lazy" decoding="async"></div>
         <div class="bruma bruma--b" aria-hidden="true"><img src="/assets/art/bruma-b.webp" width="1600" height="700" alt="" loading="lazy" decoding="async"></div>
         <div class="bruma bruma--paso" aria-hidden="true"><img src="/assets/art/bruma-a.webp" width="1600" height="800" alt="" loading="lazy" decoding="async"></div>
-        <div class="viaje-velo" aria-hidden="true"></div>
+        <div class="viaje-velo viaje-velo--der" aria-hidden="true"></div>
+        <div class="viaje-velo viaje-velo--izq" aria-hidden="true"></div>
 
         <ol class="paradas">
           <li class="parada" data-stop="1">
@@ -168,7 +169,7 @@
               <p class="parada-desc" data-i18n="pillars.1d">Plan your trip day by day on the map, with clear times and budget.</p>
             </div>
           </li>
-          <li class="parada" data-stop="2">
+          <li class="parada" data-stop="2" data-lado="izq">
             <figure class="postal"><img class="postal-img" src="/assets/art/bogota-640.webp" srcset="/assets/art/bogota-640.webp 640w, /assets/art/bogota-1200.webp 1200w"
                  sizes="(min-width: 1000px) 300px, (min-width: 720px) 40vw, 60vw" width="1200" height="1500" loading="lazy" decoding="async"
                  data-i18n-attr="alt:route.alt2" alt="Illustration of Bogotá: a cobblestone street in La Candelaria lined with white and ochre houses with wooden balconies; two travelers stroll together beneath Monserrate hill and its sanctuary."></figure>

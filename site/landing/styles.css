@@ -268,22 +268,25 @@ h1, h2, h3, .price, .footer-slogan, .free-safety strong, .faq summary { word-spa
 .viaje-on .postal { grid-area: postal; rotate: none; backface-visibility: hidden; }
 .viaje-on .viaje-telon { display: block; position: absolute; inset: 0; z-index: 5; background: var(--surface-2); }
 .viaje-on .viaje-final { z-index: 6; pointer-events: none; }
+.viaje-on .postal--final { grid-area: auto; }
 .viaje-on .viaje-lema { align-self: center; }
 
 /* escritorio y tabletas horizontales: la lámina a pantalla completa; el texto a la derecha sobre un velo de papel */
 @media (min-width: 760px) and (min-aspect-ratio: 1/1) {
-  .viaje-on .viaje-velo { background: linear-gradient(90deg, rgba(246, 244, 239, 0) 42%, rgba(246, 244, 239, .8) 56%, rgba(246, 244, 239, .94) 70%); }
-  .viaje-on .paradas { padding: 84px var(--m) 40px 57%; }
+  .viaje-on .viaje-velo { background: linear-gradient(90deg, rgba(246, 244, 239, 0) 42%, rgba(246, 244, 239, .82) 56%, rgba(246, 244, 239, .97) 72%); }
+  .viaje-on .viaje-velo--izq { background: linear-gradient(270deg, rgba(246, 244, 239, 0) 42%, rgba(246, 244, 239, .82) 56%, rgba(246, 244, 239, .97) 72%); }
+  .viaje-on .paradas { padding: 84px var(--m) 40px; }
   .viaje-on .parada {
-    align-self: center; grid-template-columns: minmax(150px, 15vw) minmax(0, 1fr); gap: 10px clamp(24px, 2.4vw, 40px);
+    align-self: center; justify-self: end; width: calc(43vw - var(--m)); grid-template-columns: minmax(150px, 15vw) minmax(0, 1fr); gap: 10px clamp(24px, 2.4vw, 40px);
     grid-template-areas: "paso paso" "ciudad ciudad" "postal pilar" "postal desc";
   }
+  .viaje-on .parada[data-lado="izq"] { justify-self: start; }
   .viaje-on .parada-ciudad { margin-bottom: clamp(16px, 2.4vh, 32px); }
   .viaje-on .postal { width: 100%; }
-  .viaje-on .viaje-final { padding: 84px var(--m) 40px 70%; align-content: center; gap: 28px; }
+  .viaje-on .viaje-final { grid-template-columns: minmax(0, 1fr); padding: 84px var(--m) 40px 67%; align-content: center; gap: 32px; }
   .viaje-on .postal--final { display: block; width: min(300px, 100%); }
   .viaje-on .postal--final .postal-img { aspect-ratio: 16 / 9; }
-  .viaje-on .viaje-lema { font-size: clamp(2.5rem, 1rem + 3.4vw, 5rem); line-height: .98; letter-spacing: -.045em; }
+  .viaje-on .viaje-lema { font-size: clamp(2.5rem, 1rem + 2.8vw, 4.25rem); line-height: .98; letter-spacing: -.045em; }
 }
 /* teléfonos y verticales: la lámina arriba con zoom y paneo; postal y texto abajo, sobre el papel */
 @media not all and (min-width: 760px) and (min-aspect-ratio: 1/1) {
@@ -299,7 +302,7 @@ h1, h2, h3, .price, .footer-slogan, .free-safety strong, .faq summary { word-spa
   .viaje-on .postal { width: 100%; align-self: end; margin-top: -24vw; padding: 6px 6px 16px; }
   .viaje-on .parada-pilar { margin-top: 12px; font-size: 1.25rem; }
   .viaje-on .parada-desc { font-size: 1rem; }
-  .viaje-on .viaje-final { padding: 56svh var(--m) 0; align-content: start; }
+  .viaje-on .viaje-final { grid-template-columns: minmax(0, 1fr); padding: 56svh var(--m) 0; align-content: start; }
   .viaje-on .viaje-lema { font-size: clamp(2.5rem, 1.4rem + 4.4vw, 3.25rem); line-height: 1; letter-spacing: -.045em; }
 }
 

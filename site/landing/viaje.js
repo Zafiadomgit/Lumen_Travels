@@ -20,17 +20,17 @@
     // foco de cada parada (centro de la viñeta pintada, px del mapa) y zoom en escritorio
     paradas: [
       { x: 770, y: 885, zoom: 2.3 },     // Medellín (viñeta en 755,885)
-      { x: 2110, y: 1255, zoom: 2.05 },  // Bogotá (caserío 2130,1300 y Monserrate 2120,1160)
+      { x: 2110, y: 1255, zoom: 2.05, izq: 1 },  // Bogotá: está al borde derecho del mapa, su texto va a la izquierda (caserío 2130,1300 y Monserrate 2120,1160)
       { x: 360, y: 455, zoom: 2.35 },    // Cartagena (340,450)
       { x: 1670, y: 640, zoom: 2.2 }     // Santa Marta (bahía 1560,688) y Tayrona (cala 1760,615)
     ],
     // por formato: resolución de la capa (zoomMax), multiplicador del zoom de las paradas, apertura en mitad de cada tramo,
     // encuadre de la entrada y del final, ancla (dónde queda el foco, en fracción del escenario) y tamaño del símbolo
-    // alto: fracción del escenario que la lámina debe cubrir siempre (en vertical, hasta donde empieza el texto)
-    horizontal: { zoomMax: 2.7, escala: 1, vuelo: 1.4, intro: [.5, .5], introFoco: [.5, .5], zIntro: 1,
-                  parada: [.31, .54], fin: [.37, .53], zFin: .7, llama: 1, alto: 1 },
-    vertical:   { zoomMax: 4.2, escala: 1.7, vuelo: 2.5, intro: [.5, .32], introFoco: [.66, .42], zIntro: 2.1,
-                  parada: [.5, .31], fin: [.5, .35], zFin: 1.04, llama: 1.5, alto: .62 },
+    // alto/ancho: parte del escenario que la lámina cubre siempre (en vertical, hasta el texto; en horizontal, hasta el panel de la derecha)
+    horizontal: { zoomMax: 2.4, escala: 1, vuelo: 1.4, intro: [.5, .5], introFoco: [.5, .5], zIntro: 1,
+                  parada: [.31, .54], paradaIzq: [.69, .54], fin: [.37, .53], zFin: .7, llama: 1, alto: 1, ancho: .6 },
+    vertical:   { zoomMax: 2.6, escala: 1.7, vuelo: 2.9, intro: [.5, .32], introFoco: [.66, .42], zIntro: 2.1,
+                  parada: [.5, .31], paradaIzq: [.5, .31], fin: [.5, .35], zFin: 1.04, llama: 1.5, alto: .62, ancho: 1 },
     beat: 46                   // alto de cada «tiempo» de la coreografía, en svh (lo usa también styles.css)
   };
   var Q_HORIZ = '(min-width: 760px) and (min-aspect-ratio: 1/1)';
@@ -83,7 +83,8 @@
       var pal = document.createElement('span'); pal.className = 'pal';
       Array.prototype.forEach.call(w, function (c) { var ch = document.createElement('span'); ch.className = 'ch'; ch.textContent = c; pal.appendChild(ch); });
       out.appendChild(pal);
-      if (wi < words.length - 1) out.appendChild(document.createTextNode(' '));
+      // el eslogan se parte en su coma: «Tu ruta, / tu gente.»
+      if (wi < words.length - 1) out.appendChild(cls === 'lema-anim' && /,$/.test(w) ? document.createElement('br') : document.createTextNode(' '));
     });
     src.classList.add('vh-viaje');
     src.parentNode.appendChild(out);
@@ -110,11 +111,13 @@
     img.sizes = Math.round(lw) + 'px';
   }
   // cover (0–1): cuánto evita la cámara mostrar el borde de la lámina cuando está acercada
-  function cam(fx, fy, z, ax, ay, cover) {
+  // lado (0–1): 0 = el texto a la derecha y el mapa a la izquierda; 1 = al revés
+  function cam(fx, fy, z, ax, ay, cover, abre, lado) {
     var k = z / modo.zoomMax, ps = BS * z, tx = ax * W - fx * ps, ty = ay * H - fy * ps;
     var lw = MW * ps, lh = MH * ps;
     if (cover > 0) {
-      if (lw > W) tx = mix(tx, clamp(tx, W - lw, 0), cover);
+      var wc = W * mix(modo.ancho, 1, abre || 0), ld = lado || 0;
+      if (lw > wc) tx = mix(tx, clamp(tx, mix(wc - lw, W - lw, ld), mix(0, W - wc, ld)), cover);
       var hc = H * modo.alto;
       if (lh > hc) ty = mix(ty, clamp(ty, hc - lh, 0), cover);
     }
@@ -123,16 +126,18 @@
   }
   var lastP = -1, lastD = -1;
   function zp(i) { return CFG.paradas[i].zoom * modo.escala; }
+  function lado(i) { return modo === CFG.horizontal && CFG.paradas[i].izq ? 1 : 0; }
+  function ancla(i) { return lado(i) ? modo.paradaIzq : modo.parada; }
   function render() {
     var C = CFG.paradas, m = modo, z, p;
     if (st.outro > 0) {
       var o = st.outro, c3 = C[3];
       p = 1;
-      z = cam(mix(c3.x, MW / 2, o), mix(c3.y, MH / 2, o), mix(zp(3), m.zFin, o), mix(m.parada[0], m.fin[0], o), mix(m.parada[1], m.fin[1], o), 1 - smooth(0, .5, o));
+      z = cam(mix(c3.x, MW / 2, o), mix(c3.y, MH / 2, o), mix(zp(3), m.zFin, o), mix(ancla(3)[0], m.fin[0], o), mix(ancla(3)[1], m.fin[1], o), 1 - smooth(0, .5, o), 0, lado(3));
     } else if (st.intro < 1) {
       var e = st.intro, c0 = C[0];
       p = 0;
-      z = cam(mix(m.introFoco[0] * MW, c0.x, e), mix(m.introFoco[1] * MH, c0.y, e), mix(m.zIntro, zp(0), e), mix(m.intro[0], m.parada[0], e), mix(m.intro[1], m.parada[1], e), smooth(.5, 1, e));
+      z = cam(mix(m.introFoco[0] * MW, c0.x, e), mix(m.introFoco[1] * MH, c0.y, e), mix(m.zIntro, zp(0), e), mix(m.intro[0], ancla(0)[0], e), mix(m.intro[1], ancla(0)[1], e), smooth(.5, 1, e), 0, lado(0));
     } else {
       var i = Math.min(2, Math.floor(st.leg)), t = clamp(st.leg - i, 0, 1), a = C[i], b = C[i + 1];
       p = mix(P[i], P[i + 1], t);
@@ -140,7 +145,8 @@
       var fx = mix(mix(a.x, q[0], smooth(0, .32, t)), b.x, smooth(.68, 1, t));
       var fy = mix(mix(a.y, q[1], smooth(0, .32, t)), b.y, smooth(.68, 1, t));
       var zb = mix(zp(i), zp(i + 1), t);
-      z = cam(fx, fy, zb - (zb - m.vuelo) * Math.sin(Math.PI * t), m.parada[0], m.parada[1], 1);
+      var sl = smooth(.15, .85, t), ld = mix(lado(i), lado(i + 1), sl);
+      z = cam(fx, fy, zb - (zb - m.vuelo) * Math.sin(Math.PI * t), mix(ancla(i)[0], ancla(i + 1)[0], sl), mix(ancla(i)[1], ancla(i + 1)[1], sl), 1, Math.sin(Math.PI * t), ld);
     }
     // la pincelada fresca llega hasta el símbolo; la tinta seca la sigue en cada parada
     if (Math.abs(p - lastP) > 1e-5) { mascara.style.strokeDashoffset = (L * (1 - p)).toFixed(1); lastP = p; }
@@ -178,7 +184,8 @@
         },
         onUpdate: render
       });
-      var cityPt = function () { return [modo.parada[0] * W, modo.parada[1] * H]; };
+      var cityPt = function (i) { return [ancla(i)[0] * W, ancla(i)[1] * H]; };
+      var velo = function (i) { return lado(i) ? '.viaje-velo--izq' : '.viaje-velo--der'; };
 
       /* 1 · entrada: la lámina llega inclinada sobre la mesa, entre la bruma */
       gsap.set(marco, { transformOrigin: '50% 62%' });
@@ -193,7 +200,7 @@
       tl.to(st, { intro: 1, duration: 1.5, ease: 'power3.inOut' }, T);
       tl.to('.bruma--a', { xPercent: -115, yPercent: 40, scale: 1.5, duration: 1.3, ease: 'power2.in' }, T);
       tl.to('.bruma--b', { xPercent: 115, yPercent: -50, scale: 1.4, duration: 1.3, ease: 'power2.in' }, T + .05);
-      tl.to('.viaje-velo', { opacity: 1, duration: .5 }, T + 1.1);
+      tl.to(velo(0), { opacity: 1, duration: .5 }, T + 1.1);
       tl.to(llama, { opacity: 1, duration: .3 }, T + 1.2);
       T += 1.3;
 
@@ -207,8 +214,8 @@
         var desc = li.querySelector('.parada-desc');
         var tinta = sellos[i].querySelector('.sello-tinta');
         var giro = i % 2 ? 3.5 : -3;
-        var dx = function () { return cityPt()[0] - centro(postal)[0]; };
-        var dy = function () { return cityPt()[1] - centro(postal)[1]; };
+        var dx = function () { return cityPt(i)[0] - centro(postal)[0]; };
+        var dy = function () { return cityPt(i)[1] - centro(postal)[1]; };
 
         gsap.set([paso, pilar, desc], { opacity: 0 });
         gsap.set(chs, { yPercent: 118 });
@@ -235,6 +242,12 @@
 
         if (i < 3) {
           tl.to(st, { leg: i + 1, duration: LEG[i], ease: 'power1.inOut' }, T);
+          // en horizontal el velo se retira mientras se viaja: el mapa entero a la vista
+          if (modo === CFG.horizontal) {
+            tl.to(velo(i), { opacity: .15, duration: .5, ease: 'sine.inOut' }, T);
+            if (velo(i) !== velo(i + 1)) tl.to(velo(i), { opacity: 0, duration: .4, ease: 'sine.inOut' }, T + LEG[i] - .55);
+            tl.to(velo(i + 1), { opacity: 1, duration: .5, ease: 'sine.inOut' }, T + LEG[i] - .55);
+          } else if (i === 0) tl.set('.viaje-velo--izq', { opacity: 0 }, T);
           if (i === 1) { // el tramo largo cruza una nube
             tl.fromTo('.bruma--paso', { xPercent: 85, yPercent: 10, scale: 1.1 }, { xPercent: -120, yPercent: -12, scale: 1.8, duration: LEG[i] * .9 }, T + .1);
             tl.fromTo('.bruma--paso', { opacity: 0 }, { opacity: .85, duration: LEG[i] * .35, ease: 'sine.out' }, T + .1);
@@ -247,6 +260,7 @@
       /* 4 · final: la cámara se aleja, la ruta entera se ilumina y llega el eslogan */
       T -= .2;
       tl.to(st, { outro: 1, duration: 1.7, ease: 'power3.inOut' }, T);
+      tl.to(velo(3), { opacity: 0, duration: 1, ease: 'sine.inOut' }, T + .5);
       tl.to(st, { dry: 1, duration: 1, ease: 'sine.inOut' }, T + .2);
       tl.fromTo(luz, { opacity: 0 }, { opacity: 1, duration: .8, ease: 'sine.inOut' }, T + .9);
       var postalFin = final.querySelector('.postal--final');
@@ -270,12 +284,12 @@
   }
 
   /* ---------- arranque: cambia el diseño de la sección sin mover lo que estás leyendo ---------- */
-  var ancla = document.getElementById('safety') || sec.nextElementSibling;
-  var antes = ancla ? ancla.getBoundingClientRect().top : 0;
+  var siguiente = document.getElementById('safety') || sec.nextElementSibling;
+  var antes = siguiente ? siguiente.getBoundingClientRect().top : 0;
   var arriba = sec.getBoundingClientRect().top < 0;
   sec.style.setProperty('--beat', String(CFG.beat));
   sec.classList.add('viaje-on');
-  if (arriba && ancla) window.scrollTo({ top: window.scrollY + ancla.getBoundingClientRect().top - antes, behavior: 'instant' });
+  if (arriba && siguiente) window.scrollTo({ top: window.scrollY + siguiente.getBoundingClientRect().top - antes, behavior: 'instant' });
   construir();
 
   // al cambiar de idioma cambian los nombres y el eslogan: se rehace la coreografía en el mismo punto
