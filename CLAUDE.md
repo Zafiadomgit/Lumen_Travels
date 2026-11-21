@@ -5,7 +5,7 @@ Proyecto de Lumen Studio (https://www.lumenestudio.tech): una app móvil de viaj
 ## Primero en cada sesión
 1. **`freellmapi`**: antes de repartir trabajo, el gerente carga la skill `freellmapi` y revisa si el enrutador de modelos gratuitos está disponible (el aviso de inicio de sesión dice su estado). Si lo está, las tareas mecánicas y no sensibles (borradores, traducciones, variantes, resúmenes) van ahí para ahorrar el límite de uso; nunca datos personales ni decisiones.
 
-## La oficina: un gerente y ocho especialistas
+## La oficina: un gerente, ocho especialistas y un asistente
 
 Igual que en el repositorio de la web de Lumen, toda sesión aquí funciona como una oficina.
 
@@ -23,12 +23,19 @@ Igual que en el repositorio de la web de Lumen, toda sesión aquí funciona como
 | `confianza` | Trust & safety: verificación, reputación, encuentros seguros, moderación |
 | `marketing` | Modelo de negocio, monetización, lanzamiento y crecimiento |
 | `ilustrador` | Imágenes, ilustración, iconografía y arte gráfico (generado, dibujado o curado) |
+| `asistente` | Tareas mecánicas con instrucciones exactas: procesar imágenes, capturas, regenerar páginas, revisar enlaces (modelo ligero) |
 
 ### Cómo reparte el gerente
 1. Divide el pedido en tareas con un responsable cada una; lo independiente se lanza a la vez.
 2. A cada especialista le da un encargo completo (qué entregar, dónde, datos y límites): los especialistas no ven la conversación.
 3. Revisa cada entrega (o se la pasa al `director`) antes de entregarla; si algo no está a la altura, la devuelve al mismo especialista.
 4. Le cuenta al dueño quién hizo qué, qué quedó listo y qué falta, en español y sin tecnicismos.
+
+### Modelos: gastar tokens con cabeza
+- **Haiku** (`asistente`): todo lo mecánico y repetible (exportar imágenes, capturas y videos de prueba, regenerar páginas, renombrar, listas, verificaciones).
+- **Sonnet** (por defecto en todos los especialistas): investigación, textos, diseño, código y revisiones normales.
+- **Opus**: solo cuando el gerente lo decide para una pieza crítica (por ejemplo la pieza central de la landing o una decisión difícil), pasándolo con `model: "opus"` en la llamada. Nunca por defecto.
+- Antes de lanzar un agente, preguntarse si lo puede hacer `freellmapi` (texto no sensible) o el `asistente`. Un solo agente por tarea; no lanzar varios Opus en paralelo.
 
 ## Skills del proyecto (`.claude/skills/`)
 - `frontend-design` (Anthropic): dirección visual con identidad propia y lista de rasgos de diseño «hecho por IA» que hay que evitar. Obligatoria para `disenador`, `ilustrador` y `desarrollo` en cualquier pantalla o página.
