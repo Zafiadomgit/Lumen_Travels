@@ -61,7 +61,7 @@ const CITIES = [
   { n: 'Bogotá',      p: [2130, 1300], lab: [-26, -34, 'right'] },
   { n: 'Cartagena',   p: [340, 450],  lab: [0, 56, 'center'] },
   { n: 'Santa Marta', p: [1560, 688], lab: [-6, 62, 'center'] },
-  { n: 'Tayrona',     p: [1760, 615], lab: [58, -6, 'left'] },
+  { n: 'Tayrona',     p: [1760, 615], lab: [-64, -4, 'right'] },
 ];
 // Catmull-Rom por tramo: la ruta pasa exacta por cada ciudad
 function crom(pts, step = 5) {
@@ -203,14 +203,15 @@ function mapCam(lt) {
   let sx = 0, sy = 0, N = 9; for (let i = 0; i < N; i++) { const p = hz(lt - .35 + i * .14); sx += p[0]; sy += p[1]; } sx /= N; sy /= N;
   let s;
   if (PORT) s = 1.38;
-  else s = lerp(.8, .706, ss(seg(lt, 3.8, 5.6)));
-  const hw = W / (2 * s), hh = H / (2 * s);
-  return { s, cx: clamp(sx, Math.min(hw, MAP_W / 2), Math.max(MAP_W - hw, MAP_W / 2)), cy: clamp(sy, Math.min(hh, MAP_H / 2), Math.max(MAP_H - hh, MAP_H / 2)) };
+  else s = lerp(.8, .72, ss(seg(lt, 3.8, 5.6)));
+  const hw = W / (2 * s), hh = (H - BAND) / (2 * s);
+  return { s, oy: BAND + (H - BAND) / 2, cx: clamp(sx, Math.min(hw, MAP_W / 2), Math.max(MAP_W - hw, MAP_W / 2)), cy: clamp(sy, Math.min(hh, MAP_H / 2), Math.max(MAP_H - hh, MAP_H / 2)) };
 }
-const toScr = (cam, p) => [(p[0] - cam.cx) * cam.s + W / 2, (p[1] - cam.cy) * cam.s + H / 2];
+const BAND = PORT ? 620 : 300;   // franja de papel arriba, solo para el texto del mapa: nada del mapa pasa por debajo de él
+const toScr = (cam, p) => [(p[0] - cam.cx) * cam.s + W / 2, (p[1] - cam.cy) * cam.s + (cam.oy ?? H / 2)];
 function drawMap(cam, alpha = 1) {
   g.save(); g.globalAlpha = alpha; g.imageSmoothingQuality = 'high';
-  g.drawImage(IMG.mapa, (0 - cam.cx) * cam.s + W / 2, (0 - cam.cy) * cam.s + H / 2, MAP_W * cam.s, MAP_H * cam.s); g.restore();
+  g.drawImage(IMG.mapa, (0 - cam.cx) * cam.s + W / 2, (0 - cam.cy) * cam.s + (cam.oy ?? H / 2), MAP_W * cam.s, MAP_H * cam.s); g.restore();
 }
 function drawRoute(cam, L, o = {}) {
   const idx = (() => { let lo = 0, hi = CUM.length - 1; while (lo < hi - 1) { const m = (lo + hi) >> 1; if (CUM[m] <= L) lo = m; else hi = m; } return lo; })();
@@ -230,7 +231,7 @@ function pin(cam, ci, lt, o = {}) {
   g.save(); g.fillStyle = 'rgba(20,18,24,.25)'; g.beginPath(); g.ellipse(x + 2, y + r * .9, r * 1.1, r * .45, 0, 0, 6.3); g.fill();
   g.fillStyle = C.crema; g.beginPath(); g.arc(x, y, r * 1.25, 0, 6.3); g.fill(); g.fillStyle = C.tinta; g.beginPath(); g.arc(x, y, r * .95, 0, 6.3); g.fill();
   g.fillStyle = C.oro; g.beginPath(); g.arc(x, y, r * .55, 0, 6.3); g.fill(); g.restore();
-  if (!o.noLabel) { const [dx, dy, al] = c.lab, sz = PORT ? 46 : 44; txt('lab-' + c.n, c.n, x + dx, y + dy * (PORT ? 1.1 : 1), sz, { weight: 800, align: al, t0: a + .15, lt, dur: .5, halo: .92 }); }
+  if (!o.noLabel) { const [dx, dy, al] = c.lab, sz = PORT ? 46 : 44; txt('lab-' + c.n, c.n, x + dx, y + dy * (PORT ? 1.1 : 1), sz, { weight: 800, align: al, t0: a + .6, lt, dur: .5, halo: .92 }); }
 }
 // placa de niebla (papel) bajo un texto sobre el mapa: borde irregular y suave
 function mist(x0, y0, x1, y1, lt, t0) {   // una pincelada ancha de color papel, pintada de izquierda a derecha, para escribir encima
@@ -287,14 +288,17 @@ function sHero(lt) {
 }
 function sMapa(lt) {
   g.drawImage(PAPER, 0, 0);
-  const cam = mapCam(lt); drawMap(cam);
-  const L = routeLen(lt);
+  const cam = mapCam(lt), L = routeLen(lt);
+  g.save(); g.beginPath(); g.moveTo(-10, H + 10); g.lineTo(-10, BAND);   // borde de pincel seco entre el papel del texto y el mapa
+  for (let x = -10; x <= W + 10; x += 6) g.lineTo(x, BAND + (vnoise(x * .011 + 3) - .5) * 22 + (hash(Math.floor(x / 5)) - .5) * 7);
+  g.lineTo(W + 10, H + 10); g.closePath(); g.clip();
+  drawMap(cam);
   const head = drawRoute(cam, L);
   for (let i = 0; i < CITIES.length; i++) pin(cam, i, lt);
-  // la llama viaja en la punta de la ruta
   if (L > 1) { const pulse = .5 + .5 * Math.sin(lt * 6); drawMark(head[0], head[1], (PORT ? 104 : 78), { glow: .45 + .15 * pulse }); }
-  if (PORT) { mist(10, 250, W - 20, 570, lt, .5); txt('map-1', 'Encuentra viajeros', 80, 330, 76, { lt, t0: .9, halo: 0 }); txt('map-2', 'que van a donde', 80, 420, 76, { lt, t0: 1.1, halo: 0 }); txt('map-3', 'tú vas.', 80, 510, 76, { lt, t0: 1.3, halo: 0 }); }
-  else { mist(20, 30, 1180, 280, lt, .5); txt('map-1', 'Encuentra viajeros que', 110, 140, 70, { lt, t0: .9, halo: 0 }); txt('map-2', 'van a donde tú vas.', 110, 224, 70, { lt, t0: 1.15, halo: 0 }); }
+  g.restore();
+  if (PORT) { txt('map-1', 'Encuentra viajeros', 80, 330, 76, { lt, t0: .6, halo: 0 }); txt('map-2', 'que van a donde', 80, 420, 76, { lt, t0: .8, halo: 0 }); txt('map-3', 'tú vas.', 80, 510, 76, { lt, t0: 1.0, halo: 0 }); }
+  else { txt('map-1', 'Encuentra viajeros que', 110, 115, 70, { lt, t0: .6, halo: 0 }); txt('map-2', 'van a donde tú vas.', 110, 200, 70, { lt, t0: .85, halo: 0 }); }
 }
 function sStop(i, lt) {
   const S = STOPS[i], im = IMG[S.img];
@@ -339,7 +343,7 @@ function sFin(lt) {
   const cx = W / 2, pulse = .5 + .5 * Math.sin(lt * 2.2);
   if (PORT) {
     const k = spring((lt - .25) / .9, 6, .5); drawMark(cx, 470, 210 * clamp(k, 0, 1.2), { glow: .6 + .15 * pulse });
-    txt('f-k', 'MUY PRONTO', cx, 650, 30, { font: FONT_B, weight: 800, color: C.terra, align: 'center', lt, t0: .7, track: 6, halo: 0 });
+    txt('f-k', 'Muy pronto', cx, 655, 38, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: .7, halo: 0 });
     txt('f-1', 'Tu ruta,', cx, 790, 132, { align: 'center', lt, t0: .85, halo: 0 }); txt('f-2', 'tu gente.', cx, 925, 132, { align: 'center', lt, t0: 1.1, halo: 0 });
     swash(cx - 250, 965, cx + 250, 960, 9, lt, 1.5, .55, 18);
     txt('f-3', 'Únete a la lista de espera', cx, 1110, 52, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: 1.7, halo: 0 });
@@ -347,7 +351,7 @@ function sFin(lt) {
     txt('f-5', 'Diseñado por Lumen Studio', cx, 1390, 34, { font: FONT_B, weight: 600, color: C.tinta2, align: 'center', lt, t0: 2.4, halo: 0 });
   } else {
     const k = spring((lt - .25) / .9, 6, .5); drawMark(cx, 250, 190 * clamp(k, 0, 1.2), { glow: .6 + .15 * pulse });
-    txt('f-k', 'MUY PRONTO', cx, 420, 28, { font: FONT_B, weight: 800, color: C.terra, align: 'center', lt, t0: .7, track: 6, halo: 0 });
+    txt('f-k', 'Muy pronto', cx, 425, 36, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: .7, halo: 0 });
     txt('f-1', 'Tu ruta, tu gente.', cx, 590, 130, { align: 'center', lt, t0: .85, halo: 0 });
     swash(cx - 430, 630, cx + 430, 624, 9, lt, 1.5, .6, 17);
     txt('f-3', 'Únete a la lista de espera', cx, 745, 52, { font: FONT_B, weight: 700, color: C.tinta2, align: 'center', lt, t0: 1.7, halo: 0 });
