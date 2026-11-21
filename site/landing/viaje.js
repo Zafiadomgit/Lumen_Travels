@@ -28,10 +28,10 @@
     // encuadre de la entrada y del final, ancla (dónde queda el foco, en fracción del escenario) y tamaño del símbolo
     // alto/ancho: parte del escenario que la lámina cubre siempre (en vertical, hasta el texto; en horizontal, hasta el panel de la derecha)
     horizontal: { zoomMax: 2.4, escala: 1, vuelo: 1.4, intro: [.5, .5], introFoco: [.5, .5], zIntro: 1,
-                  parada: [.31, .54], paradaIzq: [.69, .54], fin: [.37, .53], zFin: .7, llama: 1, alto: 1, ancho: .6 },
+                  parada: [.31, .54], paradaIzq: [.69, .54], fin: [.29, .53], zFin: .52, llama: 1, alto: 1, ancho: .6 },
     vertical:   { zoomMax: 2.6, escala: 1.7, vuelo: 2.9, intro: [.5, .32], introFoco: [.66, .42], zIntro: 2.1,
                   parada: [.5, .31], paradaIzq: [.5, .31], fin: [.5, .35], zFin: 1.04, llama: 1.5, alto: .62, ancho: 1 },
-    beat: 46                   // alto de cada «tiempo» de la coreografía, en svh (lo usa también styles.css)
+    beat: 38                   // alto de cada «tiempo» de la coreografía, en svh (lo usa también styles.css)
   };
   var Q_HORIZ = '(min-width: 760px) and (min-aspect-ratio: 1/1)';
 
@@ -49,6 +49,7 @@
   var sellos = Array.prototype.slice.call(svg.querySelectorAll('.sello'));
   var paradas = Array.prototype.slice.call(sec.querySelectorAll('.parada'));
   var final = sec.querySelector('.viaje-final');
+  var head = sec.querySelector('.viaje-head');
   var vb = svg.viewBox.baseVal;
   var MW = vb.width, MH = vb.height;
 
@@ -189,7 +190,7 @@
 
       /* 1 · entrada: la lámina llega inclinada sobre la mesa, entre la bruma */
       gsap.set(marco, { transformOrigin: '50% 62%' });
-      tl.fromTo(marco, { rotationX: 52, rotationZ: -8, scale: .82, yPercent: 16 }, { rotationX: 30, rotationZ: -5, scale: .92, yPercent: 2, duration: E, ease: 'power1.out' }, 0);
+      tl.fromTo(marco, { rotationX: 52, rotationZ: -8, scale: .82, yPercent: 16 }, { rotationX: 30, rotationZ: -5, scale: .88, yPercent: 12, duration: E, ease: 'power1.out' }, 0);
       tl.fromTo('.bruma--a', { xPercent: -4, yPercent: 18 }, { xPercent: 0, yPercent: 0, duration: E }, 0);
       tl.fromTo('.bruma--b', { xPercent: 6, yPercent: -10 }, { xPercent: 0, yPercent: 0, duration: E }, 0);
       gsap.set(['.viaje-velo', llama], { opacity: 0 });
@@ -202,6 +203,7 @@
       tl.to('.bruma--b', { xPercent: 115, yPercent: -50, scale: 1.4, duration: 1.3, ease: 'power2.in' }, T + .05);
       tl.to(velo(0), { opacity: 1, duration: .5 }, T + 1.1);
       tl.to(llama, { opacity: 1, duration: .3 }, T + 1.2);
+      tl.to(head, { y: -50, opacity: 0, duration: .55, ease: 'power2.in' }, T + .1);
       T += 1.3;
 
       /* 3 · cada parada: el sello, el nombre, la postal que se despliega desde la ciudad y el pilar */
@@ -269,11 +271,13 @@
       tl.fromTo(postalFin, { opacity: 0, y: 90, rotation: 7, scale: .9, transformPerspective: 900, rotationX: 30 },
         { opacity: 1, y: 0, rotation: -2.5, scale: 1, rotationX: 0, duration: .9, ease: 'expo.out' }, T + 1.1);
       tl.to(lema, { yPercent: 0, duration: .55, stagger: .022, ease: 'power3.out' }, T + 1.35);
-      T += 2.6;
+      T += 1.9;
 
       /* 5 · transición: sube el papel de la sección siguiente; el eslogan se queda encima y se va con el scroll */
       tl.fromTo('.viaje-telon', { yPercent: 101 }, { yPercent: 0, duration: 1.1, ease: 'power2.inOut' }, T);
       tl.to(postalFin, { opacity: 0, y: -50, duration: .6, ease: 'power2.in' }, T);
+      // el eslogan baja hacia la sección siguiente: menos papel liso al despegarse la escena
+      tl.to(final.querySelector('.viaje-lema'), { y: function () { return H * .22; }, duration: 1.1, ease: 'power2.inOut' }, T);
       tl.to(marco, { scale: .94, yPercent: -4, duration: 1.1, ease: 'power2.in' }, T);
       T += 1.15;
 
@@ -288,6 +292,7 @@
   var antes = siguiente ? siguiente.getBoundingClientRect().top : 0;
   var arriba = sec.getBoundingClientRect().top < 0;
   sec.style.setProperty('--beat', String(CFG.beat));
+  escena.insertBefore(head, escena.firstChild);   // el encabezado entra con la lámina
   sec.classList.add('viaje-on');
   if (arriba && siguiente) window.scrollTo({ top: window.scrollY + siguiente.getBoundingClientRect().top - antes, behavior: 'instant' });
   construir();

@@ -238,9 +238,13 @@ h1, h2, h3, .price, .footer-slogan, .free-safety strong, .faq summary { word-spa
 .viaje-suave .is-visible { opacity: 1; }
 
 /* ---------- la coreografía (.viaje-on) ---------- */
-.viaje-on { padding-bottom: 0; }
-.viaje-on .viaje-head { margin-bottom: clamp(32px, 5vw, 64px); }
-.viaje-on .viaje-pista { position: relative; margin-inline: calc(50% - 50vw); height: calc(100svh + var(--beats, 18) * var(--beat, 46) * 1svh); }
+.viaje-on { padding-top: calc(var(--gap) * .5); padding-bottom: 0; }
+/* el encabezado vive dentro del escenario: grande, sobre la lámina que llega, y se va cuando la cámara baja */
+.viaje-on .viaje-head { position: absolute; z-index: 7; top: clamp(96px, 13svh, 140px); left: max(var(--m), calc((100vw - 1320px) / 2)); right: var(--m); margin: 0; max-width: none; gap: 14px; pointer-events: none; }
+.viaje-on .viaje-head .sec-title { max-width: 11ch; font-size: clamp(2.75rem, 1.2rem + 4.6vw, 5.5rem); line-height: .96; letter-spacing: -.045em; }
+.viaje-on .viaje-head .sec-lead { font-size: clamp(1.125rem, 1rem + .5vw, 1.5rem); }
+.viaje-on + .safety { padding-top: calc(var(--gap) * .45); }
+.viaje-on .viaje-pista { position: relative; margin-inline: calc(50% - 50vw); height: calc(100svh + var(--beats, 18) * var(--beat, 38) * 1svh); }
 .viaje-on .viaje-escena {
   position: sticky; top: 0; display: block; height: 100svh; overflow: clip; background: var(--bg);
   perspective: 1700px; perspective-origin: 50% 30%;
@@ -283,7 +287,7 @@ h1, h2, h3, .price, .footer-slogan, .free-safety strong, .faq summary { word-spa
   .viaje-on .parada[data-lado="izq"] { justify-self: start; }
   .viaje-on .parada-ciudad { margin-bottom: clamp(16px, 2.4vh, 32px); }
   .viaje-on .postal { width: 100%; }
-  .viaje-on .viaje-final { grid-template-columns: minmax(0, 1fr); padding: 84px var(--m) 40px 67%; align-content: center; gap: 32px; }
+  .viaje-on .viaje-final { grid-template-columns: calc(43vw - var(--m)); justify-content: end; padding: 84px var(--m) 40px; align-content: center; gap: 32px; }
   .viaje-on .postal--final { display: block; width: min(300px, 100%); }
   .viaje-on .postal--final .postal-img { aspect-ratio: 16 / 9; }
   .viaje-on .viaje-lema { font-size: clamp(2.5rem, 1rem + 2.8vw, 4.25rem); line-height: .98; letter-spacing: -.045em; }
