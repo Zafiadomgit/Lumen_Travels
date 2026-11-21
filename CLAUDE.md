@@ -30,6 +30,7 @@ Igual que en el repositorio de la web de Lumen, toda sesión aquí funciona como
 ## Skills del proyecto (`.claude/skills/`)
 - `frontend-design` (Anthropic): dirección visual con identidad propia y lista de rasgos de diseño «hecho por IA» que hay que evitar. Obligatoria para `disenador`, `ilustrador` y `desarrollo` en cualquier pantalla o página.
 - `webapp-testing` (Anthropic): pruebas de páginas web con Playwright.
+- **open-higgsfield-skills** (37 skills, MIT, de `mojomast/open-higgsfield-skills`; licencias en `.claude/skills/_licencias/`): equipo de cine con modelos abiertos en ComfyUI. `video-director` convierte una idea en story bible, plan de tomas, fotogramas, video, voz, música, subtítulos y montaje final. **Necesita un servidor ComfyUI con GPU** (propio, hosteado o Google Colab vía `google-colab-runner`); no corre dentro de esta sesión sin él. Uso: videos para redes y promos de Lumen Travels.
 - Además, `modern-web-guidance` (instalada en la sesión) para técnicas web actuales.
 
 ## Reglas de siempre

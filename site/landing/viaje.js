@@ -19,10 +19,10 @@
   var CFG = {
     // foco de cada parada (centro de la viñeta pintada, px del mapa) y zoom en escritorio
     paradas: [
-      { x: 760, y: 890, zoom: 2.3 },     // Medellín
-      { x: 2110, y: 1270, zoom: 2.05 },  // Bogotá
-      { x: 360, y: 470, zoom: 2.35 },    // Cartagena
-      { x: 1745, y: 640, zoom: 2.35 }    // Santa Marta y Tayrona
+      { x: 770, y: 885, zoom: 2.3 },     // Medellín (viñeta en 755,885)
+      { x: 2110, y: 1255, zoom: 2.05 },  // Bogotá (caserío 2130,1300 y Monserrate 2120,1160)
+      { x: 360, y: 455, zoom: 2.35 },    // Cartagena (340,450)
+      { x: 1670, y: 640, zoom: 2.2 }     // Santa Marta (bahía 1560,688) y Tayrona (cala 1760,615)
     ],
     // por formato: resolución de la capa (zoomMax), multiplicador del zoom de las paradas, apertura en mitad de cada tramo,
     // encuadre de la entrada y del final, ancla (dónde queda el foco, en fracción del escenario) y tamaño del símbolo
