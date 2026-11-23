@@ -99,7 +99,7 @@
         var cerca = new IntersectionObserver(function (entries) {
           if (!entries.some(function (en) { return en.isIntersecting; })) return;
           cerca.disconnect();
-          cargar(['/vendor/gsap.min.js', '/vendor/ScrollTrigger.min.js', '/viaje.js']);
+          cargar(['/travels/vendor/gsap.min.js', '/travels/vendor/ScrollTrigger.min.js', '/travels/viaje.js']);
         }, { rootMargin: '150% 0px 150% 0px' });
         cerca.observe(viaje);
       }
