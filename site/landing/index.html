@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Lumen Travels">
 <meta property="og:title" data-i18n-attr="content:meta.title" content="Lumen Travels: plan your route and find travel companions in Colombia">
 <meta property="og:description" data-i18n-attr="content:meta.desc" content="Plan your trip day by day and find verified travelers heading your way across Colombia. Join the waitlist. Your route, your people.">
-<meta property="og:image" content="https://lumentravels.vercel.app/assets/og/og-image.jpg">
+<meta property="og:image" content="https://www.lumenestudio.tech/travels/assets/og/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Lumen symbol over a gouache painting of three travelers walking a mountain path through coffee fields in Colombia.">
@@ -23,24 +23,24 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" data-i18n-attr="content:meta.title" content="Lumen Travels: plan your route and find travel companions in Colombia">
 <meta name="twitter:description" data-i18n-attr="content:meta.desc" content="Plan your trip day by day and find verified travelers heading your way across Colombia. Join the waitlist. Your route, your people.">
-<meta name="twitter:image" content="https://lumentravels.vercel.app/assets/og/og-image.jpg">
+<meta name="twitter:image" content="https://www.lumenestudio.tech/travels/assets/og/og-image.jpg">
 
-<link rel="canonical" href="https://lumentravels.vercel.app/">
-<link rel="alternate" hreflang="en" href="https://lumentravels.vercel.app/?lang=en">
-<link rel="alternate" hreflang="es" href="https://lumentravels.vercel.app/?lang=es">
-<link rel="alternate" hreflang="x-default" href="https://lumentravels.vercel.app/">
-<link rel="icon" href="/assets/brand/favicon.ico" sizes="48x48">
-<link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml" sizes="any">
-<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="preload" as="image" href="/assets/art/hero-1200.webp" imagesrcset="/assets/art/hero-1200.webp 1200w, /assets/art/hero-2400.webp 2400w" imagesizes="100vw" fetchpriority="high">
-<link rel="preload" href="/assets/fonts/manrope-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css">
+<link rel="canonical" href="https://www.lumenestudio.tech/travels">
+<link rel="alternate" hreflang="en" href="https://www.lumenestudio.tech/travels?lang=en">
+<link rel="alternate" hreflang="es" href="https://www.lumenestudio.tech/travels?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://www.lumenestudio.tech/travels">
+<link rel="icon" href="/travels/assets/brand/favicon.ico" sizes="48x48">
+<link rel="icon" href="/travels/assets/brand/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="/travels/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/travels/site.webmanifest">
+<link rel="preload" as="image" href="/travels/assets/art/hero-1200.webp" imagesrcset="/travels/assets/art/hero-1200.webp 1200w, /travels/assets/art/hero-2400.webp 2400w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" href="/travels/assets/fonts/manrope-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/travels/assets/fonts/plus-jakarta-sans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/travels/styles.css">
 <!-- Síncrono a propósito: decide variante e idioma antes de pintar (sin parpadeo entre A y B). -->
-<script src="/app.js"></script>
+<script src="/travels/app.js"></script>
 <!-- Efectos (luz, farol, chispas; carga perezosa de El viaje pintado): mejora progresiva, nada depende de ellos. -->
-<script src="/fx.js" defer></script>
+<script src="/travels/fx.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="a11y.skip">Skip to content</a>
@@ -59,6 +59,7 @@
     <span>lumen <span class="wm-b">travels</span></span>
   </a>
   <div class="topbar-actions">
+    <a class="studio-link" href="https://www.lumenestudio.tech" aria-label="Lumen Studio"><span class="studio-full">Lumen&nbsp;</span>Studio</a>
     <div class="lang-switch" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">
       <button type="button" class="lang-btn" data-lang="en" lang="en" aria-pressed="true">EN</button>
       <button type="button" class="lang-btn" data-lang="es" lang="es" aria-pressed="false">ES</button>
@@ -91,7 +92,7 @@
       </div>
     </div>
     <figure class="hero-art">
-      <img src="/assets/art/hero-1200.webp" srcset="/assets/art/hero-1200.webp 1200w, /assets/art/hero-2400.webp 2400w"
+      <img src="/travels/assets/art/hero-1200.webp" srcset="/travels/assets/art/hero-1200.webp 1200w, /travels/assets/art/hero-2400.webp 2400w"
            sizes="100vw" width="2400" height="1350" fetchpriority="high" decoding="async"
            data-i18n-attr="alt:hero.alt" alt="Illustration: three small travelers, seen from behind, walk together along a mountain path through coffee fields, above green valleys and a river glowing at sunset.">
     </figure>
@@ -112,8 +113,8 @@
             <!-- MAPA pintado (ilustrador), 2720×1536. Al cambiar el arte: src/srcset/width/height de esta imagen, viewBox del SVG,
                  el trazado #ruta-d y los sellos (data-x/y = punto de la ruta junto a la ciudad; transform = dónde va el sello).
                  viaje.js lo lee todo de aquí; el encuadre de la cámara (foco y zoom de cada parada) está en CFG, en viaje.js. -->
-            <img class="lamina-img" src="/assets/art/mapa-1600.webp"
-                 srcset="/assets/art/mapa-960.webp 960w, /assets/art/mapa-1600.webp 1600w, /assets/art/mapa-2720.webp 2720w"
+            <img class="lamina-img" src="/travels/assets/art/mapa-1600.webp"
+                 srcset="/travels/assets/art/mapa-960.webp 960w, /travels/assets/art/mapa-1600.webp 1600w, /travels/assets/art/mapa-2720.webp 2720w"
                  sizes="(min-width: 1000px) 56vw, 92vw" width="2720" height="1536" loading="lazy" decoding="async"
                  data-i18n-attr="alt:route.map" alt="The route: Medellín, Bogotá, Cartagena, Santa Marta and Tayrona.">
             <!-- la ruta en px del mapa, con los puntos de docs/arte/mapa-coordenadas.md unidos por una curva Catmull-Rom.
@@ -151,54 +152,54 @@
           </figure>
         </div>
 
-        <div class="bruma bruma--a" aria-hidden="true"><img src="/assets/art/bruma-a.webp" width="1600" height="800" alt="" loading="lazy" decoding="async"></div>
-        <div class="bruma bruma--b" aria-hidden="true"><img src="/assets/art/bruma-b.webp" width="1600" height="700" alt="" loading="lazy" decoding="async"></div>
-        <div class="bruma bruma--paso" aria-hidden="true"><img src="/assets/art/bruma-a.webp" width="1600" height="800" alt="" loading="lazy" decoding="async"></div>
+        <div class="bruma bruma--a" aria-hidden="true"><img src="/travels/assets/art/bruma-a.webp" width="1600" height="800" alt="" loading="lazy" decoding="async"></div>
+        <div class="bruma bruma--b" aria-hidden="true"><img src="/travels/assets/art/bruma-b.webp" width="1600" height="700" alt="" loading="lazy" decoding="async"></div>
+        <div class="bruma bruma--paso" aria-hidden="true"><img src="/travels/assets/art/bruma-a.webp" width="1600" height="800" alt="" loading="lazy" decoding="async"></div>
         <div class="viaje-velo viaje-velo--der" aria-hidden="true"></div>
         <div class="viaje-velo viaje-velo--izq" aria-hidden="true"></div>
 
         <ol class="paradas">
           <li class="parada" data-stop="1">
-            <figure class="postal"><img class="postal-img" src="/assets/art/medellin-640.webp" srcset="/assets/art/medellin-640.webp 640w, /assets/art/medellin-1200.webp 1200w"
+            <figure class="postal"><img class="postal-img" src="/travels/assets/art/medellin-640.webp" srcset="/travels/assets/art/medellin-640.webp 640w, /travels/assets/art/medellin-1200.webp 1200w"
                  sizes="(min-width: 1000px) 300px, (min-width: 720px) 40vw, 60vw" width="1200" height="1500" loading="lazy" decoding="async"
                  data-i18n-attr="alt:route.alt1" alt="Illustration of Medellín: Metrocable cable cars glide over hillside brick houses, with the Aburrá Valley below."></figure>
             <div class="parada-texto">
               <p class="parada-paso" aria-hidden="true"></p>
               <p class="parada-ciudad"><span class="ciudad-txt">Medellín</span></p>
-              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-plan"/></svg><span data-i18n="pillars.1t">Plan.</span></h3>
+              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-plan"/></svg><span data-i18n="pillars.1t">Plan.</span></h3>
               <p class="parada-desc" data-i18n="pillars.1d">Plan your trip day by day on the map, with clear times and budget.</p>
             </div>
           </li>
           <li class="parada" data-stop="2" data-lado="izq">
-            <figure class="postal"><img class="postal-img" src="/assets/art/bogota-640.webp" srcset="/assets/art/bogota-640.webp 640w, /assets/art/bogota-1200.webp 1200w"
+            <figure class="postal"><img class="postal-img" src="/travels/assets/art/bogota-640.webp" srcset="/travels/assets/art/bogota-640.webp 640w, /travels/assets/art/bogota-1200.webp 1200w"
                  sizes="(min-width: 1000px) 300px, (min-width: 720px) 40vw, 60vw" width="1200" height="1500" loading="lazy" decoding="async"
                  data-i18n-attr="alt:route.alt2" alt="Illustration of Bogotá: a cobblestone street in La Candelaria lined with white and ochre houses with wooden balconies; two travelers stroll together beneath Monserrate hill and its sanctuary."></figure>
             <div class="parada-texto">
               <p class="parada-paso" aria-hidden="true"></p>
               <p class="parada-ciudad"><span class="ciudad-txt">Bogotá</span></p>
-              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-match"/></svg><span data-i18n="pillars.2t">Match up.</span></h3>
+              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-match"/></svg><span data-i18n="pillars.2t">Match up.</span></h3>
               <p class="parada-desc" data-i18n="pillars.2d">Meet travelers heading where you’re going, when you’re going.</p>
             </div>
           </li>
           <li class="parada" data-stop="3">
-            <figure class="postal"><img class="postal-img" src="/assets/art/cartagena-640.webp" srcset="/assets/art/cartagena-640.webp 640w, /assets/art/cartagena-1200.webp 1200w"
+            <figure class="postal"><img class="postal-img" src="/travels/assets/art/cartagena-640.webp" srcset="/travels/assets/art/cartagena-640.webp 640w, /travels/assets/art/cartagena-1200.webp 1200w"
                  sizes="(min-width: 1000px) 300px, (min-width: 720px) 40vw, 60vw" width="1200" height="1500" loading="lazy" decoding="async"
                  data-i18n-attr="alt:route.alt3" alt="Illustration of Cartagena: a narrow street in the walled city between ochre and red facades with wooden balconies and bougainvillea; two travelers walk together toward the cathedral’s tower and dome."></figure>
             <div class="parada-texto">
               <p class="parada-paso" aria-hidden="true"></p>
               <p class="parada-ciudad"><span class="ciudad-txt">Cartagena</span></p>
-              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-group"/></svg><span data-i18n="pillars.3t">Travel together.</span></h3>
+              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-group"/></svg><span data-i18n="pillars.3t">Travel together.</span></h3>
               <p class="parada-desc" data-i18n="pillars.3d">One place for the plan, the chat, the votes and the bills.</p>
             </div>
           </li>
           <li class="parada" data-stop="4">
-            <figure class="postal"><img class="postal-img" src="/assets/art/tayrona-640.webp" srcset="/assets/art/tayrona-640.webp 640w, /assets/art/tayrona-1200.webp 1200w"
+            <figure class="postal"><img class="postal-img" src="/travels/assets/art/tayrona-640.webp" srcset="/travels/assets/art/tayrona-640.webp 640w, /travels/assets/art/tayrona-1200.webp 1200w"
                  sizes="(min-width: 1000px) 300px, (min-width: 720px) 40vw, 60vw" width="1200" height="1500" loading="lazy" decoding="async"
                  data-i18n-attr="alt:route.alt4" alt="Illustration of Tayrona National Park: a pale sandy cove with large rounded boulders, palm trees and a thatched hut on the point; two travelers sit on the beach watching the sea at sunset."></figure>
             <div class="parada-texto">
               <p class="parada-paso" aria-hidden="true"></p>
               <p class="parada-ciudad"><span class="ciudad-txt" data-i18n="route.s4">Santa Marta and Tayrona</span></p>
-              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-shield"/></svg><span data-i18n="pillars.4t">Trust.</span></h3>
+              <h3 class="parada-pilar"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-shield"/></svg><span data-i18n="pillars.4t">Trust.</span></h3>
               <p class="parada-desc" data-i18n="pillars.4d">Verified profiles, real reviews and a safety button that’s always free.</p>
             </div>
           </li>
@@ -206,7 +207,7 @@
 
         <!-- el remate: la ruta entera iluminada y el eslogan -->
         <div class="viaje-final">
-          <figure class="postal postal--final" aria-hidden="true"><img class="postal-img" src="/assets/art/hero-1200.webp" width="1200" height="675" alt="" loading="lazy" decoding="async"></figure>
+          <figure class="postal postal--final" aria-hidden="true"><img class="postal-img" src="/travels/assets/art/hero-1200.webp" width="1200" height="675" alt="" loading="lazy" decoding="async"></figure>
           <p class="viaje-lema"><span class="lema-txt" data-i18n="footer.slogan">Your route, your people.</span></p>
         </div>
         <div class="viaje-telon" aria-hidden="true"></div>
@@ -221,14 +222,14 @@
       <p class="safety-text" data-i18n="safety.text">Exploring is free. Meeting people takes one extra step: you verify your identity before you message, join or post a trip. This is what we’re building:</p>
     </div>
     <ol class="safety-path">
-      <li><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-id"/></svg><p data-i18n="safety.1">Identity check with an ID and a selfie, done by a specialist provider.</p></li>
-      <li><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-review"/></svg><p data-i18n="safety.2">Reviews from both sides, written after the trip.</p></li>
-      <li><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-pin"/></svg><p data-i18n="safety.3">A suggestion to hold the first meetup in a public place.</p></li>
+      <li><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-id"/></svg><p data-i18n="safety.1">Identity check with an ID and a selfie, done by a specialist provider.</p></li>
+      <li><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-review"/></svg><p data-i18n="safety.2">Reviews from both sides, written after the trip.</p></li>
+      <li><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-pin"/></svg><p data-i18n="safety.3">A suggestion to hold the first meetup in a public place.</p></li>
       <li class="is-sos">
-        <span class="sos" aria-hidden="true"><svg class="icon"><use href="/assets/icons/sprite.svg#ic-sos"/></svg></span>
+        <span class="sos" aria-hidden="true"><svg class="icon"><use href="/travels/assets/icons/sprite.svg#ic-sos"/></svg></span>
         <p data-i18n="safety.4">A safety button, free for everyone, always.</p>
       </li>
-      <li><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-flag"/></svg><p data-i18n="safety.5">Reports, blocking and a team that reviews them.</p></li>
+      <li><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-flag"/></svg><p data-i18n="safety.5">Reports, blocking and a team that reviews them.</p></li>
     </ol>
     <p class="safety-close" data-i18n="safety.close">No app can remove every risk. We design to lower it and we’ll tell you plainly how it works.</p>
   </section>
@@ -265,7 +266,7 @@
     </div>
 
     <p class="free-safety">
-      <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-shield"/></svg>
+      <svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-shield"/></svg>
       <strong data-i18n="price.lineA">Safety is never paid.</strong>
       <span data-i18n="price.lineB">Verification and the safety button are free for everyone.</span>
     </p>
@@ -282,10 +283,10 @@
     <div class="join-main">
       <form id="waitlist-form" class="form" novalidate>
         <div class="plan-chip" id="plan-chip" hidden>
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-check"/></svg>
+          <svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-check"/></svg>
           <span id="plan-chip-text"></span>
           <button type="button" class="chip-x" id="plan-chip-x" data-i18n-attr="aria-label:form.planRemove" aria-label="Remove">
-            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-close"/></svg>
+            <svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-close"/></svg>
           </button>
         </div>
 
@@ -302,7 +303,7 @@
               <select id="f-country" name="country" autocomplete="country" required aria-describedby="e-country">
                 <option value="" data-i18n="form.choose">Choose…</option>
               </select>
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-chevron"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-chevron"/></svg>
             </div>
             <p class="err" id="e-country" hidden></p>
           </div>
@@ -322,12 +323,12 @@
         <fieldset class="field cities">
           <legend><span data-i18n="form.cities">Cities of the route you’d like to visit</span> <span class="req" data-i18n="form.optional">(optional)</span></legend>
           <div class="city-grid">
-            <label class="city"><input type="checkbox" name="cities" value="medellin"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-medellin"/></svg><span>Medellín</span></label>
-            <label class="city"><input type="checkbox" name="cities" value="bogota"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-bogota"/></svg><span>Bogotá</span></label>
-            <label class="city"><input type="checkbox" name="cities" value="cartagena"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-cartagena"/></svg><span>Cartagena</span></label>
-            <label class="city"><input type="checkbox" name="cities" value="santa_marta"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-santamarta"/></svg><span>Santa Marta</span></label>
-            <label class="city"><input type="checkbox" name="cities" value="tayrona"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-tayrona"/></svg><span>Tayrona</span></label>
-            <label class="city"><input type="checkbox" name="cities" value="other"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#ic-plus"/></svg><span data-i18n="form.other">Other</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="medellin"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-medellin"/></svg><span>Medellín</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="bogota"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-bogota"/></svg><span>Bogotá</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="cartagena"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-cartagena"/></svg><span>Cartagena</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="santa_marta"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-santamarta"/></svg><span>Santa Marta</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="tayrona"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-tayrona"/></svg><span>Tayrona</span></label>
+            <label class="city"><input type="checkbox" name="cities" value="other"><svg class="icon" aria-hidden="true"><use href="/travels/assets/icons/sprite.svg#ic-plus"/></svg><span data-i18n="form.other">Other</span></label>
           </div>
         </fieldset>
 
@@ -339,7 +340,7 @@
         <div class="field consent">
           <label class="check" for="f-consent">
             <input id="f-consent" name="consent" type="checkbox" required aria-describedby="e-consent">
-            <span><span class="req req--lead" data-i18n="form.required">(required)</span> <span data-i18n="form.consentPre">I agree that Lumen Studio uses my details to contact me about Lumen Travels and to improve it. I can ask to see, correct or delete them at any time, and withdraw consent whenever I want. I’m 18 or older. See the</span> <a href="/privacidad" target="_blank" rel="noopener" data-i18n="form.consentLink">Privacy policy</a><span data-i18n="form.consentPost">.</span> <span class="consent-law" data-i18n="form.consentLaw">Colombia Law 1581 of 2012 and GDPR.</span></span>
+            <span><span class="req req--lead" data-i18n="form.required">(required)</span> <span data-i18n="form.consentPre">I agree that Lumen Studio uses my details to contact me about Lumen Travels and to improve it. I can ask to see, correct or delete them at any time, and withdraw consent whenever I want. I’m 18 or older. See the</span> <a href="/travels/privacidad" target="_blank" rel="noopener" data-i18n="form.consentLink">Privacy policy</a><span data-i18n="form.consentPost">.</span> <span class="consent-law" data-i18n="form.consentLaw">Colombia Law 1581 of 2012 and GDPR.</span></span>
           </label>
           <p class="err" id="e-consent" hidden></p>
         </div>
@@ -384,8 +385,8 @@
       <p class="footer-small" data-i18n="footer.art">Illustrations made for Lumen Studio. Icons: Lucide (ISC&nbsp;license).</p>
     </div>
     <nav class="footer-links" data-i18n-attr="aria-label:footer.nav" aria-label="Legal">
-      <a href="/privacidad" data-i18n="footer.privacy">Privacy policy</a>
-      <a href="/privacidad#derechos" data-i18n="footer.requests">Data requests</a>
+      <a href="/travels/privacidad" data-i18n="footer.privacy">Privacy policy</a>
+      <a href="/travels/privacidad#derechos" data-i18n="footer.requests">Data requests</a>
       <a href="#" id="contact-link" hidden></a>
     </nav>
     <div class="footer-lang" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language">

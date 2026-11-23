@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /travels/prototipo/
 Disallow: /prototipo/
 
-Sitemap: https://lumentravels.vercel.app/sitemap.xml
+Sitemap: https://www.lumenestudio.tech/travels/sitemap.xml

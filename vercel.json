@@ -5,7 +5,38 @@
   "installCommand": "",
   "outputDirectory": "site/landing",
   "cleanUrls": true,
-  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.lumenestudio.tech/travels",
+      "statusCode": 301
+    },
+    {
+      "source": "/privacidad",
+      "destination": "https://www.lumenestudio.tech/travels/privacidad",
+      "statusCode": 301
+    },
+    {
+      "source": "/prototipo",
+      "destination": "https://www.lumenestudio.tech/travels/prototipo",
+      "statusCode": 301
+    },
+    {
+      "source": "/prototipo/:path+",
+      "destination": "https://www.lumenestudio.tech/travels/prototipo/:path",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/travels",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/travels/:path*",
+      "destination": "/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -41,7 +72,7 @@
       ]
     },
     {
-      "source": "/(styles.css|app.js|fx.js)",
+      "source": "/travels/(styles.css|app.js|fx.js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -50,7 +81,7 @@
       ]
     },
     {
-      "source": "/assets/fonts/(.*)",
+      "source": "/travels/assets/fonts/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -59,7 +90,7 @@
       ]
     },
     {
-      "source": "/assets/(art|brand|og|icons)/(.*)",
+      "source": "/travels/assets/(art|brand|og|icons)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

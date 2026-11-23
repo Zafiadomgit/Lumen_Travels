@@ -35,8 +35,8 @@
     var btns = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', String(btns[i].getAttribute('data-lang') === lang));
     // volver a la landing conserva el idioma
-    var home = document.querySelectorAll('a[href="/"], a[href^="/?lang="]');
-    for (var h = 0; h < home.length; h++) home[h].setAttribute('href', '/?lang=' + lang);
+    var home = document.querySelectorAll('a[href="/travels"], a[href^="/travels?lang="]');
+    for (var h = 0; h < home.length; h++) home[h].setAttribute('href', '/travels?lang=' + lang);
   }
 
   function init() {

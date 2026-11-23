@@ -432,10 +432,10 @@
 
   /* ---------- Los enlaces a la política llevan el idioma: no cambia al pasar de página ---------- */
   function syncLegalLinks() {
-    var links = document.querySelectorAll('a[href^="/privacidad"]');
+    var links = document.querySelectorAll('a[href^="/travels/privacidad"]');
     for (var i = 0; i < links.length; i++) {
       var hash = links[i].getAttribute('href').split('#')[1] || '';
-      links[i].setAttribute('href', '/privacidad?lang=' + lang + (hash ? '#' + hash : ''));
+      links[i].setAttribute('href', '/travels/privacidad?lang=' + lang + (hash ? '#' + hash : ''));
     }
   }
 
