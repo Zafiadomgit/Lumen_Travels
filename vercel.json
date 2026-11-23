@@ -30,7 +30,7 @@
   "rewrites": [
     {
       "source": "/travels",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/travels/:path*",
