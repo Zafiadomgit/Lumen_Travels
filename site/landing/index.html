@@ -71,7 +71,7 @@
 <main id="main">
   <!-- 1 · Hero claro: el símbolo de Lumen sobre una rejilla tenue que se apaga antes de la pintura (lo único que cambia entre A y B es el texto) -->
   <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"><div class="hero-luz"></div></div>
     <div class="hero-copy">
       <button class="lamp" type="button" id="lamp" data-i18n-attr="aria-label:lamp.label" aria-label="Tap the lantern">
         <svg class="mark mark--hero" aria-hidden="true" focusable="false"><use href="#lumen-mark"/></svg>
@@ -146,9 +146,9 @@
                 <g class="sello" data-stop="3" data-x="580" data-y="502" transform="translate(330 330)"><g class="sello-tinta" transform="rotate(-6)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">3</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">CARTAGENA · CARTAGENA</textPath></text></g></g>
                 <g class="sello" data-stop="4" data-x="1722" data-y="652" transform="translate(1760 470)"><g class="sello-tinta" transform="rotate(14)"><circle r="62"/><circle class="sello-in" r="36"/><text class="sello-n" y="15">4</text><text class="sello-txt"><textPath href="#sello-arco" startOffset="50%">TAYRONA · SANTA MARTA</textPath></text></g></g>
               </g>
-              <!-- el símbolo de Lumen recorre la ruta; sin JS descansa al final -->
-              <g class="llama" transform="translate(1722 652)"><circle class="llama-luz" r="40"/><use href="#lumen-mark" x="-24" y="-24" width="48" height="48"/></g>
             </svg>
+            <!-- el símbolo de Lumen recorre la ruta en su propia capa (solo transform); sin JS descansa al final, en Tayrona -->
+            <svg class="llama" viewBox="-50 -50 100 100" aria-hidden="true" focusable="false"><circle class="llama-luz" r="40"/><use href="#lumen-mark" x="-24" y="-24" width="48" height="48"/></svg>
           </figure>
         </div>
 
