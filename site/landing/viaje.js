@@ -264,7 +264,7 @@
       var tl = gsap.timeline({
         defaults: { ease: 'none' },
         scrollTrigger: {
-          trigger: pista, start: 'top bottom', end: 'bottom bottom', scrub: .8, invalidateOnRefresh: true,
+          trigger: pista, start: 'top bottom', end: 'bottom bottom', scrub: .4, invalidateOnRefresh: true,
           onRefresh: function () { medir(); render(); },
           onToggle: function (self) { sec.classList.toggle('is-activa', self.isActive); document.documentElement.classList.toggle('viaje-activa', self.isActive); }
         },
