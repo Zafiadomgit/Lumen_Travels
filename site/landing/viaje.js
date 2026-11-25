@@ -42,10 +42,8 @@
   var img = sec.querySelector('.lamina-img');
   var svg = sec.querySelector('.lamina-ruta');
   var pathEl = svg.querySelector('#ruta-d');
-  var mascara = svg.querySelector('.ruta-mascara');
-  var seca = svg.querySelector('.ruta-seca');
   var luz = svg.querySelector('.ruta-luz');
-  var llama = svg.querySelector('.llama');
+  var llama = lam.querySelector('.llama');
   var sellos = Array.prototype.slice.call(svg.querySelectorAll('.sello'));
   var paradas = Array.prototype.slice.call(sec.querySelectorAll('.parada'));
   var final = sec.querySelector('.viaje-final');
@@ -72,6 +70,94 @@
     return best;
   });
   P[0] = 0; P[P.length - 1] = 1;
+  var FX = SX[N], FY = SY[N];   // final de la ruta: donde descansa la llama sin JS
+
+  /* ---------- rendimiento: la pincelada por tramos y sin máscara ----------
+     La máscara (#ruta-revela) obligaba a pintar fuera de pantalla todo el grupo en cada cuadro. En modo animado se parte la ruta
+     en sus tres tramos y cada trazo se revela con su propio stroke-dasharray: el patrón de cerdas se repite hasta donde llegó
+     el pincel y después hay un hueco. Así cada cuadro repinta solo el tramo en curso. Sin JS se ve el SVG original. */
+  var NS = 'http://www.w3.org/2000/svg';
+  var TRAZOS = [   // clase, patrón de cerdas (null = trazo liso) y desplazamiento
+    ['trazo trazo-borde', [150, 6, 52, 4, 210, 8], 0, 0],
+    ['trazo trazo-cuerpo', null, 0, 0],
+    ['trazo trazo-sombra', [40, 22, 110, 12, 60, 30], 3, 3],
+    ['trazo trazo-brillo', [80, 16, 30, 9, 130, 22], -3, -2.5]
+  ];
+  var tramos = (function () {
+    var tk = pathEl.getAttribute('d').match(/[MC]|-?[\d.]+/g), k = 0, ends = [], segs = [];
+    var num = function () { return +tk[k++]; };
+    k = 1; ends.push([num(), num()]);
+    while (k < tk.length) { if (tk[k] === 'C') k++; var sg = [num(), num(), num(), num(), num(), num()]; segs.push(sg); ends.push([sg[4], sg[5]]); }
+    var corte = sellos.slice(1, 3).map(function (g) {   // Bogotá y Cartagena: el extremo de segmento más cercano
+      var x = +g.getAttribute('data-x'), y = +g.getAttribute('data-y'), best = 0, bd = 1e12;
+      ends.forEach(function (e, i) { var d = (e[0] - x) * (e[0] - x) + (e[1] - y) * (e[1] - y); if (d < bd) { bd = d; best = i; } });
+      return best;
+    });
+    var lim = [0, corte[0], corte[1], segs.length];
+    var g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'ruta-tramos');
+    var out = [];
+    for (var t = 0; t < 3; t++) {
+      var d = 'M' + ends[lim[t]].join(' ');
+      for (var i = lim[t]; i < lim[t + 1]; i++) d += 'C' + segs[i].join(' ');
+      var gt = document.createElementNS(NS, 'g');
+      var seco = document.createElementNS(NS, 'path'); seco.setAttribute('d', d); seco.setAttribute('class', 'ruta-seca'); gt.appendChild(seco);
+      var len = seco.getTotalLength();
+      var fresh = TRAZOS.map(function (tz) {
+        var pth = document.createElementNS(NS, 'path'); pth.setAttribute('d', d); pth.setAttribute('class', tz[0]);
+        if (tz[2] || tz[3]) pth.setAttribute('transform', 'translate(' + tz[2] + ' ' + tz[3] + ')');
+        gt.appendChild(pth); return pth;
+      });
+      g.appendChild(gt);
+      out.push({ seco: seco, fresh: fresh, len: len, pf: -1, pd: -1 });
+    }
+    svg.querySelector('.ruta-tinta').insertBefore(g, svg.querySelector('.ruta-luz'));
+    return out;
+  })();
+  // dasharray que muestra solo los primeros «rev» px del trazo, respetando su patrón de cerdas
+  function dashes(pat, len, rev) {
+    if (rev <= .5) return '0 ' + (len + 100).toFixed(0);
+    if (!pat) return rev.toFixed(1) + ' ' + (len + 100).toFixed(0);
+    var arr = [], acc = 0, j = 0;
+    while (true) {
+      var dsh = pat[j % pat.length], gap = pat[(j + 1) % pat.length]; j += 2;
+      if (acc + dsh >= rev) { arr.push((rev - acc).toFixed(1), (len + 100).toFixed(0)); break; }
+      arr.push(dsh, gap); acc += dsh + gap;
+      if (acc >= rev) { arr.push(0, (len + 100).toFixed(0)); break; }
+    }
+    return arr.join(' ');
+  }
+  // fracción de cada tramo según el avance global (fresco) y el de la tinta seca
+  function pintarTramos(p, dry) {
+    for (var t = 0; t < 3; t++) {
+      var tr = tramos[t], f = clamp((p - P[t]) / (P[t + 1] - P[t]), 0, 1), dd = clamp((dry - P[t]) / (P[t + 1] - P[t]), 0, 1);
+      if (Math.abs(f - tr.pf) > 1e-4) { for (var k = 0; k < 4; k++) tr.fresh[k].style.strokeDasharray = dashes(TRAZOS[k][1], tr.len, f * tr.len); tr.pf = f; }
+      if (Math.abs(dd - tr.pd) > 1e-4) { tr.seco.style.strokeDasharray = dashes(null, tr.len, dd * tr.len); tr.pd = dd; }
+    }
+  }
+
+  /* ---------- sellos y brillo final en capas propias: aparecen con transform y opacity, sin repintar la ruta ---------- */
+  var capasSello = sellos.map(function (g, i) {
+    var m = /translate\(([-\d.]+)[ ,]+([-\d.]+)\)/.exec(g.getAttribute('transform'));
+    var x = +m[1], y = +m[2], tinta = g.querySelector('.sello-tinta');
+    var rot = /rotate\(([-\d.]+)\)/.exec(tinta.getAttribute('transform') || '');
+    // el sello horneado en imagen (assets/art/sello-N.webp, con las fuentes reales): el texto SVG se volvía a maquetar
+    // en cada cambio de escala de la cámara; una imagen se compone sin repintar
+    var c = document.createElement('div'), im = document.createElement('img');
+    c.className = 'sello-capa'; c.setAttribute('aria-hidden', 'true');
+    im.src = '/travels/assets/art/sello-' + (i + 1) + '.webp'; im.alt = ''; im.decoding = 'async';
+    c.style.left = ((x - 80) / MW * 100).toFixed(3) + '%'; c.style.top = ((y - 80) / MH * 100).toFixed(3) + '%';
+    c.style.width = (160 / MW * 100).toFixed(3) + '%';
+    c.appendChild(im); lam.appendChild(c);
+    c.giro = rot ? +rot[1] : 0;
+    return c;
+  });
+  // el texto SVG de los sellos originales se volvía a maquetar con cada movimiento de la cámara: en modo animado se retiran
+  var grupoSellos = svg.querySelector('.sellos');
+  if (grupoSellos) grupoSellos.parentNode.removeChild(grupoSellos);
+  var luzCapa = document.createElementNS(NS, 'svg');
+  luzCapa.setAttribute('class', 'lamina-ruta lamina-luz'); luzCapa.setAttribute('viewBox', '0 0 ' + MW + ' ' + MH); luzCapa.setAttribute('aria-hidden', 'true');
+  luz.parentNode.removeChild(luz); luzCapa.appendChild(luz);
+  lam.insertBefore(luzCapa, llama);
 
   /* ---------- textos que se animan letra a letra: copia visual, el original queda para el lector de pantalla ---------- */
   function partir(src, cls) {
@@ -100,13 +186,15 @@
   }
 
   /* ---------- la cámara ---------- */
-  var W = 0, H = 0, BS = 1, modo = null;
+  var W = 0, H = 0, BS = 1, LW = 1, LH = 1, modo = null;
   var st = { intro: 0, leg: 0, outro: 0, dry: 0, p: 0 };
   function medir() {
     W = escena.clientWidth; H = escena.clientHeight;
     modo = window.matchMedia(Q_HORIZ).matches ? CFG.horizontal : CFG.vertical;
     BS = Math.min(W * .9 / MW, H * .86 / MH);           // px de pantalla por px del mapa con la lámina entera
-    var lw = MW * BS * modo.zoomMax, lh = MH * BS * modo.zoomMax;
+    // la capa nunca pasa de la resolución nativa de la pintura (rasterizar más grande no agrega detalle y cuesta mucho)
+    var lw = Math.min(MW * BS * modo.zoomMax, MW), lh = lw * MH / MW;
+    LW = lw; LH = lh;
     lam.style.width = lw.toFixed(1) + 'px';
     lam.style.height = lh.toFixed(1) + 'px';
     img.sizes = Math.round(lw) + 'px';
@@ -114,7 +202,7 @@
   // cover (0–1): cuánto evita la cámara mostrar el borde de la lámina cuando está acercada
   // lado (0–1): 0 = el texto a la derecha y el mapa a la izquierda; 1 = al revés
   function cam(fx, fy, z, ax, ay, cover, abre, lado) {
-    var k = z / modo.zoomMax, ps = BS * z, tx = ax * W - fx * ps, ty = ay * H - fy * ps;
+    var ps = BS * z, k = ps * MW / LW, tx = ax * W - fx * ps, ty = ay * H - fy * ps;
     var lw = MW * ps, lh = MH * ps;
     if (cover > 0) {
       var wc = W * mix(modo.ancho, 1, abre || 0), ld = lado || 0;
@@ -125,7 +213,6 @@
     lam.style.transform = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0) scale(' + k.toFixed(5) + ')';
     return z;
   }
-  var lastP = -1, lastD = -1;
   function zp(i) { return CFG.paradas[i].zoom * modo.escala; }
   function lado(i) { return modo === CFG.horizontal && CFG.paradas[i].izq ? 1 : 0; }
   function ancla(i) { return lado(i) ? modo.paradaIzq : modo.parada; }
@@ -150,10 +237,10 @@
       z = cam(fx, fy, zb - (zb - m.vuelo) * Math.sin(Math.PI * t), mix(ancla(i)[0], ancla(i + 1)[0], sl), mix(ancla(i)[1], ancla(i + 1)[1], sl), 1, Math.sin(Math.PI * t), ld);
     }
     // la pincelada fresca llega hasta el símbolo; la tinta seca la sigue en cada parada
-    if (Math.abs(p - lastP) > 1e-5) { mascara.style.strokeDashoffset = (L * (1 - p)).toFixed(1); lastP = p; }
-    if (Math.abs(st.dry - lastD) > 1e-5) { seca.style.strokeDashoffset = (L * (1 - st.dry)).toFixed(1); lastD = st.dry; }
+    pintarTramos(p, st.dry);
+    // la llama es una capa propia anclada al final de la ruta: se mueve con transform, sin repintar nada
     var pos = at(p), sc = clamp(Math.pow(zp(0) / z, .7), .8, 1.9) * m.llama;
-    llama.setAttribute('transform', 'translate(' + pos[0].toFixed(1) + ' ' + pos[1].toFixed(1) + ') scale(' + sc.toFixed(3) + ')');
+    llama.style.transform = 'translate3d(' + ((pos[0] - FX) / MW * LW).toFixed(2) + 'px,' + ((pos[1] - FY) / MH * LH).toFixed(2) + 'px,0) scale(' + sc.toFixed(3) + ')';
   }
 
   /* ---------- posición de reposo de un elemento dentro del escenario (sin transformaciones) ---------- */
@@ -169,19 +256,17 @@
     if (ctx) ctx.revert();
     textos();
     medir();
-    lastP = lastD = -1;
+    tramos.forEach(function (t) { t.pf = t.pd = -1; });
     st.intro = st.leg = st.outro = st.dry = 0;
-    var dash = L.toFixed(1) + ' ' + (L + 40).toFixed(1);
-    mascara.style.strokeDasharray = dash; seca.style.strokeDasharray = dash;
 
     ctx = gsap.context(function () {
       var E = 100 / CFG.beat;                     // la entrada dura lo que tarda la escena en llegar arriba (100svh)
       var tl = gsap.timeline({
         defaults: { ease: 'none' },
         scrollTrigger: {
-          trigger: pista, start: 'top bottom', end: 'bottom bottom', scrub: 1.1, invalidateOnRefresh: true,
+          trigger: pista, start: 'top bottom', end: 'bottom bottom', scrub: .4, invalidateOnRefresh: true,
           onRefresh: function () { medir(); render(); },
-          onToggle: function (self) { sec.classList.toggle('is-activa', self.isActive); }
+          onToggle: function (self) { sec.classList.toggle('is-activa', self.isActive); document.documentElement.classList.toggle('viaje-activa', self.isActive); }
         },
         onUpdate: render
       });
@@ -214,7 +299,7 @@
         var paso = li.querySelector('.parada-paso');
         var pilar = li.querySelector('.parada-pilar');
         var desc = li.querySelector('.parada-desc');
-        var tinta = sellos[i].querySelector('.sello-tinta');
+        var tinta = capasSello[i];
         var giro = i % 2 ? 3.5 : -3;
         var dx = function () { return cityPt(i)[0] - centro(postal)[0]; };
         var dy = function () { return cityPt(i)[1] - centro(postal)[1]; };
@@ -222,7 +307,7 @@
         gsap.set([paso, pilar, desc], { opacity: 0 });
         gsap.set(chs, { yPercent: 118 });
         gsap.set(postal, { opacity: 0, transformPerspective: 900 });
-        gsap.set(tinta, { opacity: 0, scale: 1.9, transformOrigin: '50% 50%' });
+        gsap.set(tinta, { opacity: 0, scale: 1.9, rotation: tinta.giro });
 
         tl.to(tinta, { opacity: .9, scale: 1, duration: .35, ease: 'back.out(2.4)' }, T + .1);
         tl.fromTo(paso, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .35, ease: 'power2.out' }, T);
@@ -264,7 +349,7 @@
       tl.to(st, { outro: 1, duration: 1.7, ease: 'power3.inOut' }, T);
       tl.to(velo(3), { opacity: 0, duration: 1, ease: 'sine.inOut' }, T + .5);
       tl.to(st, { dry: 1, duration: 1, ease: 'sine.inOut' }, T + .2);
-      tl.fromTo(luz, { opacity: 0 }, { opacity: 1, duration: .8, ease: 'sine.inOut' }, T + .9);
+      tl.fromTo(luzCapa, { opacity: 0 }, { opacity: 1, duration: .8, ease: 'sine.inOut' }, T + .9);
       var postalFin = final.querySelector('.postal--final');
       var lema = final.querySelectorAll('.lema-anim .ch');
       gsap.set(lema, { yPercent: 118 });

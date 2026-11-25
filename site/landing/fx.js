@@ -40,28 +40,39 @@
     var hero = document.querySelector('.hero');
     var lamp = document.getElementById('lamp');
 
-    /* ---------- 1. la luz: sigue al mouse en el hero; si no, se queda en el farol ---------- */
-    var lx = 0, ly = 0, tx = 0, ty = 0, inHero = false, raf = 0;
-    function paint() {
-      doc.style.setProperty('--lx', lx.toFixed(1) + 'px');
-      doc.style.setProperty('--ly', ly.toFixed(1) + 'px');
-    }
-    function anchor() {
-      if (!lamp) return;
-      var r = lamp.getBoundingClientRect();
-      tx = r.left + r.width / 2; ty = r.top + r.height * 0.55;
-      if (!inHero) { lx = tx; ly = ty; paint(); }
+    /* ---------- 1. la luz: sigue al mouse en el hero; si no, se queda en el farol ----------
+       Es un círculo (.hero-luz) que se mueve con transform, en coordenadas de la rejilla: no recalcula estilos ni repinta nada,
+       y no escucha el scroll. */
+    var grid = document.querySelector('.hero-grid');
+    var luz = grid && grid.querySelector('.hero-luz');
+    var lx = 0, ly = 0, tx = 0, ty = 0, raf = 0, box = null;
+    function paint() { luz.style.transform = 'translate3d(' + lx.toFixed(1) + 'px,' + ly.toFixed(1) + 'px,0)'; }
+    function home() {   // el farol, en coordenadas de la rejilla
+      var g = grid.getBoundingClientRect(), r = lamp.getBoundingClientRect();
+      return [r.left - g.left + r.width / 2, r.top - g.top + r.height * 0.55];
     }
     function loop() {
       lx += (tx - lx) * 0.08; ly += (ty - ly) * 0.08; paint();
       raf = (Math.abs(tx - lx) > 0.5 || Math.abs(ty - ly) > 0.5) ? requestAnimationFrame(loop) : 0;
     }
-    anchor();
-    addEventListener('resize', anchor);
-    addEventListener('scroll', function () { if (!inHero) anchor(); }, { passive: true });
-    if (hero && finePointer && !reduce) {
-      hero.addEventListener('pointermove', function (e) { inHero = true; tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop); });
-      hero.addEventListener('pointerleave', function () { inHero = false; var r = lamp.getBoundingClientRect(); tx = r.left + r.width / 2; ty = r.top + r.height * 0.55; if (!raf) raf = requestAnimationFrame(loop); });
+    // el farol deja de respirar y la rejilla no se dibuja cuando el hero no se ve (Chrome la repintaba en cada scroll)
+    if (hero && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { hero.classList.toggle('is-off', !en[0].isIntersecting); }, { rootMargin: '300px 0px' }).observe(hero);
+    }
+    if (luz && lamp) {
+      var reset = function () { var h = home(); lx = tx = h[0]; ly = ty = h[1]; paint(); };
+      reset();
+      addEventListener('resize', reset);
+      if (hero && finePointer && !reduce) {
+        hero.addEventListener('pointerenter', function () { box = grid.getBoundingClientRect(); });
+        hero.addEventListener('pointermove', function (e) {
+          if (!box) box = grid.getBoundingClientRect();
+          tx = e.clientX - box.left; ty = e.clientY - box.top;
+          if (!raf) raf = requestAnimationFrame(loop);
+        });
+        hero.addEventListener('pointerleave', function () { box = null; var h = home(); tx = h[0]; ty = h[1]; if (!raf) raf = requestAnimationFrame(loop); });
+        addEventListener('scroll', function () { box = null; }, { passive: true });
+      }
     }
 
     /* ---------- 2. tocar el símbolo: late y suelta unas chispas discretas ---------- */
